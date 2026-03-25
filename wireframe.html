@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Under Suspicion — Wireframe Document</title>
+  <style>
+    :root {
+      --bg:        #0e0e0e;
+      --surface:   #1c1c1c;
+      --surface2:  #252525;
+      --border:    #4a4a4a;
+      --border2:   #333;
+      --text:      #cccccc;
+      --text-dim:  #777;
+      --text-faint:#3d3d3d;
+      --accent:    #f0e8d0;
+      --red:       #c0392b;
+      --red-dark:  #2d1010;
+      --red-mid:   #8b2020;
+      --ann:       #f39c12;
+      --desk-bg:   #2c1e0e;
+      --room-bg:   #0c0c1a;
+      --paper:     #e8e0c8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080808;
+      font-family: 'Courier New', Courier, monospace;
+      color: var(--text);
+      padding-bottom: 48px;
+    }
+
+    /* ── NAV ──────────────────────────────────── */
+    #sitenav {
+      position: sticky;
+      top: 0;
+      z-index: 9000;
+      background: #050505;
+      border-bottom: 1px solid #222;
+      padding: 9px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #sitenav .brand {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #555;
+      margin-right: 16px;
+      white-space: nowrap;
+    }
+    .nbtn {
+      background: #141414;
+      border: 1px solid #3a3a3a;
+      color: #888;
+      font-family: 'Courier New', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      padding: 5px 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background .1s, color .1s;
+    }
+    .nbtn:hover { background: #232323; color: #ccc; border-color: #555; }
+    .nbtn.on    { background: #2c2c2c; color: #fff; border-color: var(--ann); }
+
+    /* ── SCREEN WRAPPER ───────────────────────── */
+    .sw { display: none; padding: 18px 20px; }
+    .sw.on { display: block; }
+    .slabel {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #444;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* The 1280×720 canvas (16:9). Scale with CSS for smaller viewports. */
+    .canvas {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      background: var(--surface);
+      border: 2px solid #3a3a3a;
+      overflow: hidden;
+      margin: 0 auto;
+      transform-origin: top left;
+    }
+
+    /* ── ANNOTATIONS ──────────────────────────── */
+    .ann {
+      position: absolute;
+      font-size: 8.5px;
+      color: var(--ann);
+      background: rgba(0,0,0,.88);
+      border: 1px dashed var(--ann);
+      padding: 2px 6px;
+      z-index: 800;
+      pointer-events: none;
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    .ann::before { content: '▶ '; }
+
+    /* ── WIREFRAME PRIMITIVES ─────────────────── */
+    .ph {           /* placeholder box */
+      border: 1px dashed var(--border2);
+      background: rgba(255,255,255,.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 9px;
+      color: var(--text-dim);
+      position: absolute;
+    }
+
+    .btn {
+      border: 2px solid var(--border);
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text);
+      text-transform: uppercase;
+      position: absolute;
+    }
+    .btn.primary { border-color: #aaa; background: #333; color: #fff; font-weight: bold; }
+    .btn.danger  { border-color: #6b1515; background: var(--red-dark); color: #e88; }
+    .btn.cta     { border-color: var(--red); background: #5a0e0e; color: #faa; font-weight: bold; letter-spacing: 4px; font-size: 15px; }
+    .btn.ghost   { border-color: #3a3a60; background: #141428; color: #aab; }
+
+    /* HATCHING */
+    .hd { background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,.022) 5px, rgba(255,255,255,.022) 6px); }
+    .hv { background-image: repeating-linear-gradient(90deg,  transparent, transparent 8px, rgba(255,255,255,.028) 8px, rgba(255,255,255,.028) 9px); }
+
+    /* PROGRESS BAR */
+    .pbar-track { background: #111; border: 1px solid #3a3a3a; position: absolute; }
+    .pbar-fill  { position: absolute; top: 0; left: 0; height: 100%; background: linear-gradient(90deg, var(--red-mid), var(--red)); }
+
+    /* DOC CARDS */
+    .card {
+      position: absolute;
+      border: 1px solid #888;
+      background: var(--paper);
+      box-shadow: 3px 3px 10px rgba(0,0,0,.6);
+    }
+    .card-head {
+      background: #bbb;
+      border-bottom: 1px solid #999;
+      padding: 3px 6px;
+      font-size: 8px;
+      color: #333;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .card-body {
+      padding: 5px 6px;
+      font-size: 8px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* CORNER BRACKETS */
+    .bracket::before,
+    .bracket::after {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+    }
+
+    /* ── RESPONSIVE NOTE ── */
+    .rn {
+      max-width: 1280px;
+      margin: 10px auto 0;
+      padding: 7px 14px;
+      background: #120f00;
+      border: 1px solid #4a3a00;
+      font-size: 9px;
+      color: #b89a00;
+      letter-spacing: .5px;
+      line-height: 1.6;
+    }
+    .rn strong { color: #ffcc00; }
+
+    /* ── SCALE HELPER (shows at small viewports) ── */
+    @media (max-width:1340px) {
+      .canvas { transform: scale(.9); }
+      .sw { padding-top: 8px; }
+    }
+    @media (max-width:1180px) { .canvas { transform: scale(.78); } }
+    @media (max-width:1020px) { .canvas { transform: scale(.65); } }
+    @media (max-width: 860px) { .canvas { transform: scale(.52); } }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════ -->
+<nav id="sitenav">
+  <span class="brand">UNDER SUSPICION · WIREFRAME v1.0 · 1920×1080</span>
+  <button class="nbtn on"  onclick="go('s1')">S1 · Menú Principal</button>
+  <button class="nbtn"     onclick="go('s2')">S2 · Partida (Split)</button>
+  <button class="nbtn"     onclick="go('s3')">S3 · Menú Preguntas</button>
+  <button class="nbtn"     onclick="go('s4')">S4 · Modal Prueba</button>
+  <button class="nbtn"     onclick="go('s5')">S5 · Resolver Caso</button>
+  <button class="nbtn"     onclick="go('s6')">S6 · Contradicción</button>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 1 · MAIN MENU
+═══════════════════════════════════════════════════ -->
+<div class="sw on" id="s1">
+  <p class="slabel">PANTALLA 1 — MENÚ PRINCIPAL · representado a 1280×720 (diseño base 1920×1080)</p>
+  <div class="canvas">
+
+    <!-- BG -->
+    <div style="position:absolute;inset:0;background:#0b0b0b;" class="hd"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(45,35,10,.45) 0%,rgba(0,0,0,.82) 68%);pointer-events:none;"></div>
+
+    <!-- Decorative folder shapes in the bg -->
+    <div style="position:absolute;top:34px;left:44px;width:170px;height:250px;border:1px solid #1c140a;background:#120d05;transform:rotate(-14deg);opacity:.35;"></div>
+    <div style="position:absolute;bottom:60px;left:30px;width:130px;height:190px;border:1px solid #1a1a0a;background:#0e0e07;transform:rotate(8deg);opacity:.25;"></div>
+    <div style="position:absolute;top:56px;right:52px;width:155px;height:230px;border:1px solid #1c1e0a;background:#0f1205;transform:rotate(11deg);opacity:.3;"></div>
+    <div style="position:absolute;bottom:40px;right:32px;width:120px;height:170px;border:1px solid #1a1a1a;background:#111;transform:rotate(-6deg);opacity:.25;"></div>
+
+    <!-- Horizontal rules atmospherics -->
+    <div style="position:absolute;top:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,rgba(255,255,255,.015),transparent);pointer-events:none;"></div>
+
+    <!-- ── LOGO BLOCK ── -->
+    <div style="position:absolute;top:100px;left:50%;transform:translateX(-50%);width:620px;text-align:center;">
+      <div style="border:3px solid #777;background:rgba(8,8,8,.92);padding:26px 44px;position:relative;">
+        <!-- Corner brackets -->
+        <div style="position:absolute;top:-3px;left:-3px;width:22px;height:22px;border-top:3px solid #bbb;border-left:3px solid #bbb;"></div>
+        <div style="position:absolute;top:-3px;right:-3px;width:22px;height:22px;border-top:3px solid #bbb;border-right:3px solid #bbb;"></div>
+        <div style="position:absolute;bottom:-3px;left:-3px;width:22px;height:22px;border-bottom:3px solid #bbb;border-left:3px solid #bbb;"></div>
+        <div style="position:absolute;bottom:-3px;right:-3px;width:22px;height:22px;border-bottom:3px solid #bbb;border-right:3px solid #bbb;"></div>
+
+        <div style="font-size:54px;font-weight:900;letter-spacing:8px;color:var(--accent);text-shadow:0 0 40px rgba(240,230,200,.22);line-height:1;font-family:'Courier New',monospace;">UNDER<br>SUSPICION</div>
+        <div style="height:1px;background:linear-gradient(90deg,transparent,#555,transparent);margin:14px 0 12px;"></div>
+        <div style="font-size:12px;letter-spacing:7px;color:#666;font-family:'Courier New',monospace;">POLICÍA DE LA CIUDAD</div>
+      </div>
+    </div>
+
+    <!-- ── CONFIDENTIAL STAMP ── -->
+    <div style="position:absolute;top:280px;left:50%;transform:translateX(-50%) rotate(-5deg);width:248px;height:66px;border:3.5px solid rgba(192,57,43,.68);display:flex;align-items:center;justify-content:center;background:rgba(100,15,15,.1);">
+      <div style="font-size:20px;font-weight:900;letter-spacing:5px;color:rgba(210,60,50,.65);font-family:'Courier New',monospace;">CONFIDENTIAL</div>
+    </div>
+
+    <!-- ── MENU BUTTONS ── -->
+    <!-- Primary -->
+    <div class="btn primary" style="top:368px;left:50%;transform:translateX(-50%);width:340px;height:54px;font-size:14px;letter-spacing:3px;">MODO HISTORIA</div>
+    <!-- Secondary -->
+    <div class="btn" style="top:432px;left:50%;transform:translateX(-50%);width:340px;height:48px;font-size:13px;letter-spacing:2.5px;">MODO SIN FIN</div>
+    <!-- Settings -->
+    <div class="btn" style="top:490px;left:50%;transform:translateX(-50%);width:340px;height:44px;font-size:11px;letter-spacing:2px;color:#bbb;border-color:#444;">
+      <span style="margin-right:9px;font-size:15px;">⚙</span> CONFIGURACIÓN
+    </div>
+    <!-- Exit -->
+    <div class="btn danger" style="top:544px;left:50%;transform:translateX(-50%);width:340px;height:44px;font-size:12px;letter-spacing:3px;">SALIR</div>
+
+    <!-- ── CREDITS ── -->
+    <div style="position:absolute;bottom:16px;left:0;right:0;text-align:center;">
+      <div style="width:420px;height:1px;background:linear-gradient(90deg,transparent,#2a2a2a,transparent);margin:0 auto 10px;"></div>
+      <div style="font-size:9px;letter-spacing:3px;color:var(--text-faint);">DEVELOPED BY AARON · DAVID · ROMAN</div>
+    </div>
+
+    <!-- ── ANNOTATIONS ── -->
+    <div class="ann" style="top:101px;right:24px;">Logo principal — tipografía display bold, estilo dossier policial</div>
+    <div class="ann" style="top:281px;right:24px;">Sello "CONFIDENTIAL" rotado −5° — visual carpeta clasificada</div>
+    <div class="ann" style="top:370px;right:24px;">Botón PRIMARIO — modo principal, mayor prominencia visual</div>
+    <div class="ann" style="top:435px;right:24px;">Botón SECUNDARIO — mismo estilo, sin énfasis extra</div>
+    <div class="ann" style="top:492px;right:24px;">CONFIGURACIÓN — icono ⚙ a la izquierda, tamaño ligeramente menor</div>
+    <div class="ann" style="top:546px;right:24px;">SALIR — tono rojo indica acción destructiva / de salida</div>
+    <div class="ann" style="bottom:14px;left:16px;">Créditos del equipo de desarrollo</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#444;color:#555;">1920×1080 · MAIN MENU SCREEN</div>
+  </div>
+
+  <div class="rn">
+    <strong>RESPONSIVO (MOBILE &lt;768px):</strong> Botones al 100% del ancho disponible, padding táctil mínimo 48px. Logo reduce a 28px / letra-spacing a 4px. Carpetas de fondo y sello reducen opacidad al 15% para no competir con el contenido principal. Stack vertical centrado.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 2 · MAIN GAME — SPLIT VIEW
+═══════════════════════════════════════════════════ -->
+<div class="sw" id="s2">
+  <p class="slabel">PANTALLA 2 — PARTIDA PRINCIPAL · SPLIT-SCREEN 50/50 (640px / 640px a esta resolución)</p>
+  <div class="canvas">
+
+    <!-- ── TOP NAV BAR (full width) ── -->
+    <div style="position:absolute;top:0;left:0;right:0;height:40px;background:#080808;border-bottom:1px solid #2e2e2e;z-index:100;display:flex;align-items:center;">
+      <!-- Title left -->
+      <div style="padding:0 16px;font-size:11px;letter-spacing:3px;color:#666;border-right:1px solid #222;white-space:nowrap;">UNDER SUSPICION</div>
+      <!-- Suspect switcher center -->
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <div style="width:30px;height:28px;border:1px solid #444;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:8px;color:#666;">S1</div>
+        <div style="width:30px;height:28px;border:2px solid var(--red);background:var(--red-dark);display:flex;align-items:center;justify-content:center;font-size:8px;color:#e88;font-weight:bold;">S2</div>
+        <div style="width:30px;height:28px;border:1px solid #444;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:8px;color:#666;">S3</div>
+        <div style="margin-left:6px;font-size:8px;color:#3a3a3a;letter-spacing:1px;">sospechoso activo</div>
+      </div>
+      <!-- Resolver button right -->
+      <div style="padding:0 14px;border-left:1px solid #222;display:flex;align-items:center;">
+        <div class="btn danger" style="position:static;width:136px;height:28px;font-size:9px;letter-spacing:1.5px;">RESOLVER CASO</div>
+      </div>
+    </div>
+
+    <!-- CENTER DIVIDER -->
+    <div style="position:absolute;top:40px;bottom:0;left:640px;width:2px;background:#2a2a2a;z-index:50;"></div>
+
+    <!-- ════════════ LEFT HALF — MESA DE PRUEBAS ════════════ -->
+    <div style="position:absolute;top:40px;left:0;width:640px;height:680px;background:var(--desk-bg);" class="hd">
+      <!-- Desk texture overlay -->
+      <div style="position:absolute;inset:0;background:linear-gradient(145deg,rgba(90,55,18,.35),rgba(30,18,4,.55));pointer-events:none;"></div>
+
+      <!-- NOTEBOOK (top-left corner) -->
+      <div style="position:absolute;top:13px;left:13px;width:134px;height:168px;background:#e8dfc0;border:1.5px solid #8a7040;box-shadow:3px 3px 11px rgba(0,0,0,.55);z-index:20;">
+        <div style="background:#5e4520;padding:4px 7px;border-bottom:1px solid #7a6030;display:flex;align-items:center;gap:5px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#e8c860;"></div>
+          <div style="font-size:8px;font-weight:bold;color:#e8c860;letter-spacing:1px;">LIBRETA</div>
+        </div>
+        <div style="padding:6px 7px;font-size:7.5px;color:#3a3a3a;line-height:1.55;">
+          <div style="font-weight:bold;letter-spacing:.5px;margin-bottom:5px;color:#555;">NOTAS:</div>
+          <div style="border-bottom:1px solid #ccc;padding-bottom:3px;margin-bottom:3px;">— Sin coartada 22h</div>
+          <div style="border-bottom:1px solid #ccc;padding-bottom:3px;margin-bottom:3px;">— Contradicción ubicación</div>
+          <div style="border-bottom:1px solid #ccc;padding-bottom:3px;margin-bottom:3px;color:#8b2020;font-weight:bold;">⚠ MENTIRA</div>
+          <div style="color:#aaa;font-style:italic;font-size:7px;">auto-generado...</div>
+        </div>
+      </div>
+
+      <!-- DOC CARD: Prueba 1 -->
+      <div class="card" style="top:18px;left:196px;width:148px;height:108px;transform:rotate(-3.5deg);z-index:12;">
+        <div class="card-head">PRUEBA 1 · INFORME</div>
+        <div class="card-body">
+          <div style="height:44px;border:1px dashed #999;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:7px;margin-bottom:4px;">[imagen placeholder]</div>
+          <div>Ref: DOC-001 · DOC oficial</div>
+        </div>
+      </div>
+
+      <!-- DOC CARD: Prueba 2 -->
+      <div class="card" style="top:88px;left:260px;width:136px;height:96px;transform:rotate(2.5deg);z-index:11;">
+        <div class="card-head">PRUEBA 2 · NOTA MS.</div>
+        <div class="card-body">
+          <div style="height:38px;border:1px dashed #999;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:7px;margin-bottom:3px;">[texto ms. placeholder]</div>
+          <div>Autor: Desconocido</div>
+        </div>
+      </div>
+
+      <!-- DOC CARD: Foto -->
+      <div class="card" style="top:212px;left:165px;width:126px;height:118px;transform:rotate(-2deg);z-index:10;">
+        <div class="card-head">FOTO · ESCENA</div>
+        <div class="card-body">
+          <div style="height:76px;border:1px dashed #999;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:7px;">[fotografía 2D]</div>
+        </div>
+      </div>
+
+      <!-- DOC CARD: Expediente (open / zoomed) -->
+      <div class="card" style="top:168px;left:304px;width:192px;height:202px;z-index:14;box-shadow:5px 5px 20px rgba(0,0,0,.8);">
+        <div class="card-head" style="background:#555;color:#eee;font-size:9px;">EXPEDIENTE · ABIERTO ↕</div>
+        <div class="card-body">
+          <div style="height:88px;border:1px dashed #999;display:flex;align-items:center;justify-content:center;color:#999;font-size:7px;margin-bottom:5px;">[foto/imagen evidencia]</div>
+          <div style="font-size:7px;line-height:1.6;color:#444;">
+            Fecha: 14/03/2026<br>
+            Lugar: C/ Alcalá 34<br>
+            — — — — — — — — —<br>
+            [texto descriptivo...]<br>
+            [texto descriptivo...]
+          </div>
+        </div>
+      </div>
+
+      <!-- Drag hint -->
+      <div style="position:absolute;bottom:30px;left:0;right:0;text-align:center;font-size:8px;color:#3a2808;letter-spacing:1px;">arrastrar · reposicionar · hacer zoom</div>
+
+      <!-- Section label -->
+      <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:8.5px;letter-spacing:6px;color:#3a2808;text-transform:uppercase;">MESA DE PRUEBAS</div>
+    </div>
+
+    <!-- ════════════ RIGHT HALF — SALA DE INTERROGATORIO ════════════ -->
+    <div style="position:absolute;top:40px;left:642px;width:638px;height:680px;background:var(--room-bg);" class="hv">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 28%,rgba(18,18,44,.5),rgba(0,0,0,.88) 76%);pointer-events:none;"></div>
+
+      <!-- PRESSURE BAR -->
+      <div style="position:absolute;top:9px;left:13px;right:13px;z-index:20;">
+        <div style="font-size:8px;letter-spacing:2px;color:var(--red-mid);margin-bottom:3px;">NIVEL DE PRESIÓN</div>
+        <div class="pbar-track" style="position:relative;height:11px;width:100%;z-index:auto;">
+          <div class="pbar-fill" style="width:58%;"></div>
+          <div style="position:absolute;top:0;left:33%;width:1px;height:100%;background:rgba(0,0,0,.4);"></div>
+          <div style="position:absolute;top:0;left:66%;width:1px;height:100%;background:rgba(0,0,0,.4);"></div>
+        </div>
+        <div style="font-size:7px;color:#444;margin-top:2px;text-align:right;">58% · Al máximo: sospechoso deja de responder</div>
+      </div>
+
+      <!-- SUSPECT PORTRAIT -->
+      <div style="position:absolute;top:54px;left:50%;transform:translateX(-50%);width:252px;height:232px;border:2px solid #333;background:#0a0a12;z-index:10;">
+        <div style="position:absolute;top:-2px;left:-2px;width:18px;height:18px;border-top:2px solid #555;border-left:2px solid #555;"></div>
+        <div style="position:absolute;top:-2px;right:-2px;width:18px;height:18px;border-top:2px solid #555;border-right:2px solid #555;"></div>
+        <div style="position:absolute;bottom:-2px;left:-2px;width:18px;height:18px;border-bottom:2px solid #555;border-left:2px solid #555;"></div>
+        <div style="position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;border-bottom:2px solid #555;border-right:2px solid #555;"></div>
+        <!-- Wireframe figure -->
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:4px;opacity:.25;">
+          <div style="width:52px;height:52px;border-radius:50%;border:2px solid #aaa;background:#111;"></div>
+          <div style="width:96px;height:110px;border:2px solid #aaa;border-top:none;border-radius:0 0 10px 10px;background:#111;"></div>
+        </div>
+        <div style="position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:3px;color:#444;">SOSPECHOSO</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:7px;color:#2a2a2a;padding-bottom:3px;">Ilustración 2D noir · estática · sin animación</div>
+      </div>
+
+      <!-- DIALOGUE BOX -->
+      <div style="position:absolute;top:300px;left:13px;right:13px;height:84px;background:#0b0b18;border:1px solid #252540;z-index:10;">
+        <div style="padding:4px 9px;border-bottom:1px solid #1a1a30;font-size:8px;letter-spacing:1.5px;color:#3a3a6a;">RESPUESTA DEL SOSPECHOSO</div>
+        <div style="padding:7px 11px;font-size:10px;color:#888;font-style:italic;line-height:1.55;">"Yo estaba en casa esa noche. Mi vecina puede confirmarlo, ya lo dije antes..."</div>
+      </div>
+
+      <!-- QUESTION TABS PANEL -->
+      <div style="position:absolute;top:394px;left:13px;right:13px;bottom:26px;background:#0a0a14;border:1px solid #222038;z-index:10;overflow:hidden;">
+        <!-- Tab headers -->
+        <div style="display:flex;border-bottom:1px solid #222038;">
+          <div style="padding:7px 18px;background:#18182e;border-right:1px solid #222038;border-bottom:2px solid #5555aa;font-size:9px;letter-spacing:2px;color:#ccccff;">VÍNCULO</div>
+          <div style="padding:7px 18px;background:#0a0a14;border-right:1px solid #222038;font-size:9px;letter-spacing:2px;color:#3a3a3a;">COARTADA</div>
+          <div style="padding:7px 18px;background:#0a0a14;font-size:9px;letter-spacing:2px;color:#3a3a3a;">PRUEBA</div>
+        </div>
+        <!-- Content preview -->
+        <div style="padding:10px 12px;">
+          <div style="font-size:9px;color:#555;margin-bottom:6px;">¿De qué conoces a <span style="color:#7777bb;border-bottom:1px dashed #7777bb;">[Persona ▼]</span>?</div>
+          <div style="font-size:9px;color:#555;margin-bottom:6px;">¿Cuándo fue la última vez que viste a [Persona]?</div>
+          <div style="font-size:9px;color:#555;">¿Qué opinas de [Persona]?</div>
+        </div>
+      </div>
+
+      <div style="position:absolute;bottom:8px;left:13px;font-size:7.5px;letter-spacing:4px;color:#1e1e30;text-transform:uppercase;">SALA DE INTERROGATORIO</div>
+    </div>
+
+    <!-- ── ANNOTATIONS ── -->
+    <div class="ann" style="top:42px;left:9px;">Barra de navegación global · título + switcher sospechosos + RESOLVER CASO</div>
+    <div class="ann" style="top:65px;left:9px;">Libreta del detective · notas y contradicciones auto-generadas</div>
+    <div class="ann" style="top:100px;left:350px;">Documentos arrastrables · "Expediente" en estado abierto/zoomed</div>
+    <div class="ann" style="top:42px;right:9px;">Barra de presión — se llena al preguntar, bloquea al 100%</div>
+    <div class="ann" style="top:80px;right:9px;">Retrato 2D noir estático — ilustración del sospechoso activo</div>
+    <div class="ann" style="top:302px;right:9px;">Caja de diálogo — muestra la última respuesta del sospechoso</div>
+    <div class="ann" style="top:396px;right:9px;">Panel de preguntas — 3 pestañas: VÍNCULO · COARTADA · PRUEBA</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#333;color:#444;">1920×1080 · SPLIT SCREEN 50/50</div>
+  </div>
+
+  <div class="rn">
+    <strong>RESPONSIVO (MOBILE):</strong> El split se apila verticalmente: Sala de Interrogatorio arriba (40% viewport), Mesa de Pruebas debajo (60%). La barra de navegación superior permanece; el suspect switcher colapsa a un selector de una línea. Los documentos de la mesa se reorganizan en una fila horizontal con scroll.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 3 · QUESTION MENU DETAIL
+═══════════════════════════════════════════════════ -->
+<div class="sw" id="s3">
+  <p class="slabel">PANTALLA 3 — MENÚ DE PREGUNTAS · zoom sobre la mitad derecha, todas las pestañas expuestas</p>
+  <div class="canvas">
+
+    <!-- BG -->
+    <div style="position:absolute;inset:0;background:#0a0a16;" class="hv"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 18%,rgba(16,16,44,.5),rgba(0,0,0,.82) 72%);pointer-events:none;"></div>
+
+    <!-- Context top strip -->
+    <div style="position:absolute;top:0;left:0;right:0;height:34px;background:#060606;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;padding:0 14px;">
+      <div style="font-size:8.5px;letter-spacing:2.5px;color:#333;">VISTA DETALLE · MENÚ DE PREGUNTAS · SALA DE INTERROGATORIO →</div>
+    </div>
+
+    <!-- Pressure bar context -->
+    <div style="position:absolute;top:46px;left:16px;right:16px;z-index:10;">
+      <div style="font-size:8px;letter-spacing:2px;color:var(--red-mid);margin-bottom:3px;">NIVEL DE PRESIÓN</div>
+      <div class="pbar-track" style="position:relative;height:9px;z-index:auto;">
+        <div class="pbar-fill" style="width:38%;"></div>
+      </div>
+    </div>
+
+    <!-- ── MAIN PANEL ── -->
+    <div style="position:absolute;top:86px;left:16px;right:16px;bottom:16px;background:#0b0b18;border:1px solid #20203a;display:flex;flex-direction:column;overflow:hidden;">
+
+      <!-- Panel title bar -->
+      <div style="padding:9px 14px;border-bottom:1px solid #18183a;background:#07070e;display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-size:9px;letter-spacing:3px;color:#555;">SELECCIONAR PREGUNTA PARA EL SOSPECHOSO</div>
+        <div style="font-size:8px;color:#333;letter-spacing:1px;">Sospechoso activo: S2</div>
+      </div>
+
+      <!-- TAB ROW -->
+      <div style="display:flex;border-bottom:1px solid #20203a;flex-shrink:0;">
+        <div style="padding:10px 36px;background:#1c1c38;border-right:1px solid #20203a;border-bottom:2px solid #6666bb;font-size:11px;letter-spacing:2.5px;color:#ddddff;cursor:pointer;">VÍNCULO</div>
+        <div style="padding:10px 36px;background:#0b0b18;border-right:1px solid #20203a;font-size:11px;letter-spacing:2.5px;color:#383838;cursor:pointer;">COARTADA</div>
+        <div style="padding:10px 36px;background:#0b0b18;font-size:11px;letter-spacing:2.5px;color:#383838;cursor:pointer;">PRUEBA</div>
+      </div>
+
+      <!-- CONTENT AREA (scrollable container) -->
+      <div style="flex:1;overflow-y:auto;padding:18px 18px 0;">
+
+        <!-- ─ TAB: VÍNCULO (active) ─ -->
+        <div style="font-size:8px;letter-spacing:2px;color:#3a3a6a;margin-bottom:12px;">TAB ACTIVO: VÍNCULO — preguntas sobre relaciones interpersonales</div>
+
+        <!-- Q1 with person dropdown -->
+        <div style="border:1px solid #1e1e38;background:#0e0e22;padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;font-size:11px;color:#999;line-height:1.7;">
+            ¿De qué conoces a
+            <span style="display:inline-flex;align-items:center;background:#181830;border:1px solid #3434 60;padding:2px 22px 2px 8px;font-size:9.5px;color:#9999cc;position:relative;margin:0 4px;">
+              [Persona ▼]
+            </span>
+            ?
+          </div>
+          <div style="width:90px;height:32px;background:#1a1a38;border:1px solid #3a3a66;display:flex;align-items:center;justify-content:center;font-size:9px;color:#666;letter-spacing:1.5px;flex-shrink:0;cursor:pointer;">PREGUNTAR</div>
+        </div>
+
+        <!-- Q2 -->
+        <div style="border:1px solid #1e1e38;background:#0e0e22;padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;font-size:11px;color:#999;line-height:1.7;">
+            ¿Cuándo fue la última vez que viste a
+            <span style="display:inline-flex;align-items:center;background:#181830;border:1px solid #343460;padding:2px 22px 2px 8px;font-size:9.5px;color:#9999cc;margin:0 4px;">
+              [Persona ▼]
+            </span>
+            ?
+          </div>
+          <div style="width:90px;height:32px;background:#1a1a38;border:1px solid #3a3a66;display:flex;align-items:center;justify-content:center;font-size:9px;color:#666;letter-spacing:1.5px;flex-shrink:0;cursor:pointer;">PREGUNTAR</div>
+        </div>
+
+        <!-- Q3 -->
+        <div style="border:1px solid #1e1e38;background:#0e0e22;padding:13px 15px;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+          <div style="flex:1;font-size:11px;color:#999;line-height:1.7;">
+            ¿Qué opinas de
+            <span style="display:inline-flex;align-items:center;background:#181830;border:1px solid #343460;padding:2px 22px 2px 8px;font-size:9.5px;color:#9999cc;margin:0 4px;">
+              [Persona ▼]
+            </span>
+            ?
+          </div>
+          <div style="width:90px;height:32px;background:#1a1a38;border:1px solid #3a3a66;display:flex;align-items:center;justify-content:center;font-size:9px;color:#666;letter-spacing:1.5px;flex-shrink:0;cursor:pointer;">PREGUNTAR</div>
+        </div>
+
+        <!-- Divider -->
+        <div style="border-top:1px solid #14142a;margin-bottom:14px;"></div>
+
+        <!-- ─ TAB: COARTADA (dimmed/preview) ─ -->
+        <div style="font-size:8px;letter-spacing:2px;color:#252538;margin-bottom:10px;">PESTAÑA: COARTADA — preguntas sobre coartada temporal (inactiva)</div>
+
+        <!-- CQ1 -->
+        <div style="border:1px solid #141420;background:#08080e;padding:11px 15px;margin-bottom:7px;display:flex;align-items:center;gap:12px;opacity:.45;">
+          <div style="flex:1;font-size:10px;color:#444;">
+            ¿Qué hacías a
+            <span style="background:#0e0e18;border:1px solid #1e1e2a;padding:2px 18px 2px 6px;font-size:9px;color:#444;margin:0 4px;">[Hora ▼]</span>?
+          </div>
+          <div style="width:90px;height:28px;background:#080812;border:1px solid #1a1a22;display:flex;align-items:center;justify-content:center;font-size:8px;color:#333;">PREGUNTAR</div>
+        </div>
+        <!-- CQ2 -->
+        <div style="border:1px solid #141420;background:#08080e;padding:11px 15px;margin-bottom:7px;display:flex;align-items:center;gap:12px;opacity:.45;">
+          <div style="flex:1;font-size:10px;color:#444;">
+            ¿Dónde estabas a
+            <span style="background:#0e0e18;border:1px solid #1e1e2a;padding:2px 18px 2px 6px;font-size:9px;color:#444;margin:0 4px;">[Hora ▼]</span>?
+          </div>
+          <div style="width:90px;height:28px;background:#080812;border:1px solid #1a1a22;display:flex;align-items:center;justify-content:center;font-size:8px;color:#333;">PREGUNTAR</div>
+        </div>
+        <!-- CQ3 -->
+        <div style="border:1px solid #141420;background:#08080e;padding:11px 15px;margin-bottom:18px;display:flex;align-items:center;gap:12px;opacity:.45;">
+          <div style="flex:1;font-size:10px;color:#444;">
+            ¿Con quién estabas a
+            <span style="background:#0e0e18;border:1px solid #1e1e2a;padding:2px 18px 2px 6px;font-size:9px;color:#444;margin:0 4px;">[Hora ▼]</span>?
+          </div>
+          <div style="width:90px;height:28px;background:#080812;border:1px solid #1a1a22;display:flex;align-items:center;justify-content:center;font-size:8px;color:#333;">PREGUNTAR</div>
+        </div>
+
+        <!-- ─ TAB: PRUEBA (dimmed/preview) ─ -->
+        <div style="border-top:1px solid #14142a;padding-top:14px;margin-bottom:10px;">
+          <div style="font-size:8px;letter-spacing:2px;color:#252538;margin-bottom:8px;">PESTAÑA: PRUEBA — cuadrícula de evidencias para presentar al sospechoso (inactiva)</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;opacity:.4;padding-bottom:20px;">
+            <div style="width:58px;height:58px;border:1px dashed #2a2a2a;background:#070710;display:flex;align-items:center;justify-content:center;font-size:7px;color:#3a3a3a;">[P1]</div>
+            <div style="width:58px;height:58px;border:1px dashed #2a2a2a;background:#070710;display:flex;align-items:center;justify-content:center;font-size:7px;color:#3a3a3a;">[P2]</div>
+            <div style="width:58px;height:58px;border:1px dashed #2a2a2a;background:#070710;display:flex;align-items:center;justify-content:center;font-size:7px;color:#3a3a3a;">[FOTO]</div>
+            <div style="width:58px;height:58px;border:1px dashed #2a2a2a;background:#070710;display:flex;align-items:center;justify-content:center;font-size:7px;color:#3a3a3a;">[EXP]</div>
+            <div style="width:58px;height:58px;border:1px dashed #1a1a1a;background:#060608;display:flex;align-items:center;justify-content:center;font-size:10px;color:#222;">+</div>
+          </div>
+        </div>
+
+      </div><!-- end scroll area -->
+    </div><!-- end main panel -->
+
+    <!-- ANNOTATIONS -->
+    <div class="ann" style="top:88px;right:20px;">Panel principal de selección de preguntas (pantalla completa en esta vista)</div>
+    <div class="ann" style="top:138px;right:20px;">3 pestañas · VÍNCULO activa con subrayado · COARTADA y PRUEBA inactivas (dimmed)</div>
+    <div class="ann" style="top:186px;right:20px;">Inline dropdown para nombre de persona · se rellena con personajes del caso</div>
+    <div class="ann" style="top:240px;right:20px;">Botón PREGUNTAR por fila · activa respuesta del sospechoso + consume presión</div>
+    <div class="ann" style="top:380px;right:20px;">COARTADA: el selector [Hora ▼] filtra por bloques horarios del timeline</div>
+    <div class="ann" style="top:540px;right:20px;">PRUEBA: cuadrícula de thumbnails · clic = presentar vs. sospechoso activo</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#333;color:#444;">ZOOM DERECHO · QUESTION MENU DETAIL</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 4 · EVIDENCE ZOOM MODAL
+═══════════════════════════════════════════════════ -->
+<div class="sw" id="s4">
+  <p class="slabel">PANTALLA 4 — MODAL DE EVIDENCIA · overlay al hacer clic en un documento de la mesa</p>
+  <div class="canvas">
+
+    <!-- Background: blurred game state hint -->
+    <div style="position:absolute;inset:0;background:#0e0e0e;"></div>
+    <div style="position:absolute;top:0;left:0;width:50%;height:100%;background:#2c1e0e;opacity:.28;" class="hd"></div>
+    <div style="position:absolute;top:0;right:0;width:50%;height:100%;background:#0c0c1a;opacity:.28;" class="hv"></div>
+    <!-- Divider hint -->
+    <div style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:#1a1a1a;"></div>
+
+    <!-- OVERLAY -->
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:100;"></div>
+
+    <!-- ── MODAL ── -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:720px;background:#181818;border:2px solid #4a4a4a;z-index:200;box-shadow:0 0 80px rgba(0,0,0,.95);">
+
+      <!-- Modal header -->
+      <div style="background:#0f0f0f;border-bottom:1px solid #2e2e2e;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:10px;letter-spacing:3px;color:#888;">EVIDENCIA · DETALLE COMPLETO</div>
+          <div style="font-size:8.5px;color:#444;margin-top:2px;letter-spacing:1px;">Expediente Policial — REF: DOC-001</div>
+        </div>
+        <!-- Close X -->
+        <div style="width:30px;height:30px;border:1px solid #4a4a4a;background:#262626;display:flex;align-items:center;justify-content:center;font-size:15px;color:#aaa;cursor:pointer;flex-shrink:0;">✕</div>
+      </div>
+
+      <!-- Modal body -->
+      <div style="padding:22px;display:flex;gap:22px;">
+
+        <!-- Image column -->
+        <div style="width:270px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
+          <!-- Large image placeholder -->
+          <div style="width:270px;height:210px;border:1px dashed #444;background:#0e0e0e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;">
+            <div style="font-size:32px;color:#2a2a2a;">⬛</div>
+            <div style="font-size:8.5px;color:#3a3a3a;letter-spacing:1px;">[IMAGEN DE EVIDENCIA]</div>
+            <div style="font-size:7.5px;color:#2a2a2a;">260 × 200 · placeholder</div>
+          </div>
+          <!-- Zoom controls -->
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:30px;height:22px;border:1px solid #3a3a3a;background:#181818;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666;cursor:pointer;">+</div>
+            <div style="width:30px;height:22px;border:1px solid #3a3a3a;background:#181818;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666;cursor:pointer;">−</div>
+            <div style="font-size:7.5px;color:#333;margin-left:2px;">controles de zoom</div>
+          </div>
+        </div>
+
+        <!-- Info column -->
+        <div style="flex:1;display:flex;flex-direction:column;gap:13px;">
+
+          <!-- Title -->
+          <div>
+            <div style="font-size:8.5px;letter-spacing:2px;color:#555;margin-bottom:4px;">TÍTULO DE EVIDENCIA</div>
+            <div style="font-size:15px;font-weight:bold;color:#ddd;letter-spacing:1px;">Expediente Policial #201</div>
+          </div>
+
+          <!-- Metadata -->
+          <div style="border-top:1px solid #242424;padding-top:11px;">
+            <div style="font-size:8.5px;letter-spacing:2px;color:#555;margin-bottom:6px;">METADATOS</div>
+            <div style="font-size:9px;color:#666;line-height:1.8;">
+              Fecha de obtención: 14/03/2026<br>
+              Lugar de hallazgo: C/ Alcalá 34, Madrid<br>
+              Tipo: Documento oficial<br>
+              Estado: <span style="color:#5a5a8a;">[Sin analizar]</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div style="border-top:1px solid #242424;padding-top:11px;">
+            <div style="font-size:8.5px;letter-spacing:2px;color:#555;margin-bottom:6px;">DESCRIPCIÓN</div>
+            <div style="font-size:9px;color:#5a5a5a;line-height:1.8;font-style:italic;">
+              [Texto descriptivo placeholder de la evidencia. Puede incluir notas forenses, observaciones del detective o datos de laboratorio. Se rellena dinámicamente según el caso activo.]
+            </div>
+          </div>
+
+          <!-- Links/Tags -->
+          <div style="border-top:1px solid #242424;padding-top:9px;">
+            <div style="font-size:8.5px;letter-spacing:2px;color:#555;margin-bottom:6px;">VINCULADO A</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;">
+              <div style="background:#141424;border:1px solid #2a2a44;padding:3px 9px;font-size:8px;color:#6666aa;">Sospechoso 2</div>
+              <div style="background:#141424;border:1px solid #2a2a44;padding:3px 9px;font-size:8px;color:#6666aa;">Evento: 14/03 22:00h</div>
+              <div style="background:#1a1212;border:1px solid #3a2424;padding:3px 9px;font-size:8px;color:#8b5555;">Contradicción detectada</div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="btn ghost" style="position:static;width:100%;height:46px;font-size:10.5px;letter-spacing:2px;margin-top:auto;">
+            PRESENTAR AL SOSPECHOSO
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ANNOTATIONS -->
+    <div class="ann" style="top:34px;left:18px;z-index:300;">Fondo oscurecido (opacity 78%) — estado del juego visible debajo</div>
+    <div class="ann" style="top:92px;right:18px;z-index:300;">Botón ✕ cierra el modal y devuelve el foco a la partida</div>
+    <div class="ann" style="top:200px;right:18px;z-index:300;">Imagen a máximo tamaño disponible + controles de zoom básicos</div>
+    <div class="ann" style="top:340px;right:18px;z-index=300;">Metadatos y descripción dinámicos según la evidencia seleccionada</div>
+    <div class="ann" style="top:480px;right:18px;z-index:300;">Tags de vinculación — indica qué sospechosos / eventos relaciona</div>
+    <div class="ann" style="bottom:30px;right:18px;z-index:300;">CTA: PRESENTAR AL SOSPECHOSO — envía esta prueba directamente al interrogatorio activo</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#333;color:#444;z-index:300;">MODAL OVERLAY · EVIDENCE DETAIL</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 5 · RESOLVER CASO
+═══════════════════════════════════════════════════ -->
+<div class="sw" id="s5">
+  <p class="slabel">PANTALLA 5 — RESOLVER EL CASO · pantalla completa de acusación final</p>
+  <div class="canvas">
+
+    <!-- BG -->
+    <div style="position:absolute;inset:0;background:#0b0b0b;" class="hd"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 52%,rgba(70,8,8,.18),transparent 68%);pointer-events:none;"></div>
+
+    <!-- Back button -->
+    <div class="btn" style="top:16px;left:16px;width:110px;height:34px;font-size:10px;letter-spacing:1.5px;color:#666;border-color:#333;">← VOLVER</div>
+
+    <!-- Title -->
+    <div style="position:absolute;top:56px;left:0;right:0;text-align:center;">
+      <div style="font-size:34px;font-weight:700;letter-spacing:7px;color:#d8d8d8;font-family:'Courier New',monospace;">RESOLVER EL CASO</div>
+      <div style="font-size:9px;letter-spacing:5px;color:#3a3a3a;margin-top:8px;">SELECCIONA UNA OPCIÓN EN CADA CATEGORÍA · ACUSA CUANDO ESTÉS SEGURO</div>
+      <div style="width:440px;height:1px;background:linear-gradient(90deg,transparent,#333,transparent);margin:14px auto 0;"></div>
+    </div>
+
+    <!-- ── BLOCK 1: QUIÉN ── -->
+    <div style="position:absolute;top:156px;left:50%;transform:translateX(-50%);width:580px;background:#121212;border:1px solid #2e2e2e;">
+      <div style="padding:11px 16px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;background:var(--red-mid);border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;color:#fff;flex-shrink:0;">1</div>
+        <div>
+          <div style="font-size:13px;letter-spacing:3px;color:#ccc;">¿QUIÉN cometió el crimen?</div>
+          <div style="font-size:8.5px;color:#444;margin-top:2px;letter-spacing:.5px;">Selecciona al principal sospechoso</div>
+        </div>
+      </div>
+      <!-- Dropdown (expanded to show options) -->
+      <div style="padding:13px 16px 0;">
+        <div style="height:38px;background:#0a0a0a;border:1px solid #2e2e2e;display:flex;align-items:center;padding:0 12px;font-size:10.5px;color:#4a4a4a;position:relative;">
+          <span>Seleccionar sospechoso...</span>
+          <span style="position:absolute;right:12px;font-size:10px;color:#3a3a3a;">▼</span>
+        </div>
+      </div>
+      <!-- Dropdown options -->
+      <div style="margin:0 16px 13px;border:1px solid #1e1e1e;border-top:none;background:#080808;overflow:hidden;">
+        <div style="padding:7px 12px;font-size:10px;color:#aaa;border-bottom:1px solid #161616;background:#141414;display:flex;align-items:center;gap:6px;">
+          <div style="width:6px;height:6px;background:var(--red);border-radius:50%;"></div>María García
+        </div>
+        <div style="padding:7px 12px;font-size:10px;color:#666;border-bottom:1px solid #101010;">Carlos Ruiz</div>
+        <div style="padding:7px 12px;font-size:10px;color:#666;">Elena Martínez</div>
+      </div>
+    </div>
+
+    <!-- ── BLOCK 2: CÓMO ── -->
+    <div style="position:absolute;top:320px;left:50%;transform:translateX(-50%);width:580px;background:#121212;border:1px solid #2e2e2e;">
+      <div style="padding:11px 16px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;background:#383838;border:1px solid #555;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;color:#fff;flex-shrink:0;">2</div>
+        <div>
+          <div style="font-size:13px;letter-spacing:3px;color:#ccc;">¿CÓMO fue cometido?</div>
+          <div style="font-size:8.5px;color:#444;margin-top:2px;">Método o arma utilizada</div>
+        </div>
+      </div>
+      <div style="padding:13px 16px;">
+        <div style="height:38px;background:#0a0a0a;border:1px solid #2e2e2e;display:flex;align-items:center;padding:0 12px;font-size:10.5px;color:#4a4a4a;position:relative;">
+          <span>Seleccionar método...</span>
+          <span style="position:absolute;right:12px;font-size:10px;color:#3a3a3a;">▼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BLOCK 3: POR QUÉ ── -->
+    <div style="position:absolute;top:436px;left:50%;transform:translateX(-50%);width:580px;background:#121212;border:1px solid #2e2e2e;">
+      <div style="padding:11px 16px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;gap:12px;">
+        <div style="width:30px;height:30px;background:#383838;border:1px solid #555;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;color:#fff;flex-shrink:0;">3</div>
+        <div>
+          <div style="font-size:13px;letter-spacing:3px;color:#ccc;">¿POR QUÉ lo hizo?</div>
+          <div style="font-size:8.5px;color:#444;margin-top:2px;">Motivo principal del crimen</div>
+        </div>
+      </div>
+      <div style="padding:13px 16px;">
+        <div style="height:38px;background:#0a0a0a;border:1px solid #2e2e2e;display:flex;align-items:center;padding:0 12px;font-size:10.5px;color:#4a4a4a;position:relative;">
+          <span>Seleccionar motivo...</span>
+          <span style="position:absolute;right:12px;font-size:10px;color:#3a3a3a;">▼</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ACUSAR BUTTON ── -->
+    <div class="btn cta" style="top:566px;left:50%;transform:translateX(-50%);width:310px;height:58px;">ACUSAR</div>
+
+    <!-- Disabled note -->
+    <div style="position:absolute;top:636px;left:50%;transform:translateX(-50%);font-size:8.5px;color:#2e2e2e;letter-spacing:.5px;text-align:center;white-space:nowrap;">Botón ACUSAR se activa sólo cuando las 3 opciones han sido seleccionadas</div>
+
+    <!-- ANNOTATIONS -->
+    <div class="ann" style="top:160px;right:26px;">Bloque 1 con dropdown expandido como ejemplo — opción activa resaltada</div>
+    <div class="ann" style="top:324px;right:26px;">Bloque 2 — dropdown colapsado, sin selección</div>
+    <div class="ann" style="top:440px;right:26px;">Bloque 3 — dropdown colapsado, sin selección</div>
+    <div class="ann" style="top:570px;right:26px;">ACUSAR en rojo — acción irreversible, lleva a pantalla de resultado</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#333;color:#444;">RESOLVER CASO · FULL SCREEN</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCREEN 6 · CONTRADICTION ALERT
+═══════════════════════════════════════════════════ -->
+<div class="sw" id="s6">
+  <p class="slabel">PANTALLA 6 — ALERTA DE CONTRADICCIÓN · overlay dramático sobre el juego activo</p>
+  <div class="canvas">
+
+    <!-- BG: split game state dimmed -->
+    <div style="position:absolute;inset:0;background:#100903;"></div>
+    <div style="position:absolute;top:0;left:0;width:50%;height:100%;background:#2c1e0e;opacity:.3;" class="hd"></div>
+    <div style="position:absolute;top:0;right:0;width:50%;height:100%;background:#0c0c1a;opacity:.3;" class="hv"></div>
+    <div style="position:absolute;top:0;bottom:0;left:50%;width:1px;background:#1e1e1e;"></div>
+
+    <!-- Split screen hint elements (faded game) -->
+    <div style="position:absolute;top:40px;left:30px;width:110px;height:140px;background:#e8dfc0;opacity:.08;border:1px solid #888;transform:rotate(-3deg);"></div>
+    <div style="position:absolute;top:80px;left:210px;width:130px;height:90px;background:#e8dfc0;opacity:.06;border:1px solid #888;transform:rotate(2deg);"></div>
+    <div style="position:absolute;top:50%;right:50px;transform:translateY(-50%);width:240px;height:220px;border:1px solid #1a1a1a;opacity:.15;background:#111;"></div>
+
+    <!-- Dark overlay -->
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.6);z-index:50;"></div>
+
+    <!-- ── ALERT BANNER (centered vertically) ── -->
+    <div style="position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);z-index:100;">
+
+      <!-- Top accent line -->
+      <div style="height:3px;background:linear-gradient(90deg,transparent 0%,#8b2020 15%,#e74c3c 50%,#8b2020 85%,transparent 100%);"></div>
+
+      <!-- Main alert container -->
+      <div style="background:#160000;border-top:2px solid var(--red);border-bottom:2px solid var(--red);padding:22px 48px;">
+
+        <!-- Alert title -->
+        <div style="text-align:center;margin-bottom:22px;">
+          <div style="font-size:28px;font-weight:900;letter-spacing:5px;color:#e74c3c;font-family:'Courier New',monospace;text-shadow:0 0 25px rgba(231,76,60,.5);">¡CONTRADICCIÓN DETECTADA!</div>
+          <div style="font-size:9px;letter-spacing:4.5px;color:#5a1a1a;margin-top:5px;">INCONSISTENCIA LÓGICA REGISTRADA — LIBRETA ACTUALIZADA</div>
+        </div>
+
+        <!-- Side by side comparison -->
+        <div style="display:flex;gap:18px;margin-bottom:20px;align-items:stretch;">
+
+          <!-- Left: sospechoso's statement -->
+          <div style="flex:1;background:#120000;border:1px solid #3a0000;padding:14px 16px;">
+            <div style="font-size:8.5px;letter-spacing:2px;color:#7a1a1a;border-bottom:1px solid #240000;padding-bottom:7px;margin-bottom:10px;">DECLARACIÓN DEL SOSPECHOSO</div>
+            <div style="font-size:10.5px;color:#888;font-style:italic;line-height:1.65;">"Yo estaba en casa esa noche. Mi vecina puede confirmarlo, ya lo dije antes..."</div>
+            <div style="margin-top:9px;font-size:8px;color:#3a3a3a;letter-spacing:.5px;">— Interrogatorio · 22:14h</div>
+          </div>
+
+          <!-- VS divider -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:center;padding:0 4px;">
+            <div style="width:1px;height:30px;background:#3a0000;"></div>
+            <div style="font-size:13px;font-weight:bold;color:var(--red);">VS</div>
+            <div style="width:1px;height:30px;background:#3a0000;"></div>
+          </div>
+
+          <!-- Right: evidence -->
+          <div style="flex:1;background:#120000;border:1px solid #3a0000;padding:14px 16px;">
+            <div style="font-size:8.5px;letter-spacing:2px;color:#7a1a1a;border-bottom:1px solid #240000;padding-bottom:7px;margin-bottom:10px;">PRUEBA</div>
+            <div style="display:flex;gap:11px;align-items:center;">
+              <div style="width:64px;height:64px;border:1px dashed #3a0000;background:#0a0000;display:flex;align-items:center;justify-content:center;font-size:7px;color:#3a1a1a;flex-shrink:0;text-align:center;">[FOTO<br>CÁMARA<br>007]</div>
+              <div>
+                <div style="font-size:10px;color:#888;font-weight:bold;margin-bottom:4px;">Cámara de seguridad · C/ Gran Vía</div>
+                <div style="font-size:9.5px;color:#666;font-style:italic;line-height:1.6;">El sospechoso aparece en C/ Gran Vía a las 22:05h del 14/03</div>
+                <div style="margin-top:5px;font-size:7.5px;color:#444;">Ref: FOTO-007</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end comparison -->
+
+        <!-- Bottom row: sospecha + continuar -->
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <!-- Sospecha indicator -->
+          <div style="background:#1c0000;border:1px solid var(--red-mid);padding:10px 18px;display:flex;align-items:center;gap:14px;">
+            <div style="font-size:26px;font-weight:900;color:#e74c3c;line-height:1;">+10%</div>
+            <div>
+              <div style="font-size:9px;letter-spacing:2px;color:var(--red);">NIVEL DE SOSPECHA</div>
+              <div style="font-size:8px;color:#555;margin-top:2px;">El sospechoso pierde credibilidad</div>
+            </div>
+          </div>
+          <!-- Dismiss controls -->
+          <div style="text-align:right;">
+            <div style="font-size:8.5px;color:#333;margin-bottom:7px;letter-spacing:.5px;">Auto-cierra en 3 segundos · o pulsa:</div>
+            <div class="btn" style="position:static;width:148px;height:36px;font-size:10.5px;letter-spacing:2px;color:#777;border-color:#3a3a3a;">CONTINUAR</div>
+          </div>
+        </div>
+
+      </div><!-- end alert container -->
+
+      <!-- Bottom accent line -->
+      <div style="height:3px;background:linear-gradient(90deg,transparent 0%,#8b2020 15%,#e74c3c 50%,#8b2020 85%,transparent 100%);"></div>
+    </div>
+
+    <!-- ANNOTATIONS -->
+    <div class="ann" style="top:28px;left:18px;z-index:200;">Split-screen del juego visible debajo (opacidad reducida ~30%)</div>
+    <div class="ann" style="top:58px;right:18px;z-index:200;">Overlay oscuro — rgba(0,0,0,.6) · bloquea la interacción</div>
+    <div class="ann" style="top:90px;right:18px;z-index:200;">Banner dramático centrado · líneas de destello rojo arriba y abajo</div>
+    <div class="ann" style="bottom:62px;left:18px;z-index:200;">+10% SOSPECHA — indicador de progresión acumulativo por sospechoso</div>
+    <div class="ann" style="bottom:32px;right:18px;z-index:200;">Auto-dismiss 3 seg. OR botón CONTINUAR · ambas opciones disponibles</div>
+    <div class="ann" style="top:7px;right:10px;border-color:#333;color:#444;z-index:300;">CONTRADICCIÓN · OVERLAY ALERT</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
+<script>
+  function go(id) {
+    document.querySelectorAll('.sw').forEach(el => el.classList.remove('on'));
+    document.querySelectorAll('.nbtn').forEach(el => el.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+    const order = ['s1','s2','s3','s4','s5','s6'];
+    const idx = order.indexOf(id);
+    if (idx >= 0) document.querySelectorAll('.nbtn')[idx].classList.add('on');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const order = ['s1','s2','s3','s4','s5','s6'];
+    const cur = document.querySelector('.sw.on');
+    const idx = order.indexOf(cur ? cur.id : 's1');
+    if (e.key === 'ArrowRight' && idx < order.length - 1) go(order[idx + 1]);
+    if (e.key === 'ArrowLeft'  && idx > 0)                go(order[idx - 1]);
+  });
+</script>
+
+</body>
+</html>
