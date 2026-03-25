@@ -167,6 +167,7 @@ US.UIController = class UIController {
 
     this.screens.game.innerHTML = `
       <nav class="game-nav">
+        <button class="btn btn--nav-back" data-action="go-menu">← MENÚ</button>
         <div class="game-nav__title">UNDER SUSPICION</div>
         <div class="game-nav__suspects" id="nav-suspects"></div>
         <div class="game-nav__actions">
@@ -202,6 +203,13 @@ US.UIController = class UIController {
 
     this.screens.game.querySelector('[data-action="go-resolve"]')
       .addEventListener('click', () => this.showScreen('resolution'));
+
+    this.screens.game.querySelector('[data-action="go-menu"]')
+      .addEventListener('click', () => {
+        if (confirm('¿Abandonar el caso? Se perderá el progreso actual.')) {
+          this.showScreen('menu');
+        }
+      });
 
     this.root.querySelector('#notebook-toggle')
       .addEventListener('click', () => this._toggleNotebook());
@@ -652,12 +660,17 @@ US.UIController = class UIController {
       return;
     }
 
-    body.innerHTML = notes.slice().reverse().map(n => {
+    const briefing = notes.find(n => n.type === 'briefing');
+    const rest = notes.filter(n => n.type !== 'briefing').slice().reverse();
+    const ordered = briefing ? [briefing, ...rest] : rest;
+
+    body.innerHTML = ordered.map(n => {
       const isContradiction = n.type === 'contradiction';
-      const typeLabel = { question: 'PREGUNTA', evidence: 'PRUEBA PRESENTADA', contradiction: '⚠ CONTRADICCIÓN' }[n.type];
+      const isBriefing = n.type === 'briefing';
+      const typeLabel = { question: 'PREGUNTA', evidence: 'PRUEBA PRESENTADA', contradiction: '⚠ CONTRADICCIÓN', briefing: '📋 EXPEDIENTE' }[n.type];
       const typeCls = `note-entry__type--${n.type}`;
       return `
-        <div class="note-entry ${isContradiction ? 'note-entry--contradiction' : ''}">
+        <div class="note-entry ${isContradiction ? 'note-entry--contradiction' : ''} ${isBriefing ? 'note-entry--briefing' : ''}">`
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
             <span class="note-entry__type ${typeCls}">${typeLabel}</span>
             <span class="note-entry__time">${n.time}</span>

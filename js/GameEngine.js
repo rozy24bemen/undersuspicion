@@ -49,6 +49,11 @@ US.GameEngine = class GameEngine {
       this.suspectState[s.id] = { pressure: 0, suspicion: 0 };
       this.presentedEvidence[s.id] = new Set();
     });
+
+    // Briefing inicial fijado en la libreta
+    this._addNote('briefing', src.title,
+      'Víctima: ' + src.victim.name + ' · ' + src.scene.location,
+      src.intro);
   }
 
   // ── Getters ───────────────────────────────────────

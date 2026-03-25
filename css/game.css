@@ -212,6 +212,19 @@ html, body {
 }
 .btn--resolver:hover { background: #2a0e0e; }
 
+.btn--nav-back {
+  height: 28px;
+  padding: 0 12px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  border-color: #2a2a2a;
+  background: transparent;
+  color: #444;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.btn--nav-back:hover { color: #888; border-color: #555; background: #0c0c0c; }
+
 .btn--cta {
   width: 100%;
   max-width: 320px;
@@ -1195,6 +1208,13 @@ html, body {
   margin-bottom: 4px;
 }
 
+.note-entry--briefing {
+  background: #f5edd8;
+  border: 1px solid #8a7040;
+  border-bottom: 2px solid #8a7040;
+  margin-bottom: 8px;
+}
+
 .note-entry__time {
   font-size: 8px;
   color: #999;
@@ -1211,6 +1231,7 @@ html, body {
 .note-entry__type--question { color: var(--blue); }
 .note-entry__type--evidence { color: var(--gold-dim); }
 .note-entry__type--contradiction { color: var(--red); }
+.note-entry__type--briefing { color: #5e4520; font-weight: bold; }
 
 .note-entry__suspect {
   font-weight: bold;
