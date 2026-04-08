@@ -590,6 +590,7 @@ US.UIController = class UIController {
       const isBriefing = n.type === 'briefing';
       const typeLabel = { question: 'PREGUNTA', evidence: 'PRUEBA PRESENTADA', contradiction: '⚠ CONTRADICCIÓN', briefing: '📋 EXPEDIENTE' }[n.type];
       const typeCls = `note-entry__type--${n.type}`;
+      const detail2Html = n.detail2 ? `<div class="note-entry__detail" style="margin-top:4px;font-style:normal;color:#666;">→ ${this._esc(n.detail2)}</div>` : '';
       return `
         <div class="note-entry ${isContradiction ? 'note-entry--contradiction' : ''} ${isBriefing ? 'note-entry--briefing' : ''}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
@@ -598,7 +599,7 @@ US.UIController = class UIController {
           </div>
           <div><span class="note-entry__suspect">${this._esc(n.suspectName)}:</span></div>
           <div class="note-entry__detail">${this._esc(n.detail1)}</div>
-          ${n.detail2 ? `<div class="note-entry__detail" style="margin-top:4px;font-style:normal;color:#666;">→ ${this._esc(n.detail2)}</div>` : ''}
+          ${detail2Html}
         </div>
       `;
     }).join('');
@@ -610,6 +611,142 @@ US.UIController = class UIController {
     const count = this.engine.getNotebook().length;
     badge.textContent = count;
     badge.classList.toggle('visible', count > 0);
+  }
+
+  // ═══════════════════════════════════════════════════
+  // RESOLUTION SCREEN
+  // ═══════════════════════════════════════════════════
+
+  renderResolution() {
+    const c = this.engine.getCase();
+    const suspects = this.engine.getSuspects();
+
+    const whoOptions = suspects.map(s => `<option value="${s.id}">${this._esc(s.name)} — ${this._esc(s.role)}</option>`).join('');
+    const howOptions = c.howOptions.map(o => `<option value="${o.id}">${this._esc(o.text)}</option>`).join('');
+    const whyOptions = c.whyOptions.map(o => `<option value="${o.id}">${this._esc(o.text)}</option>`).join('');
+
+    this.screens.resolution.innerHTML = `
+      <div class="resolution">
+        <button class="btn btn--back" data-action="back-to-game">← VOLVER</button>
+
+        <div class="resolution__title">RESOLVER EL CASO</div>
+        <div class="resolution__subtitle">SELECCIONA UNA OPCIÓN EN CADA CATEGORÍA · ACUSA CUANDO ESTÉS SEGURO</div>
+
+        <div class="resolution__block">
+          <div class="resolution__block-header">
+            <div class="resolution__block-number" style="background:var(--red-dark);border-color:var(--red);">1</div>
+            <div class="resolution__block-question">¿QUIÉN cometió el crimen?</div>
+          </div>
+          <div class="resolution__select-wrap">
+            <select class="resolution__select" id="res-who">
+              <option value="">Seleccionar sospechoso...</option>
+              ${whoOptions}
+            </select>
+          </div>
+        </div>
+
+        <div class="resolution__block">
+          <div class="resolution__block-header">
+            <div class="resolution__block-number">2</div>
+            <div class="resolution__block-question">¿CÓMO fue cometido?</div>
+          </div>
+          <div class="resolution__select-wrap">
+            <select class="resolution__select" id="res-how">
+              <option value="">Seleccionar método...</option>
+              ${howOptions}
+            </select>
+          </div>
+        </div>
+
+        <div class="resolution__block">
+          <div class="resolution__block-header">
+            <div class="resolution__block-number">3</div>
+            <div class="resolution__block-question">¿POR QUÉ lo hizo?</div>
+          </div>
+          <div class="resolution__select-wrap">
+            <select class="resolution__select" id="res-why">
+              <option value="">Seleccionar motivo...</option>
+              ${whyOptions}
+            </select>
+          </div>
+        </div>
+
+        <button class="btn btn--cta" id="btn-accuse" data-action="accuse">ACUSAR</button>
+      </div>
+    `;
+
+    this.screens.resolution.querySelector('[data-action="back-to-game"]')
+      .addEventListener('click', () => this.showScreen('game'));
+
+    this.screens.resolution.querySelector('[data-action="accuse"]')
+      .addEventListener('click', () => this._handleAccuse());
+  }
+
+  _handleAccuse() {
+    const who = this.root.querySelector('#res-who').value;
+    const how = this.root.querySelector('#res-how').value;
+    const why = this.root.querySelector('#res-why').value;
+
+    if (!who || !how || !why) {
+      var btn = this.root.querySelector('#btn-accuse');
+      btn.textContent = '⚠ SELECCIONA LAS 3 OPCIONES';
+      btn.style.borderColor = 'var(--red)';
+      setTimeout(function() { btn.textContent = 'ACUSAR'; btn.style.borderColor = ''; }, 2000);
+      return;
+    }
+
+    const result = this.engine.resolveCase(who, how, why);
+    this._renderResult(result);
+    this.showScreen('result');
+  }
+
+  // ═══════════════════════════════════════════════════
+  // RESULT SCREEN
+  // ═══════════════════════════════════════════════════
+
+  _renderResult(result) {
+    const verdictText = result.allCorrect ? '¡CASO RESUELTO!'
+      : (result.correct.who ? 'CASO PARCIALMENTE RESUELTO' : 'CASO NO RESUELTO');
+    const verdictCls = result.allCorrect ? 'correct'
+      : (result.correct.who ? 'partial' : 'wrong');
+
+    this.screens.result.innerHTML = `
+      <div class="result">
+        <div class="result__verdict result__verdict--${verdictCls}">${verdictText}</div>
+
+        <div class="result__score">${result.score}</div>
+        <div class="result__rating">RANGO ${result.rating} — ${result.ratingLabel}</div>
+
+        <div class="result__breakdown">
+          <div class="result__row">
+            <span class="result__row-label">¿Quién?</span>
+            <span class="result__row-value ${result.correct.who ? 'correct' : 'wrong'}">${result.correct.who ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
+          </div>
+          <div class="result__row">
+            <span class="result__row-label">¿Cómo?</span>
+            <span class="result__row-value ${result.correct.how ? 'correct' : 'wrong'}">${result.correct.how ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
+          </div>
+          <div class="result__row">
+            <span class="result__row-label">¿Por qué?</span>
+            <span class="result__row-value ${result.correct.why ? 'correct' : 'wrong'}">${result.correct.why ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
+          </div>
+          <div style="border-top:1px solid #2e2e2e;margin-top:4px;padding-top:8px;" class="result__row">
+            <span class="result__row-label">Contradicciones encontradas</span>
+            <span class="result__row-value" style="color:#aaa;">${result.contradictionsFound} / ${result.totalContradictions}</span>
+          </div>
+        </div>
+
+        <div class="result__explanation">
+          <div class="result__explanation-label">LO QUE REALMENTE OCURRIÓ</div>
+          ${this._esc(result.explanation)}
+        </div>
+
+        <button class="btn btn--primary btn--menu" style="max-width:320px;" data-action="back-to-menu">VOLVER AL MENÚ</button>
+      </div>
+    `;
+
+    this.screens.result.querySelector('[data-action="back-to-menu"]')
+      .addEventListener('click', () => this.showScreen('menu'));
   }
 
   // ═══════════════════════════════════════════════════
