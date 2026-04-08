@@ -1,6 +1,7 @@
 /**
  * UIController — Toda la manipulación del DOM.
  * Genera las pantallas, gestiona eventos, actualiza visuales.
+ * Delega el renderizado de pantallas a clases Screen independientes.
  */
 var US = US || {};
 
@@ -11,12 +12,23 @@ US.UIController = class UIController {
     this.root = root;
     this.activeTab = 'vinculo';
     this.deskCardZIndex = 20;
+    this._lastResult = null;
 
     // Drag state for desk cards
     this._drag = null;
 
     // Build all static screen shells
     this._buildShell();
+
+    // Instantiate screen delegates
+    this._screens = {
+      menu:       new US.MenuScreen(this),
+      intro:      new US.IntroScreen(this),
+      game:       new US.GameScreen(this),
+      resolution: new US.ResolutionScreen(this),
+      result:     new US.ResultScreen(this)
+    };
+
     this._bindGlobalEvents();
   }
 
@@ -57,185 +69,15 @@ US.UIController = class UIController {
     Object.values(this.screens).forEach(s => s.classList.remove('active'));
     this.screens[name].classList.add('active');
 
-    const renderers = {
-      menu:       () => this.renderMenu(),
-      intro:      () => this.renderIntro(),
-      game:       () => this.renderGame(),
-      resolution: () => this.renderResolution(),
-      result:     () => {}  // rendered by resolveCase
-    };
-    if (renderers[name]) renderers[name]();
+    if (this._screens[name]) {
+      this._screens[name].render(this.screens[name]);
+    }
   }
 
   // ═══════════════════════════════════════════════════
-  // MAIN MENU
+  // GAME SCREEN — Internal render helpers
+  // (Top-level render delegated to GameScreen)
   // ═══════════════════════════════════════════════════
-
-  renderMenu() {
-    this.screens.menu.innerHTML = `
-      <div class="menu">
-        <div class="menu__bg"></div>
-        <div class="menu__folder" style="top:30px;left:40px;width:160px;height:240px;transform:rotate(-12deg);opacity:.3;"></div>
-        <div class="menu__folder" style="bottom:60px;left:25px;width:120px;height:180px;transform:rotate(7deg);opacity:.2;"></div>
-        <div class="menu__folder" style="top:50px;right:45px;width:150px;height:220px;transform:rotate(10deg);opacity:.25;"></div>
-        <div class="menu__folder" style="bottom:35px;right:30px;width:110px;height:160px;transform:rotate(-5deg);opacity:.2;"></div>
-
-        <div class="menu__content">
-          <div class="menu__logo">
-            <div class="menu__logo-corner menu__logo-corner--tl"></div>
-            <div class="menu__logo-corner menu__logo-corner--tr"></div>
-            <div class="menu__logo-corner menu__logo-corner--bl"></div>
-            <div class="menu__logo-corner menu__logo-corner--br"></div>
-            <div class="menu__title">UNDER<br>SUSPICION</div>
-            <div class="menu__divider"></div>
-            <div class="menu__subtitle">POLICÍA DE LA CIUDAD</div>
-          </div>
-
-          <div class="menu__stamp">CONFIDENTIAL</div>
-
-          <button class="btn btn--menu btn--primary" data-action="start-story">MODO HISTORIA</button>
-          <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
-          <button class="btn btn--menu btn--disabled">⚙ CONFIGURACIÓN</button>
-          <button class="btn btn--menu btn--exit btn--disabled">SALIR</button>
-
-          <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
-        </div>
-      </div>
-    `;
-
-    this.screens.menu.querySelector('[data-action="start-story"]')
-      .addEventListener('click', () => {
-        this.engine.loadCase('caso-01');
-        this.showScreen('intro');
-      });
-  }
-
-  // ═══════════════════════════════════════════════════
-  // CASE INTRO
-  // ═══════════════════════════════════════════════════
-
-  renderIntro() {
-    const c = this.engine.getCase();
-    this.screens.intro.innerHTML = `
-      <div class="intro">
-        <div class="intro__card">
-          <div class="intro__header">
-            <div class="intro__case-number">${this._esc(c.subtitle)}</div>
-            <div class="intro__case-title">${this._esc(c.title)}</div>
-          </div>
-          <div class="intro__body">
-            <div class="intro__row">
-              <span class="intro__label">VÍCTIMA</span>
-              <span class="intro__value">${this._esc(c.victim.name)}, ${c.victim.age} años — ${this._esc(c.victim.occupation)}</span>
-            </div>
-            <div class="intro__row">
-              <span class="intro__label">LUGAR</span>
-              <span class="intro__value">${this._esc(c.scene.location)}</span>
-            </div>
-            <div class="intro__row">
-              <span class="intro__label">FECHA</span>
-              <span class="intro__value">${this._esc(c.scene.date)}</span>
-            </div>
-            <div class="intro__row">
-              <span class="intro__label">HORA</span>
-              <span class="intro__value">${this._esc(c.scene.timeOfDeath)}</span>
-            </div>
-            <div class="intro__divider"></div>
-            <div class="intro__text">${this._esc(c.intro)}</div>
-            <div class="intro__divider"></div>
-            <div class="intro__row">
-              <span class="intro__label">SOSPECHOSOS</span>
-              <span class="intro__value">${c.suspects.map(s => this._esc(s.name) + ' — ' + this._esc(s.role)).join('<br>')}</span>
-            </div>
-            <div class="intro__divider"></div>
-            <button class="btn btn--primary btn--menu intro__start" data-action="open-case">ABRIR EXPEDIENTE</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    this.screens.intro.querySelector('[data-action="open-case"]')
-      .addEventListener('click', () => this.showScreen('game'));
-  }
-
-  // ═══════════════════════════════════════════════════
-  // GAME SCREEN (SPLIT VIEW)
-  // ═══════════════════════════════════════════════════
-
-  renderGame() {
-    const suspects = this.engine.getSuspects();
-
-    this.screens.game.innerHTML = `
-      <nav class="game-nav">
-        <button class="btn btn--nav-back" data-action="go-menu">← MENÚ</button>
-        <div class="game-nav__title">UNDER SUSPICION</div>
-        <div class="game-nav__suspects" id="nav-suspects"></div>
-        <div class="game-nav__actions">
-          <button class="btn btn--resolver" data-action="go-resolve">RESOLVER CASO</button>
-        </div>
-      </nav>
-      <main class="game-split">
-        <div class="desk" id="half-desk">
-          <div class="desk__surface" id="desk-surface"></div>
-          <div class="notebook-toggle" id="notebook-toggle">
-            <span class="notebook-toggle__icon">📓</span>
-            <span class="notebook-toggle__badge" id="notebook-badge">0</span>
-          </div>
-          <div class="desk__label">MESA DE PRUEBAS</div>
-        </div>
-        <div class="room" id="half-room">
-          <div class="pressure" id="pressure-section"></div>
-          <div class="portrait" id="portrait-section"></div>
-          <div class="dialogue" id="dialogue-section">
-            <div class="dialogue__header">RESPUESTA DEL SOSPECHOSO</div>
-            <div class="dialogue__text" id="dialogue-text">Seleccione un sospechoso y comience el interrogatorio. Revise las pruebas en la mesa antes de preguntar.</div>
-          </div>
-          <div class="question-panel" id="question-panel"></div>
-        </div>
-      </main>
-    `;
-
-    // Bind nav
-    this._renderSuspectSwitcher();
-    this._renderDesk();
-    this._renderRoom();
-    this._renderNotebookPanel();
-
-    this.screens.game.querySelector('[data-action="go-resolve"]')
-      .addEventListener('click', () => this.showScreen('resolution'));
-
-    this.screens.game.querySelector('[data-action="go-menu"]')
-      .addEventListener('click', () => {
-        if (confirm('¿Abandonar el caso? Se perderá el progreso actual.')) {
-          this.showScreen('menu');
-        }
-      });
-
-    this.root.querySelector('#notebook-toggle')
-      .addEventListener('click', () => this._toggleNotebook());
-  }
-
-  // ── Suspect Switcher ──────────────────────────────
-
-  _renderSuspectSwitcher() {
-    const container = this.root.querySelector('#nav-suspects');
-    const suspects = this.engine.getSuspects();
-    const active = this.engine.getActiveSuspect();
-
-    container.innerHTML = suspects.map((s, i) => {
-      const initials = s.name.split(' ').map(w => w[0]).join('');
-      const cls = s.id === active.id ? 'suspect-thumb active' : 'suspect-thumb';
-      return `<div class="${cls}" data-idx="${i}" title="${this._esc(s.name)}">${this._esc(initials)}</div>`;
-    }).join('');
-
-    container.querySelectorAll('.suspect-thumb').forEach(el => {
-      el.addEventListener('click', () => {
-        this.engine.switchSuspect(parseInt(el.dataset.idx));
-        this._renderSuspectSwitcher();
-        this._renderRoom();
-      });
-    });
-  }
 
   // ── Evidence Desk ─────────────────────────────────
 
@@ -243,30 +85,38 @@ US.UIController = class UIController {
     const surface = this.root.querySelector('#desk-surface');
     const evidence = this.engine.getEvidence();
 
-    // Generate positions for cards spread across the desk
-    const positions = this._generateDeskPositions(evidence.length);
+    const buildCards = () => {
+      // Generate positions for cards spread across the desk
+      const positions = this._generateDeskPositions(evidence.length, surface);
 
-    surface.innerHTML = evidence.map((ev, i) => {
-      const pos = positions[i];
-      return `
-        <div class="desk-card"
-             data-evidence-id="${ev.id}"
-             style="left:${pos.x}px;top:${pos.y}px;transform:rotate(${pos.rot}deg);z-index:${10 + i};"
-        >
-          <div class="desk-card__head">
-            <span class="desk-card__icon">${ev.icon}</span>
-            <span class="desk-card__title">${this._esc(ev.title)}</span>
+      surface.innerHTML = evidence.map((ev, i) => {
+        const pos = positions[i];
+        return `
+          <div class="desk-card"
+               data-evidence-id="${ev.id}"
+               style="left:${pos.x}px;top:${pos.y}px;transform:rotate(${pos.rot}deg);z-index:${10 + i};"
+          >
+            <div class="desk-card__head">
+              <span class="desk-card__icon">${ev.icon}</span>
+              <span class="desk-card__title">${this._esc(ev.title)}</span>
+            </div>
+            <div class="desk-card__body">${this._esc(ev.shortDesc)}</div>
+            <div class="desk-card__click-hint">
+              <span class="hint-mouse">CLIC PARA VER · ARRASTRA PARA MOVER</span>
+              <span class="hint-touch">TOCA PARA VER · MANTÉN PARA MOVER</span>
+            </div>
           </div>
-          <div class="desk-card__body">${this._esc(ev.shortDesc)}</div>
-          <div class="desk-card__click-hint">CLIC PARA VER · ARRASTRA PARA MOVER</div>
-        </div>
-      `;
-    }).join('');
+        `;
+      }).join('');
 
-    // Bind drag and click for each card
-    surface.querySelectorAll('.desk-card').forEach(card => {
-      card.addEventListener('pointerdown', e => this._onCardPointerDown(e, card));
-    });
+      // Bind drag and click for each card
+      surface.querySelectorAll('.desk-card').forEach(card => {
+        card.addEventListener('pointerdown', e => this._onCardPointerDown(e, card));
+      });
+    };
+
+    // Defer to ensure layout is calculated before reading dimensions
+    requestAnimationFrame(buildCards);
 
     // Global pointer events for drag
     surface.addEventListener('pointermove', e => this._onCardPointerMove(e));
@@ -274,55 +124,126 @@ US.UIController = class UIController {
     surface.addEventListener('pointercancel', e => this._onCardPointerUp(e));
   }
 
-  _generateDeskPositions(count) {
-    const cols = 4;
-    const positions = [];
-    for (let i = 0; i < count; i++) {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
+  _generateDeskPositions(count, surface) {
+    var w = surface.clientWidth || 700;
+    var h = surface.clientHeight || 500;
+    // Determine card size from CSS (mobile vs desktop)
+    var cardW = w < 500 ? 110 : w < 700 ? 130 : 165;
+    var cols = Math.max(2, Math.floor((w - 20) / (cardW + 10)));
+    var rows = Math.ceil(count / cols);
+    var padX = Math.max(10, (w - cols * (cardW + 10)) / 2);
+    var padY = Math.max(10, Math.min(40, (h - rows * 100) / (rows + 1)));
+    var rowH = Math.min(140, (h - padY) / Math.max(rows, 1));
+
+    var positions = [];
+    for (var i = 0; i < count; i++) {
+      var col = i % cols;
+      var row = Math.floor(i / cols);
       positions.push({
-        x: 30 + col * 155 + (Math.random() * 30 - 15),
-        y: 70 + row * 160 + (Math.random() * 20 - 10),
+        x: Math.round(padX + col * (cardW + 10) + (Math.random() * 14 - 7)),
+        y: Math.round(padY + row * rowH + (Math.random() * 10 - 5)),
         rot: (Math.random() * 8 - 4).toFixed(1)
       });
     }
     return positions;
   }
 
+  /**
+   * Pointer interaction strategy:
+   *  - Mouse (pointerType "mouse"): instant drag, 4px threshold to separate click vs drag.
+   *  - Touch (pointerType "touch"/"pen"): long-press (~300ms) to enter drag mode.
+   *    A short tap opens the evidence modal. Moving >12px before the timer fires cancels it
+   *    (scroll gesture), so the user can scroll the desk freely.
+   *    Visual feedback: the card scales up when the long-press fires.
+   */
+
   _onCardPointerDown(e, card) {
     if (e.button !== 0) return;
+    var isTouch = (e.pointerType === 'touch' || e.pointerType === 'pen');
+
     card.setPointerCapture(e.pointerId);
     this.deskCardZIndex++;
     card.style.zIndex = this.deskCardZIndex;
-    card.classList.add('dragging');
 
     this._drag = {
       card: card,
+      pointerId: e.pointerId,
       startX: e.clientX,
       startY: e.clientY,
       origLeft: parseInt(card.style.left) || 0,
       origTop: parseInt(card.style.top) || 0,
-      moved: false
+      moved: false,
+      dragActive: false,    // true once drag is confirmed
+      isTouch: isTouch,
+      longPressTimer: null,
+      cancelled: false
     };
+
+    if (isTouch) {
+      // Start a long-press timer; drag starts only after 300ms hold
+      this._drag.longPressTimer = setTimeout(() => {
+        if (!this._drag || this._drag.cancelled) return;
+        this._drag.dragActive = true;
+        card.classList.add('dragging');
+        // Haptic-like visual pulse
+        card.style.transition = 'transform .12s ease';
+        card.style.transform = 'scale(1.08)';
+        setTimeout(function () {
+          card.style.transition = '';
+        }, 130);
+      }, 300);
+    } else {
+      // Mouse: drag is immediately active
+      this._drag.dragActive = true;
+      card.classList.add('dragging');
+    }
   }
 
   _onCardPointerMove(e) {
     if (!this._drag) return;
-    const dx = e.clientX - this._drag.startX;
-    const dy = e.clientY - this._drag.startY;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) this._drag.moved = true;
-    this._drag.card.style.left = (this._drag.origLeft + dx) + 'px';
-    this._drag.card.style.top = (this._drag.origTop + dy) + 'px';
+
+    var dx = e.clientX - this._drag.startX;
+    var dy = e.clientY - this._drag.startY;
+    var dist = Math.abs(dx) + Math.abs(dy);
+
+    if (this._drag.isTouch && !this._drag.dragActive) {
+      // If finger moves >12px before long-press fires → cancel (scroll intent)
+      if (dist > 12) {
+        clearTimeout(this._drag.longPressTimer);
+        this._drag.cancelled = true;
+      }
+      return; // Don't move the card until drag is confirmed
+    }
+
+    // Mark as moved (for click-vs-drag detection on mouse)
+    var threshold = this._drag.isTouch ? 12 : 4;
+    if (dist > threshold) this._drag.moved = true;
+
+    if (this._drag.dragActive) {
+      this._drag.card.style.left = (this._drag.origLeft + dx) + 'px';
+      this._drag.card.style.top = (this._drag.origTop + dy) + 'px';
+    }
   }
 
   _onCardPointerUp(e) {
     if (!this._drag) return;
-    this._drag.card.classList.remove('dragging');
-    if (!this._drag.moved) {
-      const evId = this._drag.card.dataset.evidenceId;
+    var d = this._drag;
+    this._drag = null;
+
+    clearTimeout(d.longPressTimer);
+    d.card.classList.remove('dragging');
+
+    // Reset any scale transform applied during long-press
+    if (d.isTouch) {
+      var rot = d.card.style.transform.match(/rotate\([^)]+\)/);
+      d.card.style.transform = rot ? rot[0] : '';
+    }
+
+    // Open evidence modal on tap (touch) or click (mouse) when no drag occurred
+    if (!d.moved && !d.cancelled) {
+      var evId = d.card.dataset.evidenceId;
       this._showEvidenceModal(evId);
     }
-    this._drag = null;
   }
 
   // ── Room (Right Half) ─────────────────────────────
@@ -670,7 +591,7 @@ US.UIController = class UIController {
       const typeLabel = { question: 'PREGUNTA', evidence: 'PRUEBA PRESENTADA', contradiction: '⚠ CONTRADICCIÓN', briefing: '📋 EXPEDIENTE' }[n.type];
       const typeCls = `note-entry__type--${n.type}`;
       return `
-        <div class="note-entry ${isContradiction ? 'note-entry--contradiction' : ''} ${isBriefing ? 'note-entry--briefing' : ''}">`
+        <div class="note-entry ${isContradiction ? 'note-entry--contradiction' : ''} ${isBriefing ? 'note-entry--briefing' : ''}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
             <span class="note-entry__type ${typeCls}">${typeLabel}</span>
             <span class="note-entry__time">${n.time}</span>
@@ -689,138 +610,6 @@ US.UIController = class UIController {
     const count = this.engine.getNotebook().length;
     badge.textContent = count;
     badge.classList.toggle('visible', count > 0);
-  }
-
-  // ═══════════════════════════════════════════════════
-  // RESOLUTION SCREEN
-  // ═══════════════════════════════════════════════════
-
-  renderResolution() {
-    const c = this.engine.getCase();
-    const suspects = this.engine.getSuspects();
-
-    this.screens.resolution.innerHTML = `
-      <div class="resolution">
-        <button class="btn btn--back" data-action="back-to-game">← VOLVER</button>
-
-        <div class="resolution__title">RESOLVER EL CASO</div>
-        <div class="resolution__subtitle">SELECCIONA UNA OPCIÓN EN CADA CATEGORÍA · ACUSA CUANDO ESTÉS SEGURO</div>
-
-        <div class="resolution__block">
-          <div class="resolution__block-header">
-            <div class="resolution__block-number" style="background:var(--red-dark);border-color:var(--red);">1</div>
-            <div class="resolution__block-question">¿QUIÉN cometió el crimen?</div>
-          </div>
-          <div class="resolution__select-wrap">
-            <select class="resolution__select" id="res-who">
-              <option value="">Seleccionar sospechoso...</option>
-              ${suspects.map(s => `<option value="${s.id}">${this._esc(s.name)} — ${this._esc(s.role)}</option>`).join('')}
-            </select>
-          </div>
-        </div>
-
-        <div class="resolution__block">
-          <div class="resolution__block-header">
-            <div class="resolution__block-number">2</div>
-            <div class="resolution__block-question">¿CÓMO fue cometido?</div>
-          </div>
-          <div class="resolution__select-wrap">
-            <select class="resolution__select" id="res-how">
-              <option value="">Seleccionar método...</option>
-              ${c.howOptions.map(o => `<option value="${o.id}">${this._esc(o.text)}</option>`).join('')}
-            </select>
-          </div>
-        </div>
-
-        <div class="resolution__block">
-          <div class="resolution__block-header">
-            <div class="resolution__block-number">3</div>
-            <div class="resolution__block-question">¿POR QUÉ lo hizo?</div>
-          </div>
-          <div class="resolution__select-wrap">
-            <select class="resolution__select" id="res-why">
-              <option value="">Seleccionar motivo...</option>
-              ${c.whyOptions.map(o => `<option value="${o.id}">${this._esc(o.text)}</option>`).join('')}
-            </select>
-          </div>
-        </div>
-
-        <button class="btn btn--cta" id="btn-accuse" data-action="accuse">ACUSAR</button>
-      </div>
-    `;
-
-    this.screens.resolution.querySelector('[data-action="back-to-game"]')
-      .addEventListener('click', () => this.showScreen('game'));
-
-    this.screens.resolution.querySelector('[data-action="accuse"]')
-      .addEventListener('click', () => this._handleAccuse());
-  }
-
-  _handleAccuse() {
-    const who = this.root.querySelector('#res-who').value;
-    const how = this.root.querySelector('#res-how').value;
-    const why = this.root.querySelector('#res-why').value;
-
-    if (!who || !how || !why) {
-      var btn = this.root.querySelector('#btn-accuse');
-      btn.textContent = '⚠ SELECCIONA LAS 3 OPCIONES';
-      btn.style.borderColor = 'var(--red)';
-      setTimeout(function() { btn.textContent = 'ACUSAR'; btn.style.borderColor = ''; }, 2000);
-      return;
-    }
-
-    const result = this.engine.resolveCase(who, how, why);
-    this._renderResult(result);
-    this.showScreen('result');
-  }
-
-  // ═══════════════════════════════════════════════════
-  // RESULT SCREEN
-  // ═══════════════════════════════════════════════════
-
-  _renderResult(result) {
-    const verdictText = result.allCorrect ? '¡CASO RESUELTO!'
-      : (result.correct.who ? 'CASO PARCIALMENTE RESUELTO' : 'CASO NO RESUELTO');
-    const verdictCls = result.allCorrect ? 'correct'
-      : (result.correct.who ? 'partial' : 'wrong');
-
-    this.screens.result.innerHTML = `
-      <div class="result">
-        <div class="result__verdict result__verdict--${verdictCls}">${verdictText}</div>
-
-        <div class="result__score">${result.score}</div>
-        <div class="result__rating">RANGO ${result.rating} — ${result.ratingLabel}</div>
-
-        <div class="result__breakdown">
-          <div class="result__row">
-            <span class="result__row-label">¿Quién?</span>
-            <span class="result__row-value ${result.correct.who ? 'correct' : 'wrong'}">${result.correct.who ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
-          </div>
-          <div class="result__row">
-            <span class="result__row-label">¿Cómo?</span>
-            <span class="result__row-value ${result.correct.how ? 'correct' : 'wrong'}">${result.correct.how ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
-          </div>
-          <div class="result__row">
-            <span class="result__row-label">¿Por qué?</span>
-            <span class="result__row-value ${result.correct.why ? 'correct' : 'wrong'}">${result.correct.why ? '✓ CORRECTO' : '✕ INCORRECTO'}</span>
-          </div>
-          <div style="border-top:1px solid #2e2e2e;margin-top:4px;padding-top:8px;" class="result__row">
-            <span class="result__row-label">Contradicciones encontradas</span>
-            <span class="result__row-value" style="color:#aaa;">${result.contradictionsFound} / ${result.totalContradictions}</span>
-          </div>
-        </div>
-
-        <div class="result__explanation">
-          <div class="result__explanation-label">LO QUE REALMENTE OCURRIÓ</div>
-          ${this._esc(result.explanation)}
-        </div>
-
-        <button class="btn btn--primary btn--menu" style="max-width:320px;" data-action="back-to-menu">VOLVER AL MENÚ</button>
-      </div>
-    `;
-
-    this.screens.result.querySelector('[data-action="back-to-menu"]')
-      .addEventListener('click', () => this.showScreen('menu'));
   }
 
   // ═══════════════════════════════════════════════════

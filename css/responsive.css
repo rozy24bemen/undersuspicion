@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — RESPONSIVE
+   ═══════════════════════════════════════════════════ */
+
+/* ── Tablet / small laptop (≤ 900px) ─────────────── */
+@media (max-width: 900px) {
+
+  /* Layout: room (character) on TOP, desk (evidence) on BOTTOM */
+  .game-split      { flex-direction: column-reverse; }
+  .desk, .room     { width: 100%; }
+  .room            { height: 55%; border-left: none; border-bottom: 2px solid #1a1a1a; overflow-y: auto; }
+  .desk            { height: 45%; }
+
+  /* Nav bar compact */
+  .game-nav__title { display: none; }
+  .btn--nav-back   { font-size: 9px; padding: 0 8px; letter-spacing: 1px; }
+  .btn--resolver   { font-size: 9px; padding: 0 8px; letter-spacing: 1px; }
+  .suspect-thumb   { width: 28px; height: 26px; font-size: 7px; }
+
+  /* Portrait smaller */
+  .portrait         { padding: 4px 12px; }
+  .portrait__frame  { width: 100px; height: 90px; }
+  .portrait__figure-head { width: 32px; height: 32px; }
+  .portrait__figure-body { width: 56px; height: 48px; }
+  .portrait__name   { font-size: 11px; margin-top: 4px; }
+  .portrait__role   { font-size: 8px; }
+
+  /* Pressure bar compact */
+  .pressure         { padding: 6px 12px 4px; }
+  .pressure__track  { height: 8px; }
+
+  /* Dialogue compact */
+  .dialogue         { margin: 0 10px; }
+  .dialogue__text   { font-size: 10px; max-height: 50px; padding: 6px 10px; }
+
+  /* Question panel */
+  .question-panel   { margin: 6px 10px 8px; }
+  .q-tab            { padding: 6px 0; font-size: 9px; }
+  .q-item           { padding: 6px 8px; gap: 8px; }
+  .q-item__text     { font-size: 10px; }
+
+  /* Evidence thumbs smaller */
+  .ev-thumb         { width: 54px; height: 54px; }
+  .ev-thumb__label  { font-size: 6px; }
+
+  /* Desk cards smaller */
+  .desk-card        { width: 130px; }
+  .desk-card__body  { max-height: 50px; font-size: 8px; }
+  .desk-card__title { font-size: 7px; }
+
+  /* Long-press visual feedback on touch */
+  .desk-card.dragging {
+    box-shadow: 0 0 0 3px var(--gold), 4px 4px 18px rgba(0,0,0,.9);
+  }
+
+  /* Notebook toggle */
+  .notebook-toggle  { width: 40px; height: 40px; top: 8px; left: 8px; }
+  .notebook-toggle__icon { font-size: 18px; }
+
+  /* Notebook panel full width */
+  .notebook-panel   { width: 100%; max-width: 100vw; }
+
+  /* Contradiction overlay */
+  .contradiction__comparison { flex-direction: column; }
+  .contradiction__vs { flex-direction: row; padding: 4px 0; }
+  .contradiction__vs-line { width: 28px; height: 1px; }
+  .contradiction__body { padding: 16px 20px; }
+  .contradiction__title { font-size: 20px; }
+
+  /* Modal */
+  .modal-card { max-width: 98vw; }
+}
+
+/* ── Phone landscape & small tablets (≤ 600px) ───── */
+@media (max-width: 600px) {
+
+  /* Menu */
+  .menu__title     { font-size: 28px; letter-spacing: 3px; }
+  .menu__subtitle  { font-size: 8px; letter-spacing: 3px; }
+  .menu__logo      { padding: 16px 20px; }
+  .menu__stamp     { font-size: 13px; }
+  .btn--menu       { height: 46px; font-size: 11px; }
+
+  /* Layout split: room 50%, desk 50% */
+  .room            { height: 50%; }
+  .desk            { height: 50%; }
+
+  /* Nav bar even more compact */
+  .game-nav        { height: 38px; }
+  .suspect-thumb   { width: 26px; height: 24px; font-size: 7px; }
+
+  /* Portrait further reduced */
+  .portrait         { padding: 2px 8px; }
+  .portrait__frame  { width: 80px; height: 72px; }
+  .portrait__figure-head { width: 26px; height: 26px; }
+  .portrait__figure-body { width: 44px; height: 38px; }
+  .portrait__name   { font-size: 10px; letter-spacing: 2px; margin-top: 3px; }
+  .portrait__role   { display: none; }
+  .portrait__suspicion { font-size: 8px; margin-top: 2px; }
+
+  /* Dialogue tighter */
+  .dialogue         { margin: 0 8px; min-height: 50px; }
+  .dialogue__header { padding: 3px 8px; font-size: 7px; }
+  .dialogue__text   { font-size: 9.5px; max-height: 40px; padding: 5px 8px; line-height: 1.5; }
+
+  /* Question panel tighter */
+  .question-panel   { margin: 4px 8px 6px; }
+  .q-tab            { padding: 5px 0; font-size: 8px; letter-spacing: 1px; }
+  .q-body           { padding: 6px; }
+  .q-item           { padding: 5px 6px; gap: 6px; }
+  .q-item__text     { font-size: 9.5px; }
+  .q-item__cost     { font-size: 7px; }
+
+  /* Evidence thumbs smaller */
+  .ev-grid          { gap: 4px; }
+  .ev-thumb         { width: 48px; height: 48px; }
+  .ev-thumb__icon   { font-size: 16px; }
+  .ev-thumb__label  { font-size: 5.5px; }
+
+  /* Desk cards even smaller */
+  .desk-card        { width: 110px; }
+  .desk-card__head  { padding: 3px 6px; gap: 4px; }
+  .desk-card__icon  { font-size: 12px; }
+  .desk-card__title { font-size: 7px; }
+  .desk-card__body  { padding: 5px 6px; max-height: 40px; font-size: 7.5px; }
+  .desk-card__click-hint { font-size: 6.5px; padding: 2px 6px; }
+
+  /* Desk label hide */
+  .desk__label      { display: none; }
+
+  /* Notebook toggle smaller */
+  .notebook-toggle  { width: 36px; height: 36px; top: 6px; left: 6px; }
+  .notebook-toggle__icon { font-size: 16px; }
+  .notebook-toggle__badge { min-width: 16px; height: 16px; font-size: 8px; }
+
+  /* Modal full-screen on phone */
+  .modal-card       { max-width: 100vw; max-height: 100vh; width: 100vw; }
+  .modal__body      { padding: 14px; }
+  .modal__image-placeholder { height: 100px; }
+
+  /* Contradiction */
+  .contradiction__body  { padding: 12px 14px; }
+  .contradiction__title { font-size: 18px; letter-spacing: 3px; }
+  .contradiction__subtitle { font-size: 8px; }
+  .contradiction__side  { padding: 10px; }
+  .contradiction__side-text { font-size: 10px; }
+
+  /* Resolution & Result */
+  .resolution__title { font-size: 20px; letter-spacing: 3px; }
+  .resolution__block-question { font-size: 11px; }
+  .resolution__select { height: 36px; font-size: 10px; }
+
+  .result__score   { font-size: 44px; }
+  .result__verdict { font-size: 24px; letter-spacing: 3px; }
+  .result__breakdown { padding: 12px; }
+  .result__row     { font-size: 10px; }
+}
+
+/* ── Small phones (≤ 400px) ──────────────────────── */
+@media (max-width: 400px) {
+
+  /* Nav stacks tighter */
+  .game-nav          { height: 36px; }
+  .btn--nav-back     { font-size: 8px; padding: 0 6px; }
+  .btn--resolver     { font-size: 8px; padding: 0 6px; }
+  .game-nav__actions { padding: 0 6px; }
+
+  /* Portrait minimal */
+  .portrait          { padding: 2px 6px; }
+  .portrait__frame   { width: 64px; height: 58px; }
+  .portrait__figure-head { width: 22px; height: 22px; }
+  .portrait__figure-body { width: 36px; height: 30px; }
+  .portrait__corner  { width: 10px; height: 10px; }
+  .portrait__name    { font-size: 9px; letter-spacing: 1px; }
+  .portrait__suspicion { display: none; }
+
+  /* Desk cards minimal */
+  .desk-card         { width: 96px; }
+  .desk-card__body   { max-height: 32px; font-size: 7px; }
+
+  /* Resolution */
+  .resolution        { gap: 12px; padding: 12px; }
+  .resolution__title { font-size: 18px; }
+  .result            { gap: 10px; padding: 16px; }
+  .result__score     { font-size: 36px; }
+  .result__verdict   { font-size: 20px; }
+}

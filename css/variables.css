@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — CSS VARIABLES
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  --bg:           #080808;
+  --surface:      #0e0e0e;
+  --surface2:     #161616;
+  --desk-wood:    #2c1e0e;
+  --desk-wood-d:  #1a110a;
+  --room-dark:    #0a0a16;
+  --room-accent:  #12122a;
+  --paper:        #e8dfc8;
+  --paper-head:   #c8b888;
+  --text:         #d8d8d8;
+  --text-2:       #999;
+  --text-dim:     #555;
+  --text-faint:   #333;
+  --gold:         #d4a845;
+  --gold-dim:     #8a6a20;
+  --red:          #c0392b;
+  --red-dark:     #8b2020;
+  --red-glow:     rgba(192,57,43,.35);
+  --blue:         #5566aa;
+  --blue-dim:     #333360;
+  --border:       #2e2e2e;
+  --border-light: #444;
+  --font:         'Courier New', Courier, monospace;
+  --radius:       3px;
+  --transition:   .2s ease;
+}

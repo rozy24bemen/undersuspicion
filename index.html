@@ -4,13 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Under Suspicion</title>
-  <link rel="stylesheet" href="css/game.css" />
+
+  <!-- CSS: Variables & Base -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+
+  <!-- CSS: Components -->
+  <link rel="stylesheet" href="css/components/buttons.css" />
+  <link rel="stylesheet" href="css/components/modal.css" />
+  <link rel="stylesheet" href="css/components/contradiction.css" />
+  <link rel="stylesheet" href="css/components/notebook.css" />
+
+  <!-- CSS: Screens -->
+  <link rel="stylesheet" href="css/screens/menu.css" />
+  <link rel="stylesheet" href="css/screens/intro.css" />
+  <link rel="stylesheet" href="css/screens/game.css" />
+  <link rel="stylesheet" href="css/screens/resolution.css" />
+  <link rel="stylesheet" href="css/screens/result.css" />
+
+  <!-- CSS: Responsive -->
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
   <div id="app"></div>
 
+  <!-- Data -->
   <script src="js/data/caso01.js"></script>
+
+  <!-- Engine -->
   <script src="js/GameEngine.js"></script>
+
+  <!-- Screens (before UIController) -->
+  <script src="js/screens/MenuScreen.js"></script>
+  <script src="js/screens/IntroScreen.js"></script>
+  <script src="js/screens/GameScreen.js"></script>
+  <script src="js/screens/ResolutionScreen.js"></script>
+  <script src="js/screens/ResultScreen.js"></script>
+
+  <!-- UI Controller & Bootstrap -->
   <script src="js/UIController.js"></script>
   <script src="js/app.js"></script>
 </body>

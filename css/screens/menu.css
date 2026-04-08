@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — MENU SCREEN
+   ═══════════════════════════════════════════════════ */
+
+.menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,.012) 5px, rgba(255,255,255,.012) 6px),
+    radial-gradient(ellipse at 50% 40%, rgba(50,38,12,.5) 0%, rgba(0,0,0,.9) 70%),
+    var(--bg);
+}
+
+.menu__folder {
+  position: absolute;
+  border: 1px solid rgba(40,30,10,.35);
+  background: rgba(20,14,6,.4);
+  pointer-events: none;
+}
+
+.menu__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 400px;
+  max-width: 90vw;
+}
+
+.menu__logo {
+  border: 3px solid #666;
+  background: rgba(8,8,8,.92);
+  padding: 28px 48px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.menu__logo-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.menu__logo-corner--tl { top: -3px; left: -3px; border-top: 3px solid #aaa; border-left: 3px solid #aaa; }
+.menu__logo-corner--tr { top: -3px; right: -3px; border-top: 3px solid #aaa; border-right: 3px solid #aaa; }
+.menu__logo-corner--bl { bottom: -3px; left: -3px; border-bottom: 3px solid #aaa; border-left: 3px solid #aaa; }
+.menu__logo-corner--br { bottom: -3px; right: -3px; border-bottom: 3px solid #aaa; border-right: 3px solid #aaa; }
+
+.menu__title {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: #f0e8d0;
+  line-height: 1.1;
+  text-shadow: 0 0 30px rgba(240,230,200,.15);
+}
+
+.menu__subtitle {
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: #555;
+}
+
+.menu__divider {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #444, transparent);
+  margin: 10px 0;
+}
+
+.menu__stamp {
+  border: 3px solid rgba(192,57,43,.55);
+  padding: 6px 28px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: rgba(210,60,50,.55);
+  transform: rotate(-4deg);
+  margin-bottom: 12px;
+}
+
+.menu__credits {
+  margin-top: 18px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-faint);
+}
