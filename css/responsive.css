@@ -17,24 +17,20 @@
   .btn--resolver   { font-size: 9px; padding: 0 8px; letter-spacing: 1px; }
   .suspect-thumb   { width: 28px; height: 26px; font-size: 7px; }
 
-  /* Portrait smaller */
-  .portrait         { padding: 4px 12px; }
-  .portrait__frame  { width: 100px; height: 90px; }
-  .portrait__figure-head { width: 32px; height: 32px; }
-  .portrait__figure-body { width: 56px; height: 48px; }
-  .portrait__name   { font-size: 11px; margin-top: 4px; }
+  /* Portrait info compact */
+  .portrait__info   { padding: 4px 12px; gap: 8px; }
+  .portrait__name   { font-size: 11px; }
   .portrait__role   { font-size: 8px; }
+  .portrait__img    { height: 65%; }
 
   /* Pressure bar compact */
   .pressure         { padding: 6px 12px 4px; }
   .pressure__track  { height: 8px; }
 
   /* Dialogue compact */
-  .dialogue         { margin: 0 10px; }
   .dialogue__text   { font-size: 10px; max-height: 50px; padding: 6px 10px; }
 
   /* Question panel */
-  .question-panel   { margin: 6px 10px 8px; }
   .q-tab            { padding: 6px 0; font-size: 9px; }
   .q-item           { padding: 6px 8px; gap: 8px; }
   .q-item__text     { font-size: 10px; }
@@ -89,22 +85,18 @@
   .game-nav        { height: 38px; }
   .suspect-thumb   { width: 26px; height: 24px; font-size: 7px; }
 
-  /* Portrait further reduced */
-  .portrait         { padding: 2px 8px; }
-  .portrait__frame  { width: 80px; height: 72px; }
-  .portrait__figure-head { width: 26px; height: 26px; }
-  .portrait__figure-body { width: 44px; height: 38px; }
-  .portrait__name   { font-size: 10px; letter-spacing: 2px; margin-top: 3px; }
+  /* Portrait info further reduced */
+  .portrait__info   { padding: 3px 8px; gap: 6px; }
+  .portrait__name   { font-size: 10px; letter-spacing: 2px; }
   .portrait__role   { display: none; }
-  .portrait__suspicion { font-size: 8px; margin-top: 2px; }
+  .portrait__suspicion { font-size: 8px; }
+  .portrait__img    { height: 55%; }
 
   /* Dialogue tighter */
-  .dialogue         { margin: 0 8px; min-height: 50px; }
   .dialogue__header { padding: 3px 8px; font-size: 7px; }
   .dialogue__text   { font-size: 9.5px; max-height: 40px; padding: 5px 8px; line-height: 1.5; }
 
   /* Question panel tighter */
-  .question-panel   { margin: 4px 8px 6px; }
   .q-tab            { padding: 5px 0; font-size: 8px; letter-spacing: 1px; }
   .q-body           { padding: 6px; }
   .q-item           { padding: 5px 6px; gap: 6px; }
@@ -166,13 +158,10 @@
   .game-nav__actions { padding: 0 6px; }
 
   /* Portrait minimal */
-  .portrait          { padding: 2px 6px; }
-  .portrait__frame   { width: 64px; height: 58px; }
-  .portrait__figure-head { width: 22px; height: 22px; }
-  .portrait__figure-body { width: 36px; height: 30px; }
-  .portrait__corner  { width: 10px; height: 10px; }
+  .portrait__info    { padding: 2px 6px; gap: 4px; }
   .portrait__name    { font-size: 9px; letter-spacing: 1px; }
   .portrait__suspicion { display: none; }
+  .portrait__img     { height: 45%; }
 
   /* Desk cards minimal */
   .desk-card         { width: 96px; }

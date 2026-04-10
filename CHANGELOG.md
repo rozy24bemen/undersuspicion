@@ -35,6 +35,31 @@
 
 ---
 
+## [v0.1.1] — Sistema de Retratos con Moods
+
+### Cambios
+- **Retratos de sospechosos**: Cada personaje ahora tiene 3 estados visuales (neutral, hablando, nervioso)
+- **Datos**: Añadido campo `portraits` a cada sospechoso en `caso01.js` con rutas a 3 imágenes
+- **UIController**: Nuevo sistema `_suspectMood` + `_setSuspectMood(mood, duration)` que gestiona transiciones automáticas
+- **Lógica de moods**:
+  - `neutral` → estado por defecto, al cambiar sospechoso
+  - `talking` → al responder preguntas o recibir evidencia (4s y vuelve a neutral)
+  - `nervous` → al detectar contradicción o alcanzar presión máxima (permanece hasta dismiss)
+- **CSS**: Efectos visuales por mood (filtros, animación de temblor para nervioso)
+- **Fallback**: Si no hay imagen de retrato, se mantiene la silueta CSS original
+- **9 SVG placeholders** creados como assets temporales en `assets/img/suspects/`
+
+### Archivos afectados
+| Archivo | Cambio |
+|---------|--------|
+| `js/data/caso01.js` | `portraits: {neutral, talking, nervous}` en cada sospechoso |
+| `js/UIController.js` | `_suspectMood`, `_setSuspectMood()`, portrait con `<img>`, moods en handlers |
+| `css/screens/game.css` | `.portrait__img`, filtros por mood, `@keyframes portrait-nervous` |
+| `assets/img/suspects/*.svg` | 9 placeholders (3 personajes × 3 moods) |
+| `SOUL.md` | Documentación del sistema de moods y convención de assets |
+
+---
+
 ## [v0.1.0] — Reestructuración del Proyecto
 
 ### Cambios

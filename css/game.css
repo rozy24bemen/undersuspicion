@@ -617,80 +617,6 @@ html, body {
 .pressure__text.warning { color: var(--gold); }
 .pressure__text.critical { color: var(--red); font-weight: bold; }
 
-/* ── PORTRAIT ─────────────────────────────────────── */
-
-.portrait {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px 16px;
-  flex-shrink: 0;
-}
-
-.portrait__frame {
-  width: 180px;
-  height: 170px;
-  border: 2px solid #333;
-  background: #080810;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.portrait__corner {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-}
-.portrait__corner--tl { top: -2px; left: -2px; border-top: 2px solid #555; border-left: 2px solid #555; }
-.portrait__corner--tr { top: -2px; right: -2px; border-top: 2px solid #555; border-right: 2px solid #555; }
-.portrait__corner--bl { bottom: -2px; left: -2px; border-bottom: 2px solid #555; border-left: 2px solid #555; }
-.portrait__corner--br { bottom: -2px; right: -2px; border-bottom: 2px solid #555; border-right: 2px solid #555; }
-
-.portrait__figure-head {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 2px solid #444;
-  background: #111;
-}
-
-.portrait__figure-body {
-  width: 80px;
-  height: 70px;
-  border: 2px solid #444;
-  border-top: none;
-  background: #111;
-  border-radius: 0 0 10px 10px;
-  margin-top: -1px;
-}
-
-.portrait__name {
-  margin-top: 8px;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: var(--text);
-  font-weight: bold;
-}
-
-.portrait__role {
-  font-size: 9px;
-  color: var(--text-dim);
-  letter-spacing: 1px;
-  margin-top: 2px;
-}
-
-.portrait__suspicion {
-  font-size: 9px;
-  letter-spacing: 1px;
-  margin-top: 4px;
-  color: var(--text-faint);
-}
-.portrait__suspicion.elevated { color: var(--gold); }
-.portrait__suspicion.high { color: var(--red); font-weight: bold; }
-
 /* ── DIALOGUE BOX ─────────────────────────────────── */
 
 .dialogue {
@@ -1483,13 +1409,11 @@ html, body {
   .btn--resolver   { font-size: 9px; padding: 0 8px; letter-spacing: 1px; }
   .suspect-thumb   { width: 28px; height: 26px; font-size: 7px; }
 
-  /* Portrait smaller */
-  .portrait         { padding: 4px 12px; }
-  .portrait__frame  { width: 100px; height: 90px; }
-  .portrait__figure-head { width: 32px; height: 32px; }
-  .portrait__figure-body { width: 56px; height: 48px; }
-  .portrait__name   { font-size: 11px; margin-top: 4px; }
+  /* Portrait info compact */
+  .portrait__info   { padding: 4px 12px; gap: 8px; }
+  .portrait__name   { font-size: 11px; }
   .portrait__role   { font-size: 8px; }
+  .portrait__img    { height: 65%; }
 
   /* Pressure bar compact */
   .pressure         { padding: 6px 12px 4px; }
@@ -1555,17 +1479,15 @@ html, body {
   .game-nav        { height: 38px; }
   .suspect-thumb   { width: 26px; height: 24px; font-size: 7px; }
 
-  /* Portrait further reduced */
-  .portrait         { padding: 2px 8px; }
-  .portrait__frame  { width: 80px; height: 72px; }
-  .portrait__figure-head { width: 26px; height: 26px; }
-  .portrait__figure-body { width: 44px; height: 38px; }
-  .portrait__name   { font-size: 10px; letter-spacing: 2px; margin-top: 3px; }
+  /* Portrait info further reduced */
+  .portrait__info   { padding: 3px 8px; gap: 6px; }
+  .portrait__name   { font-size: 10px; letter-spacing: 2px; }
   .portrait__role   { display: none; }
-  .portrait__suspicion { font-size: 8px; margin-top: 2px; }
+  .portrait__suspicion { font-size: 8px; }
+  .portrait__img    { height: 55%; }
 
   /* Dialogue tighter */
-  .dialogue         { margin: 0 8px; min-height: 50px; }
+  .dialogue         { min-height: 50px; }
   .dialogue__header { padding: 3px 8px; font-size: 7px; }
   .dialogue__text   { font-size: 9.5px; max-height: 40px; padding: 5px 8px; line-height: 1.5; }
 
@@ -1632,13 +1554,10 @@ html, body {
   .game-nav__actions { padding: 0 6px; }
 
   /* Portrait minimal */
-  .portrait          { padding: 2px 6px; }
-  .portrait__frame   { width: 64px; height: 58px; }
-  .portrait__figure-head { width: 22px; height: 22px; }
-  .portrait__figure-body { width: 36px; height: 30px; }
-  .portrait__corner  { width: 10px; height: 10px; }
+  .portrait__info    { padding: 2px 6px; gap: 4px; }
   .portrait__name    { font-size: 9px; letter-spacing: 1px; }
   .portrait__suspicion { display: none; }
+  .portrait__img     { height: 45%; }
 
   /* Desk cards minimal */
   .desk-card         { width: 96px; }

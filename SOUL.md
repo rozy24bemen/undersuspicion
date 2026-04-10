@@ -69,6 +69,36 @@ js/
 - 4 contradicciones (3 de Hugo, 1 red herring de Lucía)
 - Categorías de preguntas: vinculo (3), coartada (3) por sospechoso
 - evidenceResponses: 8 respuestas por sospechoso
+- **portraits**: objeto con 3 moods (`neutral`, `talking`, `nervous`) → rutas a imágenes
+
+### Sistema de Retratos con Moods (v0.1.1)
+
+Cada sospechoso tiene 3 estados visuales:
+
+| Mood | Cuándo se activa | Duración | Efecto CSS |
+|------|-----------------|----------|------------|
+| `neutral` | Estado por defecto, al cambiar de sospechoso, al cerrar contradicción | Permanente | `grayscale(30%) brightness(0.9)` |
+| `talking` | Al responder pregunta o al presentar evidencia | 4 segundos → vuelve a neutral | `grayscale(10%) brightness(1.0)` |
+| `nervous` | Al detectar contradicción, al alcanzar maxPressure | Hasta que se cierre la contradicción | `sepia(20%) brightness(0.85)` + temblor |
+
+**Estructura de datos en suspect:**
+```js
+portraits: {
+  neutral:  'assets/img/suspects/nombre-neutral.svg',  // o .webp/.png
+  talking:  'assets/img/suspects/nombre-talking.svg',
+  nervous:  'assets/img/suspects/nombre-nervous.svg'
+}
+```
+
+**Convención de nombres de archivo:**
+```
+assets/img/suspects/{suspect-id}-{mood}.{ext}
+```
+Ejemplo: `hugo-nervous.svg`, `marta-talking.webp`
+
+**Fallback:** Si `suspect.portraits` no existe, se usa la silueta CSS original.
+
+**Para futuros casos:** Solo necesitas 3 imágenes por sospechoso siguiendo esta convención.
 
 ---
 

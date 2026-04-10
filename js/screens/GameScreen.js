@@ -30,13 +30,20 @@ US.GameScreen = class GameScreen {
           <div class="desk__label">MESA DE PRUEBAS</div>
         </div>
         <div class="room" id="half-room">
-          <div class="pressure" id="pressure-section"></div>
-          <div class="portrait" id="portrait-section"></div>
-          <div class="dialogue" id="dialogue-section">
-            <div class="dialogue__header">RESPUESTA DEL SOSPECHOSO</div>
-            <div class="dialogue__text" id="dialogue-text">Seleccione un sospechoso y comience el interrogatorio. Revise las pruebas en la mesa antes de preguntar.</div>
+          <div class="room__scene" id="portrait-section"></div>
+          <div class="room__hud">
+            <div class="room__hud-top">
+              <div class="pressure" id="pressure-section"></div>
+              <div class="portrait__info" id="portrait-info"></div>
+            </div>
+            <div class="room__hud-bottom">
+              <div class="dialogue" id="dialogue-section">
+                <div class="dialogue__header">RESPUESTA DEL SOSPECHOSO</div>
+                <div class="dialogue__text" id="dialogue-text">Seleccione un sospechoso y comience el interrogatorio. Revise las pruebas en la mesa antes de preguntar.</div>
+              </div>
+              <div class="question-panel" id="question-panel"></div>
+            </div>
           </div>
-          <div class="question-panel" id="question-panel"></div>
         </div>
       </main>
     `;

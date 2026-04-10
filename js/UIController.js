@@ -13,6 +13,8 @@ US.UIController = class UIController {
     this.activeTab = 'vinculo';
     this.deskCardZIndex = 20;
     this._lastResult = null;
+    this._suspectMood = 'neutral';  // 'neutral' | 'talking' | 'nervous'
+    this._moodTimer = null;
 
     // Drag state for desk cards
     this._drag = null;
@@ -249,6 +251,8 @@ US.UIController = class UIController {
   // ── Room (Right Half) ─────────────────────────────
 
   _renderRoom() {
+    this._suspectMood = 'neutral';
+    if (this._moodTimer) { clearTimeout(this._moodTimer); this._moodTimer = null; }
     this._renderPressureBar();
     this._renderPortrait();
     this._renderQuestionPanel();
@@ -276,17 +280,16 @@ US.UIController = class UIController {
     const suspect = this.engine.getActiveSuspect();
     const state = this.engine.getActiveSuspectState();
     const susCls = state.suspicion >= 40 ? 'high' : state.suspicion >= 15 ? 'elevated' : '';
-    const section = this.root.querySelector('#portrait-section');
+    const scene = this.root.querySelector('#portrait-section');
+    const info = this.root.querySelector('#portrait-info');
+    const mood = this._suspectMood;
+    const portraitSrc = suspect.portraits ? suspect.portraits[mood] : '';
 
-    section.innerHTML = `
-      <div class="portrait__frame">
-        <div class="portrait__corner portrait__corner--tl"></div>
-        <div class="portrait__corner portrait__corner--tr"></div>
-        <div class="portrait__corner portrait__corner--bl"></div>
-        <div class="portrait__corner portrait__corner--br"></div>
-        <div class="portrait__figure-head"></div>
-        <div class="portrait__figure-body"></div>
-      </div>
+    scene.innerHTML = portraitSrc
+      ? `<img class="portrait__img portrait__img--${mood}" src="${this._esc(portraitSrc)}" alt="${this._esc(suspect.name)}">`
+      : `<div class="portrait__fallback"><div class="portrait__figure-head"></div><div class="portrait__figure-body"></div></div>`;
+
+    info.innerHTML = `
       <div class="portrait__name">${this._esc(suspect.name)}</div>
       <div class="portrait__role">${this._esc(suspect.role)}</div>
       <div class="portrait__suspicion ${susCls}">SOSPECHA: ${state.suspicion}%</div>
@@ -372,17 +375,20 @@ US.UIController = class UIController {
     const result = this.engine.askQuestion(questionId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
+        this._setSuspectMood('nervous', 0);
         this._setDialogue('El sospechoso se niega a responder más preguntas. "No tengo nada más que decir. Quiero un abogado."');
       }
       return;
     }
 
+    this._setSuspectMood('talking', 4000);
     this._setDialogue(result.response);
     this._renderPressureBar();
     this._renderQuestionPanel();
     this._updateNotebookBadge();
 
     if (result.contradiction) {
+      this._setSuspectMood('nervous', 0);
       setTimeout(() => this._showContradiction(result.contradiction), 600);
     }
   }
@@ -391,6 +397,7 @@ US.UIController = class UIController {
     const result = this.engine.presentEvidence(evidenceId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
+        this._setSuspectMood('nervous', 0);
         this._setDialogue('El sospechoso se niega a recibir más preguntas. "No tengo nada más que decir."');
       } else if (result.reason === 'alreadyPresented') {
         this._setDialogue('Ya has presentado esta prueba a este sospechoso.');
@@ -398,6 +405,7 @@ US.UIController = class UIController {
       return;
     }
 
+    this._setSuspectMood('talking', 4000);
     this._setDialogue(result.response);
     this._renderPressureBar();
     this._renderPortrait();
@@ -405,6 +413,7 @@ US.UIController = class UIController {
     this._updateNotebookBadge();
 
     if (result.contradiction) {
+      this._setSuspectMood('nervous', 0);
       setTimeout(() => this._showContradiction(result.contradiction), 600);
     }
   }
@@ -415,6 +424,19 @@ US.UIController = class UIController {
     el.classList.remove('animate');
     void el.offsetWidth;  // force reflow
     el.classList.add('animate');
+  }
+
+  _setSuspectMood(mood, duration) {
+    this._suspectMood = mood;
+    this._renderPortrait();
+    if (this._moodTimer) clearTimeout(this._moodTimer);
+    if (duration) {
+      this._moodTimer = setTimeout(() => {
+        this._suspectMood = 'neutral';
+        this._renderPortrait();
+        this._moodTimer = null;
+      }, duration);
+    }
   }
 
   // ═══════════════════════════════════════════════════
@@ -533,6 +555,7 @@ US.UIController = class UIController {
 
     const dismiss = () => {
       this.contradictionEl.classList.remove('active');
+      this._suspectMood = 'neutral';
       this._renderPortrait();
       this._updateNotebookBadge();
     };
@@ -626,6 +649,7 @@ US.UIController = class UIController {
         }
         if (this.contradictionEl.classList.contains('active')) {
           this.contradictionEl.classList.remove('active');
+          this._suspectMood = 'neutral';
           this._renderPortrait();
           this._updateNotebookBadge();
         }
@@ -641,6 +665,7 @@ US.UIController = class UIController {
     this.contradictionEl.addEventListener('click', (e) => {
       if (e.target === this.contradictionEl) {
         this.contradictionEl.classList.remove('active');
+        this._suspectMood = 'neutral';
         this._renderPortrait();
         this._updateNotebookBadge();
       }
