@@ -17,6 +17,7 @@ US.GameScreen = class GameScreen {
         <div class="game-nav__title">UNDER SUSPICION</div>
         <div class="game-nav__suspects" id="nav-suspects"></div>
         <div class="game-nav__actions">
+          <button class="btn btn--ghost btn--portrait-variant" id="portrait-variant-toggle" type="button">RETRATO: RECORTE</button>
           <button class="btn btn--resolver" data-action="go-resolve">RESOLVER CASO</button>
         </div>
       </nav>
@@ -63,8 +64,13 @@ US.GameScreen = class GameScreen {
         }
       });
 
+    container.querySelector('#portrait-variant-toggle')
+      .addEventListener('click', () => this.ui._togglePortraitVariant());
+
     this.ui.root.querySelector('#notebook-toggle')
       .addEventListener('click', () => this.ui._toggleNotebook());
+
+    this.ui._updatePortraitVariantToggle();
   }
 
   _renderSuspectSwitcher() {

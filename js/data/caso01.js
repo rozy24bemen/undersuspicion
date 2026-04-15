@@ -33,9 +33,18 @@ US.CASES['caso-01'] = {
       description: 'Fría, calculadora, cooperativa. Muestra poco pesar por la muerte de Diego.',
       isGuilty: false,
       portraits: {
-        neutral:  'assets/img/suspects/marta-neutral.svg',
-        talking:  'assets/img/suspects/marta-talking.svg',
-        nervous:  'assets/img/suspects/marta-nervous.svg'
+        neutral:  {
+          cutout: 'assets/img/suspects/martaneutral-withoutbg.png',
+          fallback: 'assets/img/suspects/marta-neutral.svg'
+        },
+        talking:  {
+          cutout: 'assets/img/suspects/martapensativa-withoutbg.png',
+          fallback: 'assets/img/suspects/marta-talking.svg'
+        },
+        nervous:  {
+          cutout: 'assets/img/suspects/martanerviosa-withoutbg.png',
+          fallback: 'assets/img/suspects/marta-nervous.svg'
+        }
       },
       questions: {
         vinculo: [
@@ -100,9 +109,18 @@ US.CASES['caso-01'] = {
       description: 'Emocional, a la defensiva. Parece ocultar algo, pero ¿el crimen o un secreto personal?',
       isGuilty: false,
       portraits: {
-        neutral:  'assets/img/suspects/lucia-neutral.svg',
-        talking:  'assets/img/suspects/lucia-talking.svg',
-        nervous:  'assets/img/suspects/lucia-nervous.svg'
+        neutral:  {
+          cutout: 'assets/img/suspects/lucianeutral-withoutbg.png',
+          fallback: 'assets/img/suspects/lucia-neutral.svg'
+        },
+        talking:  {
+          cutout: 'assets/img/suspects/luciapensativa-withoutbg.png',
+          fallback: 'assets/img/suspects/lucia-talking.svg'
+        },
+        nervous:  {
+          cutout: 'assets/img/suspects/lucianerviosa-withoutbg.png',
+          fallback: 'assets/img/suspects/lucia-nervous.svg'
+        }
       },
       questions: {
         vinculo: [
@@ -167,9 +185,20 @@ US.CASES['caso-01'] = {
       description: 'Nervioso, intenta aparentar calma. Suda. Sus respuestas son cada vez más evasivas.',
       isGuilty: true,
       portraits: {
-        neutral:  'assets/img/suspects/hugo-neutral.svg',
-        talking:  'assets/img/suspects/hugo-talking.svg',
-        nervous:  'assets/img/suspects/hugo-nervous.svg'
+        neutral:  {
+          cutout: 'assets/img/suspects/hugoneutral-withoutbg.png',
+          fallback: 'assets/img/suspects/hugo-neutral.svg'
+        },
+        talking:  {
+          background: 'assets/img/suspects/hugopensativo.png',
+          cutout: 'assets/img/suspects/hugopensativo-removebg.png',
+          fallback: 'assets/img/suspects/hugo-talking.svg'
+        },
+        nervous:  {
+          background: 'assets/img/suspects/hugonervioso.png',
+          cutout: 'assets/img/suspects/hugonervioso-removebg.png',
+          fallback: 'assets/img/suspects/hugo-nervous.svg'
+        }
       },
       questions: {
         vinculo: [

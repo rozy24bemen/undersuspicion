@@ -35,6 +35,30 @@
 
 ---
 
+## [v0.1.2] — Selector de Variante de Retrato
+
+### Cambios
+- **Comparativa de assets**: Nuevo selector `RETRATO: FONDO / RECORTE` en la barra superior de juego
+- **Persistencia local**: La variante elegida se guarda en `localStorage` para mantener la comparación entre recargas
+- **Resolución flexible**: El render de retratos ahora acepta tanto una ruta simple como un objeto con variantes por mood
+- **Fallback seguro**: Si la variante elegida no existe todavía en disco, el juego vuelve automáticamente al asset anterior del sospechoso
+- **Hugo Delmar**: Su retrato neutral queda preparado para probar dos fuentes distintas sin fijar aún el formato definitivo
+
+### Archivos afectados
+| Archivo | Cambio |
+|---------|--------|
+| `js/UIController.js` | Toggle de variante, persistencia, resolución flexible y fallback de retratos |
+| `js/screens/GameScreen.js` | Botón para alternar entre retrato con fondo y recorte |
+| `js/data/caso01.js` | Hugo neutral preparado con `background`, `cutout` y `fallback` |
+| `css/screens/game.css` | Ajustes visuales del botón y de las dos variantes de retrato |
+
+### Convención provisional de assets
+- `assets/img/suspects/hugo-neutral-background.png`
+- `assets/img/suspects/hugo-neutral-removebg.png`
+- Si faltan, se usa `assets/img/suspects/hugo-neutral.svg` como fallback
+
+---
+
 ## [v0.1.1] — Sistema de Retratos con Moods
 
 ### Cambios

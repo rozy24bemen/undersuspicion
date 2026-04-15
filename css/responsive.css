@@ -77,9 +77,9 @@
   .menu__stamp     { font-size: 13px; }
   .btn--menu       { height: 46px; font-size: 11px; }
 
-  /* Layout split: room 50%, desk 50% */
-  .room            { height: 50%; }
-  .desk            { height: 50%; }
+  /* Layout split: give more space to portrait on mobile */
+  .room            { height: 56%; }
+  .desk            { height: 44%; }
 
   /* Nav bar even more compact */
   .game-nav        { height: 38px; }
@@ -90,7 +90,7 @@
   .portrait__name   { font-size: 10px; letter-spacing: 2px; }
   .portrait__role   { display: none; }
   .portrait__suspicion { font-size: 8px; }
-  .portrait__img    { height: 55%; }
+  .portrait__img    { --portrait-scale: 1.35; height: 72%; }
 
   /* Dialogue tighter */
   .dialogue__header { padding: 3px 8px; font-size: 7px; }
@@ -157,11 +157,14 @@
   .btn--resolver     { font-size: 8px; padding: 0 6px; }
   .game-nav__actions { padding: 0 6px; }
 
+  .room              { height: 58%; }
+  .desk              { height: 42%; }
+
   /* Portrait minimal */
   .portrait__info    { padding: 2px 6px; gap: 4px; }
   .portrait__name    { font-size: 9px; letter-spacing: 1px; }
   .portrait__suspicion { display: none; }
-  .portrait__img     { height: 45%; }
+  .portrait__img     { --portrait-scale: 1.45; height: 66%; }
 
   /* Desk cards minimal */
   .desk-card         { width: 96px; }

@@ -60,6 +60,14 @@
   border-left: 1px solid #1a1a1a;
   display: flex;
   align-items: center;
+  gap: 8px;
+}
+
+.btn--portrait-variant {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
 }
 
 /* ── GAME SPLIT ───────────────────────────────────── */
@@ -253,6 +261,7 @@
 
 /* Character image floats on top of scene */
 .portrait__img {
+  --portrait-scale: 1.3;
   position: relative;
   z-index: 1;
   width: auto;
@@ -260,8 +269,27 @@
   max-width: 60%;
   object-fit: contain;
   object-position: bottom center;
+  transform-origin: bottom center;
   transition: opacity .3s ease, filter .3s ease;
   filter: drop-shadow(0 0 20px rgba(0,0,0,.7));
+}
+
+.portrait__img--asset-background {
+  height: 82%;
+  max-width: 72%;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 16px 36px rgba(0,0,0,.45);
+  transform: scale(var(--portrait-scale));
+}
+
+.portrait__img--asset-cutout {
+  max-width: 60%;
+  transform: scale(var(--portrait-scale));
+}
+
+.portrait__img--asset-fallback {
+  box-shadow: none;
+  border: none;
 }
 
 .portrait__img--neutral {
@@ -278,8 +306,8 @@
 }
 
 @keyframes portrait-nervous {
-  from { transform: translateX(-1px); }
-  to   { transform: translateX(1px); }
+  from { transform: scale(var(--portrait-scale)) translateX(-1px); }
+  to   { transform: scale(var(--portrait-scale)) translateX(1px); }
 }
 
 /* Fallback CSS silhouette (when no portrait image) */
