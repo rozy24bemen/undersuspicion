@@ -260,8 +260,8 @@
 }
 
 /* Escenarios específicos */
-.room__scene.scene-interrogatorio1 {
-  background-image: url('../../assets/img/scenes/Escenario_interrogatorio1.png');
+.room__scene.scene-interrogatorio2 {
+  background-image: url('../../assets/img/scenes/Escenario_interrogatorio2.png');
 }
 
 /* Character image floats on top of scene */

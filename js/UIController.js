@@ -341,7 +341,7 @@ US.UIController = class UIController {
     this._suspectMood = 'neutral';
     if (this._moodTimer) { clearTimeout(this._moodTimer); this._moodTimer = null; }
     const scene = this.root.querySelector('#portrait-section');
-    scene.classList.add('scene-interrogatorio1');
+    scene.classList.add('scene-interrogatorio2');
     this._renderPressureBar();
     this._renderPortrait();
     this._updatePortraitVariantToggle();
