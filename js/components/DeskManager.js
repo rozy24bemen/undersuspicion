@@ -154,7 +154,7 @@ US.DeskManager = class DeskManager {
 
     if (!d.moved && !d.cancelled) {
       var evId = d.card.dataset.evidenceId;
-      this.ui._showEvidenceModal(evId);
+      this.ui.modals.showEvidence(evId);
     }
   }
 };

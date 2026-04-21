@@ -120,7 +120,7 @@ US.ModalManager = class ModalManager {
 
     const dismiss = () => {
       this.contradictionEl.classList.remove('active');
-      this.ui._renderPortrait();
+      this.ui._setSuspectMood('neutral', 0);
       this.ui.notebook.updateBadge();
     };
 
@@ -130,7 +130,7 @@ US.ModalManager = class ModalManager {
 
   dismissContradiction() {
     this.contradictionEl.classList.remove('active');
-    this.ui._renderPortrait();
+    this.ui._setSuspectMood('neutral', 0);
     this.ui.notebook.updateBadge();
   }
 };

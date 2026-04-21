@@ -50,9 +50,9 @@ US.GameScreen = class GameScreen {
     `;
 
     this._renderSuspectSwitcher();
-    this.ui._renderDesk();
+    this.ui.desk.render();
     this.ui._renderRoom();
-    this.ui._renderNotebookPanel();
+    this.ui.notebook.render();
 
     container.querySelector('[data-action="go-resolve"]')
       .addEventListener('click', () => this.ui.showScreen('resolution'));
@@ -68,7 +68,7 @@ US.GameScreen = class GameScreen {
       .addEventListener('click', () => this.ui._togglePortraitVariant());
 
     this.ui.root.querySelector('#notebook-toggle')
-      .addEventListener('click', () => this.ui._toggleNotebook());
+      .addEventListener('click', () => this.ui.notebook.toggle());
 
     this.ui._updatePortraitVariantToggle();
   }
