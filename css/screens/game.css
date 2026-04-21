@@ -259,6 +259,11 @@
   pointer-events: none;
 }
 
+/* Escenarios específicos */
+.room__scene.scene-interrogatorio2 {
+  background-image: url('../../assets/img/scenes/Escenario_interrogatorio2.png');
+}
+
 /* Character image floats on top of scene */
 .portrait__img {
   --portrait-scale: 1.3;
