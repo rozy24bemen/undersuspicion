@@ -35,7 +35,7 @@ US.MenuScreen = class MenuScreen {
           <button class="btn btn--menu btn--primary" data-action="start-story">MODO HISTORIA</button>
           <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
           <button class="btn btn--menu btn--disabled">⚙ CONFIGURACIÓN</button>
-          <button class="btn btn--menu btn--exit btn--disabled">SALIR</button>
+          <button class="btn btn--menu btn--exit" data-action="exit-game">SALIR</button>
 
           <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
         </div>
@@ -47,5 +47,16 @@ US.MenuScreen = class MenuScreen {
         this.engine.loadCase('caso-01');
         this.ui.showScreen('intro');
       });
+
+    // Botón SALIR: cerrar la pestaña o ventana
+    const exitBtn = container.querySelector('[data-action="exit-game"]');
+    if (exitBtn) {
+      exitBtn.addEventListener('click', () => {
+        // Intenta cerrar la ventana. Si no es posible, muestra un mensaje.
+        if (window.confirm('¿Seguro que quieres salir del juego?')) {
+          window.close();
+        }
+      });
+    }
   }
 };
