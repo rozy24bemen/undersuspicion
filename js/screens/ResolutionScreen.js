@@ -86,6 +86,6 @@ US.ResolutionScreen = class ResolutionScreen {
 
     const result = this.engine.resolveCase(who, how, why);
     this.ui._lastResult = result;
-    this.ui.showScreen('result');
+    this.ui.showScreen('dinner');
   }
 };

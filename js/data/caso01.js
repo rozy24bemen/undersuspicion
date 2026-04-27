@@ -392,5 +392,125 @@ US.CASES['caso-01'] = {
 
   correctExplanation: 'Hugo Delmar, desesperado al saber que Diego Varela iba a denunciarle por desfalcar 47.000€ del restaurante durante 8 meses, decidió envenenarlo. Aprovechó la cena privada para mezclar rodenticida en la copa de vino tinto de Diego, sirviéndola personalmente —algo que nunca hacía—. La cámara de seguridad lo captó saliendo de la cocina hacia el despacho, la carta manuscrita demuestra que sabía del desfalco, y el testimonio del camarero confirma que sirvió la copa. Hugo Delmar es culpable del asesinato de Diego Varela.',
 
-  wrongExplanation: 'El verdadero culpable era Hugo Delmar, el chef. Diego había descubierto que Hugo llevaba meses desviando fondos del restaurante (47.000€). Ante la amenaza de denuncia, Hugo envenenó la copa de vino de Diego con rodenticida durante la cena, sirviéndola personalmente. Las pruebas clave eran: la cámara de seguridad, la carta suplicando clemencia, y el testimonio del camarero.'
+  wrongExplanation: 'El verdadero culpable era Hugo Delmar, el chef. Diego había descubierto que Hugo llevaba meses desviando fondos del restaurante (47.000€). Ante la amenaza de denuncia, Hugo envenenó la copa de vino de Diego con rodenticida durante la cena, sirviéndola personalmente. Las pruebas clave eran: la cámara de seguridad, la carta suplicando clemencia, y el testimonio del camarero.',
+
+  // ═══════════════════════════════════════════════════
+  // CENA EN CASA — Tras resolver el caso
+  // ═══════════════════════════════════════════════════
+  cena: {
+    apertura: 'Salió en las noticias. El envenenamiento del restaurante. ¿Era el tuyo?',
+
+    repasoPool: [
+      {
+        id: 'c01_marta',
+        linea: {
+          default: 'La socia, Marta... ¿la descartaste pronto o te dio que pensar?',
+          acusoIncorrecto: 'Acusaste a {nombreAcusado}, ¿no? De verdad pensabas que era ella.'
+        },
+        respuestas: [
+          { id: 'a', texto: 'Todo apuntaba a ella al principio. El tema de las participaciones.',
+            efecto: { integridad: -3 },
+            replica: 'Ya. Pero "apuntar" no es "ser".' },
+          { id: 'b', texto: 'Me equivoqué con ella más rato del que debería.',
+            efecto: { integridad: +10, sinceridad: +4 },
+            replica: 'Reconocerlo ya es algo.' },
+          { id: 'c', texto: 'Prefiero no hablar de las pistas que no llevaron a nada.',
+            efecto: { sinceridad: -8 },
+            replica: 'Como quieras.' }
+        ]
+      },
+
+      {
+        id: 'c01_lucia',
+        linea: {
+          default: 'Y la ex-mujer. ¿Te dio pena interrogarla?',
+          acusoIncorrecto: 'Acusaste a {nombreAcusado}... ¿De verdad pensabas que había cruzado la ciudad para envenenarlo?'
+        },
+        respuestas: [
+          { id: 'a', texto: 'Un poco. Había perdido a alguien, aunque estuvieran divorciados.',
+            efecto: { sinceridad: +6 },
+            replica: 'A veces me olvido de que aún sientes cosas por la gente.' },
+          { id: 'b', texto: 'Mintió sobre su coartada. La pena se le pasa pronto a uno cuando miente.',
+            efecto: { integridad: +4 },
+            replica: 'Frío.' },
+          { id: 'c', texto: 'No. Hago mi trabajo.',
+            efecto: { sinceridad: -5, integridad: -3 },
+            replica: '...' }
+        ]
+      },
+
+      {
+        id: 'c01_carta',
+        linea: {
+          default: 'Lo de la carta del chef suplicando... ¿la encontraste pronto?'
+        },
+        respuestas: [
+          { id: 'a', texto: 'No. Estaba en el cajón del muerto. Tardé más de lo que me gusta admitir.',
+            efecto: { sinceridad: +8, integridad: +5 },
+            replica: 'Ahí está. Eso es hablar.' },
+          { id: 'b', texto: 'Enseguida. Encajé las piezas rápido.',
+            efecto: { sinceridad: -8, integridad: -5, flags: ['exagera_logros'] },
+            replica: 'Ajá.' },
+          { id: 'c', texto: 'Todas las cartas aparecen cuando tienen que aparecer.',
+            efecto: { sinceridad: +2 },
+            replica: 'Qué poético te pones.' }
+        ]
+      },
+
+      {
+        id: 'c01_camarero',
+        linea: {
+          default: 'El camarero que vio al chef servir la copa... ¿se atrevió a declarar sin más?'
+        },
+        respuestas: [
+          { id: 'a', texto: 'Le costó. Tiene hijos, necesita el trabajo.',
+            efecto: { sinceridad: +5 },
+            replica: 'La gente normal siempre tiene más que perder.' },
+          { id: 'b', texto: 'Declaró enseguida. Gente honrada todavía queda.',
+            efecto: { integridad: +3 },
+            replica: 'Ojalá fuera tan fácil.' },
+          { id: 'c', texto: 'Le apreté un poco. No mucho. Lo justo.',
+            efecto: { sinceridad: +8, integridad: -4, flags: ['presion_testigo'] },
+            replica: '...cuánto es "lo justo"?' }
+        ]
+      },
+
+      {
+        id: 'c01_sentir',
+        linea: {
+          default: '¿Y cómo te sientes? De haberlo cerrado.',
+          acusoIncorrecto: '¿Y cómo te sientes? Aunque no lo cerraras del todo.'
+        },
+        respuestas: [
+          { id: 'a', texto: 'Bien. Justicia hecha.',
+            efecto: { sinceridad: -5 },
+            replica: 'Ya.' },
+          { id: 'b', texto: 'Regular. El hombre sigue muerto.',
+            efecto: { sinceridad: +8, lucidez: -3 },
+            replica: 'Sí.' },
+          { id: 'c', texto: 'Cansado. Solo cansado.',
+            efecto: { sinceridad: +6, lucidez: -4 },
+            replica: 'Come algo.' }
+        ]
+      }
+    ],
+
+    // Gancho de memoria: planta una flag del metaarco.
+    // "La Estrella" es el restaurante del caso 01. La mujer recuerda haber ido años atrás.
+    ganchoMemoria: {
+      id: 'c01_memoria_estrella',
+      linea: '¿El restaurante se llamaba La Estrella? Creo que estuvimos allí una vez. Hace doce años, igual. Nuestro aniversario, ¿no?',
+      respuestas: [
+        { id: 'a', texto: 'No me suena. No creo.',
+          efecto: { sinceridad: -8, flags: ['oculta_recuerdo_estrella'] },
+          replica: 'Qué raro. Yo lo tengo clavado.' },
+        { id: 'b', texto: 'Ahora que lo dices... puede ser. No estoy seguro.',
+          efecto: { sinceridad: +4, flags: ['duda_estrella_12y'] },
+          replica: 'Ya me acordaré de algún detalle y te lo cuento.' },
+        { id: 'c', texto: 'No quiero pensar en ese sitio ahora. No esta noche.',
+          efecto: { lucidez: -4, flags: ['rechaza_estrella'] },
+          replica: 'Vale. Lo dejo.' }
+      ]
+    }
+  }
 };

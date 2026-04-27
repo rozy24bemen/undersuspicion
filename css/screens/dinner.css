@@ -1,0 +1,420 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — DINNER SCREEN
+   Cena en casa tras resolver un caso. Paleta cálida.
+   ═══════════════════════════════════════════════════ */
+
+/* ── NAV ──────────────────────────────────────────── */
+
+.dinner-nav {
+  background: #140b04;
+  border-bottom: 1px solid #3a2814;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.dinner-nav .game-nav__title {
+  color: var(--gold-dim);
+  border-right: none;
+}
+
+.dinner-nav__who {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+
+/* ── SPLIT ────────────────────────────────────────── */
+
+.dinner-split { flex: 1; display: flex; overflow: hidden; }
+
+/* ── TABLE (LEFT HALF) ────────────────────────────── */
+
+.dinner-table {
+  width: 50%;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(212, 168, 69, .18), transparent 55%),
+    linear-gradient(165deg, #3a2616 0%, #1e120a 100%);
+  overflow: hidden;
+}
+
+.dinner-table::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(40deg, transparent, transparent 6px, rgba(0,0,0,.10) 6px, rgba(0,0,0,.10) 7px),
+    radial-gradient(ellipse at 50% 70%, rgba(0,0,0,.45), transparent 65%);
+  pointer-events: none;
+}
+
+/* ── DRAGGABLE ITEMS ──────────────────────────────── */
+
+.dinner-item {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition: filter .15s, box-shadow .15s;
+  z-index: 10;
+}
+
+.dinner-item:hover {
+  filter: brightness(1.08);
+}
+
+.dinner-item.dragging {
+  cursor: grabbing;
+  filter: brightness(1.12) drop-shadow(0 0 18px rgba(255, 180, 80, .35));
+  z-index: 99;
+}
+
+/* Candle glow — focal point, top-right */
+.dinner-table__candle {
+  position: absolute;
+  top: 18%;
+  right: 22%;
+  width: 14px;
+  height: 40px;
+  background: linear-gradient(180deg, #f8e1a0 0%, #d4a845 70%, #6a4a14 100%);
+  border-radius: 3px 3px 2px 2px;
+  box-shadow:
+    0 -10px 24px rgba(255, 210, 120, .45),
+    0 -22px 60px rgba(255, 170, 60, .25),
+    0 -40px 120px rgba(255, 140, 40, .15);
+}
+.dinner-table__candle::after {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 70%, #fff7c8 0%, #ffb844 50%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  filter: blur(.4px);
+  animation: dinner-flicker .9s ease-in-out infinite alternate;
+}
+
+@keyframes dinner-flicker {
+  0%   { transform: translateX(-50%) scale(1)    rotate(-1deg); opacity: .95; }
+  100% { transform: translateX(-50%) scale(1.08) rotate(2deg);  opacity: 1; }
+}
+
+/* Plate — centered */
+.dinner-table__plate {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #f4ead4 0%, #c9b892 70%, #6a5838 100%);
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,.3),
+    0 8px 24px rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dinner-table__food {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 40%, #7a4a20 0%, #4a2a10 70%, #2a1608 100%);
+  box-shadow: inset 0 0 14px rgba(0,0,0,.4);
+  opacity: .85;
+}
+
+/* Glass — left of plate */
+.dinner-table__glass {
+  position: absolute;
+  bottom: 32%;
+  left: 18%;
+  width: 28px;
+  height: 70px;
+}
+.dinner-table__glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, rgba(140, 40, 30, .9) 0%, rgba(90, 20, 10, .95) 100%);
+  border: 1px solid rgba(240, 210, 160, .3);
+  border-radius: 3px 3px 14px 14px;
+  box-shadow: inset -4px 0 8px rgba(0,0,0,.4), 0 0 12px rgba(200, 100, 60, .2);
+}
+.dinner-table__glass::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 14px;
+  background: rgba(240, 210, 160, .4);
+  box-shadow: 0 12px 0 -1px rgba(240, 210, 160, .5);
+}
+
+/* Fork — left of plate */
+.dinner-table__fork {
+  position: absolute;
+  bottom: 28%;
+  left: 32%;
+  width: 3px;
+  height: 70px;
+  background: linear-gradient(180deg, #c9b892 0%, #6a5838 100%);
+  box-shadow: 2px 0 4px rgba(0,0,0,.4);
+}
+
+/* Knife — right of plate */
+.dinner-table__knife {
+  position: absolute;
+  bottom: 28%;
+  right: 34%;
+  width: 4px;
+  height: 70px;
+  background: linear-gradient(180deg, #d0c4a0 0%, #5a4828 100%);
+  box-shadow: -2px 0 4px rgba(0,0,0,.4);
+}
+
+.dinner-table__label {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 6px;
+  color: rgba(212, 168, 69, .35);
+  pointer-events: none;
+}
+
+/* ── ROOM (RIGHT HALF) ────────────────────────────── */
+
+.dinner-room {
+  width: 50%;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 40%, #2a1a10 0%, #140a04 100%);
+  border-left: 2px solid #2a1a08;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+.dinner-room > * { grid-area: 1 / 1; }
+
+.dinner-room__scene {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dinner-room__scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 35%, transparent 25%, rgba(0,0,0,.65) 100%);
+  pointer-events: none;
+}
+
+.dinner-figure {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dinner-figure img {
+  max-height: 70vh;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(212, 168, 69, .25));
+}
+
+.dinner-figure__silhouette {
+  width: 180px;
+  height: 280px;
+  background: linear-gradient(180deg, #2a1a10 0%, #0c0604 100%);
+  border: 1px solid rgba(212, 168, 69, .15);
+  border-radius: 90px 90px 30px 30px / 110px 110px 30px 30px;
+  box-shadow:
+    0 0 40px rgba(212, 168, 69, .12),
+    inset 0 20px 40px rgba(0,0,0,.5);
+  position: relative;
+}
+
+.dinner-figure__silhouette::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #3a2416 0%, #140a04 80%);
+  box-shadow: 0 0 24px rgba(0,0,0,.5);
+}
+
+/* ── HUD ──────────────────────────────────────────── */
+
+.dinner-room__hud {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  height: 100%;
+}
+.dinner-room__hud > * { pointer-events: auto; }
+
+.dinner-room__info {
+  padding: 8px 14px;
+  background: rgba(20, 10, 4, 0.88);
+  border-bottom: 1px solid rgba(90, 60, 20, 0.5);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.dinner-room__name {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.dinner-room__role {
+  font-size: 9px;
+  color: var(--gold-dim);
+  letter-spacing: 1px;
+}
+
+/* ── DIALOGUE PANEL ───────────────────────────────── */
+
+.dinner-panel {
+  display: flex;
+  flex-direction: column;
+  background: rgba(16, 8, 4, 0.92);
+  border-top: 1px solid rgba(90, 60, 20, 0.4);
+  max-height: 62%;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+.dinner-panel__header {
+  padding: 6px 12px;
+  border-bottom: 1px solid #2a1a08;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.dinner-panel__phase {
+  color: var(--gold);
+  font-weight: bold;
+}
+
+.dinner-panel__caseRef {
+  color: var(--gold-dim);
+}
+
+.dinner-panel__line {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #e8dfc8;
+  font-style: italic;
+  line-height: 1.65;
+  border-bottom: 1px solid #1a0e04;
+  background: rgba(30, 18, 8, .6);
+  animation: fadeInText .35s ease;
+  min-height: 60px;
+}
+
+.dinner-panel__body {
+  flex: 1;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.dinner-panel__waiting {
+  font-size: 18px;
+  letter-spacing: 8px;
+  color: var(--gold-dim);
+  text-align: center;
+  padding: 24px 0;
+  animation: dinner-waiting 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes dinner-waiting {
+  from { opacity: .35; }
+  to   { opacity: .8; }
+}
+
+.dinner-panel__response {
+  text-align: left;
+  padding: 10px 12px;
+  font-family: var(--font);
+  font-size: 11px;
+  color: #c9b892;
+  background: #1c1008;
+  border: 1px solid #3a2814;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  line-height: 1.5;
+}
+
+.dinner-panel__response:hover {
+  background: #2a1a0a;
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.dinner-panel__continue,
+.dinner-panel__exit {
+  align-self: center;
+  margin-top: 8px;
+  padding: 10px 24px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  background: #2a1a0a;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.dinner-panel__continue:hover,
+.dinner-panel__exit:hover {
+  background: #3a2410;
+  border-color: var(--gold);
+}
+
+.dinner-panel__veredicto {
+  padding: 10px 12px;
+  background: rgba(10, 6, 2, .8);
+  border: 1px solid #2a1a08;
+  color: var(--gold-dim);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 8px;
+}

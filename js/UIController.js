@@ -22,7 +22,7 @@ US.UIController = class UIController {
       intro:      new US.IntroScreen(this),
       game:       new US.GameScreen(this),
       resolution: new US.ResolutionScreen(this),
-      result:     new US.ResultScreen(this)
+      dinner:     new US.DinnerScreen(this)
     };
 
     this.desk      = new US.DeskManager(this);
@@ -43,7 +43,7 @@ US.UIController = class UIController {
       <section id="screen-intro" class="screen"></section>
       <section id="screen-game" class="screen"></section>
       <section id="screen-resolution" class="screen"></section>
-      <section id="screen-result" class="screen"></section>
+      <section id="screen-dinner" class="screen"></section>
       <div class="modal-overlay" id="modal-evidence"></div>
       <div class="contradiction-overlay" id="overlay-contradiction"></div>
       <div class="notebook-panel" id="panel-notebook"></div>
@@ -54,7 +54,7 @@ US.UIController = class UIController {
       intro:      this.root.querySelector('#screen-intro'),
       game:       this.root.querySelector('#screen-game'),
       resolution: this.root.querySelector('#screen-resolution'),
-      result:     this.root.querySelector('#screen-result')
+      dinner:     this.root.querySelector('#screen-dinner')
     };
 
     this.modal = this.root.querySelector('#modal-evidence');

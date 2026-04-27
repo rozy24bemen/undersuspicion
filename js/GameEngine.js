@@ -186,6 +186,8 @@ US.GameEngine = class GameEngine {
       score,
       rating,
       ratingLabel,
+      accusedWho: who,
+      actualWho: sol.who,
       contradictionsFound: foundC,
       totalContradictions: totalC,
       explanation: allCorrect ? this.caseData.correctExplanation : this.caseData.wrongExplanation

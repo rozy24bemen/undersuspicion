@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check \"c:/Users/Roman/Documents/ROMAN/UnderSuspi/js/components/MetaStore.js\")",
+      "Bash(node --check \"c:/Users/Roman/Documents/ROMAN/UnderSuspi/js/components/DinnerPanel.js\")",
+      "Bash(node --check \"c:/Users/Roman/Documents/ROMAN/UnderSuspi/js/screens/DinnerScreen.js\")",
+      "Bash(node --check \"c:/Users/Roman/Documents/ROMAN/UnderSuspi/js/data/cenasGlobal.js\")",
+      "Bash(node --check \"c:/Users/Roman/Documents/ROMAN/UnderSuspi/js/data/caso01.js\")",
+      "Bash(npm --version)",
+      "Bash(npm ls *)",
+      "Bash(npm view *)",
+      "Bash(mkdir -p /tmp/undersuspi-smoke)",
+      "Read(//tmp/**)",
+      "Bash(npm init *)",
+      "Bash(npm install *)"
+    ]
+  }
+}
