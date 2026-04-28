@@ -154,6 +154,13 @@ US.DeskManager = class DeskManager {
 
     if (!d.moved && !d.cancelled) {
       var evId = d.card.dataset.evidenceId;
+      if (US.Telemetry) {
+        var caseData = this.engine.getCase();
+        US.Telemetry.log('evidence-clicked', {
+          caseId:     caseData ? caseData.id : null,
+          evidenceId: evId
+        });
+      }
       this.ui.modals.showEvidence(evId);
     }
   }

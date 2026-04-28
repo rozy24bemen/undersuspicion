@@ -42,6 +42,7 @@ US.GameEngine = class GameEngine {
     this.askedQuestions = new Set();
     this.detectedContradictions = new Set();
     this.notebook = [];
+    this._caseStartedAt = Date.now();
 
     this.suspectState = {};
     this.presentedEvidence = {};
@@ -54,6 +55,21 @@ US.GameEngine = class GameEngine {
     this._addNote('briefing', src.title,
       'Víctima: ' + src.victim.name + ' · ' + src.scene.location,
       src.intro);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('case-start', { caseId: caseId });
+      if (US.MetaStore) {
+        const m = US.MetaStore.get();
+        US.Telemetry.log('meta-snapshot', {
+          caseId:     caseId,
+          phase:      'case-start',
+          sinceridad: m.sinceridad,
+          integridad: m.integridad,
+          lucidez:    m.lucidez,
+          memoria:    Object.keys(m.memoria || {}).filter(k => m.memoria[k])
+        });
+      }
+    }
   }
 
   // ── Getters ───────────────────────────────────────
@@ -107,10 +123,21 @@ US.GameEngine = class GameEngine {
     }
     if (!question) return { blocked: true, reason: 'notFound' };
 
+    const pressureBefore = state.pressure;
     this.askedQuestions.add(questionId);
     state.pressure = Math.min(100, state.pressure + question.pressureCost);
 
     this._addNote('question', suspect.name, question.text, question.response);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('ask', {
+        caseId:         this.caseData.id,
+        suspectId:      suspect.id,
+        questionId:     questionId,
+        pressureBefore: pressureBefore,
+        pressureAfter:  state.pressure
+      });
+    }
 
     const contradiction = this._checkContradictions(suspect.id);
 
@@ -137,10 +164,21 @@ US.GameEngine = class GameEngine {
     const evResp = suspect.evidenceResponses[evidenceId];
     if (!evidence || !evResp) return { blocked: true, reason: 'notFound' };
 
+    const pressureBefore = state.pressure;
     this.presentedEvidence[suspect.id].add(evidenceId);
     state.pressure = Math.min(100, state.pressure + evResp.pressureCost);
 
     this._addNote('evidence', suspect.name, evidence.title, evResp.response);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('present', {
+        caseId:         this.caseData.id,
+        suspectId:      suspect.id,
+        evidenceId:     evidenceId,
+        pressureBefore: pressureBefore,
+        pressureAfter:  state.pressure
+      });
+    }
 
     const contradiction = this._checkContradictions(suspect.id);
 
@@ -180,6 +218,25 @@ US.GameEngine = class GameEngine {
       F: 'El Culpable Ha Escapado'
     }[rating];
 
+    if (US.Telemetry) {
+      US.Telemetry.log('accuse', {
+        caseId:              this.caseData.id,
+        who:                 who,
+        how:                 how,
+        why:                 why,
+        actualWho:           sol.who,
+        correct:             allCorrect,
+        score:               score,
+        rating:              rating,
+        contradictionsFound: foundC,
+        totalContradictions: totalC
+      });
+      US.Telemetry.log('case-end', {
+        caseId:     this.caseData.id,
+        durationMs: this._caseStartedAt ? (Date.now() - this._caseStartedAt) : null
+      });
+    }
+
     return {
       correct,
       allCorrect,
@@ -210,6 +267,15 @@ US.GameEngine = class GameEngine {
 
         const suspectName = this.caseData.suspects.find(s => s.id === suspectId).name;
         this._addNote('contradiction', suspectName, c.statement, c.proof);
+
+        if (US.Telemetry) {
+          US.Telemetry.log('contradiction-detected', {
+            caseId:          this.caseData.id,
+            suspectId:       suspectId,
+            contradictionId: c.id,
+            isRedHerring:    !!c.isRedHerring
+          });
+        }
 
         return c;
       }

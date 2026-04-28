@@ -406,7 +406,34 @@ US.ToolRegistry.register(new US.DeskPhoneTool());
 
 ---
 
-## Decisiones que quedan por tomar
+## 9. Plan de despliegue por caso
+
+Reparto efectivo de herramientas a lo largo del Modo Historia. La **motivación
+narrativa** de cada herramienta y el porqué de su orden viven en
+`HISTORIA-MODO-HISTORIA.md` (sección "Estructura de 3 actos" y casos del Acto I).
+
+| Caso | Acto | Herramienta | Tipo | Notas |
+|------|------|-------------|------|-------|
+| 1 (Tutorial) | — | — | — | Sin herramientas. Solo interrogatorio + pruebas. |
+| 2 | I | — | — | Mecánica narrativa nueva (pistas falsas) sin UI nueva. |
+| 3 | I | `desk-phone` | panel | Número fragmentado entre pruebas; al reunirlo y marcarlo desbloquea audio o transcripción decisiva. |
+| 4 | I (pivote) | — | — | Sin herramienta. Peso narrativo del cierre del Acto I. |
+| 5 | II | `uv-light` | overlay | Sobre fotos antiguas y cartas; revela escritura tachada o huellas. |
+| 6, 7 | II | (pendiente) | — | Por decidir tras retrospectiva del Acto I. |
+| 8 | III (final) | TODAS | combinadas | `desk-phone` + `uv-light` (+ las que se hayan añadido) son **necesarias en combinación obligatoria**. Ver `HISTORIA-MODO-HISTORIA.md` sección "ACTO III". |
+
+### Cruces con otros documentos
+- **Palancas internas del interrogatorio** (red herrings, contradicciones cruzadas,
+  presión, etc.) → `SISTEMA-DIFICULTAD.md`. Una herramienta de escritorio y una
+  palanca interna pueden coexistir en el mismo caso (p.ej. caso 3 = teléfono +
+  pruebas desbloqueables encadenadas).
+- **Datos de la cena tras el caso** → `METAARCO-CENAS.md`. El uso del teléfono y
+  qué se descubre con él alimenta `sinceridad` (alta si el detective se lo cuenta a
+  Elena, baja si lo oculta).
+
+---
+
+## 10. Decisiones que quedan por tomar
 
 Estas no tienen respuesta correcta ahora — dependen de qué herramientas se implementen:
 

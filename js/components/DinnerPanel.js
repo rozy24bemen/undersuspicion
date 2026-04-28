@@ -140,6 +140,23 @@ US.DinnerPanel = class DinnerPanel {
     US.MetaStore.applyEffect(resp.efecto);
     if (ex.fromGlobal) US.MetaStore.markUsed(ex.id);
 
+    if (US.Telemetry) {
+      const efecto = resp.efecto || {};
+      US.Telemetry.log('dinner-choice', {
+        caseId:     this.caseData.id,
+        phase:      this.phase,
+        exchangeId: ex.id || null,
+        responseId: respId,
+        fromGlobal: !!ex.fromGlobal,
+        axisDeltas: {
+          sinceridad: efecto.sinceridad || 0,
+          integridad: efecto.integridad || 0,
+          lucidez:    efecto.lucidez    || 0
+        },
+        flags: Array.isArray(efecto.flags) ? efecto.flags.slice() : []
+      });
+    }
+
     this.replica = resp.replica || '...';
     this.render();
 
@@ -191,6 +208,17 @@ US.DinnerPanel = class DinnerPanel {
 
       case 'cierre':
         this.phase = 'done';
+        if (US.Telemetry && US.MetaStore) {
+          const m = US.MetaStore.get();
+          US.Telemetry.log('meta-snapshot', {
+            caseId:     this.caseData.id,
+            phase:      'dinner-end',
+            sinceridad: m.sinceridad,
+            integridad: m.integridad,
+            lucidez:    m.lucidez,
+            memoria:    Object.keys(m.memoria || {}).filter(k => m.memoria[k])
+          });
+        }
         break;
     }
   }

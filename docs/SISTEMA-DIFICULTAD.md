@@ -1,10 +1,20 @@
 # Under Suspicion — Sistema de Dificultad Progresiva
 
 > Documento de diseño con ideas y mecánicas para escalar la dificultad a lo largo de los 8 casos del Modo Historia.
+>
+> **Alcance**: este doc cubre las **palancas internas del sistema de interrogatorio**
+> (ambigüedad de pruebas, presión, contradicciones, sospechosos, etc.). Las
+> **herramientas de escritorio** (luz UV, teléfono, etc.) viven en
+> `TOOLS-ARCHITECTURE.md`. El **reparto narrativo** (qué caso introduce qué palanca y
+> qué herramienta) vive en `HISTORIA-MODO-HISTORIA.md`. Si los tres entran en
+> conflicto, **`HISTORIA-MODO-HISTORIA.md` es la fuente de verdad** para el reparto.
+>
+> **Numeración**: caso 1 = tutorial. Casos 2-8 = los siete casos restantes,
+> agrupados en tres actos (Acto I: 2-4, Acto II: 5-7, Acto III: 8).
 
 ---
 
-## 1. Análisis del caso actual (Caso Tutorial)
+## 1. Análisis del caso actual (Caso 1 — Tutorial)
 
 El caso "El Último Brindis" funciona como tutorial porque:
 
@@ -158,16 +168,24 @@ Esto es **perfecto como tutorial**, ya que enseña al jugador todas las mecánic
 
 ## 3. Tabla de progresión por caso
 
-| Caso | Dificultad | Sospechosos | Pruebas | Contrad. | Pruebas ocultas | Pistas rojas | Presión | Mecánica nueva |
-|------|-----------|-------------|---------|----------|-----------------|--------------|---------|----------------|
-| 0 (Tutorial) | ★☆☆☆☆ | 3 | 8 | 3+1 | 0 | 1 simple | Normal | Todas las mecánicas base |
-| 1 | ★★☆☆☆ | 3 | 8 | 4 | 1 | 2 | Normal | Prueba desbloqueable |
-| 2 | ★★☆☆☆ | 3 | 9 | 4 | 1 | 2 | Medio | Motivo oculto |
-| 3 | ★★★☆☆ | 4 | 10 | 5 | 2 | 3 | Medio | Testigo poco fiable |
-| 4 | ★★★☆☆ | 4 | 10 | 5 | 2 | 3 | Alto | Contradicciones cruzadas |
-| 5 | ★★★★☆ | 4 | 11 | 6 | 3 | 4 | Alto | Cómplice |
-| 6 | ★★★★☆ | 5 | 12 | 7 | 3 | 4 | Alto | Prueba falsa plantada |
-| 7 | ★★★★★ | 5 | 12 | 8 | 4 | 5 | Muy alto | Dos culpables + contrad. manuales |
+La tabla cruza dos columnas independientes:
+
+- **Palanca interna**: mecánica del sistema de interrogatorio que escala la
+  dificultad sin UI nueva (ver palancas 1-7 de la sección anterior).
+- **Herramienta de escritorio**: nueva pieza de UI según `TOOLS-ARCHITECTURE.md`.
+
+Un caso puede introducir solo una, ambas, o ninguna (caso pivote / caso final).
+
+| Caso | Acto | Dificultad | Palanca interna nueva | Herramienta nueva | Sospechosos | Pruebas | Contrad. | Pruebas ocultas | Pistas rojas | Presión |
+|------|------|-----------|------------------------|---------------------|-------------|---------|----------|------------------|--------------|---------|
+| 1 (Tutorial) | — | ★☆☆☆☆ | Todas las base | — | 3 | 8 | 3+1 | 0 | 1 simple | Normal |
+| 2 | I | ★★☆☆☆ | **Pistas falsas / red herrings con `clarification`** | — | 3 | 9 | 4 | 1 | 2-3 | Normal |
+| 3 | I | ★★★☆☆ | Pruebas desbloqueables encadenadas | **`desk-phone`** (teléfono) | 3-4 | 10 | 4 | 2 | 2 | Medio |
+| 4 | I — pivote | ★★★☆☆ | Contradicciones cruzadas entre sospechosos | — | 4 | 10 | 5 | 2 | 3 | Medio |
+| 5 | II | ★★★★☆ | (a definir tras retrospectiva del Acto I) | **`uv-light`** (luz UV) | 4 | 11 | 6 | 3 | 4 | Alto |
+| 6 | II | ★★★★☆ | (a definir) | — | 5 | 12 | 7 | 3 | 4 | Alto |
+| 7 | II | ★★★★★ | (a definir) | — | 5 | 12 | 8 | 4 | 5 | Muy alto |
+| 8 | III — final | ★★★★★ | **TODAS las palancas combinadas** | **TODAS las herramientas obligatorias en combinación** | 4-5 | 14+ | 9+ | 5+ | 6+ | Extremo |
 
 ---
 
@@ -247,11 +265,42 @@ globalPressure: 0
 
 ---
 
-## 6. Ejemplo práctico: Cómo se vería un caso de dificultad media
+## 6. Ejemplo práctico: Cómo se vería el Caso 2 (pistas falsas)
 
-**Caso 3 — "Silencio en la Galería"**:
-- **4 sospechosos**: La galerista (inocente con coartada sólida), el artista endeudado (red herring fuerte con motivo económico), la asistente personal (culpable real), y un coleccionista rival (testigo poco fiable que miente para proteger un soborno).
-- **Pruebas ambiguas**: "Trazas de un disolvente industrial en las manos de la víctima" → ¿fue envenenado con el disolvente? No, el disolvente es del trabajo con pinturas; el método real fue otro.
-- **Motivo oculto**: Todo apunta a dinero (el artista debía 200.000€), pero el verdadero motivo de la asistente era un chantaje emocional que solo se descubre al cruzar las declaraciones de 2 sospechosos.
-- **Prueba desbloqueada**: Al preguntar al artista sobre su deuda, se desbloquea un "email interceptado" que revela que la asistente había amenazado a la víctima.
-- **Contradicción cruzada**: La asistente dice "no tenía las llaves del almacén", pero el coleccionista menciona haberla visto con unas llaves esa tarde. Se necesitan ambos testimonios + la prueba CCTV del almacén.
+El caso 2 es el primer caso real del modo historia (post-tutorial) y el que
+introduce la palanca de **pistas falsas** sin meter herramienta nueva. Esquema:
+
+- **3 sospechosos**: el culpable real + dos inocentes que mienten por motivos no
+  relacionados con el crimen.
+- **Mentira inocente A**: un sospechoso oculta una infidelidad (su coartada real es
+  legítima pero comprometedora; su mentira parcial le hace parecer culpable).
+- **Mentira inocente B**: otro sospechoso está cometiendo un fraude menor sin
+  conexión con el homicidio (por ejemplo, sisar de la caja del trabajo); cuando se
+  le presiona suficiente, la contradicción salta y abre una `clarification` que
+  revela el fraude pero descarta su implicación en el crimen.
+- **Mentira culpable**: el verdadero culpable miente sobre **el crimen mismo**.
+  Su contradicción **no** tiene `clarification` que lo libere — solo cierra el
+  caso.
+- **Pista física ambigua**: una prueba en la escena que apunta inicialmente a uno
+  de los inocentes (huella, colilla, hilo de ropa) y que solo en interrogatorio
+  profundo se ata al culpable.
+- **Eco con caso 1**: la víctima del caso 2 comparte un detalle con Diego Varela
+  (mismo barrio, misma generación o misma profesión cercana). Sembrado para la
+  metaarco — no se enfatiza en pantalla.
+
+#### Implementación de las pistas falsas en datos
+```js
+// En las contradictions del sospechoso inocente:
+{
+  id: 'c-fraude-cajera',
+  isRedHerring: true,
+  clarification: 'La sospechosa no estaba en la escena del crimen — estaba en su
+                  trabajo, falsificando un cierre de caja. Confirmado por las
+                  cámaras del local. Su contradicción se aclara: mintió sobre el
+                  fraude, no sobre el homicidio.'
+}
+```
+
+El jugador que acuse a esta sospechosa por su contradicción se equivoca; el motor
+acepta la acusación pero el resultado en pantalla (y la cena posterior) reflejan
+el error.

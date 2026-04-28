@@ -39,11 +39,25 @@ US.MenuScreen = class MenuScreen {
 
           <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
         </div>
+
+        <button data-action="export-telemetry"
+                title="Exportar datos de partida en JSON (para playtest)"
+                style="position:absolute;bottom:10px;right:10px;padding:6px 10px;background:rgba(0,0,0,0.55);color:#aaa;border:1px solid #444;font-family:'Courier New',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;z-index:50;">
+          ↓ EXPORTAR PARTIDA
+        </button>
       </div>
     `;
 
     container.querySelector('[data-action="start-story"]')
       .addEventListener('click', () => {
+        // MODO HISTORIA = partida nueva. Resetea metaarco (ejes y flags) y
+        // marca un nuevo sessionId de telemetría para distinguir runs en el export.
+        // Cuando exista más de un caso, esto pasará a un menú "Nueva / Continuar".
+        if (US.MetaStore)  US.MetaStore.reset();
+        if (US.Telemetry) {
+          US.Telemetry.newSession();
+          US.Telemetry.log('run-start', { caseId: 'caso-01' });
+        }
         this.engine.loadCase('caso-01');
         this.ui.showScreen('intro');
       });
@@ -56,6 +70,23 @@ US.MenuScreen = class MenuScreen {
         if (window.confirm('¿Seguro que quieres salir del juego?')) {
           window.close();
         }
+      });
+    }
+
+    // Botón exportar telemetría (para playtesters)
+    const exportBtn = container.querySelector('[data-action="export-telemetry"]');
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        if (!US.Telemetry) {
+          window.alert('Telemetría no disponible.');
+          return;
+        }
+        const count = US.Telemetry.count();
+        if (count === 0) {
+          window.alert('Aún no hay datos de partida que exportar.');
+          return;
+        }
+        US.Telemetry.download();
       });
     }
   }

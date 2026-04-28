@@ -449,7 +449,7 @@ US.CASES['caso-01'] = {
             efecto: { sinceridad: +8, integridad: +5 },
             replica: 'Ahí está. Eso es hablar.' },
           { id: 'b', texto: 'Enseguida. Encajé las piezas rápido.',
-            efecto: { sinceridad: -8, integridad: -5, flags: ['exagera_logros'] },
+            efecto: { sinceridad: -8, integridad: -5 },
             replica: 'Ajá.' },
           { id: 'c', texto: 'Todas las cartas aparecen cuando tienen que aparecer.',
             efecto: { sinceridad: +2 },
@@ -470,7 +470,7 @@ US.CASES['caso-01'] = {
             efecto: { integridad: +3 },
             replica: 'Ojalá fuera tan fácil.' },
           { id: 'c', texto: 'Le apreté un poco. No mucho. Lo justo.',
-            efecto: { sinceridad: +8, integridad: -4, flags: ['presion_testigo'] },
+            efecto: { sinceridad: +8, integridad: -4 },
             replica: '...cuánto es "lo justo"?' }
         ]
       },

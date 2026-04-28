@@ -109,13 +109,26 @@ Corroboran o desmienten coartadas. Añade profundidad sin complicar la estructur
 
 ---
 
-## Priorización por impacto / esfuerzo
+## Priorización (post-decisión narrativa)
 
-| Prioridad | Herramienta | Por qué |
-|-----------|-------------|---------|
-| 1 | Tablero de conexiones | Cambia fundamentalmente cómo el jugador piensa sobre el caso |
-| 2 | Línea temporal | Hace que las coartadas sean realmente importantes, no solo texto |
-| 3 | Teléfono + registros | Bajo esfuerzo, alto impacto narrativo |
-| 4 | Caja fuerte | Objetivo secundario satisfactorio sin mucha complejidad |
+> **Esto era un brainstorm.** El reparto real de herramientas por caso del Modo
+> Historia se decidió en `HISTORIA-MODO-HISTORIA.md` y el plan de implementación
+> técnico vive en `TOOLS-ARCHITECTURE.md` sección 9. Esta tabla refleja **lo que
+> efectivamente se va a construir**, no la priorización original abstracta.
 
-Los dos primeros transforman el juego de "interroga y acumula" a "deduce activamente".
+| Orden | Herramienta | Caso de introducción | Notas |
+|-------|-------------|----------------------|-------|
+| 1 | **Teléfono + caja fuerte (combinados)** | Caso 3 (Acto I) | El número del teléfono es el "código" de la caja fuerte: dígitos fragmentados entre pruebas. Una sola UI cubre las dos ideas con menos código. |
+| 2 | **Luz ultravioleta** | Caso 5 (Acto II) | Sobre material físico viejo (fotos, cartas) para conectar con la metaarco del pasado. |
+| 3 | (Pendiente) | Acto II (5-7) | Posible: lupa o reactivos químicos según necesidades del Acto II tras retrospectiva. |
+
+### Herramientas descartadas (por ahora)
+
+| Herramienta | Motivo |
+|-------------|--------|
+| Tablero de conexiones | Demasiado peso de UI para el alcance del proyecto. La deducción se canaliza ya por el sistema de contradicciones + pantalla de resolución. |
+| Línea temporal | Ídem. Las coartadas se gestionan con contradicciones cruzadas (palanca interna del interrogatorio, no UI nueva). |
+| Análisis de huellas / grafología | Mini-puzzles que rompen el ritmo. La luz UV cubre el descubrimiento físico oculto con menos fricción. |
+
+Estas pueden reconsiderarse en un Acto II o III si la retrospectiva muestra que
+hace falta más profundidad, pero **no son base del plan actual**.

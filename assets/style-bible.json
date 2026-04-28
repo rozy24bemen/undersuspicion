@@ -1,0 +1,98 @@
+{
+  "style_id": "undersuspi-noir-v1",
+  "version": 1,
+  "description": "Estilo visual canónico de Under Suspicion. Inspirado en ilustración tipo Cluedo moderno, con paleta noir cálida y atmósfera detectivesca atemporal de los años 80-90. Todos los assets del juego heredan estos parámetros vía su style_id.",
+
+  "base_prompt": "ilustración estilo Cluedo moderno, trazo limpio definido, paleta noir cálida con acentos rojo sangre y oro mostaza, iluminación cinematográfica de claroscuro con luz lateral cálida, época atemporal años 80-90, lente equivalente 50mm, grano sutil de papel, sin fotorrealismo, sin anime, sin 3D, sin cartoon infantil, sin texto en la imagen",
+
+  "params": {
+    "palette": {
+      "background_dark": "#1a1a1a",
+      "background_warm": "#3a2820",
+      "accent_blood": "#8B0000",
+      "accent_gold": "#C9A961",
+      "highlight_paper": "#e8d8b0"
+    },
+    "lighting": "claroscuro, luz lateral cálida, sombras profundas, ningún flash directo",
+    "era": "atemporal años 80-90 (tecnología analógica, ropa neutra)",
+    "rendering": "ilustración 2D editorial, no fotorrealista, no anime, no 3D, no cartoon infantil",
+    "linework": "trazo limpio, contornos definidos, sombreado por bloques con transiciones suaves",
+    "mood": "sobrio, tenso, ligeramente melancólico"
+  },
+
+  "negative": "anime, manga, fotorrealista, 3D, render, cartoon infantil, deforme, texto, logos, watermark, marco visible, firma de artista, exceso de saturación, paleta arcoíris, hipersexualización, gore explícito",
+
+  "framing_defaults": {
+    "suspect_portrait": {
+      "aspect_ratio": "3:4",
+      "shot": "medio cuerpo (de la cintura para arriba)",
+      "background": "fondo neutro oscuro de despacho de interrogatorio, ligeramente desenfocado"
+    },
+    "victim_portrait": {
+      "aspect_ratio": "3:4",
+      "shot": "estilo foto de carnet o de archivo policial",
+      "background": "fondo neutro plano (gris azulado o sepia apagado)"
+    },
+    "recurring_character": {
+      "aspect_ratio": "3:4",
+      "shot": "medio cuerpo",
+      "background": "según contexto del personaje (Elena: comedor cálido; Beltrán: comisaría; Octaviano Vidal: morgue/forense)"
+    },
+    "evidence_physical": {
+      "aspect_ratio": "1:1",
+      "shot": "objeto centrado sobre superficie neutra",
+      "background": "papel de estraza o fieltro oscuro de mesa de evidencias"
+    },
+    "evidence_document": {
+      "aspect_ratio": "4:5",
+      "shot": "documento plano visto cenitalmente",
+      "background": "superficie de escritorio en madera oscura"
+    },
+    "scene_establishing": {
+      "aspect_ratio": "16:9",
+      "shot": "plano general del lugar del crimen, sin personajes",
+      "background": "el escenario completo es el sujeto"
+    },
+    "ui_icon": {
+      "aspect_ratio": "1:1",
+      "shot": "icono simple, alta legibilidad a tamaño pequeño",
+      "background": "transparente o color sólido del UI"
+    }
+  },
+
+  "character_consistency_rules": {
+    "method": "character-sheet",
+    "rules": [
+      "La pose 'neutral' aprobada de cada personaje es su referencia canónica.",
+      "Toda generación de poses 'talking' o 'nervous' DEBE adjuntar la imagen 'neutral' al prompt.",
+      "Para personajes recurrentes (Elena, detective, Beltrán, Octaviano Vidal, forense Vidal), la misma 'neutral' se usa como referencia en todos los casos donde aparezcan.",
+      "Si una pose deriva (rostro o ropa cambia), rehacer adjuntando la 'neutral' y siendo más explícito en el prompt.",
+      "Cualquier cambio de estilo global incrementa la versión del style_id (v2, v3...) y obliga a re-aprobar todas las 'neutral' antes de regenerar dependientes."
+    ]
+  },
+
+  "moods": {
+    "neutral": {
+      "description": "estado por defecto, expresión calmada, mirada al frente, postura relajada",
+      "filter_css": "grayscale(30%) brightness(0.9)"
+    },
+    "talking": {
+      "description": "boca ligeramente abierta como en mitad de una frase, mirada al interlocutor, gesto vivo pero contenido",
+      "filter_css": "grayscale(10%) brightness(1.0)"
+    },
+    "nervous": {
+      "description": "mirada esquiva o desviada, mandíbula tensa, alguna mano cerca del cuello/cara, ceño levemente fruncido, sudoración apenas visible",
+      "filter_css": "sepia(20%) brightness(0.85)"
+    }
+  },
+
+  "ethics": {
+    "violence": "implícita, nunca explícita. No mostrar heridas, sangre derramada visible ni cuerpos en estado avanzado de descomposición.",
+    "suicide_representation": "el final malo del juego implica suicidio del protagonista. Cualquier asset relacionado debe seguir guidelines de representación responsable: no mostrar el método de forma explícita, evitar planos detallados, preferir silueta o sombra.",
+    "minors": "no se representan menores en situaciones violentas o sexualizadas bajo ninguna circunstancia."
+  },
+
+  "history": [
+    { "date": "2026-04-28", "version": 1, "action": "creado", "by": "equipo", "notes": "Versión inicial. Pendiente de validación con prueba real generando una neutral de personaje recurrente." }
+  ]
+}

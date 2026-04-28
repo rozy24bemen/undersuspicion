@@ -16,16 +16,35 @@
 
 ---
 
-## Arquitectura Actual (v0.1.0)
+## Metodología de trabajo
+
+> Documento operativo: `docs/METODOLOGIA.md`. Resumen aquí.
+
+- Decisiones colectivas, voto 2/3.
+- LLM produce caso entero → equipo cura por bloques grandes → playtest valida.
+- Entorno: VSCode + extensión Claude Code.
+- Imágenes: Gemini 2.5 Flash Image. Persistencia por character sheet con la
+  pose `neutral` como referencia canónica del personaje en el repo.
+- Telemetría obligatoria desde el caso 1 (`US.Telemetry`, exportable a JSON).
+- Dos niveles de playtest: barato/interno tras Acto I, pagado/serio con
+  testers vírgenes tras Acto II y tras juego completo.
+- Cualquier asset visual tiene un JSON-prompt junto al PNG (mismo basename).
+  El estilo global vive en `assets/style-bible.json`.
+- Inventario único de assets en `assets/manifest.json` (single source of truth).
+
+---
+
+## Arquitectura Actual (v0.2.0)
 
 ### Patrón
 - Namespace global `US` (var US = US || {})
 - Clases:
   - `US.GameEngine` — Lógica pura, sin DOM
   - `US.UIController` — Coordinador DOM, delega pantallas a Screen classes
-  - `US.MenuScreen`, `US.IntroScreen`, `US.GameScreen`, `US.ResolutionScreen`, `US.ResultScreen`
+  - `US.MenuScreen`, `US.IntroScreen`, `US.GameScreen`, `US.ResolutionScreen`, `US.DinnerScreen`
+  - Componentes activos: `US.MetaStore`, `US.DinnerPanel`, `US.DinnerTable`
   - Stubs: `US.DeskManager`, `US.NotebookPanel`, `US.ModalManager`, `US.QuestionPanel`
-- Datos: `US.CASES['caso-01']`
+- Datos: `US.CASES['caso-01']`, `US.CENAS_GLOBAL`
 - Bootstrap en `app.js` (IIFE)
 
 ### Estructura de archivos
@@ -34,12 +53,16 @@ index.html
 css/
   variables.css, base.css, animations.css, responsive.css
   components/ buttons.css, modal.css, contradiction.css, notebook.css
-  screens/ menu.css, intro.css, game.css, resolution.css, result.css
+  screens/ menu.css, intro.css, game.css, resolution.css, dinner.css
 js/
   GameEngine.js, UIController.js, app.js
-  screens/ MenuScreen.js, IntroScreen.js, GameScreen.js, ResolutionScreen.js, ResultScreen.js
+  screens/ MenuScreen.js, IntroScreen.js, GameScreen.js, ResolutionScreen.js, DinnerScreen.js
   components/ DeskManager.js, NotebookPanel.js, ModalManager.js, QuestionPanel.js (stubs)
-  data/ caso01.js
+  components/ MetaStore.js, DinnerPanel.js, DinnerTable.js (subsistema metaarco)
+  data/ caso01.js, cenasGlobal.js
+docs/
+  HISTORIA-MODO-HISTORIA.md, METAARCO-CENAS.md, SISTEMA-DIFICULTAD.md,
+  TOOLS-ARCHITECTURE.md, IDEAS-HERRAMIENTAS.md, METODOLOGIA.md
 ```
 
 ### Flujo de delegación
@@ -133,9 +156,14 @@ Ejemplo: `hugo-nervous.svg`, `marta-talking.webp`
 MENÚ → [Modo Historia] → INTRO CASO → [Abrir Expediente]
   → GAME (interrogar / examinar pruebas / detectar contradicciones)
   → RESOLUCIÓN (acusar: quién + cómo + por qué)
-  → RESULTADO (puntuación + rating S/A/B/C/F)
+  → CENA con Elena (DinnerScreen — sustituye a la antigua ResultScreen)
   → MENÚ
 ```
+
+`ResultScreen` y `result.css` se han retirado en v0.2.0. El veredicto se comunica por
+boca de Elena en la cena posterior, no por una tarjeta S/A/B/C/F. El sistema completo
+de cenas (4 ejes, flags de memoria, banco global de preguntas, los dos finales del
+juego) está documentado en `docs/METAARCO-CENAS.md`.
 
 ---
 
@@ -146,10 +174,47 @@ MENÚ → [Modo Historia] → INTRO CASO → [Abrir Expediente]
 - El juego funciona completo como prototipo single-case
 - La estructura actual es plana y no escala bien para múltiples casos
 - Los sospechosos no tienen imágenes reales (placeholder siluetas CSS)
-- No hay sistema de guardado/progreso
+- **Sí hay persistencia parcial** vía `MetaStore` para los 4 ejes de la cena (clave
+  `undersuspi.meta` en localStorage). No hay aún guardado de progreso de caso
+  intermedio.
 - No hay audio/SFX
 - No hay animaciones de transición entre pantallas (solo display toggle)
 - El modo "Sin Fin" y "Configuración" están deshabilitados (btn--disabled)
+
+---
+
+## Subsistema Metaarco (v0.2.0)
+
+> Documentado en detalle en `docs/METAARCO-CENAS.md`. Resumen aquí para que SOUL
+> tenga el mapa mental completo.
+
+### Qué es
+Cada caso del Modo Historia termina con una cena entre el detective y su mujer
+**Elena** (`DinnerScreen`) que sustituye a la antigua `ResultScreen`. Las decisiones
+del jugador en la cena alimentan **4 ejes persistentes** (`sinceridad`, `integridad`,
+`lucidez` y `memoria` como flags) que determinan cuál de los dos finales del juego
+se desbloquea en el caso 8.
+
+### Componentes nuevos
+| Componente | Rol |
+|------------|-----|
+| `DinnerScreen` (screens) | Orquesta las dos fases de la cena (repaso del caso + preguntas personales) |
+| `DinnerPanel` (components) | UI principal: diálogo, opciones, transiciones |
+| `DinnerTable` (components) | Composición visual de la mesa (mantel, copas, vela) |
+| `MetaStore` (components) | Persistencia: lee/escribe `undersuspi.meta` en localStorage |
+| `cenasGlobal.js` (data) | Banco compartido de ~25-30 preguntas meta y 6-8 cierres, tagueados con `tono` y filtros |
+
+### Datos por caso (extensión del schema)
+Cada `casoNN.js` añade un bloque `cena` con:
+- `apertura`: 1 línea inicial específica del caso.
+- `repasoPool`: 4-5 intercambios sobre el caso.
+- `ganchoMemoria`: 1 intercambio que dispara la flag clave de la metaarco para ese
+  caso.
+
+### El giro central (SPOILER)
+Elena es una alucinación del detective. La verdadera información sobre por qué, los
+dos finales del juego y los sembrados imprescindibles para hacer el giro defendible
+están en `METAARCO-CENAS.md` sección 8. **No replicar aquí.**
 
 ---
 

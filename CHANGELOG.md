@@ -35,6 +35,71 @@
 
 ---
 
+## [v0.2.0] — Subsistema Metaarco (Cenas con Elena) y Reescritura del Modo Historia — 2026-04-27
+
+### Cambios narrativos
+- **Modo Historia reescrito de cero.** Se descarta la trama de "La Red de Cristal /
+  Grupo Fenix / El Relojero" (thriller político de conspiración) y se sustituye por
+  una metaarco psicológica centrada en el pasado del detective y su mujer Elena.
+- **Antagonista del juego = el propio detective.** Sin villano externo. Las víctimas
+  de los 8 casos se conectan invisiblemente con su pasado.
+- **8 casos diseñados al completo** en `HISTORIA-MODO-HISTORIA.md` con víctima,
+  escena, sospechosos, pruebas, mecánica, resolución y función en la metaarco.
+- **Dos finales del juego** decididos por los 4 ejes acumulados en las cenas, no
+  por una puntuación tradicional. (Documentación interna; el detalle completo
+  vive en `METAARCO-CENAS.md` sección 8.)
+- **Estructura de 3 actos**: Acto I (casos 2-4), Acto II (casos 5-7), Acto III
+  (caso 8). Diseño por actos para permitir retrospectiva entre ellos.
+
+### Cambios en el subsistema de cena
+- **Nuevo flujo**: `GameScreen → ResolutionScreen → DinnerScreen → MenuScreen`.
+- **Retirada `ResultScreen`** (rangos S/A/B/C/F). El veredicto se comunica por
+  boca de Elena.
+- **4 ejes persistentes** en `localStorage` bajo `undersuspi.meta`:
+  - `sinceridad` (0-100), `integridad` (0-100), `lucidez` (0-100), `memoria` (flags).
+- **Banco global de preguntas/cierres** (`cenasGlobal.js`) compartido entre todos
+  los casos, con anti-repetición de 3 capas y arco de tonos por número de caso.
+
+### Archivos añadidos
+- `js/screens/DinnerScreen.js` — Orquesta las dos fases de la cena.
+- `js/components/DinnerPanel.js` — UI principal del diálogo.
+- `js/components/DinnerTable.js` — Composición visual de la mesa.
+- `js/components/MetaStore.js` — Persistencia de los 4 ejes y las flags.
+- `js/data/cenasGlobal.js` — Banco compartido de ~25-30 preguntas meta y cierres.
+- `css/screens/dinner.css` — Estilos de la pantalla de cena.
+- `docs/METAARCO-CENAS.md` — Diseño completo del subsistema de cenas y el giro
+  final del juego (contiene SPOILER).
+- `docs/HISTORIA-MODO-HISTORIA.md` — Reescrito al completo con los 8 casos.
+- `docs/IDEAS-HERRAMIENTAS.md` — Brainstorm previo + priorización post-decisión.
+- `docs/TOOLS-ARCHITECTURE.md` — Arquitectura de plugins de herramientas y plan de
+  despliegue por caso.
+
+### Archivos modificados
+- `index.html` — Carga de los nuevos scripts y CSS de la cena.
+- `js/UIController.js` — Coordinación de `DinnerScreen` en lugar de `ResultScreen`.
+- `js/GameEngine.js` — Hooks para volcar `_lastResult` a la cena.
+- `js/data/caso01.js` — Bloque `cena` con `apertura`, `repasoPool`, `ganchoMemoria`.
+- `js/screens/ResolutionScreen.js` — Transición a `DinnerScreen` al finalizar.
+- `SOUL.md` — Sección nueva "Subsistema Metaarco" + estructura de archivos
+  actualizada + flujo del juego con cena.
+- `docs/SISTEMA-DIFICULTAD.md` — Tabla de progresión con doble columna (palanca
+  interna + herramienta), numeración 1-8 (caso 1 = tutorial), ejemplo práctico
+  reescrito alrededor del caso 2 (pistas falsas).
+
+### Archivos eliminados
+- `js/screens/ResultScreen.js` — Sustituido por `DinnerScreen`.
+- `css/screens/result.css` — Sustituido por `dinner.css`.
+
+### Decisiones de diseño documentadas
+- Ciudad: **Madrid** (no ciudad ficticia).
+- Detective: sin nombre en pantalla hasta el caso 8 (revelado: **Roberto Mora**).
+  Apellido **Mora** sí es visible retroactivamente en pruebas de casos previos.
+- Mujer del detective: **Elena Solana**, profesora de literatura, 38 años.
+- Numeración de casos: **caso 1 = tutorial**, casos 2-8 = el resto.
+- Sin conspiración política. Sin red criminal recurrente. Sin villano externo.
+
+---
+
 ## [v0.1.2] — Selector de Variante de Retrato
 
 ### Cambios
