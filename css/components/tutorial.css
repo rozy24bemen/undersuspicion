@@ -1,0 +1,137 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — TUTORIAL OVERLAY
+   Capa que guía y bloquea al jugador durante el primer caso.
+   ═══════════════════════════════════════════════════ */
+
+.tutorial-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;       /* Solo las máscaras absorben clicks */
+  font-family: var(--font);
+}
+.tutorial-overlay.active { display: block; }
+
+/* Pausa: oculta máscaras, spotlight y tooltip mientras hay otra modal
+   crítica del juego (p. ej. la modal de contradicción). El tutorial
+   sigue activo y reanudará al cerrarse esa modal. */
+.tutorial-overlay--paused .tutorial-mask,
+.tutorial-overlay--paused .tutorial-spotlight,
+.tutorial-overlay--paused .tutorial-tooltip {
+  visibility: hidden;
+}
+
+/* Máscaras laterales: bloquean clicks fuera del spotlight */
+.tutorial-mask {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.78);
+  pointer-events: auto;
+  cursor: not-allowed;
+  transition: all .18s ease;
+}
+
+/* Marco visual alrededor del elemento resaltado (no bloquea clicks) */
+.tutorial-spotlight {
+  position: absolute;
+  pointer-events: none;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 2px rgba(212, 168, 69, 0.25),
+    0 0 24px 4px rgba(212, 168, 69, 0.55);
+  animation: tutorial-pulse 1.6s ease-in-out infinite;
+  transition: left .18s ease, top .18s ease, width .18s ease, height .18s ease;
+}
+
+@keyframes tutorial-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(212, 168, 69, 0.25),
+      0 0 22px 2px rgba(212, 168, 69, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(212, 168, 69, 0.40),
+      0 0 32px 8px rgba(212, 168, 69, 0.70);
+  }
+}
+
+/* Tooltip de instrucciones */
+.tutorial-tooltip {
+  position: absolute;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: linear-gradient(180deg, #14140e 0%, #0d0d08 100%);
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 16px 18px;
+  pointer-events: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(212, 168, 69, 0.15);
+  color: var(--text);
+  transition: left .18s ease, top .18s ease;
+}
+
+.tutorial-tooltip__step {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.tutorial-tooltip__title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.tutorial-tooltip__text {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.tutorial-tooltip__actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.tutorial-tooltip__btn {
+  background: var(--gold);
+  color: #1a1208;
+  border: none;
+  padding: 8px 18px;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--transition), transform var(--transition);
+  text-transform: uppercase;
+}
+.tutorial-tooltip__btn:hover {
+  background: #e8bd5a;
+  transform: translateY(-1px);
+}
+.tutorial-tooltip__btn:active {
+  transform: translateY(0);
+}
+
+/* ── Responsive: tooltip más compacto en móvil ───────── */
+@media (max-width: 600px) {
+  .tutorial-tooltip {
+    width: calc(100vw - 24px);
+    padding: 12px 14px;
+  }
+  .tutorial-tooltip__title { font-size: 12px; }
+  .tutorial-tooltip__text  { font-size: 11px; line-height: 1.5; }
+  .tutorial-tooltip__btn   { font-size: 10px; padding: 7px 14px; }
+}

@@ -25,8 +25,11 @@ US.QuestionPanel = class QuestionPanel {
 
     panel.querySelectorAll('.q-tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        this.activeTab = tab.dataset.tab;
+        const next = tab.dataset.tab;
+        if (this.ui.tutorial && !this.ui.tutorial.isAllowed('switch-tab', next)) return;
+        this.activeTab = next;
         this.render();
+        if (this.ui.tutorial) this.ui.tutorial.notify('tab-changed', next);
       });
     });
 

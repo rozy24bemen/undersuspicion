@@ -29,6 +29,7 @@ US.UIController = class UIController {
     this.modals    = new US.ModalManager(this);
     this.notebook  = new US.NotebookPanel(this);
     this.questions = new US.QuestionPanel(this);
+    this.tutorial  = US.TutorialOverlay ? new US.TutorialOverlay(this) : null;
 
     this._bindGlobalEvents();
   }
@@ -229,6 +230,8 @@ US.UIController = class UIController {
   // ═══════════════════════════════════════════════════
 
   _handleAskQuestion(questionId) {
+    if (this.tutorial && !this.tutorial.isAllowed('ask-question', questionId)) return;
+
     const result = this.engine.askQuestion(questionId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
@@ -244,13 +247,18 @@ US.UIController = class UIController {
     this.questions.render();
     this.notebook.updateBadge();
 
+    if (this.tutorial) this.tutorial.notify('question-asked', { questionId: questionId });
+
     if (result.contradiction) {
       this._setSuspectMood('nervous', 0);
       setTimeout(() => this.modals.showContradiction(result.contradiction), 600);
+      if (this.tutorial) this.tutorial.notify('contradiction-detected', result.contradiction);
     }
   }
 
   _handlePresentEvidence(evidenceId) {
+    if (this.tutorial && !this.tutorial.isAllowed('present-evidence', evidenceId)) return;
+
     const result = this.engine.presentEvidence(evidenceId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
@@ -269,9 +277,12 @@ US.UIController = class UIController {
     this.questions.render();
     this.notebook.updateBadge();
 
+    if (this.tutorial) this.tutorial.notify('evidence-presented', { evidenceId: evidenceId });
+
     if (result.contradiction) {
       this._setSuspectMood('nervous', 0);
       setTimeout(() => this.modals.showContradiction(result.contradiction), 600);
+      if (this.tutorial) this.tutorial.notify('contradiction-detected', result.contradiction);
     }
   }
 

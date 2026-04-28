@@ -68,10 +68,14 @@ US.ModalManager = class ModalManager {
         this.hideEvidence();
         this.ui._handlePresentEvidence(e.currentTarget.dataset.evidenceId);
       });
+
+    if (this.ui.tutorial) this.ui.tutorial.notify('evidence-modal-opened', evidenceId);
   }
 
   hideEvidence() {
+    const wasOpen = this.modal.classList.contains('active');
     this.modal.classList.remove('active');
+    if (wasOpen && this.ui.tutorial) this.ui.tutorial.notify('evidence-modal-closed', null);
   }
 
   showContradiction(c) {
@@ -122,6 +126,7 @@ US.ModalManager = class ModalManager {
       this.contradictionEl.classList.remove('active');
       this.ui._setSuspectMood('neutral', 0);
       this.ui.notebook.updateBadge();
+      if (this.ui.tutorial) this.ui.tutorial.notify('contradiction-modal-closed', c);
     };
 
     this.contradictionEl.querySelector('[data-action="dismiss-contradiction"]')
@@ -129,8 +134,10 @@ US.ModalManager = class ModalManager {
   }
 
   dismissContradiction() {
+    const wasOpen = this.contradictionEl.classList.contains('active');
     this.contradictionEl.classList.remove('active');
     this.ui._setSuspectMood('neutral', 0);
     this.ui.notebook.updateBadge();
+    if (wasOpen && this.ui.tutorial) this.ui.tutorial.notify('contradiction-modal-closed', null);
   }
 };

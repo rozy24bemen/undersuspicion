@@ -58,6 +58,7 @@ US.GameScreen = class GameScreen {
 
     container.querySelector('[data-action="go-menu"]')
       .addEventListener('click', () => {
+        if (this.ui.tutorial && this.ui.tutorial.isActive()) return;
         if (confirm('¿Abandonar el caso? Se perderá el progreso actual.')) {
           this.ui.showScreen('menu');
         }
@@ -65,6 +66,12 @@ US.GameScreen = class GameScreen {
 
     this.ui.root.querySelector('#notebook-toggle')
       .addEventListener('click', () => this.ui.notebook.toggle());
+
+    // Arranca el tutorial guiado si es la primera partida del jugador.
+    if (this.ui.tutorial && !US.TutorialOverlay.isCompleted()) {
+      // Esperamos a que el desk haya pintado las tarjetas (requestAnimationFrame interno)
+      setTimeout(() => this.ui.tutorial.start(), 80);
+    }
   }
 
   _renderSuspectSwitcher() {
@@ -80,9 +87,13 @@ US.GameScreen = class GameScreen {
 
     container.querySelectorAll('.suspect-thumb').forEach(el => {
       el.addEventListener('click', () => {
-        this.engine.switchSuspect(parseInt(el.dataset.idx));
+        const idx = parseInt(el.dataset.idx);
+        const target = this.engine.getSuspects()[idx];
+        if (this.ui.tutorial && !this.ui.tutorial.isAllowed('switch-suspect', target ? target.id : null)) return;
+        this.engine.switchSuspect(idx);
         this._renderSuspectSwitcher();
         this.ui._renderRoom();
+        if (this.ui.tutorial) this.ui.tutorial.notify('suspect-changed', target);
       });
     });
   }

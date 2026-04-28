@@ -154,6 +154,7 @@ US.DeskManager = class DeskManager {
 
     if (!d.moved && !d.cancelled) {
       var evId = d.card.dataset.evidenceId;
+      if (this.ui.tutorial && !this.ui.tutorial.isAllowed('open-evidence', evId)) return;
       if (US.Telemetry) {
         var caseData = this.engine.getCase();
         US.Telemetry.log('evidence-clicked', {
