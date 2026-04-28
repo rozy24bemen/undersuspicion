@@ -275,26 +275,9 @@
   object-fit: contain;
   object-position: bottom center;
   transform-origin: bottom center;
+  transform: scale(var(--portrait-scale));
   transition: opacity .3s ease, filter .3s ease;
   filter: drop-shadow(0 0 20px rgba(0,0,0,.7));
-}
-
-.portrait__img--asset-background {
-  height: 82%;
-  max-width: 72%;
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 16px 36px rgba(0,0,0,.45);
-  transform: scale(var(--portrait-scale));
-}
-
-.portrait__img--asset-cutout {
-  max-width: 60%;
-  transform: scale(var(--portrait-scale));
-}
-
-.portrait__img--asset-fallback {
-  box-shadow: none;
-  border: none;
 }
 
 .portrait__img--neutral {

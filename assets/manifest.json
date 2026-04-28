@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "style_id": "undersuspi-noir-v1",
+  "description": "Single source of truth de los assets visuales del juego. Cualquier imagen no listada aquí no existe — si el código carga una imagen no listada, es bug. Documentado en docs/METODOLOGIA.md sección 6.",
+
+  "_notes": {
+    "filename_inconsistency": "Hugo pensativo y nervioso usan sufijo '-removebg.png' mientras el resto usa '-withoutbg.png'. Pendiente de homogeneizar (rename + edición de caso01.js). Tarea menor.",
+    "retroactive_prompts": "Los assets del caso 1 fueron generados antes de adoptar la metodología de JSON-prompts. Los retroactivos quedan pendientes — ver `pending_retroactive_prompts` abajo. Mientras no existan, no se puede regenerar consistentemente si cambia la style bible."
+  },
+
+  "pending_retroactive_prompts": [
+    "marta-neutral", "marta-talking", "marta-nervous",
+    "lucia-neutral", "lucia-talking", "lucia-nervous",
+    "hugo-neutral",  "hugo-talking",  "hugo-nervous",
+    "elena-neutral",
+    "scene-salon", "scene-cocina",
+    "scene-interrogatorio-1", "scene-interrogatorio-2"
+  ],
+
+  "assets": [
+
+    {
+      "id":          "marta-neutral",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "marta",
+      "mood":        "neutral",
+      "is_reference": true,
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/martaneutral-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "marta-talking",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "marta",
+      "mood":        "talking",
+      "depends_on":  "marta-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/martapensativa-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "marta-nervous",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "marta",
+      "mood":        "nervous",
+      "depends_on":  "marta-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/martanerviosa-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+
+    {
+      "id":          "lucia-neutral",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "lucia",
+      "mood":        "neutral",
+      "is_reference": true,
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/lucianeutral-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "lucia-talking",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "lucia",
+      "mood":        "talking",
+      "depends_on":  "lucia-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/luciapensativa-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "lucia-nervous",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "lucia",
+      "mood":        "nervous",
+      "depends_on":  "lucia-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/lucianerviosa-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+
+    {
+      "id":          "hugo-neutral",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "hugo",
+      "mood":        "neutral",
+      "is_reference": true,
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/hugoneutral-withoutbg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "hugo-talking",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "hugo",
+      "mood":        "talking",
+      "depends_on":  "hugo-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/hugopensativo-removebg.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "hugo-nervous",
+      "type":        "suspect-portrait",
+      "case":        "caso-01",
+      "character":   "hugo",
+      "mood":        "nervous",
+      "depends_on":  "hugo-neutral",
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/hugonervioso-removebg.png",
+      "status":      "approved-legacy"
+    },
+
+    {
+      "id":          "elena-neutral",
+      "type":        "recurring-character",
+      "case":        "global",
+      "character":   "elena",
+      "mood":        "neutral",
+      "is_reference": true,
+      "appears_in":  ["caso-01", "caso-02", "caso-03", "caso-04", "caso-05", "caso-06", "caso-07", "caso-08"],
+      "prompt_file": null,
+      "image_file":  "assets/img/suspects/Elena_neutral.png",
+      "status":      "approved-legacy"
+    },
+
+    {
+      "id":          "scene-salon",
+      "type":        "scene-establishing",
+      "case":        "caso-01",
+      "prompt_file": null,
+      "image_file":  "assets/img/scenes/Escenario_Salon.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "scene-cocina",
+      "type":        "scene-establishing",
+      "case":        "caso-01",
+      "prompt_file": null,
+      "image_file":  "assets/img/scenes/Escenario_cocina.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "scene-interrogatorio-1",
+      "type":        "scene-establishing",
+      "case":        "caso-01",
+      "prompt_file": null,
+      "image_file":  "assets/img/scenes/Escenario_interrogatorio1.png",
+      "status":      "approved-legacy"
+    },
+    {
+      "id":          "scene-interrogatorio-2",
+      "type":        "scene-establishing",
+      "case":        "caso-01",
+      "prompt_file": null,
+      "image_file":  "assets/img/scenes/Escenario_interrogatorio2.png",
+      "status":      "approved-legacy",
+      "used_in_code": "css/screens/game.css (.scene-interrogatorio2)"
+    }
+  ],
+
+  "history": [
+    { "date": "2026-04-28", "action": "created", "by": "equipo", "notes": "Manifest inicial. Caso 1 importado como legacy (sin JSON-prompts). Limpieza previa: borrados SVGs placeholder, PNGs con fondo no usados, y experimentos descartados (Patricia/Ramon/Sofia)." }
+  ]
+}
