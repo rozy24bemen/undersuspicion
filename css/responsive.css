@@ -2,6 +2,50 @@
    UNDER SUSPICION — RESPONSIVE
    ═══════════════════════════════════════════════════ */
 
+/* ── Bloqueo de orientación: aviso "gira el dispositivo" ── */
+.rotate-lock {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--bg, #0a0a0a);
+  color: var(--text, #e8e8e8);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  gap: 16px;
+  font-family: var(--font, sans-serif);
+}
+.rotate-lock__icon {
+  font-size: 64px;
+  animation: rotate-lock-shake 1.6s ease-in-out infinite;
+}
+.rotate-lock__title {
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold, #c9a14a);
+}
+.rotate-lock__text {
+  font-size: 13px;
+  max-width: 320px;
+  line-height: 1.5;
+  opacity: .85;
+}
+@keyframes rotate-lock-shake {
+  0%, 100% { transform: rotate(-90deg); }
+  50%      { transform: rotate(0deg); }
+}
+
+/* Mostrar overlay solo en móviles (pantallas pequeñas) en horizontal.
+   max-height:500px asegura que solo aplique a teléfonos, no a laptops/tablets. */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .rotate-lock { display: flex; }
+  #app         { display: none; }
+}
+
 /* ── Tablet / small laptop (≤ 900px) ─────────────── */
 @media (max-width: 900px) {
 
