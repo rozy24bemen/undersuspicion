@@ -134,8 +134,29 @@ US.DeskManager = class DeskManager {
     if (dist > threshold) this._drag.moved = true;
 
     if (this._drag.dragActive) {
-      this._drag.card.style.left = (this._drag.origLeft + dx) + 'px';
-      this._drag.card.style.top = (this._drag.origTop + dy) + 'px';
+      // Obtener dimensiones del contenedor
+      var surface = this._drag.card.parentElement;
+      var cardWidth = this._drag.card.offsetWidth;
+      var cardHeight = this._drag.card.offsetHeight;
+
+      // Calcular nuevas posiciones
+      var newLeft = this._drag.origLeft + dx;
+      var newTop = this._drag.origTop + dy;
+
+      // Restringir horizontalmente (con pequeño padding)
+      var padding = 5;
+      var minLeft = -padding;
+      var maxLeft = surface.clientWidth - cardWidth + padding;
+      newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
+
+      // Restringir verticalmente (con pequeño padding)
+      var minTop = -padding;
+      var maxTop = surface.clientHeight - cardHeight + padding;
+      newTop = Math.max(minTop, Math.min(maxTop, newTop));
+
+      // Aplicar posiciones restringidas
+      this._drag.card.style.left = newLeft + 'px';
+      this._drag.card.style.top = newTop + 'px';
     }
   }
 
