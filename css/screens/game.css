@@ -14,6 +14,8 @@
   align-items: center;
   flex-shrink: 0;
   z-index: 50;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .game-nav__title {
@@ -23,6 +25,8 @@
   color: #555;
   border-right: 1px solid #1a1a1a;
   white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .game-nav__suspects {
@@ -115,6 +119,8 @@
   color: rgba(60,40,8,.6);
   z-index: 3;
   pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* ── DESK CARDS ───────────────────────────────────── */
@@ -129,6 +135,8 @@
   z-index: 10;
   transition: box-shadow .15s;
   touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .desk-card:hover { box-shadow: 4px 4px 18px rgba(0,0,0,.8); }
 .desk-card.dragging { cursor: grabbing; box-shadow: 6px 6px 24px rgba(0,0,0,.9); }
@@ -150,6 +158,8 @@
   color: #3a3a3a;
   text-transform: uppercase;
   font-weight: bold;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .desk-card__body {
@@ -159,6 +169,8 @@
   line-height: 1.6;
   max-height: 72px;
   overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .desk-card__click-hint {
@@ -211,6 +223,8 @@
   letter-spacing: 2px;
   color: var(--red-dark);
   margin-bottom: 4px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .pressure__track {
@@ -233,6 +247,8 @@
   color: #444;
   margin-top: 3px;
   text-align: right;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .pressure__text.warning { color: var(--gold); }
@@ -278,6 +294,9 @@
   transform: scale(var(--portrait-scale));
   transition: opacity .3s ease, filter .3s ease;
   filter: drop-shadow(0 0 20px rgba(0,0,0,.7));
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .portrait__img--neutral {
@@ -361,6 +380,8 @@
   padding: 6px 14px;
   background: rgba(8, 8, 20, 0.85);
   border-bottom: 1px solid rgba(40, 40, 80, 0.5);
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .portrait__name {
@@ -368,12 +389,16 @@
   letter-spacing: 3px;
   color: var(--text);
   font-weight: bold;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .portrait__role {
   font-size: 9px;
   color: var(--text-dim);
   letter-spacing: 1px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .portrait__suspicion {
@@ -381,6 +406,8 @@
   letter-spacing: 1px;
   margin-left: auto;
   color: var(--text-faint);
+  -webkit-user-select: none;
+  user-select: none;
 }
 .portrait__suspicion.elevated { color: var(--gold); }
 .portrait__suspicion.high { color: var(--red); font-weight: bold; }
@@ -394,6 +421,8 @@
   border-bottom: 1px solid rgba(34, 32, 56, 0.3);
   flex-shrink: 0;
   min-height: 60px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .dialogue__header {
@@ -402,6 +431,8 @@
   font-size: 8px;
   letter-spacing: 2px;
   color: #3a3a6a;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .dialogue__text {
@@ -413,6 +444,8 @@
   min-height: 40px;
   max-height: 80px;
   overflow-y: auto;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .dialogue__text.animate {
@@ -430,6 +463,8 @@
   border-top: 1px solid rgba(26, 26, 48, 0.5);
   overflow: hidden;
   min-height: 0;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .q-tabs {
@@ -451,6 +486,8 @@
   border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: color var(--transition), background var(--transition);
+  -webkit-user-select: none;
+  user-select: none;
 }
 .q-tab:hover { color: var(--text-dim); background: rgba(255,255,255,.02); }
 .q-tab.active {
@@ -463,6 +500,8 @@
   flex: 1;
   overflow-y: auto;
   padding: 8px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .q-item {
@@ -475,6 +514,8 @@
   gap: 10px;
   cursor: pointer;
   transition: background var(--transition), border-color var(--transition);
+  -webkit-user-select: none;
+  user-select: none;
 }
 .q-item:hover {
   background: #141428;
@@ -493,6 +534,8 @@
   font-size: 10.5px;
   color: #aaa;
   line-height: 1.5;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .q-item__cost {
@@ -501,6 +544,8 @@
   letter-spacing: 1px;
   white-space: nowrap;
   flex-shrink: 0;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .q-item__status {
@@ -508,6 +553,8 @@
   font-size: 12px;
   color: #4a4a8a;
   flex-shrink: 0;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* ── EVIDENCE GRID (PRUEBA tab) ───────────────────── */
