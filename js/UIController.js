@@ -11,7 +11,6 @@ US.UIController = class UIController {
     this.engine = engine;
     this.root = root;
     this._lastResult = null;
-    this._portraitVariant = this._readPortraitVariant();
     this._suspectMood = 'neutral';
     this._moodTimer = null;
 
@@ -77,93 +76,6 @@ US.UIController = class UIController {
   }
 
   // ═══════════════════════════════════════════════════
-  // PORTRAIT VARIANT
-  // ═══════════════════════════════════════════════════
-
-  _readPortraitVariant() {
-    try {
-      const stored = window.localStorage.getItem('us-portrait-variant');
-      return stored === 'background' ? 'background' : 'cutout';
-    } catch (_) {
-      return 'cutout';
-    }
-  }
-
-  _persistPortraitVariant() {
-    try {
-      window.localStorage.setItem('us-portrait-variant', this._portraitVariant);
-    } catch (_) {}
-  }
-
-  _togglePortraitVariant() {
-    const suspect = this.engine.getActiveSuspect();
-    if (!this._hasPortraitVariants(suspect)) return;
-
-    this._portraitVariant = this._portraitVariant === 'background' ? 'cutout' : 'background';
-    this._persistPortraitVariant();
-    this._updatePortraitVariantToggle();
-    this._renderPortrait();
-  }
-
-  _hasPortraitVariants(suspect) {
-    if (!suspect || !suspect.portraits) return false;
-    return Object.values(suspect.portraits).some(portrait => (
-      portrait && typeof portrait === 'object' && portrait.background && portrait.cutout
-    ));
-  }
-
-  _updatePortraitVariantToggle() {
-    const button = this.root.querySelector('#portrait-variant-toggle');
-    if (!button) return;
-
-    const suspect = this.engine.getActiveSuspect();
-    const canToggle = this._hasPortraitVariants(suspect);
-
-    button.textContent = canToggle
-      ? `RETRATO: ${this._portraitVariant === 'background' ? 'FONDO' : 'RECORTE'}`
-      : 'RETRATO: UNICO';
-    button.classList.toggle('btn--disabled', !canToggle);
-    button.disabled = !canToggle;
-    button.setAttribute('aria-disabled', String(!canToggle));
-    button.title = canToggle
-      ? 'Alternar variante visual del retrato'
-      : 'Este sospechoso solo tiene una variante de retrato';
-  }
-
-  _resolvePortraitAsset(suspect, mood) {
-    const portraits = suspect && suspect.portraits ? suspect.portraits : {};
-    const portrait = portraits[mood];
-
-    if (!portrait) {
-      return { src: '', fallbackSrc: '', variant: 'default' };
-    }
-
-    if (typeof portrait === 'string') {
-      return { src: portrait, fallbackSrc: '', variant: 'default' };
-    }
-
-    const fallbackSrc = portrait.fallback || portrait.default || '';
-    const preferredSrc = portrait[this._portraitVariant]
-      || portrait.cutout
-      || portrait.background
-      || portrait.default
-      || fallbackSrc;
-    const resolvedVariant = portrait.background && portrait.cutout
-      ? this._portraitVariant
-      : portrait.cutout
-        ? 'cutout'
-        : portrait.background
-          ? 'background'
-          : 'default';
-
-    return {
-      src: preferredSrc,
-      fallbackSrc: fallbackSrc && fallbackSrc !== preferredSrc ? fallbackSrc : '',
-      variant: resolvedVariant
-    };
-  }
-
-  // ═══════════════════════════════════════════════════
   // ROOM — Portrait & Pressure
   // ═══════════════════════════════════════════════════
 
@@ -174,7 +86,6 @@ US.UIController = class UIController {
     scene.classList.add('scene-interrogatorio2');
     this._renderPressureBar();
     this._renderPortrait();
-    this._updatePortraitVariantToggle();
     this.questions.render();
   }
 
@@ -203,20 +114,11 @@ US.UIController = class UIController {
     const scene = this.root.querySelector('#portrait-section');
     const info = this.root.querySelector('#portrait-info');
     const mood = this._suspectMood;
-    const portraitAsset = this._resolvePortraitAsset(suspect, mood);
+    const src = (suspect && suspect.portraits && suspect.portraits[mood]) || '';
 
-    scene.innerHTML = portraitAsset.src
-      ? `<img class="portrait__img portrait__img--${mood} portrait__img--asset-${this._esc(portraitAsset.variant)}" src="${this._esc(portraitAsset.src)}" data-fallback-src="${this._esc(portraitAsset.fallbackSrc)}" alt="${this._esc(suspect.name)}">`
+    scene.innerHTML = src
+      ? `<img class="portrait__img portrait__img--${mood}" src="${this._esc(src)}" alt="${this._esc(suspect.name)}">`
       : `<div class="portrait__fallback"><div class="portrait__figure-head"></div><div class="portrait__figure-body"></div></div>`;
-
-    const portraitImg = scene.querySelector('.portrait__img');
-    if (portraitImg && portraitAsset.fallbackSrc) {
-      portraitImg.addEventListener('error', () => {
-        portraitImg.src = portraitAsset.fallbackSrc;
-        portraitImg.classList.remove('portrait__img--asset-background', 'portrait__img--asset-cutout');
-        portraitImg.classList.add('portrait__img--asset-fallback');
-      }, { once: true });
-    }
 
     info.innerHTML = `
       <div class="portrait__name">${this._esc(suspect.name)}</div>
