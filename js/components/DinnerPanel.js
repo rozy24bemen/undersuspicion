@@ -92,7 +92,15 @@ US.DinnerPanel = class DinnerPanel {
     if (!body) return;
 
     if (this.replica) {
-      body.innerHTML = `<div class="dinner-panel__waiting">...</div>`;
+      // Tras la réplica de Elena, esperamos a que el jugador pulse continuar.
+      // Antes había un setTimeout, pero el ritmo dependía del tiempo de
+      // lectura del jugador y se cortaba con frecuencia.
+      body.innerHTML = `<button class="btn dinner-panel__continue" data-action="dinner-continue">CONTINUAR</button>`;
+      body.querySelector('[data-action="dinner-continue"]')
+        .addEventListener('click', () => {
+          this.replica = null;
+          this._advance();
+        });
       return;
     }
 
@@ -104,12 +112,42 @@ US.DinnerPanel = class DinnerPanel {
     }
 
     if (this.phase === 'cierre' || this.phase === 'done') {
+      // Marca el caso como completado en el progreso de la run.
+      if (US.Progress && this.caseData && this.caseData.id) {
+        US.Progress.markCompleted(this.caseData.id);
+      }
+
+      // Decide acción siguiente: si hay caso siguiente cargado, encadenar
+      // a su intro; si no, volver al menú.
+      const nextId    = US.Progress ? US.Progress.getNext() : null;
+      const nextCase  = nextId && US.CASES ? US.CASES[nextId] : null;
+      const allDone   = US.Progress && US.Progress.isAllCompleted();
+
+      let actionLabel, actionHandler;
+      if (nextCase) {
+        const num = this._caseNumberOf(nextId);
+        actionLabel = num ? `SIGUIENTE CASO · ${num}` : 'SIGUIENTE CASO';
+        actionHandler = () => {
+          if (US.TutorialOverlay && typeof US.TutorialOverlay.markCompleted === 'function') {
+            US.TutorialOverlay.markCompleted();
+          }
+          this.ui.engine.loadCase(nextId);
+          this.ui.showScreen('intro');
+        };
+      } else if (allDone) {
+        actionLabel = 'VOLVER AL MENÚ · ACTO I COMPLETADO';
+        actionHandler = () => this.ui.showScreen('menu');
+      } else {
+        actionLabel = 'VOLVER AL MENÚ';
+        actionHandler = () => this.ui.showScreen('menu');
+      }
+
       body.innerHTML = `
         <div class="dinner-panel__veredicto">${this.ui._esc(this.veredictoNota)}</div>
-        <button class="btn btn--primary dinner-panel__exit" data-action="dinner-menu">VOLVER AL MENÚ</button>
+        <button class="btn btn--primary dinner-panel__exit" data-action="dinner-next">${this.ui._esc(actionLabel)}</button>
       `;
-      body.querySelector('[data-action="dinner-menu"]')
-        .addEventListener('click', () => this.ui.showScreen('menu'));
+      body.querySelector('[data-action="dinner-next"]')
+        .addEventListener('click', actionHandler);
       return;
     }
 
@@ -159,12 +197,7 @@ US.DinnerPanel = class DinnerPanel {
 
     this.replica = resp.replica || '...';
     this.render();
-
-    this._replicaTimer = setTimeout(() => {
-      this.replica = null;
-      this._replicaTimer = null;
-      this._advance();
-    }, 1800);
+    // No auto-advance: el jugador pulsa CONTINUAR (gestionado en _renderBody).
   }
 
   _advance() {
@@ -294,6 +327,11 @@ US.DinnerPanel = class DinnerPanel {
   _caseNumber(caseId) {
     const m = /(\d+)/.exec(caseId || '');
     return m ? parseInt(m[1], 10) : 1;
+  }
+
+  _caseNumberOf(caseId) {
+    const m = /(\d+)/.exec(caseId || '');
+    return m ? parseInt(m[1], 10) : null;
   }
 
   // ── Line resolution ──────────────────────────────

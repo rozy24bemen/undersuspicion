@@ -93,6 +93,26 @@
   letter-spacing: 1px;
 }
 
+.modal__image {
+  width: 100%;
+  background: #0e0e0e;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.modal__image-img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .modal__section-label {
   font-size: 8px;
   letter-spacing: 2px;

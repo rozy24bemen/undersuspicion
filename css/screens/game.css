@@ -280,6 +280,22 @@
   background-image: url('../../assets/img/scenes/Escenario_interrogatorio2.png');
 }
 
+.room__scene.scene-caso2 {
+  background-image: url('../../assets/img/suspects/Caso2/Escenario/Escenario_Caso2.png');
+}
+
+.room__scene.scene-caso3-portal {
+  background-image: url('../../assets/img/suspects/Caso3/Escenario/Escenario-Portal%20calle%20Chueca.png');
+}
+
+.room__scene.scene-caso3-despacho {
+  background-image: url('../../assets/img/suspects/Caso3/Escenario/Escenario-Despacho%20TecBaria.png');
+}
+
+.room__scene.scene-caso4 {
+  background-image: url('../../assets/img/suspects/Caso4/Escenario/Escenario-Caser%C3%B3n%20Talavera.png');
+}
+
 /* Character image floats on top of scene */
 .portrait__img {
   --portrait-scale: 1.3;

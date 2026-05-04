@@ -1,5 +1,11 @@
 /**
  * MenuScreen — Pantalla del menú principal.
+ *
+ * Modo historia es lineal: cada partida sigue el orden definido en
+ * US.PROGRESS_ORDER. Si hay una run en curso, el botón principal ofrece
+ * "CONTINUAR" en lugar de "MODO HISTORIA"; si la run está terminada, ofrece
+ * "NUEVA PARTIDA". El selector DEV de casos solo se muestra con ?dev=1 en
+ * la URL para no romper la experiencia del jugador final.
  */
 var US = US || {};
 
@@ -11,6 +17,28 @@ US.MenuScreen = class MenuScreen {
   }
 
   render(container) {
+    const params = new URLSearchParams(window.location.search);
+    const devMode = params.get('dev') === '1';
+    const urlCase = params.get('case');
+
+    // Estado del Modo Historia
+    const allDone = US.Progress && US.Progress.isAllCompleted();
+    const inRun   = US.Progress && US.Progress.hasInProgressRun();
+    const next    = US.Progress ? US.Progress.getNext() : 'caso-01';
+    const nextNum = next ? this._caseNumber(next) : null;
+
+    let primaryLabel, primaryAction;
+    if (allDone) {
+      primaryLabel  = 'NUEVA PARTIDA';
+      primaryAction = 'new-run';
+    } else if (inRun) {
+      primaryLabel  = nextNum ? `CONTINUAR · CASO ${nextNum}` : 'CONTINUAR';
+      primaryAction = 'continue-run';
+    } else {
+      primaryLabel  = 'MODO HISTORIA';
+      primaryAction = 'new-run';
+    }
+
     container.innerHTML = `
       <div class="menu">
         <div class="menu__bg"></div>
@@ -32,9 +60,10 @@ US.MenuScreen = class MenuScreen {
 
           <div class="menu__stamp">CONFIDENTIAL</div>
 
-          <button class="btn btn--menu btn--primary" data-action="start-story">MODO HISTORIA</button>
+          <button class="btn btn--menu btn--primary" data-action="${primaryAction}">${this.ui._esc(primaryLabel)}</button>
+          ${inRun ? `<button class="btn btn--menu" data-action="reset-run">REINICIAR PARTIDA</button>` : ''}
+          ${devMode ? `<button class="btn btn--menu" data-action="dev-cases">⚙ DEV · ELEGIR CASO</button>` : ''}
           <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
-          <button class="btn btn--menu btn--disabled">⚙ CONFIGURACIÓN</button>
           <button class="btn btn--menu btn--exit" data-action="exit-game">SALIR</button>
 
           <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
@@ -48,32 +77,51 @@ US.MenuScreen = class MenuScreen {
       </div>
     `;
 
-    container.querySelector('[data-action="start-story"]')
-      .addEventListener('click', () => {
-        // MODO HISTORIA = partida nueva. Resetea metaarco (ejes y flags) y
-        // marca un nuevo sessionId de telemetría para distinguir runs en el export.
-        // Cuando exista más de un caso, esto pasará a un menú "Nueva / Continuar".
-        if (US.MetaStore)  US.MetaStore.reset();
-        if (US.Telemetry) {
-          US.Telemetry.newSession();
-          US.Telemetry.log('run-start', { caseId: 'caso-01' });
+    // ── Botón primario: arrancar / continuar / nueva partida ─────
+    const primaryBtn = container.querySelector('[data-action="' + primaryAction + '"]');
+    if (primaryBtn) {
+      primaryBtn.addEventListener('click', () => {
+        if (primaryAction === 'continue-run') {
+          this._continueRun();
+        } else {
+          this._startNewRun();
         }
-        this.engine.loadCase('caso-01');
-        this.ui.showScreen('intro');
       });
+    }
 
-    // Botón SALIR: cerrar la pestaña o ventana
+    const resetBtn = container.querySelector('[data-action="reset-run"]');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (window.confirm('¿Reiniciar la partida? Se perderá el progreso de los casos jugados.')) {
+          this._startNewRun();
+        }
+      });
+    }
+
+    // ── DEV: solo aparece con ?dev=1 ────────────────────────────
+    const devBtn = container.querySelector('[data-action="dev-cases"]');
+    if (devBtn) {
+      devBtn.addEventListener('click', () => this._openDevCasePicker());
+    }
+
+    // ── Salir ──────────────────────────────────────────────────
     const exitBtn = container.querySelector('[data-action="exit-game"]');
     if (exitBtn) {
       exitBtn.addEventListener('click', () => {
-        // Intenta cerrar la ventana. Si no es posible, muestra un mensaje.
         if (window.confirm('¿Seguro que quieres salir del juego?')) {
           window.close();
         }
       });
     }
 
-    // Botón exportar telemetría (para playtesters)
+    // ── Auto-arranque por URL (?case=caso-02) ──────────────────
+    // Útil para iteración. Marca tutorial completado y arranca el caso pedido
+    // sin tocar el progreso del Modo Historia.
+    if (urlCase && US.CASES && US.CASES[urlCase]) {
+      setTimeout(() => this._launchCaseFromDev(urlCase), 0);
+    }
+
+    // ── Telemetría ─────────────────────────────────────────────
     const exportBtn = container.querySelector('[data-action="export-telemetry"]');
     if (exportBtn) {
       exportBtn.addEventListener('click', () => {
@@ -89,5 +137,72 @@ US.MenuScreen = class MenuScreen {
         US.Telemetry.download();
       });
     }
+  }
+
+  // ── Modo historia: arranque y continuación ──────────────────
+
+  _startNewRun() {
+    if (US.MetaStore) US.MetaStore.reset();
+    if (US.Progress)  US.Progress.reset();
+    if (US.Telemetry) {
+      US.Telemetry.newSession();
+      US.Telemetry.log('run-start', { caseId: 'caso-01' });
+    }
+    this.engine.loadCase('caso-01');
+    this.ui.showScreen('intro');
+  }
+
+  _continueRun() {
+    const next = US.Progress ? US.Progress.getNext() : 'caso-01';
+    if (!next) {
+      // Run terminada: arranca una nueva.
+      this._startNewRun();
+      return;
+    }
+    if (US.Telemetry) {
+      US.Telemetry.log('run-continue', { caseId: next });
+    }
+    this.engine.loadCase(next);
+    this.ui.showScreen('intro');
+  }
+
+  _caseNumber(caseId) {
+    const m = /(\d+)/.exec(caseId || '');
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  // ── DEV · selector de caso (solo con ?dev=1) ────────────────
+  _openDevCasePicker() {
+    const ids = Object.keys(US.CASES || {});
+    if (ids.length === 0) {
+      window.alert('No hay casos cargados.');
+      return;
+    }
+
+    const list = ids.map(id => `${id} — ${US.CASES[id].title}`).join('\n');
+
+    const choice = window.prompt(
+      'DEV · Elegir caso\n\nCasos disponibles:\n' + list + '\n\nEscribe el id (ej: caso-02):',
+      ids[ids.length - 1]
+    );
+    if (!choice) return;
+    if (!US.CASES[choice]) {
+      window.alert('Caso no encontrado: ' + choice);
+      return;
+    }
+    this._launchCaseFromDev(choice);
+  }
+
+  _launchCaseFromDev(caseId) {
+    if (US.MetaStore) US.MetaStore.reset();
+    if (US.Telemetry) {
+      US.Telemetry.newSession();
+      US.Telemetry.log('run-start', { caseId: caseId, dev: true });
+    }
+    if (US.TutorialOverlay && typeof US.TutorialOverlay.markCompleted === 'function') {
+      US.TutorialOverlay.markCompleted();
+    }
+    this.engine.loadCase(caseId);
+    this.ui.showScreen('intro');
   }
 };

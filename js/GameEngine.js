@@ -70,6 +70,8 @@ US.GameEngine = class GameEngine {
         });
       }
     }
+
+    this.emit('caseLoaded', this.caseData);
   }
 
   // ── Getters ───────────────────────────────────────
@@ -261,7 +263,14 @@ US.GameEngine = class GameEngine {
       const questionMet = c.questionIds.some(qId => this.askedQuestions.has(qId));
       const evidenceMet = this.presentedEvidence[suspectId].has(c.evidenceId);
 
-      if (questionMet && evidenceMet) {
+      // Mecánica de contradicciones cruzadas (introducida en caso 4): para
+      // disparar la contradicción es necesario haber preguntado al menos una
+      // cosa a CADA uno de los sospechosos listados en requiredFromSuspects.
+      // Si el campo no existe, el comportamiento es el de siempre (caso 1-3).
+      const crossMet = !c.requiredFromSuspects
+        || c.requiredFromSuspects.every(id => this._hasAskedAnyQuestion(id));
+
+      if (questionMet && evidenceMet && crossMet) {
         this.detectedContradictions.add(c.id);
         this.suspectState[suspectId].suspicion += c.suspicionBonus;
 
@@ -281,6 +290,18 @@ US.GameEngine = class GameEngine {
       }
     }
     return null;
+  }
+
+  _hasAskedAnyQuestion(suspectId) {
+    const suspect = this.caseData.suspects.find(s => s.id === suspectId);
+    if (!suspect) return false;
+    for (const cat of ['vinculo', 'coartada']) {
+      const list = suspect.questions[cat] || [];
+      for (const q of list) {
+        if (this.askedQuestions.has(q.id)) return true;
+      }
+    }
+    return false;
   }
 
   _addNote(type, suspectName, detail1, detail2) {

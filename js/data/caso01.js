@@ -14,13 +14,15 @@ US.CASES['caso-01'] = {
   victim: {
     name: 'Diego Varela',
     age: 52,
-    occupation: 'Propietario de "La Estrella"'
+    occupation: 'Propietario de "La Estrella"',
+    portrait: 'assets/img/suspects/Caso1/Retrato_Victima_casotutorial.png'
   },
 
   scene: {
     location: 'Restaurante "La Estrella" — Despacho privado',
     date: '14 de marzo de 2026',
-    timeOfDeath: 'Entre las 22:00 y las 23:00h'
+    timeOfDeath: 'Entre las 22:00 y las 23:00h',
+    cssClass: 'scene-interrogatorio2'
   },
 
   suspects: [
@@ -33,9 +35,9 @@ US.CASES['caso-01'] = {
       description: 'Fría, calculadora, cooperativa. Muestra poco pesar por la muerte de Diego.',
       isGuilty: false,
       portraits: {
-        neutral: 'assets/img/suspects/martaneutral-withoutbg.png',
-        talking: 'assets/img/suspects/martapensativa-withoutbg.png',
-        nervous: 'assets/img/suspects/martanerviosa-withoutbg.png'
+        neutral: 'assets/img/suspects/Caso1/Sospechosos/martaneutral-withoutbg.png',
+        talking: 'assets/img/suspects/Caso1/Sospechosos/martapensativa-withoutbg.png',
+        nervous: 'assets/img/suspects/Caso1/Sospechosos/martanerviosa-withoutbg.png'
       },
       questions: {
         vinculo: [
@@ -100,9 +102,9 @@ US.CASES['caso-01'] = {
       description: 'Emocional, a la defensiva. Parece ocultar algo, pero ¿el crimen o un secreto personal?',
       isGuilty: false,
       portraits: {
-        neutral: 'assets/img/suspects/lucianeutral-withoutbg.png',
-        talking: 'assets/img/suspects/luciapensativa-withoutbg.png',
-        nervous: 'assets/img/suspects/lucianerviosa-withoutbg.png'
+        neutral: 'assets/img/suspects/Caso1/Sospechosos/lucianeutral-withoutbg.png',
+        talking: 'assets/img/suspects/Caso1/Sospechosos/luciapensativa-withoutbg.png',
+        nervous: 'assets/img/suspects/Caso1/Sospechosos/lucianerviosa-withoutbg.png'
       },
       questions: {
         vinculo: [
@@ -167,9 +169,9 @@ US.CASES['caso-01'] = {
       description: 'Nervioso, intenta aparentar calma. Suda. Sus respuestas son cada vez más evasivas.',
       isGuilty: true,
       portraits: {
-        neutral: 'assets/img/suspects/hugoneutral-withoutbg.png',
-        talking: 'assets/img/suspects/hugopensativo-removebg.png',
-        nervous: 'assets/img/suspects/hugonervioso-removebg.png'
+        neutral: 'assets/img/suspects/Caso1/Sospechosos/hugoneutral-withoutbg.png',
+        talking: 'assets/img/suspects/Caso1/Sospechosos/hugopensativo-removebg.png',
+        nervous: 'assets/img/suspects/Caso1/Sospechosos/hugonervioso-removebg.png'
       },
       questions: {
         vinculo: [
@@ -232,6 +234,7 @@ US.CASES['caso-01'] = {
       title: 'Informe de Autopsia',
       type: 'documento',
       icon: '📋',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P1 — Informe de Autopsia.png',
       shortDesc: 'Muerte por envenenamiento con rodenticida ingerido en bebida.',
       fullDesc: 'Causa de muerte: envenenamiento por rodenticida (brodifacoum). El tóxico fue ingerido por vía oral, mezclado con una bebida alcohólica. Hora estimada del fallecimiento: entre las 22:00 y las 23:00h del 14 de marzo de 2026.',
       metadata: { fecha: '15/03/2026', fuente: 'Dra. Alicia Moreno — Forense', ref: 'AUT-2026-0314' }
@@ -241,6 +244,7 @@ US.CASES['caso-01'] = {
       title: 'Registros Financieros',
       type: 'documento',
       icon: '💰',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P2 — Registros Financieros.png',
       shortDesc: 'Desvío de 47.000€ en 8 meses hacia la cuenta de Hugo Delmar.',
       fullDesc: 'Auditoría interna de "La Estrella" realizada por Diego Varela. Muestra desvíos de fondos durante 8 meses, por un total de 47.000€. Los desvíos se destinaron a una cuenta bancaria perteneciente a Hugo Delmar.',
       metadata: { fecha: '10/03/2026', fuente: 'Auditoría interna — Diego Varela', ref: 'FIN-2026-0310' }
@@ -250,6 +254,7 @@ US.CASES['caso-01'] = {
       title: 'Cámara de Seguridad',
       type: 'fotografía',
       icon: '📸',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P3 — Cámara de Seguridad.png',
       shortDesc: 'Hugo Delmar junto al despacho de Diego a las 22:15h.',
       fullDesc: 'Imagen de la cámara de seguridad del pasillo del primer piso. Se observa a Hugo Delmar caminando hacia el despacho de Diego Varela a las 22:15h del 14 de marzo. Hugo declaró no haber salido de la cocina.',
       metadata: { fecha: '14/03/2026 — 22:15h', fuente: 'Cámara CCTV — Pasillo 1er piso', ref: 'CAM-2026-0314-A' }
@@ -259,6 +264,7 @@ US.CASES['caso-01'] = {
       title: 'Carta Manuscrita',
       type: 'documento',
       icon: '✉️',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P4 — Carta Manuscrita.png',
       shortDesc: 'Hugo suplica a Diego que no le denuncie por el desfalco.',
       fullDesc: '"Diego, por favor, no vayas a la policía. Puedo devolver todo el dinero. Dame tiempo. Te lo suplico. Lo que hice estuvo mal, lo sé, pero no me arruines la vida. — Hugo". Encontrada en el cajón del escritorio de Diego Varela.',
       metadata: { fecha: 'Sin fecha — Manuscrita', fuente: 'Cajón del escritorio de Diego', ref: 'DOC-2026-0314-B' }
@@ -268,6 +274,7 @@ US.CASES['caso-01'] = {
       title: 'Copa de Vino Analizada',
       type: 'objeto',
       icon: '🍷',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P5 — Copa de Vino Analizada.png',
       shortDesc: 'Copa de Diego con trazas de rodenticida. Demás copas limpias.',
       fullDesc: 'La copa de vino tinto de Diego contenía trazas de rodenticida (brodifacoum), el mismo agente que causó su muerte. Las demás copas de la mesa estaban limpias. Se encontró un frasco vacío de raticida comercial en el cubo de basura de la cocina.',
       metadata: { fecha: '15/03/2026', fuente: 'Laboratorio Forense Nacional', ref: 'LAB-2026-0315-C' }
@@ -277,6 +284,7 @@ US.CASES['caso-01'] = {
       title: 'Registro Telefónico',
       type: 'documento',
       icon: '📞',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P6 — Registro Telefónico.png',
       shortDesc: 'Marta al teléfono con su abogado de 21:45 a 22:30. Coartada sólida.',
       fullDesc: 'Registro de la operadora que confirma que Marta Requena mantuvo una llamada con Fernando Ríos (abogado) desde las 21:45 hasta las 22:30 del 14 de marzo. La señal se originó en las inmediaciones de La Estrella.',
       metadata: { fecha: '16/03/2026', fuente: 'Operadora Movistar — Registro CDR', ref: 'TEL-2026-0316' }
@@ -286,6 +294,7 @@ US.CASES['caso-01'] = {
       title: 'Declaración del Camarero',
       type: 'testimonio',
       icon: '👤',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P7 — Declaración del Camarero.png',
       shortDesc: 'Tomás vio a Hugo servir personalmente la copa de vino a Diego.',
       fullDesc: 'Declaración jurada de Tomás Heredia, camarero de La Estrella: "Vi al chef Hugo salir de la cocina con una copa de vino tinto y servírsela personalmente a Don Diego. Me pareció raro porque eso siempre lo hacemos nosotros. Nunca había visto a Hugo servir la mesa."',
       metadata: { fecha: '15/03/2026', fuente: 'Tomás Heredia — Camarero', ref: 'DEC-2026-0315-D' }
@@ -295,6 +304,7 @@ US.CASES['caso-01'] = {
       title: 'CCTV del Hotel Ritz',
       type: 'vídeo',
       icon: '🎥',
+      imagePath: 'assets/img/suspects/Caso1/Pruebas/P8 — CCTV del Hotel Ritz.png',
       shortDesc: 'Lucía ausente del bar 10 min (22:00-22:10). Confirmado: fue al baño.',
       fullDesc: 'Las cámaras del Hotel Ritz muestran a Lucía Varela en el bar durante toda la noche, EXCEPTO una ausencia de 10 minutos entre las 22:00 y las 22:10. El hotel está a 15 min en coche del restaurante. La cámara del pasillo confirma que fue al baño del vestíbulo.',
       metadata: { fecha: '16/03/2026', fuente: 'CCTV Hotel Ritz — Cámaras bar y pasillo', ref: 'VID-2026-0316-E' }

@@ -13,6 +13,10 @@ US.UIController = class UIController {
     this._lastResult = null;
     this._suspectMood = 'neutral';
     this._moodTimer = null;
+    // Última línea de diálogo mostrada por sospechoso (id → texto). Permite
+    // que al cambiar de personaje se restaure su última intervención en lugar
+    // de quedarse con la del anterior.
+    this._lastDialogueBySuspect = {};
 
     this._buildShell();
 
@@ -83,10 +87,39 @@ US.UIController = class UIController {
     this._suspectMood = 'neutral';
     if (this._moodTimer) { clearTimeout(this._moodTimer); this._moodTimer = null; }
     const scene = this.root.querySelector('#portrait-section');
-    scene.classList.add('scene-interrogatorio2');
+    this._applySceneClass(scene);
     this._renderPressureBar();
     this._renderPortrait();
+    this._restoreDialogueForActiveSuspect();
     this.questions.render();
+  }
+
+  _restoreDialogueForActiveSuspect() {
+    const suspect = this.engine.getActiveSuspect();
+    if (!suspect) return;
+    const last = this._lastDialogueBySuspect[suspect.id];
+    if (last) {
+      this._setDialogue(last);
+    } else {
+      // Sin interacciones todavía con este sospechoso: línea neutra.
+      this._setDialogue('Aún no has hablado con ' + suspect.name + '. Selecciona una pregunta o presenta una prueba.');
+    }
+  }
+
+  _applySceneClass(scene) {
+    // Limpia cualquier clase scene-* previa para evitar acumulación entre casos.
+    Array.from(scene.classList)
+      .filter(c => c.indexOf('scene-') === 0)
+      .forEach(c => scene.classList.remove(c));
+
+    // Permite override por sospechoso (suspect.sceneCssClass) — útil cuando un
+    // caso usa varios escenarios. Si no, usa el del caso.
+    const suspect  = this.engine.getActiveSuspect();
+    const caseData = this.engine.getCase();
+    const cls = (suspect && suspect.sceneCssClass)
+      || (caseData && caseData.scene && caseData.scene.cssClass)
+      || 'scene-interrogatorio2';
+    scene.classList.add(cls);
   }
 
   _renderPressureBar() {
@@ -134,17 +167,21 @@ US.UIController = class UIController {
   _handleAskQuestion(questionId) {
     if (this.tutorial && !this.tutorial.isAllowed('ask-question', questionId)) return;
 
+    const suspect = this.engine.getActiveSuspect();
     const result = this.engine.askQuestion(questionId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
+        const blockMsg = 'El sospechoso se niega a responder más preguntas. "No tengo nada más que decir. Quiero un abogado."';
         this._setSuspectMood('nervous', 0);
-        this._setDialogue('El sospechoso se niega a responder más preguntas. "No tengo nada más que decir. Quiero un abogado."');
+        this._setDialogue(blockMsg);
+        if (suspect) this._lastDialogueBySuspect[suspect.id] = blockMsg;
       }
       return;
     }
 
     this._setSuspectMood('talking', 4000);
     this._setDialogue(result.response);
+    if (suspect) this._lastDialogueBySuspect[suspect.id] = result.response;
     this._renderPressureBar();
     this.questions.render();
     this.notebook.updateBadge();
@@ -161,11 +198,14 @@ US.UIController = class UIController {
   _handlePresentEvidence(evidenceId) {
     if (this.tutorial && !this.tutorial.isAllowed('present-evidence', evidenceId)) return;
 
+    const suspect = this.engine.getActiveSuspect();
     const result = this.engine.presentEvidence(evidenceId);
     if (result.blocked) {
       if (result.reason === 'maxPressure') {
+        const blockMsg = 'El sospechoso se niega a recibir más preguntas. "No tengo nada más que decir."';
         this._setSuspectMood('nervous', 0);
-        this._setDialogue('El sospechoso se niega a recibir más preguntas. "No tengo nada más que decir."');
+        this._setDialogue(blockMsg);
+        if (suspect) this._lastDialogueBySuspect[suspect.id] = blockMsg;
       } else if (result.reason === 'alreadyPresented') {
         this._setDialogue('Ya has presentado esta prueba a este sospechoso.');
       }
@@ -174,6 +214,7 @@ US.UIController = class UIController {
 
     this._setSuspectMood('talking', 4000);
     this._setDialogue(result.response);
+    if (suspect) this._lastDialogueBySuspect[suspect.id] = result.response;
     this._renderPressureBar();
     this._renderPortrait();
     this.questions.render();
@@ -214,6 +255,12 @@ US.UIController = class UIController {
   // ═══════════════════════════════════════════════════
 
   _bindGlobalEvents() {
+    // Cuando cambia de caso, limpia la caché de diálogos por sospechoso para
+    // que las respuestas del caso anterior no se muestren en el nuevo.
+    this.engine.on('caseLoaded', () => {
+      this._lastDialogueBySuspect = {};
+    });
+
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         this.modals.hideEvidence();

@@ -128,6 +128,9 @@
     .intro__header {
       padding: 12px 8px;
     }
+    .intro__victim-portrait {
+      width: 100px;
+    }
     .intro__start {
       min-width: 80vw;
       max-width: 95vw;
@@ -160,6 +163,16 @@
   }
   .intro__header {
     padding: 10px 4px;
+  }
+  .intro__victim-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .intro__victim-portrait {
+    width: 100%;
+    max-width: 180px;
+    align-self: center;
   }
   .intro__start {
     min-width: 90vw;
@@ -231,6 +244,7 @@
   .modal-card       { max-width: 100vw; max-height: 100vh; width: 100vw; }
   .modal__body      { padding: 14px; }
   .modal__image-placeholder { height: 100px; }
+  .modal__image-img { max-height: 240px; }
 
   /* Contradiction */
   .contradiction__body  { padding: 12px 14px; }

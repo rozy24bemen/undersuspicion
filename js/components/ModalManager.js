@@ -27,10 +27,15 @@ US.ModalManager = class ModalManager {
           <button class="modal__close" data-action="close-modal">✕</button>
         </div>
         <div class="modal__body">
-          <div class="modal__image-placeholder">
-            <span class="modal__image-icon">${ev.icon}</span>
-            <span class="modal__image-label">[${this.ui._esc(ev.type).toUpperCase()} — IMAGEN PLACEHOLDER]</span>
-          </div>
+          ${ev.imagePath
+            ? `<div class="modal__image">
+                 <img src="${this.ui._esc(ev.imagePath)}" alt="${this.ui._esc(ev.title)}" class="modal__image-img" />
+               </div>`
+            : `<div class="modal__image-placeholder">
+                 <span class="modal__image-icon">${ev.icon}</span>
+                 <span class="modal__image-label">[${this.ui._esc(ev.type).toUpperCase()} — IMAGEN PLACEHOLDER]</span>
+               </div>`
+          }
 
           <div>
             <div class="modal__section-label">TÍTULO</div>
@@ -80,6 +85,11 @@ US.ModalManager = class ModalManager {
 
   showContradiction(c) {
     const suspectName = this.engine.getSuspects().find(s => s.id === c.suspectId).name;
+
+    // No diferenciamos visualmente las pistas falsas: el jugador debe deducir
+    // por sí mismo si una contradicción es decisiva o un episodio personal.
+    // La única señal numérica es el suspicionBonus (datos), no la UI.
+    this.contradictionEl.classList.remove('contradiction--red-herring');
 
     this.contradictionEl.innerHTML = `
       <div class="contradiction__accent"></div>

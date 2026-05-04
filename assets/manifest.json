@@ -27,7 +27,7 @@
       "mood":        "neutral",
       "is_reference": true,
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/martaneutral-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/martaneutral-withoutbg.png",
       "status":      "approved-legacy"
     },
     {
@@ -38,7 +38,7 @@
       "mood":        "talking",
       "depends_on":  "marta-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/martapensativa-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/martapensativa-withoutbg.png",
       "status":      "approved-legacy"
     },
     {
@@ -49,7 +49,7 @@
       "mood":        "nervous",
       "depends_on":  "marta-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/martanerviosa-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/martanerviosa-withoutbg.png",
       "status":      "approved-legacy"
     },
 
@@ -61,7 +61,7 @@
       "mood":        "neutral",
       "is_reference": true,
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/lucianeutral-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/lucianeutral-withoutbg.png",
       "status":      "approved-legacy"
     },
     {
@@ -72,7 +72,7 @@
       "mood":        "talking",
       "depends_on":  "lucia-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/luciapensativa-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/luciapensativa-withoutbg.png",
       "status":      "approved-legacy"
     },
     {
@@ -83,7 +83,7 @@
       "mood":        "nervous",
       "depends_on":  "lucia-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/lucianerviosa-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/lucianerviosa-withoutbg.png",
       "status":      "approved-legacy"
     },
 
@@ -95,7 +95,7 @@
       "mood":        "neutral",
       "is_reference": true,
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/hugoneutral-withoutbg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/hugoneutral-withoutbg.png",
       "status":      "approved-legacy"
     },
     {
@@ -106,7 +106,7 @@
       "mood":        "talking",
       "depends_on":  "hugo-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/hugopensativo-removebg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/hugopensativo-removebg.png",
       "status":      "approved-legacy"
     },
     {
@@ -117,7 +117,7 @@
       "mood":        "nervous",
       "depends_on":  "hugo-neutral",
       "prompt_file": null,
-      "image_file":  "assets/img/suspects/hugonervioso-removebg.png",
+      "image_file":  "assets/img/suspects/Caso1/Sospechosos/hugonervioso-removebg.png",
       "status":      "approved-legacy"
     },
 
@@ -166,10 +166,170 @@
       "image_file":  "assets/img/scenes/Escenario_interrogatorio2.png",
       "status":      "approved-legacy",
       "used_in_code": "css/screens/game.css (.scene-interrogatorio2)"
-    }
+    },
+
+    {
+      "id":          "victim-diego-varela",
+      "type":        "victim-portrait",
+      "case":        "caso-01",
+      "character":   "diego-varela",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#diego-varela--víctima-opcional",
+      "image_file":  "assets/img/suspects/Caso1/Retrato_Victima_casotutorial.png",
+      "status":      "approved"
+    },
+
+    {
+      "id":          "evidence-c1-autopsia",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "autopsia",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p1--informe-de-autopsia-rodenticida--brodifacoum",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P1 — Informe de Autopsia.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-finanzas",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "finanzas",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p2--registros-financieros-desfalco-47000-hugo",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P2 — Registros Financieros.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-camara",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "camara",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p3--cámara-de-seguridad-hugo-junto-al-despacho--2215h",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P3 — Cámara de Seguridad.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-carta",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "carta",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p4--carta-manuscrita-hugo-suplica-a-diego",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P4 — Carta Manuscrita.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-copa",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "copa",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p5--copa-de-vino-analizada-rodenticida--frasco-vacío",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P5 — Copa de Vino Analizada.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-telefono",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "telefono",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p6--registro-telefónico-cdr-marta--coartada-sólida",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P6 — Registro Telefónico.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-camarero",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "camarero",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p7--declaración-del-camarero-testimonio-tomás",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P7 — Declaración del Camarero.png",
+      "status":      "approved"
+    },
+    {
+      "id":          "evidence-c1-hotel",
+      "type":        "evidence",
+      "case":        "caso-01",
+      "evidence_id": "hotel",
+      "prompt_file": "docs/PROMPTS-CASOS-2-3-4.md#p8--cctv-del-hotel-ritz-lucía-ausente-10-min--red-herring",
+      "image_file":  "assets/img/suspects/Caso1/Pruebas/P8 — CCTV del Hotel Ritz.png",
+      "status":      "approved"
+    },
+
+    { "id": "victim-salvador-cienfuegos", "type": "victim-portrait", "case": "caso-02", "character": "salvador-cienfuegos", "image_file": "assets/img/suspects/Caso2/Retrato_Victima_caso2.png", "status": "approved" },
+    { "id": "scene-caso2",                "type": "scene-establishing", "case": "caso-02", "image_file": "assets/img/suspects/Caso2/Escenario/Escenario_Caso2.png", "status": "approved" },
+
+    { "id": "lourdes-neutral",            "type": "suspect-portrait", "case": "caso-02", "character": "lourdes",  "mood": "neutral", "image_file": "assets/img/suspects/Caso2/Sospechosos/LourdesCienfuegos-Neutral.png",  "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "lourdes-talking",            "type": "suspect-portrait", "case": "caso-02", "character": "lourdes",  "mood": "talking", "image_file": "assets/img/suspects/Caso2/Sospechosos/LourdesCienfuegos-Pensativa.png", "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "lourdes-nervous",            "type": "suspect-portrait", "case": "caso-02", "character": "lourdes",  "mood": "nervous", "image_file": "assets/img/suspects/Caso2/Sospechosos/LourdesCienfuegos-Nerviosa.png",  "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "ivan-neutral",               "type": "suspect-portrait", "case": "caso-02", "character": "ivan",     "mood": "neutral", "image_file": "assets/img/suspects/Caso2/Sospechosos/IvánCienfuegos-Neutral.png",    "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "ivan-talking",               "type": "suspect-portrait", "case": "caso-02", "character": "ivan",     "mood": "talking", "image_file": "assets/img/suspects/Caso2/Sospechosos/IvánCienfuegos-Pensativo.png",  "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "ivan-nervous",               "type": "suspect-portrait", "case": "caso-02", "character": "ivan",     "mood": "nervous", "image_file": "assets/img/suspects/Caso2/Sospechosos/IvánCienfuegos-Nervioso.png",   "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "adelina-neutral",            "type": "suspect-portrait", "case": "caso-02", "character": "adelina",  "mood": "neutral", "image_file": "assets/img/suspects/Caso2/Sospechosos/AdelinaRoca-Neutral.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "adelina-talking",            "type": "suspect-portrait", "case": "caso-02", "character": "adelina",  "mood": "talking", "image_file": "assets/img/suspects/Caso2/Sospechosos/AdelinaRoca-Pensativa.png",      "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "adelina-nervous",            "type": "suspect-portrait", "case": "caso-02", "character": "adelina",  "mood": "nervous", "image_file": "assets/img/suspects/Caso2/Sospechosos/AdelinaRoca-Nerviosa.png",       "status": "approved", "post_processed": "rembg-u2net" },
+
+    { "id": "evidence-c2-forense",        "type": "evidence", "case": "caso-02", "evidence_id": "forense",         "image_file": "assets/img/suspects/Caso2/Pruebas/P1 — Informe forense.png",                          "status": "approved" },
+    { "id": "evidence-c2-almohada",       "type": "evidence", "case": "caso-02", "evidence_id": "almohada",        "image_file": "assets/img/suspects/Caso2/Pruebas/P2 — Almohada con cabello canoso.png",              "status": "approved" },
+    { "id": "evidence-c2-cctv",           "type": "evidence", "case": "caso-02", "evidence_id": "cctv",            "image_file": "assets/img/suspects/Caso2/Pruebas/P3 — CCTV portal Lavapiés.png",                     "status": "approved" },
+    { "id": "evidence-c2-testamento",     "type": "evidence", "case": "caso-02", "evidence_id": "testamento",      "image_file": "assets/img/suspects/Caso2/Pruebas/P4 — Borrador testamento sin firmar.png",           "status": "approved" },
+    { "id": "evidence-c2-banco-lourdes",  "type": "evidence", "case": "caso-02", "evidence_id": "banco_lourdes",   "image_file": "assets/img/suspects/Caso2/Pruebas/P5 — Recibos del banco de Lourdes.png",              "status": "approved" },
+    { "id": "evidence-c2-cuenta-salvador","type": "evidence", "case": "caso-02", "evidence_id": "cuenta_salvador", "image_file": "assets/img/suspects/Caso2/Pruebas/P6 — Movimientos de Salvador.png",                  "status": "approved" },
+    { "id": "evidence-c2-fotos",          "type": "evidence", "case": "caso-02", "evidence_id": "fotos",           "image_file": "assets/img/suspects/Caso2/Pruebas/P7 — Caja con fotos antiguas (relación 30 años).png","status": "approved" },
+    { "id": "evidence-c2-calendario",     "type": "evidence", "case": "caso-02", "evidence_id": "calendario",      "image_file": "assets/img/suspects/Caso2/Pruebas/P8 — Calendario de pared con día rojo.png",         "status": "approved" },
+
+    { "id": "victim-carla-vinyets",       "type": "victim-portrait", "case": "caso-03", "character": "carla-vinyets", "image_file": "assets/img/suspects/Caso3/Retrato_Victima_caso3.png", "status": "approved" },
+    { "id": "scene-caso3-portal",         "type": "scene-establishing", "case": "caso-03", "image_file": "assets/img/suspects/Caso3/Escenario/Escenario-Portal calle Chueca.png", "status": "approved" },
+    { "id": "scene-caso3-despacho",       "type": "scene-establishing", "case": "caso-03", "image_file": "assets/img/suspects/Caso3/Escenario/Escenario-Despacho TecBaria.png",  "status": "approved" },
+
+    { "id": "bernabe-neutral",            "type": "suspect-portrait", "case": "caso-03", "character": "bernabe",  "mood": "neutral", "image_file": "assets/img/suspects/Caso3/Sospechosos/BernabéFaz-Neutral.png",          "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "bernabe-talking",            "type": "suspect-portrait", "case": "caso-03", "character": "bernabe",  "mood": "talking", "image_file": "assets/img/suspects/Caso3/Sospechosos/BernabéFaz-Pensativo.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "bernabe-nervous",            "type": "suspect-portrait", "case": "caso-03", "character": "bernabe",  "mood": "nervous", "image_file": "assets/img/suspects/Caso3/Sospechosos/BernabéFaz-Nervioso.png",         "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "esteban-neutral",            "type": "suspect-portrait", "case": "caso-03", "character": "esteban",  "mood": "neutral", "image_file": "assets/img/suspects/Caso3/Sospechosos/EstebanVidal-Neutral.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "esteban-talking",            "type": "suspect-portrait", "case": "caso-03", "character": "esteban",  "mood": "talking", "image_file": "assets/img/suspects/Caso3/Sospechosos/EstebanVidal-Pensativo.png",      "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "esteban-nervous",            "type": "suspect-portrait", "case": "caso-03", "character": "esteban",  "mood": "nervous", "image_file": "assets/img/suspects/Caso3/Sospechosos/EstebanVidal-Nerviosa.png",       "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "olalla-neutral",             "type": "suspect-portrait", "case": "caso-03", "character": "olalla",   "mood": "neutral", "image_file": "assets/img/suspects/Caso3/Sospechosos/OlallaBermejo-Neutral.png",       "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "olalla-talking",             "type": "suspect-portrait", "case": "caso-03", "character": "olalla",   "mood": "talking", "image_file": "assets/img/suspects/Caso3/Sospechosos/OlallaBermejo-Pensativa.png",     "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "olalla-nervous",             "type": "suspect-portrait", "case": "caso-03", "character": "olalla",   "mood": "nervous", "image_file": "assets/img/suspects/Caso3/Sospechosos/OlallaBermejo-Nerviosa.png",      "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "jorge-neutral",              "type": "suspect-portrait", "case": "caso-03", "character": "jorge",    "mood": "neutral", "image_file": "assets/img/suspects/Caso3/Sospechosos/JorgeSallén-Neutral.png",         "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "jorge-talking",              "type": "suspect-portrait", "case": "caso-03", "character": "jorge",    "mood": "talking", "image_file": "assets/img/suspects/Caso3/Sospechosos/JorgeSallén-Pensativo.png",       "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "jorge-nervous",              "type": "suspect-portrait", "case": "caso-03", "character": "jorge",    "mood": "nervous", "image_file": "assets/img/suspects/Caso3/Sospechosos/JorgeSallén-NerviosoExplosivo.png", "status": "approved", "post_processed": "rembg-u2net" },
+
+    { "id": "evidence-c3-cuchillo",       "type": "evidence", "case": "caso-03", "evidence_id": "cuchillo",       "image_file": "assets/img/suspects/Caso3/Pruebas/P1 — Cuchillo de cocina.png",                       "status": "approved" },
+    { "id": "evidence-c3-cctv",           "type": "evidence", "case": "caso-03", "evidence_id": "cctv",           "image_file": "assets/img/suspects/Caso3/Pruebas/P2 — CCTV portal Chueca.png",                        "status": "approved" },
+    { "id": "evidence-c3-movil-carla",    "type": "evidence", "case": "caso-03", "evidence_id": "movil_carla",    "image_file": "assets/img/suspects/Caso3/Pruebas/P3 — Móvil de Carla con mensajes borrados.png",      "status": "approved" },
+    { "id": "evidence-c3-rrhh",           "type": "evidence", "case": "caso-03", "evidence_id": "rrhh",           "image_file": "assets/img/suspects/Caso3/Pruebas/P4 — Carpeta RRHH.png",                              "status": "approved" },
+    { "id": "evidence-c3-recibo-cafe",    "type": "evidence", "case": "caso-03", "evidence_id": "recibo_cafe",    "image_file": "assets/img/suspects/Caso3/Pruebas/P5 — Recibo café.png",                               "status": "approved" },
+    { "id": "evidence-c3-cuaderno",       "type": "evidence", "case": "caso-03", "evidence_id": "cuaderno",       "image_file": "assets/img/suspects/Caso3/Pruebas/P6 — Cuaderno con número incompleto.png",            "status": "approved" },
+    { "id": "evidence-c3-pegatina-22",    "type": "evidence", "case": "caso-03", "evidence_id": "pegatina_22",    "image_file": "assets/img/suspects/Caso3/Pruebas/P7 — Pegatina amarilla 22 en monitor.png",           "status": "approved" },
+    { "id": "evidence-c3-mail-fragmento", "type": "evidence", "case": "caso-03", "evidence_id": "mail_fragmento", "image_file": "assets/img/suspects/Caso3/Pruebas/P8 — Mail con fragmento numérico.png",               "status": "approved" },
+    { "id": "evidence-c3-foto-vidal",     "type": "evidence", "case": "caso-03", "evidence_id": "foto_vidal",     "image_file": "assets/img/suspects/Caso3/Pruebas/P9 — Foto familiar Esteban Vidal.png",                "status": "approved" },
+
+    { "id": "victim-andres-solera",       "type": "victim-portrait", "case": "caso-04", "character": "andres-solera", "image_file": "assets/img/suspects/Caso4/Retrato_Victima_caso4.png", "status": "approved" },
+    { "id": "scene-caso4",                "type": "scene-establishing", "case": "caso-04", "image_file": "assets/img/suspects/Caso4/Escenario/Escenario-Caserón Talavera.png", "status": "approved" },
+    { "id": "object-c4-caja-fuerte",      "type": "object-prop", "case": "caso-04", "appears_in": ["caso-04","caso-05"], "image_file": "assets/img/suspects/Caso4/CajaFuerte-Caso4-5.png", "status": "approved", "notes": "Caja fuerte cerrada. Hilo abierto: combinación 8614 se descubre en caso 5." },
+
+    { "id": "joaquin-neutral",            "type": "suspect-portrait", "case": "caso-04", "character": "joaquin",  "mood": "neutral", "image_file": "assets/img/suspects/Caso4/Sospechosos/JoaquínVela-Neutral.png",          "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "joaquin-talking",            "type": "suspect-portrait", "case": "caso-04", "character": "joaquin",  "mood": "talking", "image_file": "assets/img/suspects/Caso4/Sospechosos/JoaquínVela-Pensativo.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "joaquin-nervous",            "type": "suspect-portrait", "case": "caso-04", "character": "joaquin",  "mood": "nervous", "image_file": "assets/img/suspects/Caso4/Sospechosos/JoaquínVela-Nervioso.png",         "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "mireia-neutral",             "type": "suspect-portrait", "case": "caso-04", "character": "mireia",   "mood": "neutral", "image_file": "assets/img/suspects/Caso4/Sospechosos/MireiaSolana-Neutral.png",         "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "mireia-talking",             "type": "suspect-portrait", "case": "caso-04", "character": "mireia",   "mood": "talking", "image_file": "assets/img/suspects/Caso4/Sospechosos/MireiaSolana-Pensativa.png",       "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "mireia-nervous",             "type": "suspect-portrait", "case": "caso-04", "character": "mireia",   "mood": "nervous", "image_file": "assets/img/suspects/Caso4/Sospechosos/MireiaSolana-Nerviosa.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "eulogio-neutral",            "type": "suspect-portrait", "case": "caso-04", "character": "eulogio",  "mood": "neutral", "image_file": "assets/img/suspects/Caso4/Sospechosos/DonEulogioPacheco-Neutral.png",    "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "eulogio-talking",            "type": "suspect-portrait", "case": "caso-04", "character": "eulogio",  "mood": "talking", "image_file": "assets/img/suspects/Caso4/Sospechosos/DonEulogioPacheco-Pensativo.png",  "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "eulogio-nervous",            "type": "suspect-portrait", "case": "caso-04", "character": "eulogio",  "mood": "nervous", "image_file": "assets/img/suspects/Caso4/Sospechosos/DonEulogioPacheco-Nervioso.png",   "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "lucia_s-neutral",            "type": "suspect-portrait", "case": "caso-04", "character": "lucia_s",  "mood": "neutral", "image_file": "assets/img/suspects/Caso4/Sospechosos/LucíaSolera-Neutral.png",          "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "lucia_s-talking",            "type": "suspect-portrait", "case": "caso-04", "character": "lucia_s",  "mood": "talking", "image_file": "assets/img/suspects/Caso4/Sospechosos/LucíaSolera-Pensativa.png",        "status": "approved", "post_processed": "rembg-u2net" },
+    { "id": "lucia_s-nervous",            "type": "suspect-portrait", "case": "caso-04", "character": "lucia_s",  "mood": "nervous", "image_file": "assets/img/suspects/Caso4/Sospechosos/LucíaSolera-Nerviosa.png",         "status": "approved", "post_processed": "rembg-u2net" },
+
+    { "id": "evidence-c4-piedra",         "type": "evidence", "case": "caso-04", "evidence_id": "piedra",    "image_file": "assets/img/suspects/Caso4/Pruebas/P1 — Piedra del fuego rota.png",                                  "status": "approved" },
+    { "id": "evidence-c4-forense",        "type": "evidence", "case": "caso-04", "evidence_id": "forense",   "image_file": "assets/img/suspects/Caso4/Pruebas/P2 — Informe forense.png",                                        "status": "approved" },
+    { "id": "evidence-c4-agenda",         "type": "evidence", "case": "caso-04", "evidence_id": "agenda",    "image_file": "assets/img/suspects/Caso4/Pruebas/P3 — Agenda de Andrés.png",                                       "status": "approved" },
+    { "id": "evidence-c4-carta",          "type": "evidence", "case": "caso-04", "evidence_id": "carta",     "image_file": "assets/img/suspects/Caso4/Pruebas/P4 — Carta a medio escribir.png",                                 "status": "approved" },
+    { "id": "evidence-c4-llamadas",       "type": "evidence", "case": "caso-04", "evidence_id": "llamadas",  "image_file": "assets/img/suspects/Caso4/Pruebas/P5 — Listado de llamadas.png",                                    "status": "approved" },
+    { "id": "evidence-c4-coartadas",      "type": "evidence", "case": "caso-04", "evidence_id": "coartadas", "image_file": "assets/img/suspects/Caso4/Pruebas/P6 — Coartadas verificables.png",                                  "status": "approved" },
+    { "id": "evidence-c4-hojas",          "type": "evidence", "case": "caso-04", "evidence_id": "hojas",     "image_file": "assets/img/suspects/Caso4/Pruebas/P7 — Hojas sueltas caso Mora del 86 y calle Goya 14.png",          "status": "approved" },
+    { "id": "evidence-c4-morgue",         "type": "evidence", "case": "caso-04", "evidence_id": "morgue",    "image_file": "assets/img/suspects/Caso4/Pruebas/P8 — Forense Octaviano Vidal en morgue.png",                       "status": "approved" }
   ],
 
   "history": [
-    { "date": "2026-04-28", "action": "created", "by": "equipo", "notes": "Manifest inicial. Caso 1 importado como legacy (sin JSON-prompts). Limpieza previa: borrados SVGs placeholder, PNGs con fondo no usados, y experimentos descartados (Patricia/Ramon/Sofia)." }
+    { "date": "2026-04-28", "action": "created", "by": "equipo", "notes": "Manifest inicial. Caso 1 importado como legacy (sin JSON-prompts). Limpieza previa: borrados SVGs placeholder, PNGs con fondo no usados, y experimentos descartados (Patricia/Ramon/Sofia)." },
+    { "date": "2026-05-04", "action": "updated", "by": "equipo", "notes": "Caso 1 completado al 100%: añadido retrato de víctima (Diego Varela) y 8 imágenes de pruebas. Sospechosos reubicados a assets/img/suspects/Caso1/Sospechosos/ para consistencia con casos 2-4 (sin renombrar archivos para minimizar riesgo)." },
+    { "date": "2026-05-04", "action": "updated", "by": "claude", "notes": "Casos 2/3/4 añadidos al manifest tras implementación de jugabilidad. Los 33 retratos de sospechosos del Acto I post-procesados con rembg (modelo u2net) para fondo transparente — registrado como `post_processed: rembg-u2net`. Caja fuerte de Caso 4 referenciada como prop con `appears_in: [caso-04, caso-05]` (hilo abierto de combinación 8614)." }
   ]
 }
