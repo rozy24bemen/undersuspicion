@@ -1,9 +1,13 @@
-# PROMPTS — Casos 2, 3 y 4 (DOC TEMPORAL · eliminar tras producción)
+# PROMPTS — Casos 1 (tutorial), 2, 3 y 4 (DOC TEMPORAL · eliminar tras producción)
 
 > Documento de uso único: prompts copy-paste para generar TODOS los assets
-> visuales pendientes de los Casos 2, 3 y 4 con Gemini. Formato basado en el
-> v3 validado con Lourdes/Iván/Adelina (Caso 2). **Eliminar tras finalizar
-> producción**.
+> visuales pendientes de los Casos 1 (tutorial), 2, 3 y 4 con Gemini. Formato
+> basado en el v3 validado con Lourdes/Iván/Adelina (Caso 2). **Eliminar tras
+> finalizar producción**.
+>
+> El bloque del Caso 1 cubre sólo lo que falta en disco: las **8 pruebas** del
+> tutorial y, opcional, el retrato de la víctima Diego Varela. Sospechosos
+> (Hugo, Lucía, Marta × 3 poses) y escenarios ya están producidos.
 
 ---
 
@@ -34,6 +38,9 @@ assets/img/evidence/casoNN/{evidence-id}.png
 
 # ÍNDICE
 
+- [CASO 1 — El Último Brindis (TUTORIAL)](#caso-1--el-último-brindis-tutorial)
+  - [Víctima · Diego Varela (opcional)](#diego-varela--víctima-opcional)
+  - [Pruebas (8)](#pruebas-caso-1)
 - [CASO 2 — Sin sangre (Lavapiés)](#caso-2--sin-sangre)
   - [Víctima · Salvador Cienfuegos](#salvador-cienfuegos--víctima)
   - [Escenario · Piso Lavapiés](#escenario--piso-lavapiés)
@@ -55,6 +62,375 @@ assets/img/evidence/casoNN/{evidence-id}.png
   - [Escenario · Caserón Talavera](#escenario--caserón-talavera)
   - [Pruebas (8)](#pruebas-caso-4)
   - [Caja fuerte](#caja-fuerte-pivote-c4-c5)
+
+---
+
+# CASO 1 · El Último Brindis (TUTORIAL)
+
+> Caso introductorio. Sospechosos (Marta, Lucía, Hugo × 3 poses) y escenarios
+> (salón, cocina, dos interrogatorios) **ya producidos**. Pendiente: 8 pruebas
+> y, opcionalmente, el retrato de la víctima para uniformidad con casos 2-4.
+> Ambientación contemporánea (Madrid, marzo 2026, restaurante de lujo "La
+> Estrella"), pero manteniendo la paleta y la pincelada noir validadas en
+> Caso 2. Sin imágenes adjuntas — todas estas pruebas se generan con sólo
+> texto.
+>
+> **Naming sugerido** (consistente con la convención ya usada en disco):
+> ```
+> assets/img/suspects/Caso1/Pruebas/P{N} — {nombre}.png
+> assets/img/suspects/Caso1/Retrato_Victima_caso1.png      (opcional)
+> ```
+
+## Diego Varela — VÍCTIMA (opcional)
+
+> Sólo si quieres añadir la ficha-víctima al expediente para uniformidad con
+> Salvador / Carla / Andrés. La pantalla de tutorial actualmente no la
+> requiere.
+
+```
+Police archive portrait, 3:4 vertical aspect ratio, identification-card style,
+frontal shot framing head and shoulders only, centered.
+
+Art style: digital oil painting illustration, semi-realistic stylized character
+art for a noir detective adventure game (Disco Elysium / classic 1990s
+point-and-click mystery game tradition). Soft painterly brush strokes, smooth
+volumetric rendered shading, visible texture of digital oil paint. NOT
+cel-shading, NOT flat colors, NOT anime, NOT 3D, NOT photorealistic.
+
+Background: plain muted desaturated grey-blue archival backdrop, slight vignette,
+no decoration, the look of a forensic record photo from a Spanish police archive.
+
+Lighting: even cool documentary lighting from the front, slight rim light from
+behind for separation, no warm tones, no dramatic shadows.
+
+Subject — DETAILED FACE (must NOT resemble any common illustration character,
+generate a unique face):
+- 52 year-old Spanish man, prosperous restaurateur in central Madrid
+- Face: square face with a strong jawline, prominent cheekbones, faint jowls
+  beginning to form, well-groomed dark salt-and-pepper goatee and short
+  moustache, straight nose with a slight bump at the bridge, thin firm lips
+  set in a neutral line, sharp dark brown eyes set under thick brows, slight
+  crow's feet, smooth tanned Mediterranean complexion
+- Hair: thick dark brown hair combed back, salt-and-pepper temples, no
+  receding line, faint shine of hair product
+- Build: average-tall, slightly stocky (only shoulders visible)
+
+Clothing: crisp white shirt with the top button unfastened, no tie, fitted
+charcoal suit jacket over it, the lapel of the jacket slightly visible, the
+look of a successful restaurant owner photographed before service.
+
+Mood: lifeless documentary tone, neutral expression, eyes open and direct, no
+smile, no frown, the face of a man photographed for a record.
+
+Composition: head and shoulders centered, eyes at upper third, slight rim light
+from behind for separation.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D render,
+children cartoon, smile, dramatic expression, dramatic lighting, warm color
+palette, full body, half body, deformed, text, logos, watermark, frame,
+oversaturated, rainbow palette.
+```
+
+## Pruebas Caso 1
+
+### P1 — Informe de Autopsia (rodenticida · brodifacoum)
+
+```
+Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay view,
+document placed flat on a dark wooden desk surface, partial soft shadow from
+an off-frame desk lamp falling across one corner.
+
+Art style: digital oil painting illustration, semi-realistic stylized props
+in the visual tradition of Disco Elysium and classic mystery adventure games.
+Soft painterly brush strokes, painterly textures. NOT cel-shading, NOT flat,
+NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: official Spanish forensic autopsy report, single A4 page,
+contemporary 2020s format.
+
+Visual content of the document (text MUST NOT be readable — it will be rendered
+programmatically over the image):
+- Modern laser-printed official forensic header at the top with a coat-of-arms
+  style emblem (illegible, painterly) suggesting "Instituto de Medicina Legal"
+- Two columns of typed paragraphs with blurred text, no readable letters
+- Diagrammatic black-ink anatomical sketch of a human silhouette with a small
+  arrow indicating an oral ingestion pathway
+- A small chemical formula box highlighted in the margin (illegible squiggles
+  evoking the structure of a coumarin-derivative rodenticide)
+- An official rubber stamp in faded red ink in the lower-right corner
+- A signature line below with a swirling illegible signature
+- A small paperclip at the top edge
+- A faint coffee ring stain near one corner
+
+Period detail: contemporary 2020s clinical aesthetic, crisp white bond paper,
+laser-printed feel, modern but austere.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: readable text, legible chemical names, photorealistic, 3D,
+cel-shading, anime, oversaturated, multiple documents, color photographs,
+medical photographs, gore, autopsy table, body bag.
+```
+
+### P2 — Registros Financieros (desfalco 47.000€ → Hugo)
+
+```
+Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay view,
+several pages of an internal audit report fanned slightly on a dark wooden
+desk surface, partial soft shadow.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop
+art (Disco Elysium tradition). Soft painterly brush strokes. NOT cel-shading,
+NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: a small stack of three or four laser-printed audit pages from
+an internal restaurant audit, with one page on top fully visible.
+
+Visual content (text MUST NOT be readable):
+- The top page shows columns of figures arranged like a spreadsheet, totals at
+  the bottom of each column, all numbers illegible
+- Several rows highlighted with a yellow marker, drawing attention to a
+  recurring pattern of monthly outflows over many months
+- A handwritten annotation in the margin in red ink (illegible) with an
+  underlined sum that visually reads as a large amount
+- A small Post-it note pressed onto the corner with a hastily scrawled question
+  mark (no readable text)
+- A black binder clip at the top edge holding the pages together
+- Faint pencil tick marks beside some rows
+
+Period detail: contemporary 2020s small-business audit aesthetic, crisp white
+laser-printed paper, neat columns, modern restaurant accounting feel.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: readable text, readable amounts, computer screen, digital
+spreadsheet view, multiple monitors, modern app UI, cel-shading, flat, anime,
+3D, photorealistic.
+```
+
+### P3 — Cámara de Seguridad (Hugo junto al despacho · 22:15h)
+
+```
+Surveillance still evidence shot, 4:5 vertical aspect ratio, top-down flat-lay
+view, a single CCTV print-out laid on a dark wooden desk surface, partial soft
+shadow from an off-frame lamp.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop art
+(Disco Elysium / classic mystery adventure tradition). Soft painterly brush
+strokes. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: a contemporary color CCTV still photograph printed on plain
+paper, slightly curled at the edges.
+
+Visual content (text MUST NOT be readable):
+- Light CCTV grain and a slight chromatic shift typical of modern fish-eye
+  surveillance lenses
+- A wide-angle elevated view of an upscale restaurant first-floor corridor:
+  polished dark wood floor, two closed doors with brass plaques (illegible) on
+  either side, warm wall sconces, a framed picture in the background
+- The figure of a man in a white chef's jacket clearly visible mid-frame,
+  walking toward the door at the end of the corridor — recognisable as a chef
+  but rendered low-res (no readable face features), back partially turned
+- An illegible timestamp burned into the upper-right corner of the still in
+  the format of a modern security camera (HH:MM:SS as glyphs, the position
+  reading as roughly "22:15")
+- A small printed evidence reference in the bottom margin (illegible)
+
+Period detail: modern 2020s CCTV aesthetic, color but slightly desaturated,
+faint scan lines, the look of a still pulled from a digital DVR and printed
+on demand.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: high-resolution photo, cinematic shot, recognisable face, multiple
+frames, readable timestamp, monochrome 1980s footage, cel-shading, flat,
+anime, 3D, photorealistic.
+```
+
+### P4 — Carta Manuscrita (Hugo suplica a Diego)
+
+```
+Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay view,
+document placed flat on a dark wooden desk surface, partial soft shadow.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop
+art (Disco Elysium tradition). Soft painterly brush strokes. NOT cel-shading,
+NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: a single sheet of plain bond paper with a handwritten letter,
+slightly creased as if folded and reopened.
+
+Visual content (text MUST NOT be readable):
+- Cursive handwriting in dark blue ballpoint, agitated and shaky hand, lines
+  unevenly spaced
+- Several lines of illegible text filling about two-thirds of the page
+- Words crossed out and rewritten in places, evidence of distress and revision
+- One short line near the middle written more forcefully, the strokes pressing
+  through the paper (a desperate plea, illegible)
+- A short signature at the bottom — illegible loose loop ending in what could
+  be the letter "H"
+- One or two small water-stain rings on the page (tear or sweat marks)
+- The top edge slightly crumpled where the letter has been clutched
+
+Period detail: contemporary informal handwritten letter, clean white modern
+paper, blue ballpoint ink, agitated emotional handwriting.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: readable text, typed font, official letterhead, calligraphy, calm
+neat handwriting, multiple pages, cel-shading, flat, anime, 3D, photorealistic.
+```
+
+### P5 — Copa de Vino Analizada (rodenticida · frasco vacío)
+
+```
+Evidence object photograph, 1:1 square aspect ratio, single object centered,
+shot from a slight top-down 30-degree angle, placed on coarse brown kraft
+paper mat (mesa de evidencias).
+
+Art style: digital oil painting illustration, semi-realistic stylized prop
+art (Disco Elysium / classic mystery adventure tradition). Soft painterly
+brush strokes, painterly textures. NOT cel-shading, NOT flat, NOT anime,
+NOT 3D, NOT photorealistic.
+
+Object: a tall elegant crystal red-wine glass standing upright on the kraft
+paper, a small amount of dark red wine residue settled at the bottom of the
+bowl, a faint dried red ring along the inside marking the level the wine
+reached. A subtle pale powdery residue clinging to the inside of the rim,
+suggesting forensic chemical analysis. Fine fingerprint dust traceable along
+the bowl. Slightly out of focus at the back-right of the frame, a small
+unmarked plastic bottle with a generic warning label (illegible, evoking a
+commercial rodenticide) lies on its side, empty. Together they read as cause
+and instrument.
+
+Lighting: single side raking light from the upper-left through the glass to
+catch the wine residue and the powdery rim, soft refraction on the kraft
+paper, mild shadow under the glass, museum-catalog feel, no flash glare.
+
+Markings: a small grey forensic ruler placed NEXT TO (not behind) the glass
+on the kraft paper, plus a small folded evidence tag with illegible
+handwriting.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: full wine glass, splashed wine, blood, gore, modern packaging,
+plastic evidence bag, multiple objects beyond the glass and the small bottle,
+readable warning label, cel-shading, flat, anime, 3D, photorealistic.
+```
+
+### P6 — Registro Telefónico (CDR Marta · coartada sólida)
+
+```
+Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay view,
+document placed flat on a dark wooden desk surface, partial soft shadow.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop
+art (Disco Elysium tradition). Soft painterly brush strokes. NOT cel-shading,
+NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: a Call Detail Record (CDR) printout from a Spanish telecom
+operator, single A4 page on plain white paper.
+
+Visual content (text MUST NOT be readable):
+- A modern telecom letterhead at the top with a generic abstract logo
+  (illegible, painterly)
+- Several columns of tabular data filling the page: an "incoming/outgoing"
+  column, a "duration" column, and a series of phone-number-shaped strings of
+  digits (all illegible glyphs)
+- One row near the middle highlighted with a yellow marker stripe — the long
+  call that anchors the alibi
+- The duration of that highlighted row visibly written as a small handwritten
+  annotation in red pen in the margin (illegible, but unmistakably a long span
+  of time)
+- A small generic operator logo footer
+- A staple at the top-left corner
+
+Period detail: contemporary 2020s Spanish telecom operator CDR aesthetic,
+crisp laser-printed white paper, modern technical document.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: readable phone numbers, readable timestamps, smartphone screenshot,
+digital app interface, modern app UI, cel-shading, flat, anime, 3D,
+photorealistic.
+```
+
+### P7 — Declaración del Camarero (testimonio Tomás)
+
+```
+Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay view,
+document placed flat on a dark wooden desk surface, partial soft shadow.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop
+art (Disco Elysium tradition). Soft painterly brush strokes. NOT cel-shading,
+NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: a sworn witness statement (declaración jurada) on official
+Spanish police-station stationery, single A4 page.
+
+Visual content (text MUST NOT be readable):
+- An official police header at the top with a coat-of-arms style emblem
+  (illegible, painterly) suggesting "Policía Nacional / comisaría"
+- Three or four typed paragraphs with blurred laser-printed text, no readable
+  letters
+- Toward the bottom, a handwritten signature in dark blue ballpoint, with a
+  small printed name above it (illegible)
+- An ID/case-number box stamped at the top-right in faded blue ink
+- An official red round stamp pressed across the lower margin
+- A date stamp impression in faded ink beside the signature
+- A small paperclip at the top edge
+
+Period detail: contemporary 2020s Spanish police bureaucratic aesthetic,
+official letterhead, modern but austere.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: readable text, readable name, photographic faces, photorealistic,
+3D, cel-shading, anime, oversaturated, color photographs, modern web form.
+```
+
+### P8 — CCTV del Hotel Ritz (Lucía ausente 10 min · red herring)
+
+```
+Surveillance still evidence shot, 4:5 vertical aspect ratio, top-down flat-lay
+view, two CCTV print-outs laid one slightly overlapping the other on a dark
+wooden desk surface, partial soft shadow.
+
+Art style: digital oil painting illustration, semi-realistic stylized prop art
+(Disco Elysium / classic mystery adventure tradition). Soft painterly brush
+strokes. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Document type: two contemporary color CCTV still frames printed on plain
+paper, edges slightly curled.
+
+Visual content (text MUST NOT be readable):
+- Top still: an interior view of an upscale hotel lounge bar — warm gold
+  pendant lighting, a long polished wooden bar with bottles in soft focus
+  behind it, a single woman in formal evening attire seated at a small round
+  table, recognisable as well-dressed but rendered low-res (no readable face),
+  a glass of wine on the table
+- Bottom still: a fish-eye view of a hotel corridor with the door of a women's
+  bathroom visible, the same woman caught walking toward it from a different
+  angle
+- Both frames carry a burned-in timestamp in the upper-right corner
+  (illegible glyphs in the format HH:MM:SS), the timestamps clearly minutes
+  apart — the implicit gap is the alibi window
+- Light surveillance grain and faint scan lines on both prints
+- A handwritten note on a small Post-it stuck between the two frames with an
+  underlined number (illegible) suggesting a short ten-minute span
+
+Period detail: modern 2020s hotel surveillance aesthetic, color CCTV but
+slightly desaturated, the warm bar lighting clearly distinguishing it from
+the cooler corridor.
+
+Style ID: undersuspi-noir-v1. CRITICAL: text must NOT be readable.
+
+NEGATIVE: high-resolution photo, recognisable face, cinematic glamour shot,
+nudity, single frame only, readable timestamp, monochrome 1980s footage,
+cel-shading, flat, anime, 3D, photorealistic.
+```
 
 ---
 
@@ -2483,6 +2859,13 @@ cel-shading, flat, anime, 3D, photorealistic, text, logos, watermark.
 
 # CHECKLIST FINAL
 
+## Caso 1 (TUTORIAL) — pendientes
+- [ ] Diego Varela (víctima · OPCIONAL para uniformidad con casos 2-4)
+- [ ] 8 pruebas (autopsia · finanzas · cámara · carta · copa · teléfono · camarero · hotel)
+
+> Sospechosos (Hugo / Lucía / Marta × 3) y escenarios (salón, cocina, dos
+> interrogatorios) ya en disco — no requieren generación.
+
 ## Caso 2 — pendientes
 - [ ] Salvador Cienfuegos (víctima)
 - [ ] Escenario Piso Lavapiés
@@ -2509,9 +2892,9 @@ cel-shading, flat, anime, 3D, photorealistic, text, logos, watermark.
 - [ ] Caja fuerte
 - [ ] Octaviano Vidal (forense recurrente, retrato morgue)
 
-> **Total**: 1 víctima + 8 sospechosos × 3 poses + 1 escenario + 8 pruebas =
+> **Total**: Caso 1 tutorial (8 pruebas + 1 víctima opcional = 8-9) ·
 > Caso 2 (10) · Caso 3 (1+12+2+9 = 24) · Caso 4 (1+12+1+8+1+1 = 24) =
-> **58 prompts**.
+> **66-67 prompts** (vs 58 antes de añadir el bloque tutorial).
 
 ---
 
