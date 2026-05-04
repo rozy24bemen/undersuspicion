@@ -290,8 +290,8 @@
 
 .phone-toggle {
   position: absolute;
-  top: 12px;
-  left: 68px;  /* Al lado del notebook-toggle */
+  top: 68px;  /* Debajo del notebook-toggle */
+  left: 12px;  /* Alineado con notebook */
   z-index: 30;
   width: 48px;
   height: 48px;
@@ -371,8 +371,8 @@
   .phone-toggle {
     width: 40px;
     height: 40px;
-    top: 8px;
-    left: 60px;
+    top: 60px;
+    left: 8px;
   }
 
   .phone-toggle__icon {
