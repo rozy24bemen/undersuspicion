@@ -15,6 +15,7 @@ US.GameEngine = class GameEngine {
     this.askedQuestions = new Set();
     this.presentedEvidence = {};
     this.detectedContradictions = new Set();
+    this.discoveredPhoneNumbers = new Set();
     this.notebook = [];
 
     // Simple event emitter
@@ -41,6 +42,7 @@ US.GameEngine = class GameEngine {
     this.activeSuspectIdx = 0;
     this.askedQuestions = new Set();
     this.detectedContradictions = new Set();
+    this.discoveredPhoneNumbers = new Set();
     this.notebook = [];
     this._caseStartedAt = Date.now();
 
@@ -251,6 +253,24 @@ US.GameEngine = class GameEngine {
       totalContradictions: totalC,
       explanation: allCorrect ? this.caseData.correctExplanation : this.caseData.wrongExplanation
     };
+  }
+
+  // ── Phone Tools ──────────────────────────────────
+
+  discoverPhoneNumber(phoneId) {
+    if (!this.caseData.phoneNumbers) return false;
+    if (this.discoveredPhoneNumbers.has(phoneId)) return false;
+    this.discoveredPhoneNumbers.add(phoneId);
+    this.emit('phoneNumberDiscovered', { phoneId });
+    return true;
+  }
+
+  getDiscoveredPhoneNumbers() {
+    return Array.from(this.discoveredPhoneNumbers);
+  }
+
+  getPhoneNumbers() {
+    return this.caseData.phoneNumbers || [];
   }
 
   // ── Internal ──────────────────────────────────────

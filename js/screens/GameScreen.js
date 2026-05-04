@@ -27,6 +27,10 @@ US.GameScreen = class GameScreen {
             <span class="notebook-toggle__icon">📓</span>
             <span class="notebook-toggle__badge" id="notebook-badge">0</span>
           </div>
+          <div class="phone-toggle" id="phone-toggle">
+            <span class="phone-toggle__icon">☎️</span>
+            <span class="phone-toggle__badge" id="phone-badge">0</span>
+          </div>
           <div class="desk__label">MESA DE PRUEBAS</div>
         </div>
         <div class="room" id="half-room">
@@ -66,6 +70,9 @@ US.GameScreen = class GameScreen {
 
     this.ui.root.querySelector('#notebook-toggle')
       .addEventListener('click', () => this.ui.notebook.toggle());
+
+    this.ui.root.querySelector('#phone-toggle')
+      .addEventListener('click', () => this.ui.phone.toggle());
 
     // Arranca el tutorial guiado si es la primera partida del jugador.
     if (this.ui.tutorial && !US.TutorialOverlay.isCompleted()) {

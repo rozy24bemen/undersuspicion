@@ -1,0 +1,381 @@
+/* ═══════════════════════════════════════════════════
+   UNDER SUSPICION — PHONE TOOL
+   Teléfono de escritorio interactivo
+   ═══════════════════════════════════════════════════ */
+
+/* ── PHONE OVERLAY (Modal centrado) ────────────────── */
+
+.phone-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.phone-overlay.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0s 0s;
+}
+
+/* ── PHONE MODAL ───────────────────────────────────── */
+
+.phone-modal {
+  width: 420px;
+  max-width: 90vw;
+  background: #1a1410;
+  border: 3px solid #3a3028;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(100, 60, 20, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: phone-pop 0.25s ease-out;
+}
+
+@keyframes phone-pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── HEADER ────────────────────────────────────────── */
+
+.phone-modal__header {
+  background: #4a3520;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2a1a08;
+}
+
+.phone-modal__title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #e8c860;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.phone-modal__close {
+  width: 28px;
+  height: 28px;
+  background: #3a2a18;
+  border: 1px solid #5a4530;
+  color: #c8a850;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  transition: background 0.2s ease;
+}
+.phone-modal__close:hover {
+  background: #4a3a28;
+}
+
+/* ── BODY ──────────────────────────────────────────– */
+
+.phone-modal__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── DISPLAY (pantalla) ────────────────────────────– */
+
+.phone-display {
+  background: #f0f0f0;
+  border: 2px solid #999;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: center;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.phone-display__screen {
+  font-family: 'Courier New', monospace;
+  font-size: 28px;
+  color: #000;
+  letter-spacing: 4px;
+  font-weight: bold;
+  min-width: 200px;
+}
+
+/* ── KEYPAD ────────────────────────────────────────– */
+
+.phone-keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.keypad-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.keypad-btn {
+  width: 60px;
+  height: 60px;
+  background: #2a2018;
+  border: 2px solid #5a4a38;
+  color: #d0c0a0;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  font-family: var(--font);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.keypad-btn:hover {
+  background: #3a3a28;
+  border-color: #8a7a68;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.keypad-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.keypad-btn--special {
+  background: #3a2a18;
+  border-color: #6a5a48;
+}
+
+.keypad-btn--special:hover {
+  background: #4a3a28;
+}
+
+.keypad-btn--call {
+  background: #2a5030;
+  border-color: #4a8050;
+  color: #80d080;
+  flex: 1;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.keypad-btn--call:hover {
+  background: #3a6a40;
+  border-color: #6aa060;
+}
+
+.keypad-btn--hang {
+  background: #502a2a;
+  border-color: #8a5a5a;
+  color: #d08080;
+  flex: 1;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.keypad-btn--hang:hover {
+  background: #6a3a3a;
+  border-color: #aa7a7a;
+}
+
+/* ── RESULT (Resultado de llamada) ─────────────────– */
+
+.phone-result {
+  background: rgba(100, 100, 100, 0.1);
+  border: 1px solid #5a4a38;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phone-result__header {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.phone-result__message {
+  font-size: 11px;
+  color: #d0c0a0;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.phone-result__effect {
+  font-size: 10px;
+  color: #80d080;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.phone-result__close {
+  background: #4a3520;
+  border: 1px solid #6a5a48;
+  color: #e8c860;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: background 0.2s ease;
+  font-family: var(--font);
+}
+
+.phone-result__close:hover {
+  background: #5a4530;
+}
+
+/* ── FOOTER (Números descubiertos) ─────────────────– */
+
+.phone-modal__footer {
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid #3a2a18;
+  padding: 12px 16px;
+  font-size: 10px;
+}
+
+.phone-discovered__title {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #e8c860;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.phone-discovered__item {
+  font-size: 9px;
+  color: #a0a080;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+}
+
+.phone-discovered__item:last-child {
+  border-bottom: none;
+}
+
+.phone-discovered__empty {
+  font-size: 9px;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ── PHONE TOGGLE (botón en el desk) ───────────────– */
+
+.phone-toggle {
+  position: absolute;
+  top: 68px;  /* Debajo del notebook-toggle */
+  left: 12px;  /* Alineado con notebook */
+  z-index: 30;
+  width: 48px;
+  height: 48px;
+  background: #e8dfc0;
+  border: 2px solid #8a7040;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.phone-toggle:hover {
+  transform: scale(1.08);
+}
+
+.phone-toggle__icon {
+  font-size: 22px;
+}
+
+.phone-toggle__badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  background: var(--blue);
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: bold;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-toggle__badge.visible {
+  display: flex;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────– */
+
+@media (max-width: 768px) {
+  .phone-modal {
+    width: 90vw;
+    max-width: none;
+  }
+
+  .keypad-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .phone-display__screen {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-modal {
+    width: 95vw;
+    border-radius: 8px;
+  }
+
+  .keypad-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .phone-display__screen {
+    font-size: 20px;
+  }
+
+  .phone-toggle {
+    width: 40px;
+    height: 40px;
+    top: 60px;
+    left: 8px;
+  }
+
+  .phone-toggle__icon {
+    font-size: 18px;
+  }
+}
