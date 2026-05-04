@@ -27,6 +27,7 @@ US.UIController = class UIController {
     this.desk      = new US.DeskManager(this);
     this.modals    = new US.ModalManager(this);
     this.notebook  = new US.NotebookPanel(this);
+    this.phone     = new US.PhoneTool(this);
     this.questions = new US.QuestionPanel(this);
     this.tutorial  = US.TutorialOverlay ? new US.TutorialOverlay(this) : null;
 

@@ -366,6 +366,72 @@ US.CASES['caso-01'] = {
   wrongExplanation: 'El verdadero culpable era Hugo Delmar, el chef. Diego había descubierto que Hugo llevaba meses desviando fondos del restaurante (47.000€). Ante la amenaza de denuncia, Hugo envenenó la copa de vino de Diego con rodenticida durante la cena, sirviéndola personalmente. Las pruebas clave eran: la cámara de seguridad, la carta suplicando clemencia, y el testimonio del camarero.',
 
   // ═══════════════════════════════════════════════════
+  // HERRAMIENTAS DE MESA — Teléfono
+  // ═══════════════════════════════════════════════════
+  phoneNumbers: [
+    {
+      id: 'phone-001',
+      number: '555-0142',
+      source: 'marta-c1 (Abogado Fernando Ríos)',
+      description: 'Número de Fernando Ríos, abogado de Marta',
+      unlockCondition: 'marta-c1 pregunta hecha',
+      response: {
+        type: 'text',
+        content: 'Llamadas realizadas a este número: 21:45-22:30 (Marta Requena). La llamada fue verificada. Coartada CONFIRMADA para Marta.'
+      },
+      gameplayEffect: {
+        type: 'confirmAlibi',
+        target: 'marta'
+      }
+    },
+    {
+      id: 'phone-002',
+      number: '555-0289',
+      source: 'marta-c3 (Camarero Tomás)',
+      description: 'Número del camarero del restaurante',
+      unlockCondition: 'marta-c3 pregunta hecha',
+      response: {
+        type: 'text',
+        content: 'Hola, soy Tomás. Sí, vi a Marta en el salón toda la noche. Estaba hablando por teléfono. No entró al despacho.'
+      },
+      gameplayEffect: {
+        type: 'addNotebook',
+        target: 'testimonio-camarero'
+      }
+    },
+    {
+      id: 'phone-003',
+      number: '555-9876',
+      source: 'Recibo de hotel (evidencia)',
+      description: 'Hotel Costa Dorada - recepción',
+      unlockCondition: 'hotel evidencia presentada',
+      response: {
+        type: 'text',
+        content: 'Hotel Costa Dorada. ¿Preguntas sobre Lucía Varela? No, no se hospedaba aquí. Nadie con ese nombre en nuestros registros.'
+      },
+      gameplayEffect: {
+        type: 'revealContradiction',
+        target: 'lucia-false-alibi'
+      }
+    },
+    {
+      id: 'phone-004',
+      number: '555-0555',
+      source: 'Carta de Hugo (evidencia)',
+      description: 'Línea directa del despacho de Diego (escritorio)',
+      unlockCondition: 'carta evidencia presentada',
+      response: {
+        type: 'text',
+        content: 'Llamada entrante perdida. Registro de llamadas: 22:15 - Hugo Delmar. Duración: 1 minuto. Diego no respondió.'
+      },
+      gameplayEffect: {
+        type: 'addNotebook',
+        target: 'llamada-hugo-perdida'
+      }
+    }
+  ],
+
+  // ═══════════════════════════════════════════════════
   // CENA EN CASA — Tras resolver el caso
   // ═══════════════════════════════════════════════════
   cena: {
