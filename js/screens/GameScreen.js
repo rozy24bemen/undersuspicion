@@ -74,11 +74,47 @@ US.GameScreen = class GameScreen {
     this.ui.root.querySelector('#phone-toggle')
       .addEventListener('click', () => this.ui.phone.toggle());
 
-    // Arranca el tutorial guiado si es la primera partida del jugador.
-    if (this.ui.tutorial && !US.TutorialOverlay.isCompleted()) {
-      // Esperamos a que el desk haya pintado las tarjetas (requestAnimationFrame interno)
-      setTimeout(() => this.ui.tutorial.start(), 80);
+    // Pregunta al jugador si quiere hacer el tutorial si es la primera partida (caso-01)
+    // y aún no ha respondido en esta sesión.
+    const caseData = this.engine.getCase();
+    if (this.ui.tutorial && 
+        caseData && caseData.id === 'caso-01' && 
+        !US._tutorialPromptShownThisSession) {
+      setTimeout(() => this._showTutorialPrompt(), 80);
     }
+  }
+
+  _showTutorialPrompt() {
+    // Marcar que ya hemos mostrado la pregunta esta sesión
+    US._tutorialPromptShownThisSession = true;
+    
+    const modal = document.createElement('div');
+    modal.className = 'tutorial-prompt-modal';
+    modal.innerHTML = `
+      <div class="tutorial-prompt__container">
+        <div class="tutorial-prompt__content">
+          <h2>¿NECESITAS AYUDA?</h2>
+          <p>¿Te gustaría ver un tutorial de cómo jugar?</p>
+          <div class="tutorial-prompt__buttons">
+            <button class="btn btn--primary" data-action="start-tutorial">SÍ, ENSEÑA ME</button>
+            <button class="btn btn--secondary" data-action="skip-tutorial">NO, QUIERO JUGAR</button>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    this.ui.root.appendChild(modal);
+    
+    modal.querySelector('[data-action="start-tutorial"]')
+      .addEventListener('click', () => {
+        modal.remove();
+        setTimeout(() => this.ui.tutorial.start(), 80);
+      });
+    
+    modal.querySelector('[data-action="skip-tutorial"]')
+      .addEventListener('click', () => {
+        modal.remove();
+      });
   }
 
   _renderSuspectSwitcher() {

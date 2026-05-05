@@ -144,6 +144,8 @@ US.MenuScreen = class MenuScreen {
   _startNewRun() {
     if (US.MetaStore) US.MetaStore.reset();
     if (US.Progress)  US.Progress.reset();
+    // Resetear flag de sesión para tutorial prompt
+    US._tutorialPromptShownThisSession = false;
     if (US.Telemetry) {
       US.Telemetry.newSession();
       US.Telemetry.log('run-start', { caseId: 'caso-01' });
