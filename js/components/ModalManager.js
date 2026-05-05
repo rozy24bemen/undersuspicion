@@ -24,6 +24,9 @@ US.ModalManager = class ModalManager {
             <div class="modal__header-title">EVIDENCIA · DETALLE COMPLETO</div>
             <div class="modal__header-ref">${this.ui._esc(ev.metadata.ref)}</div>
           </div>
+          <div class="modal__header-actions">
+            <button class="modal__uv-btn" data-action="toggle-uv" title="Activar Luz UV">🔦 LUZ UV</button>
+          </div>
           <button class="modal__close" data-action="close-modal">✕</button>
         </div>
         <div class="modal__body">
@@ -65,14 +68,84 @@ US.ModalManager = class ModalManager {
 
     this.modal.classList.add('active');
 
-    this.modal.querySelector('[data-action="close-modal"]')
-      .addEventListener('click', () => this.hideEvidence());
+    // Estado UV para este modal
+    let uvActive = false;
+    const uvBtn = this.modal.querySelector('[data-action="toggle-uv"]');
+    const imageContainer = this.modal.querySelector('.modal__image');
+    const imageImg = this.modal.querySelector('.modal__image-img');
 
-    this.modal.querySelector('[data-action="present-from-modal"]')
-      .addEventListener('click', (e) => {
-        this.hideEvidence();
-        this.ui._handlePresentEvidence(e.currentTarget.dataset.evidenceId);
+    // Toggle UV
+    if (uvBtn) {
+      uvBtn.addEventListener('click', () => {
+        uvActive = !uvActive;
+        uvBtn.classList.toggle('modal__uv-btn--active', uvActive);
+        if (imageContainer) {
+          imageContainer.classList.toggle('modal__image--uv-active', uvActive);
+        }
       });
+    }
+
+    // Cursor UV y filtro de luz
+    if (imageContainer) {
+      // Crear overlay para efecto UV
+      const uvOverlay = document.createElement('div');
+      uvOverlay.className = 'uv-overlay';
+      imageContainer.appendChild(uvOverlay);
+      
+      const uvCursor = document.createElement('div');
+      uvCursor.className = 'uv-cursor';
+      document.body.appendChild(uvCursor);
+
+      imageContainer.addEventListener('mousemove', (e) => {
+        if (!uvActive) return;
+        
+        const rect = imageContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Mostrar cursor UV
+        uvCursor.style.display = 'block';
+        uvCursor.style.left = (e.clientX - 30) + 'px';
+        uvCursor.style.top = (e.clientY - 30) + 'px';
+        
+        // Aplicar efecto de luz UV al overlay
+        uvOverlay.style.opacity = '1';
+        uvOverlay.style.setProperty('--uv-x', x + 'px');
+        uvOverlay.style.setProperty('--uv-y', y + 'px');
+      });
+
+      imageContainer.addEventListener('mouseleave', () => {
+        uvCursor.style.display = 'none';
+        uvOverlay.style.opacity = '0';
+      });
+
+      // Limpiar cursor UV al cerrar modal
+      const closeModalBtn = this.modal.querySelector('[data-action="close-modal"]');
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+          uvCursor.remove();
+          this.hideEvidence();
+        });
+      }
+
+      const presentBtn = this.modal.querySelector('[data-action="present-from-modal"]');
+      if (presentBtn) {
+        presentBtn.addEventListener('click', (e) => {
+          uvCursor.remove();
+          this.hideEvidence();
+          this.ui._handlePresentEvidence(e.currentTarget.dataset.evidenceId);
+        });
+      }
+    } else {
+      this.modal.querySelector('[data-action="close-modal"]')
+        .addEventListener('click', () => this.hideEvidence());
+
+      this.modal.querySelector('[data-action="present-from-modal"]')
+        .addEventListener('click', (e) => {
+          this.hideEvidence();
+          this.ui._handlePresentEvidence(e.currentTarget.dataset.evidenceId);
+        });
+    }
 
     if (this.ui.tutorial) this.ui.tutorial.notify('evidence-modal-opened', evidenceId);
   }

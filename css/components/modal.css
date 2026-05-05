@@ -49,6 +49,46 @@
   letter-spacing: 1px;
 }
 
+.modal__header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.modal__uv-btn {
+  background: #222;
+  color: #666;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  font-family: var(--font);
+  font-size: 9px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.modal__uv-btn:hover {
+  background: #2a2a2a;
+  color: #888;
+  border-color: #555;
+}
+
+.modal__uv-btn--active {
+  background: #4a0080;
+  color: #b366ff;
+  border-color: #8800ff;
+  box-shadow: 0 0 12px rgba(136, 0, 255, 0.4);
+}
+
+.modal__uv-btn--active:hover {
+  background: #5a00a0;
+  box-shadow: 0 0 16px rgba(136, 0, 255, 0.6);
+}
+
 .modal__close {
   width: 32px;
   height: 32px;
@@ -111,6 +151,7 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  transition: filter 0.3s ease;
 }
 
 .modal__section-label {
@@ -143,4 +184,73 @@
 
 .modal__present-btn {
   margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════════════════
+   HERRAMIENTA LUZ UV
+   ═══════════════════════════════════════════════════ */
+
+.modal__image--uv-active {
+  position: relative;
+  cursor: none;
+  background: linear-gradient(135deg, #0a0a1a 0%, #0e0e0e 100%);
+  border-color: #6600cc;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.3) inset;
+}
+
+.modal__image--uv-active .modal__image-img {
+  filter: contrast(1.2) brightness(0.9) saturate(0.5);
+}
+
+/* Overlay de luz UV que sigue el cursor */
+.uv-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  border-radius: 2px;
+}
+
+.uv-overlay::before {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(102, 0, 204, 0.7) 0%, rgba(102, 0, 204, 0.3) 40%, transparent 70%);
+  border-radius: 50%;
+  left: var(--uv-x, 0px);
+  top: var(--uv-y, 0px);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 40px rgba(102, 0, 204, 0.6),
+              0 0 80px rgba(102, 0, 204, 0.3),
+              inset 0 0 30px rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+/* Cursor UV — lupa de luz violeta */
+.uv-cursor {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border: 2px solid #8800ff;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(102, 0, 204, 0.3) 0%, transparent 70%);
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.6),
+              inset 0 0 15px rgba(102, 0, 204, 0.3);
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  animation: uv-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes uv-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(102, 0, 204, 0.6),
+                inset 0 0 15px rgba(102, 0, 204, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(102, 0, 204, 0.8),
+                inset 0 0 20px rgba(102, 0, 204, 0.5);
+  }
 }
