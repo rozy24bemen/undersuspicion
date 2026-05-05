@@ -51,6 +51,12 @@ US.TutorialOverlay = class TutorialOverlay {
     } catch (_) {}
   }
 
+  static resetCompletedFlag() {
+    try {
+      window.localStorage.removeItem('us-tutorial-completed');
+    } catch (_) {}
+  }
+
   start() {
     if (this.active) return;
     if (US.TutorialOverlay.isCompleted()) return;

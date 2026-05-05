@@ -108,6 +108,8 @@ US.GameScreen = class GameScreen {
     modal.querySelector('[data-action="start-tutorial"]')
       .addEventListener('click', () => {
         modal.remove();
+        // Resetear la flag de completado para permitir que el tutorial se inicie
+        US.TutorialOverlay.resetCompletedFlag();
         setTimeout(() => this.ui.tutorial.start(), 80);
       });
     
