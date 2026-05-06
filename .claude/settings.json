@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/Roman/Downloads/**)"
+      "Read(//c/Users/Roman/Downloads/**)",
+      "Bash(python -m http.server 8000)"
     ]
   }
 }

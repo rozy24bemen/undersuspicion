@@ -16,6 +16,10 @@ US.GameEngine = class GameEngine {
     this.presentedEvidence = {};
     this.detectedContradictions = new Set();
     this.discoveredPhoneNumbers = new Set();
+    // { 'uv-light': Set(['ev-foto1', ...]), 'desk-phone': Set([...]) }
+    this.toolDiscoveries = {};
+    // Tabla de argumentación (caso 7): Set de pares correctamente conectados
+    this.matchedArguments = new Set();
     this.notebook = [];
 
     // Simple event emitter
@@ -48,6 +52,8 @@ US.GameEngine = class GameEngine {
 
     this.suspectState = {};
     this.presentedEvidence = {};
+    this.toolDiscoveries = {};
+    this.matchedArguments = new Set();
     src.suspects.forEach(s => {
       this.suspectState[s.id] = { pressure: 0, suspicion: 0 };
       this.presentedEvidence[s.id] = new Set();
@@ -195,23 +201,34 @@ US.GameEngine = class GameEngine {
     };
   }
 
-  resolveCase(who, how, why) {
+  resolveCase(who, how, why, who2) {
     const sol = this.caseData.solution;
+
     const correct = {
       who: who === sol.who,
       how: how === sol.how,
-      why: why === sol.why
+      why: why === sol.why,
+      // Para mecánica de cómplice/doble culpable
+      who2: sol.who2 ? (who2 === sol.who2) : true
     };
-    const allCorrect = correct.who && correct.how && correct.why;
+    const allCorrect = correct.who && correct.how && correct.why && correct.who2;
 
     let score = 0;
-    if (correct.who) score += 40;
-    if (correct.how) score += 30;
-    if (correct.why) score += 30;
+    // Reparto según si hay doble culpable o no
+    if (sol.who2) {
+      if (correct.who)  score += 25;
+      if (correct.who2) score += 25;
+      if (correct.how)  score += 25;
+      if (correct.why)  score += 25;
+    } else {
+      if (correct.who) score += 40;
+      if (correct.how) score += 30;
+      if (correct.why) score += 30;
+    }
 
     const totalC = this.caseData.contradictions.length;
     const foundC = this.detectedContradictions.size;
-    score = Math.min(100, score + Math.round((foundC / totalC) * 20));
+    score = Math.min(100, score + Math.round((foundC / Math.max(totalC, 1)) * 20));
 
     const rating = score >= 90 ? 'S' : score >= 70 ? 'A' : score >= 50 ? 'B' : score >= 30 ? 'C' : 'F';
     const ratingLabel = {
@@ -226,9 +243,11 @@ US.GameEngine = class GameEngine {
       US.Telemetry.log('accuse', {
         caseId:              this.caseData.id,
         who:                 who,
+        who2:                who2 || null,
         how:                 how,
         why:                 why,
         actualWho:           sol.who,
+        actualWho2:          sol.who2 || null,
         correct:             allCorrect,
         score:               score,
         rating:              rating,
@@ -247,12 +266,108 @@ US.GameEngine = class GameEngine {
       score,
       rating,
       ratingLabel,
-      accusedWho: who,
-      actualWho: sol.who,
+      accusedWho:  who,
+      accusedWho2: who2 || null,
+      actualWho:   sol.who,
+      actualWho2:  sol.who2 || null,
       contradictionsFound: foundC,
       totalContradictions: totalC,
       explanation: allCorrect ? this.caseData.correctExplanation : this.caseData.wrongExplanation
     };
+  }
+
+  // ── Herramientas ─────────────────────────────────
+
+  useToolOnEvidence(toolId, evidenceId) {
+    const evidence = this.caseData.evidence.find(e => e.id === evidenceId);
+    const toolEntry = evidence && evidence.toolData && evidence.toolData[toolId];
+
+    if (!toolEntry) return { blocked: true, reason: 'nothingToFind' };
+
+    if (!this.toolDiscoveries[toolId]) this.toolDiscoveries[toolId] = new Set();
+    if (this.toolDiscoveries[toolId].has(evidenceId)) {
+      return { blocked: true, reason: 'alreadyDiscovered' };
+    }
+
+    this.toolDiscoveries[toolId].add(evidenceId);
+    this._addNote('tool', toolId === 'uv-light' ? 'Luz UV' : toolId, evidence.title, toolEntry.reveals);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('tool-used', {
+        caseId:     this.caseData.id,
+        toolId:     toolId,
+        evidenceId: evidenceId
+      });
+    }
+
+    // Comprobar contradicción ligada al hallazgo
+    const contradiction = toolEntry.contradictionId
+      ? this._checkContradictionById(toolEntry.contradictionId, toolEntry.suspectId || null)
+      : null;
+
+    this.emit('toolDiscovery', { toolId, evidenceId, reveals: toolEntry.reveals });
+
+    return { blocked: false, reveals: toolEntry.reveals, contradiction };
+  }
+
+  isToolDiscovered(toolId, evidenceId) {
+    return !!(this.toolDiscoveries[toolId] && this.toolDiscoveries[toolId].has(evidenceId));
+  }
+
+  // Tabla de argumentación (caso 7)
+  matchArgument(statementId, evidenceId) {
+    const argTable = this.caseData.argumentationTable;
+    if (!argTable) return { valid: false };
+
+    const entry = argTable.find(a => a.statementId === statementId && a.evidenceId === evidenceId);
+    const key = statementId + '::' + evidenceId;
+
+    if (!entry) return { valid: false, alreadyMatched: false };
+    if (this.matchedArguments.has(key)) return { valid: true, alreadyMatched: true };
+
+    this.matchedArguments.add(key);
+    this._addNote('argumentation', entry.suspectId, entry.statement, entry.proof);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('argument-matched', {
+        caseId:      this.caseData.id,
+        statementId: statementId,
+        evidenceId:  evidenceId
+      });
+    }
+
+    return { valid: true, alreadyMatched: false, entry };
+  }
+
+  getMatchedArguments() {
+    return this.matchedArguments.size;
+  }
+
+  getRequiredArguments() {
+    return this.caseData.argumentationTable ? this.caseData.argumentationTable.length : 0;
+  }
+
+  _checkContradictionById(contradictionId, suspectId) {
+    const c = this.caseData.contradictions.find(x => x.id === contradictionId);
+    if (!c || this.detectedContradictions.has(c.id)) return null;
+
+    const sid = suspectId || c.suspectId;
+    this.detectedContradictions.add(c.id);
+    if (this.suspectState[sid]) this.suspectState[sid].suspicion += c.suspicionBonus;
+
+    const suspectName = (this.caseData.suspects.find(s => s.id === sid) || {}).name || sid;
+    this._addNote('contradiction', suspectName, c.statement, c.proof);
+
+    if (US.Telemetry) {
+      US.Telemetry.log('contradiction-detected', {
+        caseId:          this.caseData.id,
+        suspectId:       sid,
+        contradictionId: c.id,
+        isRedHerring:    !!c.isRedHerring
+      });
+    }
+
+    return c;
   }
 
   // ── Phone Tools ──────────────────────────────────

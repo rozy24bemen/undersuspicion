@@ -296,6 +296,217 @@
   background-image: url('../../assets/img/suspects/Caso4/Escenario/Escenario-Caser%C3%B3n%20Talavera.png');
 }
 
+/* ── ACTO II — Escenarios ─────────────────────────── */
+
+.room__scene.scene-caso5 {
+  background-image: url('../../assets/img/suspects/Caso5/Escenario/Escenario-Piso%20Salamanca.png');
+}
+
+.room__scene.scene-caso6 {
+  background-image: url('../../assets/img/suspects/Caso6/Escenario/Escenario-Bufete%20Almagro.png');
+}
+
+.room__scene.scene-caso6-callejon {
+  background-image: url('../../assets/img/suspects/Caso6/Escenario/Escenario-Callej%C3%B3n%20Sagasta.png');
+}
+
+.room__scene.scene-caso7 {
+  background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-Chalet%20Aravaca.png');
+}
+
+.room__scene.scene-caso7-sotano {
+  background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-S%C3%B3tano.png');
+}
+
+/* ── HERRAMIENTA: Toolbar ─────────────────────────── */
+
+.tool-toolbar {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,.7);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #888;
+  font-size: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.tool-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.tool-btn--active {
+  border-color: var(--blue);
+  background: #0a0a1a;
+  color: #9999ff;
+}
+
+.tool-btn__icon { font-size: 14px; }
+.tool-btn__label { text-transform: uppercase; }
+
+/* ── HERRAMIENTA: UV Light ────────────────────────── */
+
+.desk--uv-mode {
+  filter: saturate(0.2) hue-rotate(200deg) brightness(0.8);
+  transition: filter .4s;
+}
+
+.desk--uv-mode .desk-card {
+  border-color: #334;
+  background: #090914;
+}
+
+.desk-card.uv-has-reveal {
+  box-shadow: 0 0 12px rgba(100,100,255,.5);
+  border-color: #446;
+  animation: uv-pulse 1.8s ease-in-out infinite;
+}
+
+.desk-card.uv-revealed {
+  box-shadow: 0 0 8px rgba(100,255,200,.3);
+  border-color: #464;
+}
+
+@keyframes uv-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(100,100,255,.4); }
+  50%       { box-shadow: 0 0 20px rgba(100,100,255,.8); }
+}
+
+.uv-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,10,60,.25);
+  pointer-events: none;
+  z-index: 5;
+  border-radius: inherit;
+}
+
+.uv-reveal-popup {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0a0a1e;
+  border: 1px solid #446;
+  border-radius: 4px;
+  padding: 12px 18px;
+  max-width: 340px;
+  z-index: 9000;
+  text-align: center;
+  animation: fadeInUp .3s ease;
+  cursor: pointer;
+}
+
+.uv-reveal-popup__icon { font-size: 22px; margin-bottom: 4px; }
+.uv-reveal-popup__label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #7788ff;
+  margin-bottom: 6px;
+}
+.uv-reveal-popup__text {
+  font-size: 12px;
+  color: #ccd;
+  line-height: 1.5;
+}
+
+.uv-reveal-popup--known .uv-reveal-popup__label { color: #555; }
+.uv-reveal-popup--known { border-color: #333; }
+
+/* ── TABLA DE ARGUMENTACIÓN ───────────────────────── */
+
+.arg-table {
+  margin: 20px 0;
+}
+
+.arg-table__cols {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.arg-table__col {
+  flex: 1;
+}
+
+.arg-table__col-header {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.arg-table__item {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  font-size: 11px;
+  color: #bbb;
+  line-height: 1.4;
+}
+
+.arg-table__item:hover { border-color: #666; background: #171717; }
+
+.arg-table__item--selected {
+  border-color: var(--blue);
+  background: #0a0a18;
+}
+
+.arg-table__item--matched {
+  border-color: #3a3;
+  background: #0a120a;
+  opacity: .7;
+  pointer-events: none;
+}
+
+.arg-table__item-suspect {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--red);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.arg-table__item-icon { font-size: 18px; margin-bottom: 4px; }
+.arg-table__item-text { font-size: 11px; }
+
+.arg-table__feedback {
+  text-align: center;
+  font-size: 11px;
+  color: var(--gold);
+  min-height: 20px;
+  margin: 10px 0;
+  transition: opacity .4s;
+}
+
+.arg-table__progress {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+
 /* Character image floats on top of scene */
 .portrait__img {
   --portrait-scale: 1.3;

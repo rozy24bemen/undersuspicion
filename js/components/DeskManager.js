@@ -17,6 +17,7 @@ US.DeskManager = class DeskManager {
   render() {
     const surface = this.root.querySelector('#desk-surface');
     const evidence = this.engine.getEvidence();
+    this._activeTool = null;
 
     const buildCards = () => {
       const positions = this._generatePositions(evidence.length, surface);
@@ -51,6 +52,93 @@ US.DeskManager = class DeskManager {
     surface.addEventListener('pointermove', e => this._onPointerMove(e));
     surface.addEventListener('pointerup', e => this._onPointerUp(e));
     surface.addEventListener('pointercancel', e => this._onPointerUp(e));
+
+    // Toolbar de herramientas
+    this._renderToolbar();
+  }
+
+  _renderToolbar() {
+    const caseData = this.engine.getCase();
+    if (!caseData || !US.ToolRegistry) return;
+
+    const tools = US.ToolRegistry.getForCase(caseData.availableTools);
+    if (!tools || tools.length === 0) return;
+
+    // Contenedor de herramientas dentro del área del escritorio
+    const deskArea = this.root.querySelector('#desk-area') || this.root.querySelector('#desk-surface').parentElement;
+    let toolbar = deskArea.querySelector('.tool-toolbar');
+    if (toolbar) toolbar.parentNode.removeChild(toolbar);
+
+    toolbar = document.createElement('div');
+    toolbar.className = 'tool-toolbar';
+    toolbar.innerHTML = tools.map(t => `
+      <button class="tool-btn" data-tool-id="${t.id}" title="${this.ui._esc(t.label)}">
+        <span class="tool-btn__icon">${t.icon}</span>
+        <span class="tool-btn__label">${this.ui._esc(t.label)}</span>
+      </button>
+    `).join('');
+
+    deskArea.appendChild(toolbar);
+
+    toolbar.querySelectorAll('.tool-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const toolId = btn.dataset.toolId;
+        const tool = US.ToolRegistry.get(toolId);
+        if (!tool) return;
+
+        if (this._activeTool && this._activeTool.id === toolId) {
+          // Toggle off
+          this._deactivateTool();
+          btn.classList.remove('tool-btn--active');
+        } else {
+          toolbar.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('tool-btn--active'));
+          this._deactivateTool();
+          btn.classList.add('tool-btn--active');
+          this._activateTool(tool);
+        }
+      });
+    });
+  }
+
+  _activateTool(tool) {
+    this._activeTool = tool;
+    const surface = this.root.querySelector('#desk-surface');
+    const ctx = this._buildToolContext(surface);
+    tool.activate(ctx);
+  }
+
+  _deactivateTool() {
+    if (this._activeTool) {
+      this._activeTool.deactivate();
+      this._activeTool = null;
+    }
+  }
+
+  _buildToolContext(surface) {
+    const engine = this.engine;
+    const ui = this.ui;
+    const self = this;
+    return {
+      getEvidence:      () => engine.getEvidence(),
+      getActiveSuspect: () => engine.getActiveSuspect(),
+      getSuspects:      () => engine.getSuspects(),
+      surface:          surface,
+      toolContainer:    surface,
+      esc:              (s) => ui._esc(s),
+      isToolDiscovered: (toolId, evId) => engine.isToolDiscovered(toolId, evId),
+      reportDiscovery:  (toolId, evId, data) => self._handleToolDiscovery(toolId, evId, data)
+    };
+  }
+
+  _handleToolDiscovery(toolId, evidenceId, data) {
+    const result = this.engine.useToolOnEvidence(toolId, evidenceId);
+    if (result.blocked) return;
+    if (this.ui.notebook) this.ui.notebook.refreshContent();
+    if (result.contradiction) {
+      setTimeout(() => {
+        if (this.ui.modals) this.ui.modals.showContradiction(result.contradiction);
+      }, 600);
+    }
   }
 
   _generatePositions(count, surface) {
@@ -176,6 +264,7 @@ US.DeskManager = class DeskManager {
     if (!d.moved && !d.cancelled) {
       var evId = d.card.dataset.evidenceId;
       if (this.ui.tutorial && !this.ui.tutorial.isAllowed('open-evidence', evId)) return;
+
       if (US.Telemetry) {
         var caseData = this.engine.getCase();
         US.Telemetry.log('evidence-clicked', {
@@ -183,6 +272,13 @@ US.DeskManager = class DeskManager {
           evidenceId: evId
         });
       }
+
+      // Si hay una herramienta activa, dejar que la maneje primero
+      if (this._activeTool) {
+        const evidence = this.engine.getEvidence().find(e => e.id === evId);
+        if (evidence && this._activeTool.interactWithEvidence(evidence)) return;
+      }
+
       this.ui.modals.showEvidence(evId);
     }
   }
