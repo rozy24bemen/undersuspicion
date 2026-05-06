@@ -244,7 +244,7 @@ US.TutorialOverlay = class TutorialOverlay {
       // ───────── Paso 6: leer detalle y cerrar modal ─────────
       {
         id: 'read-evidence',
-        target: () => this.root.querySelector('#modal-evidence .modal-card'),
+        target: () => this.root.querySelector('#modal-evidence'),
         title: 'CONTRASTA LA PRUEBA',
         text: 'La cámara de seguridad muestra a Hugo en el pasillo del despacho a las 22:15h. ¡Pero él dijo que no salió de la cocina! Cierra la prueba pulsando la X o ESC.',
         showButton: false,
@@ -319,7 +319,17 @@ US.TutorialOverlay = class TutorialOverlay {
     }
 
     // Esperamos un frame para que el DOM destino esté disponible
-    requestAnimationFrame(() => this._reposition());
+    // Añadimos un delay adicional para pasos que requieren layout recalculado
+    // (especialmente después de cerrar modales)
+    const delayMs = (index === 7 || index === 8) ? 150 : 0;
+    
+    if (delayMs > 0) {
+      setTimeout(() => {
+        requestAnimationFrame(() => this._reposition());
+      }, delayMs);
+    } else {
+      requestAnimationFrame(() => this._reposition());
+    }
   }
 
   _advance() {
@@ -352,10 +362,27 @@ US.TutorialOverlay = class TutorialOverlay {
 
     const rect = target.getBoundingClientRect();
     if (rect.width === 0 && rect.height === 0) {
-      this._maskFull();
-      this.spotlight.style.display = 'none';
-      this._centerTooltip();
+      // El elemento no tiene dimensiones aún. Intentar una vez más después de un delay
+      if (!this._repositionRetries) this._repositionRetries = {};
+      const key = step.id;
+      if (!this._repositionRetries[key]) this._repositionRetries[key] = 0;
+      
+      if (this._repositionRetries[key] < 3) {
+        this._repositionRetries[key]++;
+        setTimeout(() => this._reposition(), 100);
+      } else {
+        // Después de 3 intentos, mostrar tooltip centrado
+        this._maskFull();
+        this.spotlight.style.display = 'none';
+        this._centerTooltip();
+        delete this._repositionRetries[key];
+      }
       return;
+    }
+
+    // Limpiar contador si el elemento ahora tiene dimensiones
+    if (this._repositionRetries && this._repositionRetries[step.id]) {
+      delete this._repositionRetries[step.id];
     }
 
     const pad = 8;
