@@ -20,18 +20,14 @@ US.Progress = (function () {
 
   function _load() {
     if (state) return state;
-    try {
-      const raw = window.localStorage.getItem(KEY);
-      state = raw ? Object.assign({}, DEFAULT, JSON.parse(raw)) : Object.assign({}, DEFAULT);
-      state.completed = Array.isArray(state.completed) ? state.completed : [];
-    } catch (_) {
-      state = { completed: [] };
-    }
+    const raw = US.Storage ? US.Storage.readJSON(KEY) : null;
+    state = raw ? Object.assign({}, DEFAULT, raw) : Object.assign({}, DEFAULT);
+    state.completed = Array.isArray(state.completed) ? state.completed : [];
     return state;
   }
 
   function _save() {
-    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {}
+    if (US.Storage) US.Storage.writeJSON(KEY, state);
   }
 
   return {
@@ -82,6 +78,15 @@ US.Progress = (function () {
     reset() {
       state = { completed: [] };
       _save();
+    },
+
+    /**
+     * Invalida el caché en memoria. Llamar tras escribir directamente la
+     * clave de Storage desde fuera (ej. SaveManager activando un slot).
+     * El próximo getter leerá los valores nuevos.
+     */
+    reload() {
+      state = null;
     }
   };
 })();

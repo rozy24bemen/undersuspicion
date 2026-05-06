@@ -41,7 +41,22 @@
       "Bash(python scripts/rembg_suspects.py)",
       "Bash(node -c js/data/caso03.js)",
       "Bash(node -c js/data/caso04.js)",
-      "Bash(python -c \"import json; d = json.load\\(open\\('assets/manifest.json', encoding='utf-8'\\)\\); print\\('manifest valido. assets:', len\\(d['assets']\\), '· history entries:', len\\(d['history']\\)\\)\")"
+      "Bash(python -c \"import json; d = json.load\\(open\\('assets/manifest.json', encoding='utf-8'\\)\\); print\\('manifest valido. assets:', len\\(d['assets']\\), '· history entries:', len\\(d['history']\\)\\)\")",
+      "Bash(node --check js/components/Storage.js)",
+      "Bash(node --check js/components/SaveManager.js)",
+      "Bash(node --check js/components/Progress.js)",
+      "Bash(node --check js/components/MetaStore.js)",
+      "Bash(node --check js/screens/MenuScreen.js)",
+      "Bash(node --check js/screens/GameScreen.js)",
+      "Bash(node --check js/data/caso01.js)",
+      "Bash(node --check js/components/ModalManager.js)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(git restore *)",
+      "Bash(node --check js/GameEngine.js)",
+      "Bash(node --check js/components/DinnerPanel.js)",
+      "Bash(git add *)"
     ]
   }
 }

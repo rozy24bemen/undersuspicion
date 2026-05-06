@@ -377,8 +377,15 @@ US.CASES['caso-01'] = {
 
   // ═══════════════════════════════════════════════════
   // HERRAMIENTAS DE MESA — Teléfono
+  //
+  // DESACTIVADO en el Acto 1: los números existen como datos pero no hay
+  // ningún hook narrativo que se los revele al jugador (ni en respuestas,
+  // ni en evidencias, ni en libreta). Marcarlos a ciegas no es jugable.
+  // Para reactivar: descomentar el bloque y añadir los puntos donde el
+  // jugador descubre cada dígito (p.ej. respuesta de pregunta que mencione
+  // el número, anotación automática en libreta al disparar un trigger).
   // ═══════════════════════════════════════════════════
-  phoneNumbers: [
+  /* phoneNumbers: [
     {
       id: 'phone-001',
       number: '555-0142',
@@ -439,7 +446,7 @@ US.CASES['caso-01'] = {
         target: 'llamada-hugo-perdida'
       }
     }
-  ],
+  ], */
 
   // ═══════════════════════════════════════════════════
   // CENA EN CASA — Tras resolver el caso

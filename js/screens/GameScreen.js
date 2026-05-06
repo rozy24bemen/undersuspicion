@@ -11,12 +11,22 @@ US.GameScreen = class GameScreen {
   }
 
   render(container) {
+    const caseData = this.engine.getCase();
+    // El teléfono se desbloquea automáticamente cuando el caso tiene
+    // phoneNumbers definidos. Mientras no los tenga, el botón aparece
+    // bloqueado para comunicar al jugador que es una herramienta futura.
+    const phoneAvailable = !!(caseData && Array.isArray(caseData.phoneNumbers) && caseData.phoneNumbers.length > 0);
+    const phoneTitle = phoneAvailable
+      ? 'Teléfono de mesa'
+      : 'Función bloqueada · Disponible en futuros casos';
+
     container.innerHTML = `
       <nav class="game-nav">
         <button class="btn btn--nav-back" data-action="go-menu">← MENÚ</button>
         <div class="game-nav__title">UNDER SUSPICION</div>
         <div class="game-nav__suspects" id="nav-suspects"></div>
         <div class="game-nav__actions">
+          <button class="btn btn--save" data-action="quick-save" title="Guardar partida en la ranura activa">💾 GUARDAR</button>
           <button class="btn btn--resolver" data-action="go-resolve">RESOLVER CASO</button>
         </div>
       </nav>
@@ -27,7 +37,7 @@ US.GameScreen = class GameScreen {
             <span class="notebook-toggle__icon">📓</span>
             <span class="notebook-toggle__badge" id="notebook-badge">0</span>
           </div>
-          <div class="phone-toggle" id="phone-toggle">
+          <div class="phone-toggle ${phoneAvailable ? '' : 'phone-toggle--locked'}" id="phone-toggle" title="${this.ui._esc(phoneTitle)}">
             <span class="phone-toggle__icon">☎️</span>
             <span class="phone-toggle__badge" id="phone-badge">0</span>
           </div>
@@ -60,10 +70,15 @@ US.GameScreen = class GameScreen {
     container.querySelector('[data-action="go-resolve"]')
       .addEventListener('click', () => this.ui.showScreen('resolution'));
 
+    const saveBtn = container.querySelector('[data-action="quick-save"]');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => this._handleQuickSave(saveBtn));
+    }
+
     container.querySelector('[data-action="go-menu"]')
       .addEventListener('click', () => {
         if (this.ui.tutorial && this.ui.tutorial.isActive()) return;
-        if (confirm('¿Abandonar el caso? Se perderá el progreso actual.')) {
+        if (confirm('¿Abandonar el caso? Si no has guardado, perderás el progreso actual.')) {
           this.ui.showScreen('menu');
         }
       });
@@ -72,16 +87,62 @@ US.GameScreen = class GameScreen {
       .addEventListener('click', () => this.ui.notebook.toggle());
 
     this.ui.root.querySelector('#phone-toggle')
-      .addEventListener('click', () => this.ui.phone.toggle());
+      .addEventListener('click', (e) => {
+        const el = e.currentTarget;
+        if (el.classList.contains('phone-toggle--locked')) {
+          this._shakeLocked(el);
+          return;
+        }
+        this.ui.phone.toggle();
+      });
 
     // Pregunta al jugador si quiere hacer el tutorial si es la primera partida (caso-01)
     // y aún no ha respondido en esta sesión.
-    const caseData = this.engine.getCase();
-    if (this.ui.tutorial && 
-        caseData && caseData.id === 'caso-01' && 
+    if (this.ui.tutorial &&
+        caseData && caseData.id === 'caso-01' &&
         !US._tutorialPromptShownThisSession) {
       setTimeout(() => this._showTutorialPrompt(), 80);
     }
+  }
+
+  _shakeLocked(el) {
+    el.classList.remove('tool-locked-shake');
+    void el.offsetWidth; // fuerza reflow para reiniciar la animación
+    el.classList.add('tool-locked-shake');
+  }
+
+  _handleQuickSave(btn) {
+    if (!US.SaveManager) {
+      window.alert('Sistema de guardado no disponible.');
+      return;
+    }
+    if (!US.SaveManager.getActiveSlot()) {
+      window.alert('No hay ranura activa. Esta partida fue iniciada en modo DEV.');
+      return;
+    }
+
+    const ok = US.SaveManager.quickSave(this.engine);
+    if (!ok) {
+      window.alert('No se pudo guardar la partida.');
+      return;
+    }
+
+    if (US.Telemetry) {
+      const caseData = this.engine.getCase();
+      US.Telemetry.log('quick-save', {
+        caseId: caseData ? caseData.id : null,
+        slot:   US.SaveManager.getActiveSlot()
+      });
+    }
+
+    // Feedback visual breve sin bloquear el juego
+    const original = btn.textContent;
+    btn.textContent = '✓ GUARDADO';
+    btn.classList.add('btn--save-ok');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('btn--save-ok');
+    }, 1400);
   }
 
   _showTutorialPrompt() {

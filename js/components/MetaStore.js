@@ -21,19 +21,15 @@ US.MetaStore = (function() {
 
   function _load() {
     if (state) return state;
-    try {
-      const raw = window.localStorage.getItem(KEY);
-      state = raw ? Object.assign({}, DEFAULT, JSON.parse(raw)) : Object.assign({}, DEFAULT);
-      state.memoria   = state.memoria   || {};
-      state.usedLines = state.usedLines || {};
-    } catch (_) {
-      state = Object.assign({}, DEFAULT, { memoria: {}, usedLines: {} });
-    }
+    const raw = US.Storage ? US.Storage.readJSON(KEY) : null;
+    state = raw ? Object.assign({}, DEFAULT, raw) : Object.assign({}, DEFAULT);
+    state.memoria   = state.memoria   || {};
+    state.usedLines = state.usedLines || {};
     return state;
   }
 
   function _save() {
-    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {}
+    if (US.Storage) US.Storage.writeJSON(KEY, state);
   }
 
   function _clamp(v) { return Math.max(0, Math.min(100, v)); }
@@ -83,6 +79,14 @@ US.MetaStore = (function() {
     reset() {
       state = Object.assign({}, DEFAULT, { memoria: {}, usedLines: {} });
       _save();
+    },
+
+    /**
+     * Invalida el caché en memoria. Llamar tras escribir directamente la
+     * clave de Storage desde fuera (ej. SaveManager activando un slot).
+     */
+    reload() {
+      state = null;
     }
   };
 })();

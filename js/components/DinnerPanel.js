@@ -117,6 +117,19 @@ US.DinnerPanel = class DinnerPanel {
         US.Progress.markCompleted(this.caseData.id);
       }
 
+      // Autosave entre casos: vuelca progress+meta al slot activo con
+      // runtime=null (el caso recién terminado está cerrado).
+      if (US.SaveManager && US.SaveManager.getActiveSlot()) {
+        US.SaveManager.autosaveBetweenCases();
+        if (US.Telemetry) {
+          US.Telemetry.log('autosave', {
+            caseId: this.caseData.id,
+            slot:   US.SaveManager.getActiveSlot(),
+            phase:  'between-cases'
+          });
+        }
+      }
+
       // Decide acción siguiente: si hay caso siguiente cargado, encadenar
       // a su intro; si no, volver al menú.
       const nextId    = US.Progress ? US.Progress.getNext() : null;

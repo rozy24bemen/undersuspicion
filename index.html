@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/components/contradiction.css" />
   <link rel="stylesheet" href="css/components/notebook.css" />
   <link rel="stylesheet" href="css/components/tutorial.css" />
+  <link rel="stylesheet" href="css/components/save-slots.css" />
   <link rel="stylesheet" href="css/components/tools/phone.css" />
 
   <!-- CSS: Screens -->
@@ -47,6 +48,9 @@
   <script src="js/data/caso07.js"></script>
   <script src="js/data/cenasGlobal.js"></script>
 
+  <!-- Capa de almacenamiento (debe cargarse antes que MetaStore, Progress y SaveManager) -->
+  <script src="js/components/Storage.js"></script>
+
   <!-- Telemetry (debe cargarse antes que el engine para que los hooks no fallen) -->
   <script src="js/components/Telemetry.js"></script>
 
@@ -67,6 +71,7 @@
   <script src="js/components/QuestionPanel.js"></script>
   <script src="js/components/MetaStore.js"></script>
   <script src="js/components/Progress.js"></script>
+  <script src="js/components/SaveManager.js"></script>
   <script src="js/components/DinnerPanel.js"></script>
   <script src="js/components/DinnerTable.js"></script>
   <script src="js/components/TutorialOverlay.js"></script>

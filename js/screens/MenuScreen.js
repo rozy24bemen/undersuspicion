@@ -1,11 +1,13 @@
 /**
  * MenuScreen — Pantalla del menú principal.
  *
- * Modo historia es lineal: cada partida sigue el orden definido en
- * US.PROGRESS_ORDER. Si hay una run en curso, el botón principal ofrece
- * "CONTINUAR" en lugar de "MODO HISTORIA"; si la run está terminada, ofrece
- * "NUEVA PARTIDA". El selector DEV de casos solo se muestra con ?dev=1 en
- * la URL para no romper la experiencia del jugador final.
+ * Sistema de partidas con 3 slots:
+ *   - NUEVA PARTIDA → abre el panel de slots para elegir dónde crearla
+ *   - CARGAR PARTIDA → abre el panel de slots, solo se puede elegir un slot
+ *     ocupado. Si el slot tiene runtime, restaura el caso a media partida; si
+ *     no, arranca la intro del próximo caso pendiente.
+ *
+ * El selector DEV de casos se muestra con ?dev=1 en la URL.
  */
 var US = US || {};
 
@@ -17,27 +19,13 @@ US.MenuScreen = class MenuScreen {
   }
 
   render(container) {
-    const params = new URLSearchParams(window.location.search);
+    const params  = new URLSearchParams(window.location.search);
     const devMode = params.get('dev') === '1';
     const urlCase = params.get('case');
 
-    // Estado del Modo Historia
-    const allDone = US.Progress && US.Progress.isAllCompleted();
-    const inRun   = US.Progress && US.Progress.hasInProgressRun();
-    const next    = US.Progress ? US.Progress.getNext() : 'caso-01';
-    const nextNum = next ? this._caseNumber(next) : null;
-
-    let primaryLabel, primaryAction;
-    if (allDone) {
-      primaryLabel  = 'NUEVA PARTIDA';
-      primaryAction = 'new-run';
-    } else if (inRun) {
-      primaryLabel  = nextNum ? `CONTINUAR · CASO ${nextNum}` : 'CONTINUAR';
-      primaryAction = 'continue-run';
-    } else {
-      primaryLabel  = 'MODO HISTORIA';
-      primaryAction = 'new-run';
-    }
+    const hasAnySlot = US.SaveManager
+      ? US.SaveManager.listSlots().some(s => s.data)
+      : false;
 
     container.innerHTML = `
       <div class="menu">
@@ -60,8 +48,8 @@ US.MenuScreen = class MenuScreen {
 
           <div class="menu__stamp">CONFIDENTIAL</div>
 
-          <button class="btn btn--menu btn--primary" data-action="${primaryAction}">${this.ui._esc(primaryLabel)}</button>
-          ${inRun ? `<button class="btn btn--menu" data-action="reset-run">REINICIAR PARTIDA</button>` : ''}
+          <button class="btn btn--menu btn--primary" data-action="new-game">NUEVA PARTIDA</button>
+          <button class="btn btn--menu ${hasAnySlot ? '' : 'btn--disabled'}" data-action="load-game" ${hasAnySlot ? '' : 'disabled'}>CARGAR PARTIDA</button>
           ${devMode ? `<button class="btn btn--menu" data-action="dev-cases">⚙ DEV · ELEGIR CASO</button>` : ''}
           <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
           <button class="btn btn--menu btn--exit" data-action="exit-game">SALIR</button>
@@ -77,34 +65,19 @@ US.MenuScreen = class MenuScreen {
       </div>
     `;
 
-    // ── Botón primario: arrancar / continuar / nueva partida ─────
-    const primaryBtn = container.querySelector('[data-action="' + primaryAction + '"]');
-    if (primaryBtn) {
-      primaryBtn.addEventListener('click', () => {
-        if (primaryAction === 'continue-run') {
-          this._continueRun();
-        } else {
-          this._startNewRun();
-        }
-      });
+    container.querySelector('[data-action="new-game"]')
+      .addEventListener('click', () => this._openSlotPanel('new'));
+
+    const loadBtn = container.querySelector('[data-action="load-game"]');
+    if (loadBtn && hasAnySlot) {
+      loadBtn.addEventListener('click', () => this._openSlotPanel('load'));
     }
 
-    const resetBtn = container.querySelector('[data-action="reset-run"]');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        if (window.confirm('¿Reiniciar la partida? Se perderá el progreso de los casos jugados.')) {
-          this._startNewRun();
-        }
-      });
-    }
-
-    // ── DEV: solo aparece con ?dev=1 ────────────────────────────
     const devBtn = container.querySelector('[data-action="dev-cases"]');
     if (devBtn) {
       devBtn.addEventListener('click', () => this._openDevCasePicker());
     }
 
-    // ── Salir ──────────────────────────────────────────────────
     const exitBtn = container.querySelector('[data-action="exit-game"]');
     if (exitBtn) {
       exitBtn.addEventListener('click', () => {
@@ -114,14 +87,10 @@ US.MenuScreen = class MenuScreen {
       });
     }
 
-    // ── Auto-arranque por URL (?case=caso-02) ──────────────────
-    // Útil para iteración. Marca tutorial completado y arranca el caso pedido
-    // sin tocar el progreso del Modo Historia.
     if (urlCase && US.CASES && US.CASES[urlCase]) {
       setTimeout(() => this._launchCaseFromDev(urlCase), 0);
     }
 
-    // ── Telemetría ─────────────────────────────────────────────
     const exportBtn = container.querySelector('[data-action="export-telemetry"]');
     if (exportBtn) {
       exportBtn.addEventListener('click', () => {
@@ -139,41 +108,190 @@ US.MenuScreen = class MenuScreen {
     }
   }
 
-  // ── Modo historia: arranque y continuación ──────────────────
+  // ── Panel de slots ─────────────────────────────────
 
-  _startNewRun() {
-    if (US.MetaStore) US.MetaStore.reset();
-    if (US.Progress)  US.Progress.reset();
-    // Resetear flag de sesión para tutorial prompt
+  _openSlotPanel(mode) {
+    if (!US.SaveManager) {
+      window.alert('Sistema de guardado no disponible.');
+      return;
+    }
+
+    // Eliminar panel previo si existe
+    const existing = document.getElementById('save-slots-overlay');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'save-slots-overlay';
+    overlay.className = 'save-slots-overlay';
+
+    const titleText = mode === 'load' ? 'CARGAR PARTIDA' : 'NUEVA PARTIDA';
+    const helpText  = mode === 'load'
+      ? 'Selecciona la partida que quieres continuar.'
+      : 'Elige una ranura. Las ranuras ocupadas se sobreescribirán.';
+
+    overlay.innerHTML = `
+      <div class="save-slots__modal">
+        <div class="save-slots__header">
+          <span class="save-slots__title">${titleText}</span>
+          <button class="save-slots__close" data-action="close-slots">✕</button>
+        </div>
+        <div class="save-slots__help">${helpText}</div>
+        <div class="save-slots__list" id="save-slots-list"></div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.remove();
+    });
+    overlay.querySelector('[data-action="close-slots"]')
+      .addEventListener('click', () => overlay.remove());
+
+    this._renderSlotList(overlay, mode);
+  }
+
+  _renderSlotList(overlay, mode) {
+    const list = overlay.querySelector('#save-slots-list');
+    const slots = US.SaveManager.listSlots();
+    const active = US.SaveManager.getActiveSlot();
+
+    list.innerHTML = slots.map(({ slot, data }) => {
+      const occupied = !!data;
+      const desc     = occupied ? US.SaveManager.describeSlot(data) : null;
+      const isActive = active === slot;
+
+      let body;
+      if (occupied) {
+        const midTag = desc.midCase ? '<span class="save-slot__tag">EN CURSO</span>' : '';
+        body = `
+          <div class="save-slot__name">${this.ui._esc(desc.name)} ${midTag}</div>
+          <div class="save-slot__meta">
+            <span>Casos completados: ${desc.completedCount}</span>
+            <span>·</span>
+            <span>Última actividad: ${this.ui._esc(desc.updatedAt)}</span>
+          </div>
+        `;
+      } else {
+        body = `
+          <div class="save-slot__name save-slot__name--empty">— Ranura vacía —</div>
+          <div class="save-slot__meta"><span>Sin partida guardada</span></div>
+        `;
+      }
+
+      // Acciones disponibles en cada modo
+      let actions = '';
+      if (mode === 'load') {
+        if (occupied) {
+          actions = `
+            <button class="save-slot__btn save-slot__btn--primary" data-action="load" data-slot="${slot}">CARGAR</button>
+            <button class="save-slot__btn save-slot__btn--ghost"   data-action="delete" data-slot="${slot}">BORRAR</button>
+          `;
+        } else {
+          actions = `<span class="save-slot__btn save-slot__btn--disabled">VACÍA</span>`;
+        }
+      } else {
+        // mode === 'new'
+        if (occupied) {
+          actions = `
+            <button class="save-slot__btn save-slot__btn--warn"  data-action="overwrite" data-slot="${slot}">SOBREESCRIBIR</button>
+            <button class="save-slot__btn save-slot__btn--ghost" data-action="delete"    data-slot="${slot}">BORRAR</button>
+          `;
+        } else {
+          actions = `<button class="save-slot__btn save-slot__btn--primary" data-action="new" data-slot="${slot}">EMPEZAR AQUÍ</button>`;
+        }
+      }
+
+      return `
+        <div class="save-slot ${isActive ? 'save-slot--active' : ''} ${occupied ? '' : 'save-slot--empty'}">
+          <div class="save-slot__index">RANURA ${slot}${isActive ? ' · ACTIVA' : ''}</div>
+          <div class="save-slot__body">${body}</div>
+          <div class="save-slot__actions">${actions}</div>
+        </div>
+      `;
+    }).join('');
+
+    list.querySelectorAll('[data-action]').forEach(btn => {
+      const action = btn.dataset.action;
+      const n      = parseInt(btn.dataset.slot, 10);
+      btn.addEventListener('click', () => this._handleSlotAction(action, n, overlay, mode));
+    });
+  }
+
+  _handleSlotAction(action, n, overlay, mode) {
+    switch (action) {
+      case 'new': {
+        US.SaveManager.newGameInSlot(n);
+        overlay.remove();
+        this._startCase('caso-01', { newRun: true });
+        break;
+      }
+      case 'overwrite': {
+        if (!window.confirm('¿Sobreescribir la ranura ' + n + '? La partida guardada se perderá.')) return;
+        US.SaveManager.newGameInSlot(n);
+        overlay.remove();
+        this._startCase('caso-01', { newRun: true });
+        break;
+      }
+      case 'load': {
+        const runtime = US.SaveManager.loadSlot(n);
+        overlay.remove();
+        if (runtime && runtime.caseId) {
+          // Mid-case: rehidratar engine y saltar a game directamente
+          const ok = this.engine.restore(runtime);
+          if (ok) {
+            if (US.TutorialOverlay && typeof US.TutorialOverlay.markCompleted === 'function') {
+              US.TutorialOverlay.markCompleted();
+            }
+            if (US.Telemetry) {
+              US.Telemetry.newSession();
+              US.Telemetry.log('run-resume', { caseId: runtime.caseId, slot: n, midCase: true });
+            }
+            this.ui.showScreen('game');
+            return;
+          }
+          // Si la restauración falla (caso desaparecido, schema viejo) caemos
+          // al flujo "entre casos" como fallback.
+          window.alert('No se pudo restaurar el caso en curso. Continuando desde el próximo caso pendiente.');
+        }
+        // Entre casos: arrancar la intro del próximo pendiente
+        const next = US.Progress ? US.Progress.getNext() : 'caso-01';
+        if (next) {
+          this._startCase(next, { newRun: false, slot: n });
+        } else {
+          window.alert('Esta partida ya completó el Acto. Inicia una nueva.');
+          this.ui.showScreen('menu');
+        }
+        break;
+      }
+      case 'delete': {
+        if (!window.confirm('¿Borrar la partida de la ranura ' + n + '? Esta acción no se puede deshacer.')) return;
+        US.SaveManager.deleteSlot(n);
+        // Re-render del propio panel
+        this._renderSlotList(overlay, mode);
+        // Si justo borramos el slot activo y estamos en modo load, podríamos
+        // quedarnos sin slots: re-render arregla el estado visual.
+        break;
+      }
+    }
+  }
+
+  _startCase(caseId, opts) {
+    opts = opts || {};
     US._tutorialPromptShownThisSession = false;
     if (US.Telemetry) {
       US.Telemetry.newSession();
-      US.Telemetry.log('run-start', { caseId: 'caso-01' });
+      US.Telemetry.log(opts.newRun ? 'run-start' : 'run-continue', {
+        caseId: caseId,
+        slot:   US.SaveManager ? US.SaveManager.getActiveSlot() : null
+      });
     }
-    this.engine.loadCase('caso-01');
+    this.engine.loadCase(caseId);
     this.ui.showScreen('intro');
-  }
-
-  _continueRun() {
-    const next = US.Progress ? US.Progress.getNext() : 'caso-01';
-    if (!next) {
-      // Run terminada: arranca una nueva.
-      this._startNewRun();
-      return;
-    }
-    if (US.Telemetry) {
-      US.Telemetry.log('run-continue', { caseId: next });
-    }
-    this.engine.loadCase(next);
-    this.ui.showScreen('intro');
-  }
-
-  _caseNumber(caseId) {
-    const m = /(\d+)/.exec(caseId || '');
-    return m ? parseInt(m[1], 10) : null;
   }
 
   // ── DEV · selector de caso (solo con ?dev=1) ────────────────
+
   _openDevCasePicker() {
     const ids = Object.keys(US.CASES || {});
     if (ids.length === 0) {
@@ -196,6 +314,8 @@ US.MenuScreen = class MenuScreen {
   }
 
   _launchCaseFromDev(caseId) {
+    // Modo DEV: no toca SaveManager. Resetea solo lo que necesita la sesión
+    // para no contaminar partidas guardadas.
     if (US.MetaStore) US.MetaStore.reset();
     if (US.Telemetry) {
       US.Telemetry.newSession();

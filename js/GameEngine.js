@@ -388,6 +388,93 @@ US.GameEngine = class GameEngine {
     return this.caseData.phoneNumbers || [];
   }
 
+  // ── Persistencia (snapshot del caso en curso) ─────
+
+  /**
+   * Devuelve un snapshot serializable del estado del caso en curso. No
+   * incluye caseData (eso vive en US.CASES por id). Sets convertidos a
+   * arrays para que JSON.stringify funcione. Incluye los hallazgos de
+   * herramientas y la tabla de argumentación introducidos en Acto 2.
+   */
+  serialize() {
+    if (!this.caseData) return null;
+
+    const presentedPlain = {};
+    Object.keys(this.presentedEvidence).forEach(suspectId => {
+      presentedPlain[suspectId] = Array.from(this.presentedEvidence[suspectId]);
+    });
+
+    const toolDiscoveriesPlain = {};
+    Object.keys(this.toolDiscoveries || {}).forEach(toolId => {
+      toolDiscoveriesPlain[toolId] = Array.from(this.toolDiscoveries[toolId]);
+    });
+
+    return {
+      caseId:                 this.caseData.id,
+      activeSuspectIdx:       this.activeSuspectIdx,
+      caseStartedAt:          this._caseStartedAt || null,
+      suspectState:           JSON.parse(JSON.stringify(this.suspectState)),
+      askedQuestions:         Array.from(this.askedQuestions),
+      presentedEvidence:      presentedPlain,
+      detectedContradictions: Array.from(this.detectedContradictions),
+      discoveredPhoneNumbers: Array.from(this.discoveredPhoneNumbers),
+      toolDiscoveries:        toolDiscoveriesPlain,
+      matchedArguments:       Array.from(this.matchedArguments || []),
+      notebook:               this.notebook.slice()
+    };
+  }
+
+  /**
+   * Rehidrata el motor desde un snapshot generado por serialize().
+   * Devuelve true si el caso al que se refiere el snapshot existe en
+   * US.CASES y la restauración fue posible.
+   */
+  restore(snapshot) {
+    if (!snapshot || !snapshot.caseId) return false;
+    const src = US.CASES && US.CASES[snapshot.caseId];
+    if (!src) return false;
+
+    this.caseData         = src;
+    this.activeSuspectIdx = typeof snapshot.activeSuspectIdx === 'number' ? snapshot.activeSuspectIdx : 0;
+    this._caseStartedAt   = snapshot.caseStartedAt || Date.now();
+
+    // suspectState debe contener TODOS los sospechosos del caso. Si en el
+    // snapshot falta alguno (caso modificado entre versiones) lo inicializamos.
+    this.suspectState = {};
+    src.suspects.forEach(s => {
+      const saved = snapshot.suspectState && snapshot.suspectState[s.id];
+      this.suspectState[s.id] = saved
+        ? { pressure: saved.pressure || 0, suspicion: saved.suspicion || 0 }
+        : { pressure: 0, suspicion: 0 };
+    });
+
+    this.askedQuestions = new Set(Array.isArray(snapshot.askedQuestions) ? snapshot.askedQuestions : []);
+
+    this.presentedEvidence = {};
+    src.suspects.forEach(s => {
+      const saved = snapshot.presentedEvidence && snapshot.presentedEvidence[s.id];
+      this.presentedEvidence[s.id] = new Set(Array.isArray(saved) ? saved : []);
+    });
+
+    this.detectedContradictions = new Set(Array.isArray(snapshot.detectedContradictions) ? snapshot.detectedContradictions : []);
+    this.discoveredPhoneNumbers = new Set(Array.isArray(snapshot.discoveredPhoneNumbers) ? snapshot.discoveredPhoneNumbers : []);
+
+    // Hallazgos por herramienta: { 'uv-light': Set([...]), ... }
+    this.toolDiscoveries = {};
+    if (snapshot.toolDiscoveries && typeof snapshot.toolDiscoveries === 'object') {
+      Object.keys(snapshot.toolDiscoveries).forEach(toolId => {
+        this.toolDiscoveries[toolId] = new Set(snapshot.toolDiscoveries[toolId] || []);
+      });
+    }
+
+    this.matchedArguments = new Set(Array.isArray(snapshot.matchedArguments) ? snapshot.matchedArguments : []);
+    this.notebook         = Array.isArray(snapshot.notebook) ? snapshot.notebook.slice() : [];
+
+    this.emit('caseLoaded', this.caseData);
+    this.emit('notebookUpdated', this.notebook);
+    return true;
+  }
+
   // ── Internal ──────────────────────────────────────
 
   _checkContradictions(suspectId) {
