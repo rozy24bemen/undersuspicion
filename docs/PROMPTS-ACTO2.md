@@ -4,6 +4,22 @@
 > visuales de los Casos 5 ("El cajón"), 6 ("Estudio Caracedo") y 7 ("El
 > sótano"). Formato validado con la v3 del style-bible (Disco Elysium /
 > digital oil painting). **Eliminar tras finalizar producción**.
+
+> ## ⚠️ CONVENCIÓN DE FRAMING (alineada con Acto 1)
+>
+> Todos los prompts de sospechosos en este documento generan retratos a
+> **CUERPO ENTERO DE PIE** (Full-body standing, head to feet), igual que en
+> Acto 1. El framing se ha unificado tras detectar que la versión inicial
+> (half-body, sentados) producía sospechosos sentados, inconsistente con
+> Hugo, Lucía, Marta y los demás del Acto 1.
+>
+> **Cuando generes**: si el modelo te devuelve un sospechoso sentado o
+> recortado a la cintura, añade al final del NEGATIVE: `seated, sitting,
+> chair, hands on lap, half-body framing, waist-up crop, bust crop`.
+>
+> Las referencias residuales a "chair" o "table" en algunas poses son
+> deliberadas: el sospechoso está de pie *junto* a la mesa o *apoyado*
+> en el respaldo de una silla vacía — nunca sentado.
 >
 > El Acto II introduce la **luz UV** (Caso 5), la **prueba plantada** (Caso 6)
 > y la **tabla de argumentación** (Caso 7). Ninguno de esos sistemas necesita
@@ -141,9 +157,10 @@ smile, youthful, healthy.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body framing from waist up,
-slight three-quarter angle, neutral dark interrogation room background slightly
-out-of-focus, single warm key light from upper-left at 45 degrees.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background slightly out-of-focus. Warm key light
+from upper-left at 45 degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art for a noir detective adventure game (Disco Elysium / classic 1990s
@@ -167,7 +184,8 @@ a small rounded collar, a cream cardigan with pearl buttons, a thin gold
 chain with a small cross at the throat, small pearl stud earrings,
 practical flat shoes partially visible.
 
-Pose & expression (NEUTRAL): upright posture, hands folded on the lap,
+Pose & expression (NEUTRAL): standing upright, weight evenly balanced on
+both feet, both hands clasped in front of her body at waist height,
 direct but gentle gaze, lips set in a composed line — the look of someone
 accustomed to keeping things to themselves.
 
@@ -186,8 +204,8 @@ masculine features, multiple people.
 [Same art style, same subject, same background — ATTACH approved Neutral portrait
 as reference image]
 
-Suspect portrait, 3:4 aspect ratio, half-body, three-quarter angle, same dark
-interrogation background.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet,
+three-quarter angle, same dark interrogation background.
 
 Same subject as reference: Aurelia Lobera, 75 year-old Spanish woman, petite
 and neat, short white hair, grey skirt, cream cardigan, pearl earrings.
@@ -195,7 +213,7 @@ CRITICAL: same face, same hair, same clothing as the approved Neutral.
 
 Pose & expression (PENSATIVA / TALKING): head tilted slightly down, eyes
 looking somewhere past the detective — lost in a memory she is deciding
-whether to share, lips barely parted, hands clasped more tightly in her lap,
+whether to share, lips barely parted, hands clasped more tightly in front of her,
 a faint shadow of grief across her brow.
 
 Style ID: undersuspi-noir-v1.
@@ -235,9 +253,10 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body framing from waist up,
-slight three-quarter angle, neutral dark interrogation room background slightly
-out-of-focus, single warm key light from upper-left at 45 degrees.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background slightly out-of-focus. Warm key light
+from upper-left at 45 degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art for a noir detective adventure game (Disco Elysium / classic 1990s
@@ -261,7 +280,7 @@ shoulders, a white shirt with a loose collar, a burgundy-striped tie
 hanging slightly crooked and loosened — the look of a man who dressed
 for something and then forgot he was dressed.
 
-Pose & expression (NEUTRAL): sitting slightly forward, elbows on his
+Pose & expression (NEUTRAL): standing slightly hunched forward, hands
 knees, hands loosely linked, a default worried look on his face — not
 frightened exactly, but perpetually braced for the next bad thing.
 
@@ -298,8 +317,8 @@ NEGATIVE: same as neutral.
 
 Same subject: Damián Mora. CRITICAL: same face, same clothes as approved Neutral.
 
-Pose & expression (NERVIOSO): visibly agitated — he has half-risen from
-his seat, one hand flat on the table as if to push himself up, eyes wide
+Pose & expression (NERVIOSO): visibly agitated — he has taken a step
+back, one hand flat on the table as if to steady himself, eyes wide
 and blinking rapidly, a sheen of sweat on his forehead and upper lip, mouth
 half open as if caught mid-word, the collar of his shirt now noticeably damp.
 
@@ -319,9 +338,10 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body framing from waist up,
-slight three-quarter angle, neutral dark interrogation room background slightly
-out-of-focus, single warm key light from upper-left at 45 degrees.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background slightly out-of-focus. Warm key light
+from upper-left at 45 degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art for a noir detective adventure game (Disco Elysium / classic 1990s
@@ -347,7 +367,8 @@ with a small institutional embroidery on the chest pocket (no readable text),
 a thin navy fleece zip-up open over it, practical rubber-soled shoes barely
 visible, no jewellery, a plain watch on the left wrist.
 
-Pose & expression (NEUTRAL): seated very upright, hands flat on her thighs,
+Pose & expression (NEUTRAL): standing very upright, hands held flat
+against the front of her thighs,
 gaze direct and unreadable — the composed mask of someone who has decided
 not to show anything, which itself is slightly off.
 
@@ -406,9 +427,10 @@ expressions. Subtle crack, not a breakdown.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body framing from waist up,
-slight three-quarter angle, neutral dark interrogation room background slightly
-out-of-focus, single warm key light from upper-left at 45 degrees.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background slightly out-of-focus. Warm key light
+from upper-left at 45 degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art for a noir detective adventure game (Disco Elysium / classic 1990s
@@ -433,7 +455,8 @@ collar, a plain navy flannel shirt underneath, no tie, simple dark trousers,
 the unpretentious clothing of a man who drove from Guadalajara and did not
 dress for the police.
 
-Pose & expression (NEUTRAL): slightly forward lean, both hands on the table
+Pose & expression (NEUTRAL): standing with a slightly forward lean, both
+hands resting on the back of an unseen chair
 in front of him — open, nothing to hide — direct gaze meeting the detective's
 eyes without hesitation, a stillness that comes from having already decided
 to be honest.
@@ -470,8 +493,8 @@ NEGATIVE: same as neutral.
 Same subject: Roque Vellido. CRITICAL: same face, same clothes.
 
 Pose & expression (NERVIOSO): he knows something important is being
-approached and he is deciding how much to say — he has pulled back
-slightly in his chair, one hand grips the edge of the table, the jaw
+approached and he is deciding how much to say — he has taken a half
+step back, one hand grips the edge of the table, the jaw
 tightens under the moustache, his eyes finally break contact for one
 moment, looking down, before they come back up with a resolution.
 
@@ -942,9 +965,9 @@ blood, dramatic lighting, warm palette.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light from
-upper-left.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light from upper-left.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -967,7 +990,8 @@ white shirt underneath with a small pointed collar, a thin gold bangle
 barely visible at the wrist, small gold stud earrings, a quality look
 that modernises the family firm without abandoning its formality.
 
-Pose & expression (NEUTRAL): seated straight, arms on the table, controlled
+Pose & expression (NEUTRAL): standing straight, arms folded across her
+chest, controlled
 posture, chin slightly elevated — a woman accustomed to being the person
 asking the questions, now being asked them.
 
@@ -1025,8 +1049,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1052,7 +1077,8 @@ ago, a grey tie loosened at the collar, a white shirt with the top
 button undone, a faint sweat stain barely visible at the collar — the
 look of a man who has been in this jacket for too many hours.
 
-Pose & expression (NEUTRAL): slightly slumped in the chair, one hand
+Pose & expression (NEUTRAL): standing with shoulders slightly slumped,
+weight on one leg, one hand
 gripping the other wrist on the table, eyes that never quite settle —
 the body language of chronic anxiety that predates whatever he is being
 accused of.
@@ -1111,8 +1137,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1141,8 +1168,9 @@ woven pattern, a white shirt with double cuffs, a silk pocket square in
 cream, a signet ring on the right hand — everything speaks of old money
 and precision.
 
-Pose & expression (NEUTRAL): leaning back very slightly in the chair,
-one arm resting along the chair back, the other hand relaxed on the table,
+Pose & expression (NEUTRAL): standing tall, weight balanced on the back
+leg, shoulders relaxed,
+one arm resting along the back of an empty chair, the other hand on the table,
 eyes meeting the detective with absolute calm — a man who has never felt
 guilty in his life.
 
@@ -1204,8 +1232,9 @@ NEGATIVE: panic, fear, obvious guilt, dishevelled, same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1230,7 +1259,8 @@ turtleneck, well-fitted dark trousers, minimal jewellery — a thin ring
 or no jewellery at all, flat leather shoes. The look is modern, sharp,
 younger than the rest of the firm but trying to read as serious.
 
-Pose & expression (NEUTRAL): seated with one leg crossed over the other,
+Pose & expression (NEUTRAL): standing with weight on one leg, the other
+foot slightly crossed in front,
 arms crossed lightly over her chest — not defensive, but a slight barrier —
 eyes level and direct, a trace of impatience in the set of the chin.
 
@@ -1288,8 +1318,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1757,8 +1788,9 @@ anime, 3D, photorealistic.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1839,8 +1871,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1863,7 +1896,7 @@ black blouse, a silk scarf loosely knotted at the neck, reading glasses
 on a thin cord around her neck, a practical quality bag strap visible
 on one shoulder.
 
-Pose & expression (NEUTRAL): sitting across from the detective in a
+Pose & expression (NEUTRAL): standing facing the detective, in a
 businesslike way — both hands flat on the table, direct gaze, the look
 of someone who has dealt with difficult authors and difficult situations
 and knows how to manage a room.
@@ -1921,8 +1954,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -1948,7 +1982,8 @@ sweater — retired clothes, but clean and self-respecting. No tie. A
 plain watch on the left wrist. The look of a man who no longer has
 anything to prove but still dresses like someone who did once.
 
-Pose & expression (NEUTRAL): leaning forward with his elbows on the
+Pose & expression (NEUTRAL): standing with a slight forward lean, hands
+resting on the
 table, large hands loosely clasped, looking at the detective with a
 directness that has a weight to it — not intimidating, but full of
 things unsaid for a very long time.
@@ -2007,8 +2042,9 @@ NEGATIVE: same as neutral.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -2033,8 +2069,9 @@ as Pinhel's but clearly quality — a plain white shirt, a dark tie, a
 simple watch on the left wrist. The look of a successful Madrid businessman
 on the younger, newer-money side.
 
-Pose & expression (NEUTRAL): leaning back slightly in the chair, one arm
-on the chair back, the other hand resting on the table, the confident
+Pose & expression (NEUTRAL): standing relaxed, weight on the back leg,
+one arm
+on the back of an empty chair, the other hand resting on the table, the confident
 pose of a man who has been in difficult situations before and managed them
 — controlled and slightly impatient.
 
@@ -2096,8 +2133,9 @@ tension only.
 ### Neutral
 
 ```
-Suspect portrait, 3:4 vertical aspect ratio, half-body from waist up, slight
-three-quarter angle, dark interrogation room background, warm key light.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet, occupying the central vertical axis of the image.
+Dark interrogation room background. Warm key light.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
@@ -2122,7 +2160,8 @@ not a suit jacket, not a fashionable jacket, just a good warm jacket.
 A plain dark sweater underneath. Practical dark trousers. The no-nonsense
 clothes of a self-made working-class business owner.
 
-Pose & expression (NEUTRAL): arms crossed, occupying his chair with a
+Pose & expression (NEUTRAL): standing with arms crossed, occupying the
+frame with a
 physical solidity, gaze level and patient — a man who rarely speaks but
 when he does, people listen. The silence itself is a kind of pressure.
 
@@ -2160,7 +2199,7 @@ Same subject: Vicente Solera. CRITICAL: same face, same clothes, same
 broad physical presence.
 
 Pose & expression (NERVIOSO): the vehicle registration has been raised —
-he has shifted in the chair, the arms are no longer crossed but both
+he has shifted his stance, the arms are no longer crossed but both
 hands are now flat on the table, he is looking at the table surface
 rather than at the detective, the jaw is set hard, a man who knows the
 physical evidence places him there and is deciding in real time whether

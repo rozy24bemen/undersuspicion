@@ -6,8 +6,10 @@
  */
 var US = US || {};
 
-// Orden lineal del Modo Historia. Cuando se añadan casos 5-8, se extiende aquí.
-US.PROGRESS_ORDER = ['caso-01', 'caso-02', 'caso-03', 'caso-04'];
+// Orden lineal del Modo Historia. Acto 1: casos 1-4. Acto 2: casos 5-7.
+// Caso 8 (final) se añadirá cuando esté implementado.
+US.PROGRESS_ORDER = ['caso-01', 'caso-02', 'caso-03', 'caso-04',
+                     'caso-05', 'caso-06', 'caso-07'];
 
 US.Progress = (function () {
   const KEY = 'undersuspi.progress';

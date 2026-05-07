@@ -79,6 +79,7 @@ US.TutorialOverlay = class TutorialOverlay {
       window.removeEventListener('scroll', this._reposHandler, true);
       this._reposHandler = null;
     }
+    this._unobserveTarget();
     if (markCompleted) {
       US.TutorialOverlay.markCompleted();
     }
@@ -347,8 +348,13 @@ US.TutorialOverlay = class TutorialOverlay {
       this._maskFull();
       this.spotlight.style.display = 'none';
       this._centerTooltip();
+      this._unobserveTarget();
       return;
     }
+
+    // Observamos el target para reposicionar cuando cambie de tamaño
+    // (p. ej. cuando carga la imagen del modal de evidencia y la tarjeta crece).
+    this._observeTarget(target);
 
     const rect = target.getBoundingClientRect();
     if (rect.width === 0 && rect.height === 0) {
@@ -430,6 +436,29 @@ US.TutorialOverlay = class TutorialOverlay {
     }
     tt.style.left = left + 'px';
     tt.style.top  = top + 'px';
+  }
+
+  // ── Observación de cambios de tamaño en el target ───
+
+  _observeTarget(target) {
+    if (!target) return;
+    if (this._observedTarget === target) return;
+    this._unobserveTarget();
+    this._observedTarget = target;
+    if (typeof ResizeObserver === 'undefined') return;
+    this._observer = new ResizeObserver(() => {
+      if (!this.active) return;
+      this._reposition();
+    });
+    this._observer.observe(target);
+  }
+
+  _unobserveTarget() {
+    if (this._observer) {
+      this._observer.disconnect();
+      this._observer = null;
+    }
+    this._observedTarget = null;
   }
 
   // ── Helpers para encontrar targets ──────────────────

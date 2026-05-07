@@ -148,7 +148,7 @@ US.DinnerPanel = class DinnerPanel {
           this.ui.showScreen('intro');
         };
       } else if (allDone) {
-        actionLabel = 'VOLVER AL MENÚ · ACTO I COMPLETADO';
+        actionLabel = 'VOLVER AL MENÚ · INVESTIGACIÓN COMPLETADA';
         actionHandler = () => this.ui.showScreen('menu');
       } else {
         actionLabel = 'VOLVER AL MENÚ';

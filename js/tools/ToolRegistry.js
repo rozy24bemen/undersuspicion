@@ -21,8 +21,11 @@ US.ToolRegistry = {
   },
 
   getForCase(availableTools) {
-    // Si el caso declara qué herramientas tiene, filtrar; si no, devolver todas.
-    if (!availableTools || availableTools.length === 0) return this.getAll();
+    // Una herramienta solo aparece en la mesa si el caso la declara
+    // explícitamente en `availableTools`. Casos sin esta clave no muestran
+    // toolbar — evita herramientas no funcionales (p. ej. la luz UV en casos
+    // que aún no tienen pruebas con `toolData['uv-light']`).
+    if (!Array.isArray(availableTools)) return [];
     return availableTools
       .map(id => this._tools.get(id))
       .filter(Boolean);

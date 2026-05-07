@@ -103,6 +103,28 @@ US.GameScreen = class GameScreen {
         !US._tutorialPromptShownThisSession) {
       setTimeout(() => this._showTutorialPrompt(), 80);
     }
+
+    // Mini-tutorial del teléfono al entrar al caso-03 por primera vez.
+    // Persistencia propia (no se resetea con MetaStore).
+    if (caseData && caseData.id === 'caso-03' &&
+        !US.GameScreen.isPhoneIntroSeen() &&
+        !US._phoneIntroShownThisSession) {
+      setTimeout(() => this._showPhoneIntroModal(), 200);
+    }
+  }
+
+  static isPhoneIntroSeen() {
+    try {
+      return window.localStorage.getItem('us-phone-intro-seen') === 'true';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static markPhoneIntroSeen() {
+    try {
+      window.localStorage.setItem('us-phone-intro-seen', 'true');
+    } catch (_) {}
   }
 
   _shakeLocked(el) {
@@ -177,6 +199,40 @@ US.GameScreen = class GameScreen {
     modal.querySelector('[data-action="skip-tutorial"]')
       .addEventListener('click', () => {
         modal.remove();
+      });
+  }
+
+  _showPhoneIntroModal() {
+    US._phoneIntroShownThisSession = true;
+
+    const modal = document.createElement('div');
+    modal.className = 'tutorial-prompt-modal';
+    modal.innerHTML = `
+      <div class="tutorial-prompt__container">
+        <div class="tutorial-prompt__content">
+          <h2>NUEVA HERRAMIENTA · TELÉFONO ☎️</h2>
+          <p>En tu mesa hay un <strong>teléfono de escritorio</strong>. Cuando descubras un número de teléfono entre las pruebas o los testimonios, podrás marcarlo aquí para escuchar lo que esa línea revele.</p>
+          <p>En este caso encontrarás un <strong>número incompleto</strong>. Tendrás que reunir los fragmentos a través de las pruebas y los interrogatorios. Cuando logres marcarlo entero, descubrirás algo decisivo para la investigación.</p>
+          <p style="font-size:11px;color:var(--gold-dim);margin-top:-10px;">El botón ☎️ está en la esquina superior izquierda de la mesa de pruebas.</p>
+          <div class="tutorial-prompt__buttons">
+            <button class="btn btn--primary" data-action="phone-intro-ok">ENTENDIDO</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.ui.root.appendChild(modal);
+
+    modal.querySelector('[data-action="phone-intro-ok"]')
+      .addEventListener('click', () => {
+        modal.remove();
+        US.GameScreen.markPhoneIntroSeen();
+        // Parpadeo guiado del botón del teléfono para fijarlo en la atención del jugador.
+        const phoneToggle = this.ui.root.querySelector('#phone-toggle');
+        if (phoneToggle && !phoneToggle.classList.contains('phone-toggle--locked')) {
+          phoneToggle.classList.add('phone-toggle--highlight');
+          setTimeout(() => phoneToggle.classList.remove('phone-toggle--highlight'), 5000);
+        }
       });
   }
 

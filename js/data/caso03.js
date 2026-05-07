@@ -239,7 +239,7 @@ US.CASES['caso-03'] = {
         'movil_carla':    { response: '"Los mensajes borrados deben ser los suyos. \'JS\'. Iniciales de Jorge Sallén. Me apuesto lo que quiera. Ella los borraba cuando volvía a casa, lo hacía cada noche por seguridad."', pressureCost: 12 },
         'rrhh':           { response: '"[respira hondo] Por fin. Por fin se ve negro sobre blanco. Pero esto debería haber pasado hace un año, no hace dos días. Si la denuncia hubiera entrado antes... [silencio]"', pressureCost: 10 },
         'recibo_cafe':    { response: '"Café tardío en la oficina. Eso me sonaba a tarde de entrega cerrada. Si ella iba a quedarse hasta las diez, yo lo sabía. Pero ese día no me avisó porque pensaba salir antes. Acabó saliendo más tarde."', pressureCost: 8 },
-        'cuaderno':       { response: '"Conozco la letra. Es suya. Si lo apuntaba a mano es que iba a llamar fuera. Para no dejar registro digital. Estaba pidiendo ayuda en algún sitio. Una asociación, seguro."', pressureCost: 10 },
+        'cuaderno':       { response: '"Conozco la letra. Es suya. Si lo apuntaba a mano es que iba a llamar fuera. Para no dejar registro digital. Estaba pidiendo ayuda en algún sitio. Una asociación, seguro. [pausa] El número... lo dictó en voz alta una vez para memorizarlo. Repetía \'noventa y ocho\' al final, como un mantra. Y un dos en el medio que decía como un puente entre los grupos. No sé por qué se me ha quedado."', pressureCost: 10 },
         'pegatina_22':    { response: '"Veintidós es el número del despacho de Jorge Sallén en la planta cuarta. Carla lo apuntaba en sus notas para acordarse de no pasar por allí cuando él estuviese. Era su sistema."', pressureCost: 14 },
         'mail_fragmento': { response: '"Esa firma no la conozco. ¿Algún número de teléfono? Si Esteban dice que es de fuera, será de fuera. Pero el dominio... \'asistenciamujer.es\'. Eso es lo que estaba haciendo Carla. Llamando."', pressureCost: 10 },
         'foto_vidal':     { response: '"Ese es el padre de Esteban. La tuvo en su despacho desde que entró en la empresa. No sé qué relación tendrá con Carla. Ninguna, supongo."', pressureCost: 6 }
@@ -393,7 +393,7 @@ US.CASES['caso-03'] = {
       icon: '📧',
       imagePath: 'assets/img/suspects/Caso3/Pruebas/P8 — Mail con fragmento numérico.png',
       shortDesc: 'Mail externo a Carla. Asociación de asistencia. Servidor coincide con oficina de Vidal.',
-      fullDesc: 'Mail recibido en la cuenta personal de Carla Vinyets el 16 de mayo desde una dirección externa, "informa@asistenciamujer.es". El cuerpo es genérico ("respondemos a su consulta del 14 de mayo"); la firma incluye un teléfono parcial: "[...] llámenos al 91 X3 X 65 47 [...]". Origen verificado: una asociación de asistencia jurídica a víctimas de acoso. Detalle colateral: la dirección IP del envío sitúa al servidor en Madrid centro, en el mismo edificio que la oficina paralela de la calle Sagasta donde Esteban Vidal acudió entre los días 17 y 21 de mayo según logs de su VPN personal.',
+      fullDesc: 'Mail recibido en la cuenta personal de Carla Vinyets el 16 de mayo desde una dirección externa, "informa@asistenciamujer.es". El cuerpo es genérico ("respondemos a su consulta del 14 de mayo"); la firma muestra un teléfono parcialmente legible — algunos caracteres se han corrompido en el reenvío automático: "[...] línea de atención 24h: 665-X3-47-9X [...]". Origen verificado: una asociación de asistencia jurídica a víctimas de acoso, sede en Madrid centro. Detalle colateral: la dirección IP del envío sitúa al servidor en el mismo edificio que la oficina paralela de la calle Sagasta donde Esteban Vidal acudió entre los días 17 y 21 de mayo según logs de su VPN personal.',
       metadata: { fecha: '16/05/2026', fuente: 'Cuenta personal Carla Vinyets', ref: 'TEL-2026-0521-F' }
     },
     {
@@ -405,6 +405,40 @@ US.CASES['caso-03'] = {
       shortDesc: 'Foto enmarcada en el despacho de Vidal. "Talavera de Vélez, 1986. Padre y Comisario Mora".',
       fullDesc: 'Foto enmarcada sobre la estantería del despacho de Esteban Vidal. Hombre con uniforme de la Guardia Civil junto a un Citroën GS de los años 80. Inscripción al dorso, manuscrita: "Talavera de Vélez, 1986. Mi padre y el Comisario Mora". Vidal menciona, sin que se le pregunte, que su padre y un comisario apellidado Mora trabajaron juntos en aquel pueblo. Catalogado como referencia colateral; sin línea de investigación abierta.',
       metadata: { fecha: '22/05/2026', fuente: 'Despacho Esteban Vidal — TecBaria S.A.', ref: 'INV-2026-0521-G' }
+    }
+  ],
+
+  // ═══════════════════════════════════════════════════
+  // HERRAMIENTAS DE MESA — Teléfono
+  //
+  // El número 665-23-47-98 corresponde a la línea 24h de la Asociación de
+  // Asistencia Jurídica a Víctimas de Acoso. Carla intentó llamar el 18
+  // de mayo y dejó un buzón decisivo nombrando a Jorge Sallén.
+  //
+  // Fragmentos repartidos por las pruebas para que el jugador reconstruya
+  // el número:
+  //   - Cuaderno (P6):     6XX-X3-XX-9X        → posiciones 1, 5, 8
+  //   - Mail asociación:    665-X3-47-9X        → posiciones 1-3, 5, 6-7, 8
+  //   - Respuesta de Olalla al cuaderno:        → posición 4 (el "dos del
+  //     medio") y posición 9 (el "ocho" final)
+  //   - Pegatina "22":      es el despacho de Sallén, NO un fragmento del
+  //     teléfono. Sirve de pista hacia el sospechoso, no hacia el número.
+  // ═══════════════════════════════════════════════════
+  phoneNumbers: [
+    {
+      id: 'phone-asistencia',
+      number: '665-23-47-98',
+      source: 'Asociación de Asistencia Jurídica a Víctimas de Acoso',
+      description: 'Línea 24h de la asociación. Carla intentó llamar el 18 de mayo.',
+      unlockCondition: 'Reunir los fragmentos: cuaderno + mail + respuesta de Olalla al cuaderno',
+      response: {
+        type: 'text',
+        content: '*Tono de marcado · contestador automático*\n\n"Ha llamado a la línea 24h de la Asociación de Asistencia Jurídica a Víctimas de Acoso. Si su llamada es urgente, puede dejar un mensaje tras la señal."\n\n*pi*\n\n*Mensaje guardado · 18 de mayo, 23:14 · entrante de número con prefijo 91:*\n\n"Hola, soy Carla Vinyets. Trabajo en TecBaria, calle Sagasta. Necesito ayuda urgente. Hay un compañero, Jorge Sallén, que lleva meses persiguiéndome. Le he puesto la denuncia formal en RRHH hace dos días. Pero él se ha enterado y le tengo miedo. Salgo tarde del despacho casi todas las noches. Por favor, llámenme. Mi número está en el formulario que les mandé. Por favor."\n\n*fin del mensaje*'
+      },
+      gameplayEffect: {
+        type: 'addNotebook',
+        target: 'mensaje-carla-asociacion'
+      }
     }
   ],
 

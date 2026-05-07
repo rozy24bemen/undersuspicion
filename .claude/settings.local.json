@@ -56,7 +56,13 @@
       "Bash(git restore *)",
       "Bash(node --check js/GameEngine.js)",
       "Bash(node --check js/components/DinnerPanel.js)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(node --check js/data/caso03.js)",
+      "PowerShell(Get-ChildItem -Path \"assets\\\\img\\\\suspects\\\\Caso5\" -Recurse -File | ForEach-Object { $_.FullName.Replace\\(\\(Get-Location\\).Path + \"\\\\\", \"\"\\) })",
+      "Bash(cd /c/Users/damasa/Documents/PROYECTOFINAL/undersuspicion && find assets/img/suspects/Caso2 -type f | head -10)",
+      "Read(//c/c/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/suspects/**)"
     ]
   }
 }
