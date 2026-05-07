@@ -62,7 +62,20 @@
       "Bash(node --check js/data/caso03.js)",
       "PowerShell(Get-ChildItem -Path \"assets\\\\img\\\\suspects\\\\Caso5\" -Recurse -File | ForEach-Object { $_.FullName.Replace\\(\\(Get-Location\\).Path + \"\\\\\", \"\"\\) })",
       "Bash(cd /c/Users/damasa/Documents/PROYECTOFINAL/undersuspicion && find assets/img/suspects/Caso2 -type f | head -10)",
-      "Read(//c/c/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/suspects/**)"
+      "Read(//c/c/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/suspects/**)",
+      "Bash(python -c \"import rembg\")",
+      "Bash(where python *)",
+      "Bash(python -c \"import rembg; print\\('rembg available'\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(rm aurelia_nobg_test.png && mkdir -p assets/img/suspects/Caso5/Sospechosos/_originales_con_fondo && cp assets/img/suspects/Caso5/Sospechosos/*.png assets/img/suspects/Caso5/Sospechosos/_originales_con_fondo/ && ls assets/img/suspects/Caso5/Sospechosos/_originales_con_fondo/ | wc -l)",
+      "PowerShell(Rename-Item -LiteralPath \"assets\\\\img\\\\suspects\\\\Caso5\\\\Retrato-Victima-Caso5.png\" -NewName \"Retrato_Victima_caso5.png\")",
+      "Bash(python)",
+      "Bash(python -m http.server 8765)",
+      "Bash(curl -sI http://localhost:8765/index.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/index.html)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\damasa\\Documents\\PROYECTOFINAL\\undersuspicion\\assets\\img\\suspects\\Caso5\\Sospechosos"
     ]
   }
 }

@@ -37,7 +37,12 @@ US.CASES['caso-05'] = {
     cssClass: 'scene-caso5'
   },
 
-  availableTools: ['uv-light'],
+  // Luz UV disponible en este caso. El botón aparece en TODAS las pruebas:
+  // las que tengan `toolData['uv-light']` revelan algo (con imagen UV o
+  // texto narrativo); el resto muestran "sin hallazgos" — para que el
+  // jugador tenga que investigar pista por pista. Sin toolbar de mesa: la
+  // herramienta vive dentro de cada modal. Ver ModalManager.showEvidence.
+  uvLightAvailable: true,
 
   suspects: [
     // ──────────────── AURELIA LOBERA ────────────────
@@ -325,9 +330,18 @@ US.CASES['caso-05'] = {
       shortDesc: 'Cajón del escritorio con candado numérico. Combinación desconocida.',
       fullDesc: 'Cajón de madera en el escritorio del dormitorio. Candado numérico de cuatro dígitos. La combinación no figura en ningún papel visible del piso. Lucía Solera (caso 4) no la conoce. Los papeles del caserón de Talavera mencionaban "agosto 1986, calle Goya 14". La combinación podría ser 8614.',
       metadata: { fecha: '18-07-2026', fuente: 'Inspección del piso de Hermes', ref: 'OBJ-05-002' },
+      lock: {
+        digits: 4,
+        combination: '8614',
+        prompt: 'Candado numérico de 4 dígitos. Introduce la combinación.',
+        success: 'El cajón se abre. Dentro: papeles que Hermes guardaba para ti.',
+        failure: 'La combinación no abre el candado.',
+        unlocksMessage: 'Has abierto el cajón de Hermes. Tres pruebas nuevas se han añadido a la mesa.'
+      },
       toolData: {
         'uv-light': {
-          reveals: 'COMBINACIÓN 8614 grabada en la madera bajo el cajón con tinta invisible. Agosto 1986, calle Goya 14. El cajón se abre.',
+          reveals: 'COMBINACIÓN 8614 grabada en la madera bajo el cajón con tinta invisible. Agosto 1986, calle Goya 14.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P2-UV — Cajón con Combinación bajo UV.png',
           contradictionId: 'c05-cajon-uv'
         }
       }
@@ -344,6 +358,7 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Bajo la luz UV: mancha de sangre seca sobre la figura del hombre de uniforme (el Comisario Mora). El bebé en brazos de la mujer lleva un traje de punto idéntico al de una foto del detective de niño en sus propios documentos.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P3-UV — Foto de Grupo 1985 con Sangre bajo UV.png',
           contradictionId: null
         }
       }
@@ -356,7 +371,8 @@ US.CASES['caso-05'] = {
       imagePath: 'assets/img/suspects/Caso5/Pruebas/P4 — Carta Inacabada.png',
       shortDesc: '"Querido sobrino Roberto..." — carta sin terminar en el cajón.',
       fullDesc: '"Querido sobrino Roberto, llevo tiempo queriendo decirte algunas cosas sobre tu padre y sobre tu madre. Antes de que sea demasiado tarde para los dos. Tu padre era un hombre con un peso que no supo llevar. Aquella noche de agosto..." La carta se interrumpe. Es la primera vez que el nombre "Roberto" aparece dirigido directamente al detective. Letra temblorosa pero determinada. Tinta azul reciente.',
-      metadata: { fecha: '18-07-2026', fuente: 'Cajón abierto con combinación 8614', ref: 'DOC-05-004' }
+      metadata: { fecha: '18-07-2026', fuente: 'Cajón abierto con combinación 8614', ref: 'DOC-05-004' },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'fotos_carmen',
@@ -370,9 +386,11 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Las manchas amarronadas en las fotos de Carmen son sangre seca antigua. No hay rastro de herida en las fotos. La sangre es exterior a las imágenes: alguien las manejó con manos con sangre.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P5-UV — Fotos de Carmen Lobera con Sangre bajo UV.png',
           contradictionId: 'c05-fotos-uv'
         }
-      }
+      },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'hoja_elena',
@@ -386,9 +404,11 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Bajo la luz UV aparece un nombre escrito en sangre seca casi invisible: "ELENA". En letra cursiva, cuidadosa, como si alguien la hubiera escrito con un dedo mojado en sangre hace años. El detective observa el nombre. "Habrá muchas Elenas en el mundo. ¿Qué relación tiene mi mujer con los papeles de mi tío?"',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P6-UV — Hoja Elena UV.png',
           contradictionId: null
         }
-      }
+      },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'sobre_dinero',

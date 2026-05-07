@@ -103,6 +103,19 @@ assets/img/ui/icon-uv-light.svg   (icono toolbar)
 
 ## Hermes Mora — VÍCTIMA
 
+> ⚠️ **Diferenciación obligatoria respecto a Salvador Cienfuegos** (víctima
+> Caso 2). Salvador es un hombre delgado, demacrado, con pelo gris ralo
+> peinado hacia atrás, ojos azules hundidos, nariz rojiza, sin bigote, con
+> pijama azul y bata granate. Hermes debe leer instantáneamente como **otro
+> hombre completamente distinto**: cuerpo más lleno, calva con corona pelada
+> y franja lateral blanca, **bigote blanco poblado**, gafas redondas, ojos
+> marrones, piel oliva ruborosa, pijama de seda a rayas sin bata.
+>
+> Los descriptores positivos y negativos abajo están calibrados para forzar
+> esa separación. Si la generación devuelve algo "tipo Salvador" (delgado,
+> ojos azules, sin bigote, sin gafas), regenerar con énfasis en los puntos
+> en mayúsculas del NEGATIVE.
+
 ```
 Police archive portrait, 3:4 vertical aspect ratio, identification-card style,
 framing head and shoulders only, centered.
@@ -120,30 +133,57 @@ Lighting: even cool documentary lighting from the front, slight rim light from
 behind for separation.
 
 Subject — DETAILED FACE (must NOT resemble any common illustration character,
-generate a unique original face):
-- 80 year-old Spanish man, former civil servant of the Ministry of Health
-- Face: deeply lined forehead, heavy jowls, prominent nose with slight
-  downward curve, thin lips slightly parted in repose, hooded watery pale
-  blue eyes set under sparse white eyebrows, faint age spots on the cheeks
-  and forehead, sunken temples, gaunt cheekbones
-- Hair: very sparse white hair combed sideways over a mostly bald crown,
-  two or three thin strands, pale scalp visible
-- Build: thin and frail, slightly hunched shoulders barely visible
+generate a unique original face; the subject must look distinctly DIFFERENT
+from any other archival victim portrait — see distinguishing features below):
+- 80 year-old Spanish man, retired SENIOR civil servant of the Ministry of
+  Health — well-fed, comfortable bourgeois life in the Salamanca district
+  of Madrid; the look of a "señor mayor" who lived well
+- Face shape: ROUND, full, with HEAVY JOWLS and a soft DOUBLE CHIN; full
+  cheeks, NOT gaunt, NOT sunken, NOT thin — a face padded by decades of
+  good meals and sedentary office life
+- Skin: warm OLIVE Mediterranean complexion with rosy hypertensive cheeks
+  and nose, NOT pale, NOT ashen, NOT ruddy-broken-veined; faint age spots
+  on the temples; skin texture soft rather than weathered
+- Eyes: small, calm, warm BROWN eyes set under bushy white-grey eyebrows
+  — NOT blue, NOT grey, NOT hooded — eyes that look slightly down through
+  reading glasses
+- Glasses: round gold-rim reading glasses sitting low on the bridge of
+  the nose (a classic civil-servant detail) — clearly visible, NOT
+  removed, NOT pushed up
+- Moustache: thick well-groomed WHITE moustache covering the upper lip,
+  trimmed flat at the bottom edge in the old Spanish señor style — this
+  is the strongest distinguishing feature, MUST be present
+- Hair: completely BALD on the crown with a clean horseshoe-fringe of
+  short white hair around the sides and back, neatly combed — NOT
+  "thinning grey", NOT "combed sideways over scalp", NOT receding-from-
+  temples
+- Build: BROAD shoulders, full chest, slightly thick neck — the bulk
+  of a man who never did manual work but ate well
 
-Clothing: old-fashioned cream-coloured dress shirt with a faded brown
-cardigan buttoned to the top, the look of a man who never fully retired
-from formality.
+Clothing: a striped silk pyjama top in navy and burgundy vertical stripes
+with a small mandarin/notch collar and a single visible button at the
+neck — old-fashioned upper-middle-class sleepwear. NO dressing gown, NO
+robe over it, NO cardigan, NO shirt-and-cardigan combo, NO cream colours.
 
-Mood: lifeless documentary tone, neutral expression, eyes open and direct,
-no smile, face of a man photographed for the record.
+Mood: lifeless documentary tone, neutral expression, eyes open and looking
+slightly downward through the glasses, no smile, face of a man photographed
+post-mortem for the police record — calm and dignified, NOT haggard, NOT
+melancholic.
 
-Composition: head and shoulders centered, eyes at upper third.
+Composition: head and shoulders centered, eyes at upper third, slight rim
+light from behind for separation.
 
 Style ID: undersuspi-noir-v1.
 
 NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D render,
 children cartoon, smile, warm palette, full body, deformed, text, watermark,
-smile, youthful, healthy.
+youthful, healthy-glowing,
+THIN FACE, GAUNT FACE, SUNKEN CHEEKS, HOLLOW CHEEKBONES, BLUE EYES,
+GREY EYES, HOODED EYES, NO MOUSTACHE, CLEAN-SHAVEN, STUBBLE BEARD,
+RECEDING HAIRLINE WITH STRANDS COMBED OVER, GREY HAIR COMBED BACK,
+DRESSING GOWN, BATHROBE, MAROON ROBE, BURGUNDY ROBE, CARDIGAN, CREAM
+SHIRT, OPEN COLLAR PYJAMA, RUDDY BROKEN-VEINED NOSE, PALE ASHEN SKIN,
+WORKING-CLASS LOOK, NO GLASSES, RIMLESS GLASSES, MODERN GLASSES.
 ```
 
 ---
@@ -900,6 +940,162 @@ modern digital tablet, cel-shading, flat, anime, 3D, photorealistic.
 ```
 
 ---
+
+## Variantes UV — revelaciones bajo luz ultravioleta (Caso 5)
+
+> **Para qué son**: el motor del juego apila la imagen UV sobre la imagen
+> normal y la revela con una "linterna" circular que sigue el cursor. Por eso
+> las variantes UV deben ser **idénticas en composición, encuadre y ángulo**
+> a la versión normal, salvo por los detalles que se hacen visibles bajo luz
+> ultravioleta.
+>
+> **Cómo generarlas**: ATTACH la versión normal aprobada como referencia.
+> Indicar al modelo "exactly same composition" y describir SOLO los detalles
+> nuevos. Tono violeta sutil en todo el cuadro, NO un fondo neón. Las marcas
+> nuevas deben tener fluorescencia tenue, no luminiscencia teatral.
+>
+> **Naming al guardar**:
+> ```
+> assets/img/suspects/Caso5/Pruebas/P2-UV — Cajón con Combinación.png
+> assets/img/suspects/Caso5/Pruebas/P3-UV — Foto 1985 con Sangre.png
+> assets/img/suspects/Caso5/Pruebas/P5-UV — Fotos Carmen con Sangre.png
+> ```
+> (La P6-UV ya existe como `P6-UV — Hoja Elena UV.png`.)
+
+### P2-UV — Cajón con Combinación bajo UV
+
+```
+[ATTACH approved P2 — Cajón con Candado.png as reference image]
+
+Evidence object photograph under ultraviolet light, 1:1 square aspect ratio.
+EXACTLY the same composition, framing, angle, object placement, shadow
+direction and forensic tag as the attached reference of the wooden drawer
+with brass padlock.
+
+CRITICAL: identical drawer, identical wood grain, identical brass combination
+padlock, identical shadow from the padlock, identical felt mat, identical
+forensic evidence tag. Do NOT redraw the drawer or change the angle. The
+ONLY differences from the reference are:
+
+1. The entire scene is now bathed in a subtle violet UV cast — the dark felt
+   has a faint cool fluorescence, the wood loses some of its warm tone.
+2. Newly visible on the front face of the drawer, ABOVE the padlock and
+   slightly to the right, four characters appear to glow in pale cyan-white
+   under UV: the digits "8614" — small, neatly carved or pressed into the
+   wood as if written years ago in invisible fluorescent ink. Approximately
+   3cm tall, sitting cleanly on the wood grain.
+3. Below "8614", in the same fluorescent style but smaller, a short two-line
+   inscription in block letters: "AGOSTO 1986" / "CALLE GOYA 14".
+4. The brass padlock retains its colour but its edges fluoresce slightly with
+   a cool sheen — characteristic of metal under UV.
+
+The fluorescent text is SUBTLE — clearly readable but not theatrical, as if
+the UV light is just barely catching it. The marks sit ON the wood surface,
+they are not floating, they are not glowing brightly, they do NOT have neon
+glow or motion blur.
+
+Lighting: violet UV ambient cast across the whole scene. The original raking
+side-light direction from the right is preserved but cooled.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: different drawer, different angle, missing padlock, neon glow,
+bright luminescent text, large floating text, theatrical UV stage lighting,
+modern digital UV display, multiple objects, daylight, warm palette,
+text outside the drawer surface, blacklight party aesthetics, cel-shading,
+flat colors, anime, 3D, photorealistic, illegible numbers, deformed digits.
+```
+
+### P3-UV — Foto de Grupo 1985 con Sangre bajo UV
+
+```
+[ATTACH approved P3 — Fotografía Grupo 1985.png as reference image]
+
+Evidence object photograph under ultraviolet light, 1:1 square aspect ratio.
+EXACTLY the same composition, framing, angle, frame and photograph as the
+attached reference of the framed black-and-white 1985 family photo.
+
+CRITICAL: identical wooden frame, identical mat, identical photograph
+inside the frame with the same five figures (uniformed police commissioner
+front-centre, woman holding a baby, two older individuals), identical
+courtyard background of the 1985 photo, identical glass surface, identical
+fingerprint smear on the glass, identical shadow direction. Do NOT redraw
+the figures or change their poses. The ONLY differences from the reference
+are:
+
+1. The entire scene sits under a subtle violet UV cast — gentle, not
+   dramatic.
+2. Newly visible on the photograph itself, OVER the figure of the man in
+   the police commissioner's uniform: a previously-invisible irregular
+   stain appears as a brownish-red bloom under UV. The stain is roughly
+   the size and shape of a thumbprint smear — about 2cm across — sitting
+   on the surface of the photo paper across the uniform's chest and just
+   touching the figure's chin. It has the typical dim biological-fluorescence
+   pattern of dried blood under UV: faint dark bloom, not bright glow,
+   slightly cracked at the edges from age.
+3. The glass of the frame catches a slight violet sheen.
+4. The photographic paper itself retains its 1980s yellowed tone but
+   bathed in cool light.
+
+The blood stain is small enough to be a discovery, not a centerpiece.
+Everything else (figures, poses, frame, mat) remains identical to the
+reference.
+
+Lighting: violet UV ambient throughout. Top-down frame lighting still
+suggested by the slight shadow at frame edges.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: different photograph, different figures, fresh red blood, large
+blood pool, multiple stains, dramatic gore, modern photo, daylight, warm
+palette, neon glow, fluorescent text added, glowing eyes, blood inside the
+1985 photo image content, cel-shading, flat, anime, 3D, photorealistic.
+```
+
+### P5-UV — Fotos de Carmen Lobera con Sangre bajo UV
+
+```
+[ATTACH approved P5 — Fotos Carmen Lobera.png as reference image]
+
+Evidence object photograph under ultraviolet light, 1:1 square aspect ratio.
+EXACTLY the same composition, framing, angle and arrangement as the attached
+reference image of the loose stack of seven 1980s photographs of Carmen
+Lobera spread on the dark felt mat.
+
+CRITICAL: identical photo stack, identical poses of Carmen visible in the
+images, identical felt mat, identical lighting direction, identical strip
+of old tape holding the photos together, identical handwriting on the back
+of the top photo. Do NOT redraw the photographs or change their order.
+The ONLY differences from the reference are:
+
+1. The entire scene sits under a subtle violet UV cast.
+2. The brownish stains that were faint and barely visible at the edges and
+   corners of two of the photographs in the reference are NOW clearly
+   visible as dried-blood patterns under UV: irregular brown smears and
+   partial fingerprint marks along the white photographic borders, more
+   concentrated at the corners where someone would grip a photo between
+   thumb and forefinger. The pattern suggests repeated handling.
+3. The blood is OLD — slightly cracked, faded brown, the dim biological
+   fluorescence characteristic of decades-old residue. NOT bright red,
+   NOT fresh, NOT theatrical.
+4. The blood pattern is exclusively on the BORDERS / WHITE EDGES of the
+   photographs and on the back of the top photo (where handwriting is).
+   It is NEVER on the photographic image content itself — Carmen's face
+   and the scenes inside the photos remain clean.
+
+Lighting: violet UV ambient. Aging photo paper picks up cool tone but
+retains its 1980s character.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: fresh blood, blood pool, dramatic gore, blood inside the
+photographic image content (on Carmen's face or in the scenes), bright
+fluorescent stains, neon glow, theatrical UV, modern photos, daylight,
+warm palette, cel-shading, flat, anime, 3D, photorealistic, blacklight
+party aesthetics.
+```
+
+---
 ---
 
 # CASO 6 · Estudio Caracedo
@@ -911,7 +1107,42 @@ modern digital tablet, cel-shading, flat, anime, 3D, photorealistic.
 
 ---
 
+## ⚠️ GUÍA DE DIFERENCIACIÓN ENTRE PERSONAJES (leer antes de generar)
+
+> El generador tiende a crear caras parecidas cuando los descriptores son
+> genéricos ("hombre español 50 años con traje", "mujer joven con pelo
+> oscuro"). Esta tabla recoge los riesgos cruzados con personajes ya
+> generados. Cada prompt de personaje del caso 6 incluye además su propio
+> bloque "DIFERENCIACIÓN OBLIGATORIA" arriba. Si la primera generación sale
+> parecida, regenera con énfasis en los descriptores en MAYÚSCULAS.
+
+| Personaje del Caso 6 | Riesgo de parecerse a | Cómo separarlos |
+|---|---|---|
+| **Modesto Caracedo** (71, abogado, víctima) | Hermes Mora (caso 5, víctima 80, calvo, bigote, gafas, pijama rayas) · Salvador Cienfuegos (caso 2, víctima 67, demacrado, sin pelo arriba) | Modesto: PELO PLATA ESPESO peinado hacia atrás, SIN bigote, SIN gafas, traje OSCURO de funeral, cara LARGA y rectangular, expresión SEVERA |
+| **Sara Caracedo** (38, abogada hija) | — sin riesgo cruzado significativo | Mantener como referencia femenina del caso |
+| **Néstor Galindo** (50, socio nervioso) | Damián Mora (caso 3, 52, sobrino nervioso traje barato) | Néstor: ALTO y DELGADO (Damián es bajito y achaparrado), BARBA recortada (Damián clean-shaven), traje GRIS PERLA caro pero arrugado (Damián: marino barato), pelo CANO en sienes (Damián: castaño escaso) |
+| **Pedro Pinhel** (65, cliente, CULPABLE cerebro) | Roque Vellido (caso 5, 66, vecino antiguo, calvo bigote blanco, cazadora verde) | Pedro: PELO ESPESO PLATEADO peinado hacia atrás (Roque: calvo total), SIN bigote, traje cruzado caro (Roque: cazadora informal), AFEITADO de espuma (Roque: bigote pronunciado) |
+| **Marina Caracedo** (28, becaria, CULPABLE ejecutora) | Inés Quirós (caso 5, 40, auxiliar geriatría culpable, moño bajo, uniforme clínico) · Olalla Bermejo (caso 3, 35, ingeniera, pelo suelto castaño) | Marina: 28 años visible (más joven, NO 40), PELO SUELTO o moño desordenado (Inés: moño tenso), ABRIGO DE LANA negro/oscuro encima de jersey de cuello vuelto (Inés: uniforme blanco/azul, Olalla: ropa casual neutra) |
+| **Eulogio Pacheco** (50, asesor médico-legal) | Damián Mora (caso 3) · Néstor Galindo (caso 6, mismo caso!) | Eulogio: GAFAS RECTANGULARES sin moldura (Damián y Néstor sin gafas), traje MARINO IMPECABLEMENTE planchado (Damián: arrugas baratas, Néstor: arrugas caras), expresión IMPENETRABLE de médico (los otros: visiblemente nerviosos) |
+
+---
+
 ## Modesto Caracedo — VÍCTIMA
+
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA**:
+>
+> - Modesto NO es Hermes Mora (caso 5, víctima): Hermes era CALVO con franja
+>   blanca lateral, **bigote blanco poblado**, **gafas redondas doradas**,
+>   pijama de seda a rayas, cara redonda con papada. Modesto debe tener
+>   PELO PLATA-GRIS espeso peinado hacia atrás, SIN bigote, SIN gafas,
+>   cara LARGA rectangular sin papada, traje oscuro formal.
+> - Modesto NO es Salvador Cienfuegos (caso 2, víctima): Salvador era
+>   delgado, demacrado, mejillas hundidas, pelo gris ralo, en pijama y
+>   bata. Modesto debe ser SÓLIDO, mandíbula cuadrada, pelo abundante,
+>   traje impecable.
+>
+> Si el primer intento sale calvo, con bigote, con gafas o en pijama,
+> regenerar enfatizando los descriptores en MAYÚSCULAS del NEGATIVE.
 
 ```
 Police archive portrait, 3:4 vertical aspect ratio, identification-card style,
@@ -926,32 +1157,56 @@ record style.
 
 Lighting: even cool documentary front lighting, slight rim light from behind.
 
-Subject — DETAILED FACE (unique original face):
-- 71 year-old Spanish man, founding partner of a law firm
-- Face: strong authoritative face beginning to sag with age — heavy jaw
-  with jowls starting to form, deeply grooved nasolabial folds, straight
-  broad nose, thin pursed lips of a man accustomed to saying little,
-  dark hooded eyes under grey-white thick eyebrows, slight bags under
-  the eyes, a strong prominent forehead, tanned complexion going grey
-- Hair: silver-white hair cut short and neat, combed to the side in a
-  classic lawyer's style, full hair for his age
-- Build: square-shouldered but starting to shrink with age, only visible
-  from the shoulders up
+Subject — DETAILED FACE (unique original face, must look distinctly different
+from any other archival victim portrait — see distinguishing features below):
+- 71 year-old Spanish man, founding partner of a prestigious Madrid law firm,
+  the look of an "abogado de toda la vida"
+- Face shape: LONG rectangular face with strong vertical structure — heavy
+  square jaw clearly defined, strong prominent forehead, the head reads as
+  TALL not round; only the very faintest jowls forming. NOT round, NOT
+  pudgy, NOT a double chin
+- Skin: deep tanned olive complexion typical of a man who summers in the
+  south, faintly weathered but well-groomed; NOT pale, NOT ashen, NOT rosy
+- Eyes: dark brown HOODED eyes set deep under thick grey-white eyebrows,
+  slight bags below — the assessing eyes of a litigator. NOT blue. NOT
+  watery. NEVER behind glasses
+- Nose: straight broad aquiline nose, distinctive but not large
+- Lips: thin and pursed, kept very still, the mouth of a man who learned
+  decades ago to say only what is necessary
+- Mouth and chin: clean-shaven with a faint blue shadow of a heavy beard
+  recently shaved. NO MOUSTACHE under any circumstances. The shave is
+  fresh and immaculate
+- Hair: THICK silver-grey hair, abundant for his age, cut neat and combed
+  back from the forehead in a classic patrician lawyer style. NOT
+  receding, NOT thin, NOT bald on the crown, NOT combed sideways over
+  scalp
+- Build: square broad-shouldered torso, only visible from shoulders up;
+  upright, dignified posture even post-mortem
 
-Clothing: a dark charcoal suit jacket, a white dress shirt with a small
-formal collar, a dark tie with a very subtle pattern, a silk pocket square
-barely visible. The clothes of a man who has worn this combination every
-day for forty years.
+Clothing: a dark charcoal three-piece suit jacket with peaked lapels, a
+white dress shirt with a stiff small formal collar, a midnight-blue silk
+tie with a very subtle woven pattern (no readable design), a faint sliver
+of waistcoat visible at the v of the lapels. The clothes of a man who has
+worn this exact combination every working day for forty years. NO pyjama,
+NO cardigan, NO informal collar.
 
 Mood: lifeless documentary tone, neutral expression, eyes open and direct,
-no smile, the face of a man who has kept many secrets.
+no smile, the face of a man who has kept many secrets — composed and
+dignified even in a forensic record.
 
 Composition: head and shoulders centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: cel-shading, flat, anime, 3D, photorealistic, smile, wound,
-blood, dramatic lighting, warm palette.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+smile, wound, blood, dramatic lighting, warm palette,
+BALD CROWN, BALDING TOP, RECEDING HAIRLINE COMBED OVER, THINNING HAIR,
+WHITE MOUSTACHE, ANY MOUSTACHE, BEARD, GOATEE, STUBBLE BEARD,
+ROUND GOLD-RIM GLASSES, ANY GLASSES, READING GLASSES, RECTANGULAR GLASSES,
+ROUND CHUBBY FACE, DOUBLE CHIN, HEAVY JOWLS, PUDGY CHEEKS, FULL CHEEKS,
+PALE WAXY SKIN, ASHEN COMPLEXION, ROSY HYPERTENSIVE CHEEKS,
+PYJAMA, STRIPED PYJAMA, DRESSING GOWN, BATHROBE, CARDIGAN, OPEN COLLAR,
+TURTLENECK, CASUAL CLOTHING, CIVIL SERVANT LOOK, WORKING-CLASS LOOK.
 ```
 
 ---
@@ -1045,48 +1300,92 @@ NEGATIVE: same as neutral.
 > 50 años. Socio del bufete desde los años 90. Nervioso de forma crónica.
 > Está siendo extorsionado. Su pluma de Montblanc fue robada de su despacho
 > para incriminarle. Es inocente pero parece culpable.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA contra Damián Mora (caso 3, sobrino
+> nervioso de 52)**:
+> - Damián = bajo y achaparrado, cara redondeada algo pudding, papada
+>   incipiente, pelo CASTAÑO ESCASO con entradas marcadas, cara
+>   COMPLETAMENTE AFEITADA (apenas barba de un día), traje MARINO BARATO
+>   con costuras descolocadas.
+> - Néstor (lo opuesto) = ALTO y DELGADO, cara LARGA y angulosa, mejillas
+>   chupadas, BARBA recortada y poblada blanco-cana, pelo OSCURO con canas
+>   prominentes en sienes, traje GRIS PERLA o ANTRACITA OSCURO de buena
+>   tela pero arrugado por horas de uso.
+>
+> Si la primera generación sale rechoncho, sin barba, con traje barato o
+> con pelo castaño escaso, **NO es Néstor — es Damián**. Regenerar
+> enfatizando los rasgos en MAYÚSCULAS.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
 from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+Dark interrogation room background. Warm key light from upper-left at 45
+degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
-Subject — DETAILED FACE (unique original face — must read as immediately
-suspicious even when innocent):
-- 50 year-old Spanish man, senior law firm partner
-- Face: a permanently worried face — pronounced dark circles under small
-  darting brown eyes, deep frown lines between the brows even when not
-  actively frowning, a slightly too-mobile mouth that compresses and
-  releases in small nervous twitches, a long narrow nose, a weak chin
-  that he compensates for with a neatly trimmed short beard, thinning
-  salt-and-pepper hair at the temples, pallid unhealthy complexion
-  with a slight greyish undertone
-- Hair: dark hair going grey at the sides, slightly too long — not styled,
-  as if he forgot to get a haircut two weeks ago
-- Build: lean, slightly hunched, the posture of someone who has been
-  expecting bad news for years
+Subject — DETAILED FACE (unique original face — must read as a tall, lean,
+chronically anxious senior lawyer; must NOT resemble a short pudgy
+middle-management worker):
+- 50 year-old Spanish man, senior partner at an old Madrid law firm
+- Build: TALL (clearly above average height), notably LEAN almost gaunt —
+  the long thin frame of a man who skips meals when stressed (which is
+  always), shoulders slightly hunched forward as though carrying something
+  heavy
+- Face shape: LONG narrow face, never round, never pudgy — high forehead,
+  HOLLOW cheeks, a noticeably narrow jaw, prominent Adam's apple visible
+  at the loosened collar
+- Skin: pallid greyish-olive complexion of someone who hasn't slept properly
+  in months, faint dark circles emphasising the gauntness
+- Eyes: small dark brown eyes set deep, with dark circles below; the eyes
+  dart and never quite settle on one point
+- Brows: deep vertical frown lines between the brows even when not actively
+  frowning
+- Nose: long straight narrow nose
+- Lips: a slightly too-mobile mouth that compresses and releases in small
+  nervous twitches
+- BEARD: a neatly trimmed short SALT-AND-PEPPER beard, more white than dark
+  — covers the chin and jaw; the beard is one of his most distinctive
+  features and MUST be present, well-kept though slightly unkempt at the
+  edges
+- Hair: dark brown hair going clearly grey at the temples and sides, kept
+  slightly too long for a senior lawyer (forgot the last haircut two weeks
+  ago), brushed back from the forehead. Volume present, not very thin
 
-Clothing: a slightly rumpled charcoal suit that was expensive ten years
-ago, a grey tie loosened at the collar, a white shirt with the top
-button undone, a faint sweat stain barely visible at the collar — the
-look of a man who has been in this jacket for too many hours.
+Clothing: a charcoal-grey or dark anthracite woollen suit of clearly good
+quality (it was tailored well a decade ago) but visibly RUMPLED — wrinkles
+at the elbows, a soft sag at the back of the jacket, the trousers slightly
+too long. A grey or muted-tone silk tie LOOSENED at the collar with the knot
+pulled down two centimetres, the top shirt button undone, a thin sheen of
+sweat barely visible at the collar. White shirt slightly creased at the
+chest. Black brogues slightly scuffed but expensive. The wardrobe of a man
+whose money is in his clothes from ten years ago, not from this morning.
 
-Pose & expression (NEUTRAL): standing with shoulders slightly slumped,
-weight on one leg, one hand
-gripping the other wrist on the table, eyes that never quite settle —
-the body language of chronic anxiety that predates whatever he is being
-accused of.
+Pose & expression (NEUTRAL): standing with weight on one leg, body slightly
+hunched forward, ONE hand gripping the OTHER wrist held in front of his body
+at waist height (a self-soothing gesture), shoulders rounded inward, eyes
+looking somewhere past the detective's left shoulder rather than at him,
+the body language of chronic anxiety that predates this specific
+accusation.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: calm expression, neat appearance, cel-shading, flat, anime,
-3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+calm expression, confident posture, neat well-pressed appearance,
+SHORT AND PUDGY BUILD, ROUND CHUBBY FACE, DOUBLE CHIN, FULL CHEEKS,
+CLEAN-SHAVEN, NO BEARD, STUBBLE ONLY, CHEAP NAVY SUIT, SUIT TOO TIGHT,
+SUIT WITH OFFSET SEAMS, HAIR TOO SHORT, CASTAÑO HAIR THINNING ON CROWN,
+WIDOWS PEAK, RECEDING TEMPLES WITH STRANDS COMBED OVER,
+ANY GLASSES, SUNGLASSES, RIMLESS GLASSES,
+CASUAL CLOTHING, OPEN-COLLAR SHIRT NO TIE, T-SHIRT, JEANS,
+HAPPY EXPRESSION, RELAXED POSTURE, HEALTHY GLOW, ROSY CHEEKS,
+WORKING-CLASS APPEARANCE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -1133,51 +1432,94 @@ NEGATIVE: same as neutral.
 > educado hasta la esterilidad. El último vivo del círculo del padre del
 > detective, el "cliente del 86". Su mask de respetabilidad nunca se quiebra
 > del todo — incluso cuando es culpable.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA contra Roque Vellido (caso 5, vecino
+> antiguo de 66)**:
+> - Roque = CALVO con franja blanca lateral, **bigote blanco poblado**,
+>   cazadora VERDE OSCURO informal de poliéster, look de jubilado
+>   trabajador de barrio.
+> - Pedro (lo opuesto) = PELO ESPESO PLATEADO peinado hacia atrás (NUNCA
+>   calvo), cara COMPLETAMENTE AFEITADA con sombra azul de barba recién
+>   apurada (SIN bigote bajo ningún concepto), traje cruzado CHARCOAL caro,
+>   look de empresario inmobiliario de élite.
+>
+> Si la generación sale calvo, con bigote o con cazadora, **NO es Pedro —
+> es Roque**. Regenerar.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
 from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+Dark interrogation room background. Warm key light from upper-left at 45
+degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
-Subject — DETAILED FACE (unique original face — CULPABLE but must look
-completely respectable, no villain signals):
-- 65 year-old Spanish man, wealthy real estate businessman, client of an
-  exclusive Madrid law firm for forty years
-- Face: a handsome-in-its-day face now settled into authoritative age —
-  square jaw, clean-shaven with the faint blue shadow of a heavy beard
-  always recently shaved, strong straight nose, thin perfectly horizontal
-  lips that smile precisely when required and no more, calm steady grey
-  eyes that observe more than they reveal, a broad forehead, very slight
-  bags under the eyes, immaculate medium olive complexion, the face of
-  a man who controls every room he enters
-- Hair: thick silver-grey hair, cut and styled with care — swept back
-  from a strong hairline, the hair of someone who invests in his
-  appearance
-- Build: tall, broad-shouldered, still physically imposing, impeccable
-  posture
+Subject — DETAILED FACE (unique original face — the face of a wealthy
+elite businessman; CULPABLE but must look completely respectable; no
+villain signals; absolutely must NOT be confused with a working-class
+retiree):
+- 65 year-old Spanish man, very wealthy real-estate businessman, client of
+  an exclusive Madrid law firm for forty years, the unmistakable look of
+  Madrid old money — Salamanca district, weekends in country houses
+- Face shape: SQUARE strong jaw, broad symmetrical forehead, the
+  composed proportions of a man who has been handsome his entire life and
+  still is — high cheekbones, classical bone structure, NOT round, NOT
+  jowly, NOT pudgy
+- Skin: immaculate medium olive Mediterranean complexion, smooth and
+  well-cared-for, very faint bags under the eyes from age
+- Eyes: calm steady GREY eyes that observe more than they reveal, set
+  evenly under thick neat dark brows, eye contact direct and unflinching
+- Nose: strong straight aristocratic nose
+- Lips: thin perfectly horizontal lips that smile precisely when required
+  and never wider; the mouth never opens more than necessary
+- Mouth and chin: COMPLETELY CLEAN-SHAVEN with the faint blue shadow of
+  a heavy beard always recently and meticulously shaved that morning. ZERO
+  facial hair under any circumstances — no moustache, no goatee, no
+  stubble, no beard
+- Hair: THICK silver-grey hair (NEVER bald, NEVER thin), cut and styled
+  with care, swept BACK from a strong hairline, slight wave, the hair of
+  someone who invests in his appearance and visits a barber every week
+- Build: TALL, broad-shouldered, still physically imposing for his age,
+  impeccable upright posture — never slumped
 
-Clothing: a very expensive dark charcoal double-breasted suit, perfectly
-cut, not a seam out of place, a silk tie in deep burgundy with a subtle
-woven pattern, a white shirt with double cuffs, a silk pocket square in
-cream, a signet ring on the right hand — everything speaks of old money
-and precision.
+Clothing: a very expensive dark charcoal DOUBLE-BREASTED suit, perfectly
+tailored to his frame, peaked lapels, not a seam out of place, a silk tie
+in deep BURGUNDY with a very subtle woven pattern (no readable design),
+a white shirt with double cuffs and small silver cufflinks, a cream silk
+pocket square folded in a neat triple-point, a discreet gold signet ring
+on the right pinky finger. Polished black oxford shoes barely visible at
+the bottom of the frame. Everything speaks of old money and precision.
+NOT a single-breasted suit, NOT a casual jacket, NOT a turtleneck, NOT
+any kind of windbreaker or zip-up.
 
-Pose & expression (NEUTRAL): standing tall, weight balanced on the back
-leg, shoulders relaxed,
-one arm resting along the back of an empty chair, the other hand on the table,
-eyes meeting the detective with absolute calm — a man who has never felt
-guilty in his life.
+Pose & expression (NEUTRAL): standing tall and centered, weight balanced
+on the back leg with the front foot slightly forward, shoulders relaxed
+and squared, one arm resting along the back of an empty wooden chair, the
+other hand at his side or lightly on the front of his thigh, eyes meeting
+the detective with absolute calm — the body language of a man who has
+never felt guilty in his life.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: villain expression, shifty eyes, nervous body language,
-dishevelled appearance, cel-shading, flat, anime, 3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+villain expression, shifty eyes, smirk, sneer, nervous body language,
+dishevelled appearance,
+BALD CROWN, BALDING, RECEDING HAIRLINE, SIDE-FRINGE BALD HORSESHOE,
+THINNING WHITE HAIR, COMBED-OVER STRANDS,
+WHITE MOUSTACHE, ANY MOUSTACHE, BEARD, GOATEE, FIVE-O-CLOCK STUBBLE BEARD,
+GREEN WINDBREAKER, ANY WINDBREAKER, ZIP-UP JACKET, ANORAK, CAGOULE,
+CASUAL JACKET, SINGLE-BREASTED OFF-THE-RACK SUIT, CHEAP SUIT, BAGGY SUIT,
+TURTLENECK, OPEN-COLLAR NO TIE, T-SHIRT, POLO SHIRT,
+PYJAMA, CARDIGAN, FORMAL VESTMENTS,
+WORKING-CLASS APPEARANCE, RETIRED-WORKER LOOK, DOORMAN UNIFORM,
+RUDDY COMPLEXION, RED-VEINED NOSE, ROSY CHEEKS, PALE WAXY SKIN,
+ROUND CHUBBY FACE, DOUBLE CHIN, JOWLS.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -1228,46 +1570,85 @@ NEGATIVE: panic, fear, obvious guilt, dishevelled, same as neutral.
 > 28 años. Sobrina de Modesto, becaria del bufete. Joven, inteligente,
 > ambiciosa en exceso. Llegó al callejón con la pluma de Néstor en la mano.
 > Cuando presionas la máscara, lo que aparece no es miedo — es cálculo.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA**:
+> - Marina NO es Inés Quirós (caso 5, culpable de 40 con uniforme clínico
+>   y moño bajo tenso). Inés es 12 años MAYOR, lleva uniforme blanco
+>   sanitario y forro polar marino, moño de aspecto institucional. Marina
+>   es VISIBLEMENTE de los 20-30, abrigo de lana civil sobre jersey de
+>   cuello vuelto negro, pelo más libre.
+> - Marina NO es Olalla Bermejo (caso 3, ingeniera amiga de la víctima de
+>   35). Olalla viste casual neutra con pelo suelto castaño. Marina debe
+>   verse MÁS DURA, más afilada, ropa más urbano-elegante negra.
+>
+> La clave es la EDAD VISIBLE — Marina debe leer como mujer joven (28),
+> con la energía nerviosa de una becaria ambiciosa, NO como una
+> profesional asentada de 35-40.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
 from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+Dark interrogation room background. Warm key light from upper-left at 45
+degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
-Subject — DETAILED FACE (unique original face — CULPABLE, young, must look
-entirely credible as an ambitious professional, no villain markers):
-- 28 year-old Spanish woman, law firm intern-trainee
-- Face: sharp narrow face, high angular cheekbones giving a slightly
-  feline quality, a straight pointed nose, dark eyes set close together
-  that are quick and assessing, thin arched brows, well-defined lips
-  with a slight natural pout, clear light olive complexion, very slight
-  sharpness at the jaw — an intelligent face that can look either
-  charming or calculating depending on the angle
-- Hair: dark brown hair, straight, worn loose to shoulder length or in a
-  low messy bun — something between professional and young
-- Build: slim, angular, the energy of someone who moves quickly and
-  purposefully
+Subject — DETAILED FACE (unique original face — must read as a young woman
+in her late twenties, sharp and ambitious, NOT a clinical nurse, NOT a
+relaxed professional):
+- 28 year-old Spanish woman, recently-graduated lawyer intern at a
+  prestigious Madrid law firm — visibly young, late-twenties not
+  thirties
+- Face shape: SHARP NARROW face with HIGH ANGULAR cheekbones giving a
+  slightly feline quality, a defined chin tapering to a slight point,
+  the youthful firmness of skin still tight against the bone
+- Skin: clear LIGHT olive complexion, smooth and youthful (NOT weathered,
+  NOT tired)
+- Eyes: dark brown eyes set slightly close together, quick and assessing,
+  bright with intelligence — the eyes of a young woman calculating angles,
+  NOT the controlled mask of a senior professional
+- Brows: thin neatly groomed arched brows
+- Nose: straight slightly pointed nose, narrow at the bridge
+- Lips: well-defined lips with a slight natural pout, kept in a controlled
+  line that occasionally hints at impatience
+- Hair: dark brown straight hair, shoulder-length, worn LOOSE or in a
+  LOW MESSY HALF-BUN with strands escaping at the front — modern, free,
+  NOT a tight institutional bun, NOT a smooth corporate chignon. Slight
+  natural movement to it
+- Build: slim and angular, the energy of someone who moves quickly and
+  purposefully, average height
 
-Clothing: a sharply cut dark wool coat open over a plain black
-turtleneck, well-fitted dark trousers, minimal jewellery — a thin ring
-or no jewellery at all, flat leather shoes. The look is modern, sharp,
-younger than the rest of the firm but trying to read as serious.
+Clothing: a sharply-cut KNEE-LENGTH dark charcoal or black wool COAT worn
+OPEN over a plain BLACK TURTLENECK jumper, well-fitted dark trousers, flat
+black leather ankle boots, minimal jewellery (a thin silver ring on the
+right hand or none at all), no necklace. The look is modern, sharp,
+distinctly civilian — NOT a uniform, NOT clinical scrubs, NOT an
+institutional fleece. Clothes that say "young law-firm hire who shops at
+Zara's premium line", not "geriatric care assistant".
 
 Pose & expression (NEUTRAL): standing with weight on one leg, the other
-foot slightly crossed in front,
-arms crossed lightly over her chest — not defensive, but a slight barrier —
-eyes level and direct, a trace of impatience in the set of the chin.
+foot slightly crossed in front, ARMS CROSSED LIGHTLY over her chest (a
+slight barrier rather than defensive), shoulders square, chin slightly
+elevated with a trace of impatience, eyes level and direct.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: revealing clothing, anime, cel-shading, flat, 3D, photorealistic,
-obvious villainy, smirk.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+revealing clothing, dramatic gore, obvious villainy, evil smirk, glowing
+eyes,
+WHITE CLINICAL UNIFORM, NURSE UNIFORM, MEDICAL SCRUBS, BLUE CLINICAL TOP,
+NAVY FLEECE ZIP-UP, INSTITUTIONAL EMBROIDERY ON CHEST POCKET,
+TIGHT INSTITUTIONAL LOW BUN, SMOOTH CORPORATE CHIGNON,
+40 YEARS OLD, MIDDLE-AGED FACE, WEATHERED SKIN, TIRED EYES,
+HEAVY FACE, ROUND CHEEKS, MATERNAL ENERGY,
+CASUAL CLOTHING, JEANS, T-SHIRT, HOODIE, SWEATSHIRT,
+LOOSE FLOWING HAIR PAST WAIST, CURLY HAIR, BLONDE HAIR, RED HAIR.
 ```
 
 ### Pensativa (adjuntar NEUTRAL aprobada)
@@ -1314,45 +1695,89 @@ NEGATIVE: same as neutral.
 > 50 años. Médico de formación pero trabaja como asesor legal-médico en el
 > bufete. Correcto, formal, habla poco. Es el hijo del médico del caso 4,
 > condenado. Lleva quince años construyendo una carrera propia.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA contra otros 50-añeros con traje**:
+> - NO es Damián Mora (caso 3, 52, sobrino nervioso, traje barato, sin
+>   gafas, cara redondeada).
+> - NO es Néstor Galindo (caso 6, mismo caso, 50, alto delgado con BARBA,
+>   traje rumpled, sin gafas).
+>
+> La firma visual de Eulogio: **GAFAS RECTANGULARES de moldura fina** sobre
+> la nariz (siempre presentes), cara COMPLETAMENTE AFEITADA (sin barba,
+> sin bigote, ni siquiera barba de un día notable), traje MARINO IMPECABLE
+> sin una arruga, expresión IMPENETRABLE de médico que da malas noticias
+> sin alterar el tono. Si sale sin gafas o con barba, NO es Eulogio.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
 from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+Dark interrogation room background. Warm key light from upper-left at 45
+degrees, soft falloff.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
-Subject — DETAILED FACE (unique original face):
-- 50 year-old Spanish man, medically-trained legal consultant
-- Face: a precise, careful face — thin lips kept deliberately still,
-  medium dark eyes set behind rectangular thin-framed reading glasses,
-  clean-shaven with a very faint five-o'clock shadow, high forehead,
-  a straight narrow nose, slight crow's feet at the corners of the eyes,
-  faint lines around the mouth from decades of careful expressions,
-  medium olive complexion, the composure of a doctor accustomed to
-  delivering difficult news without inflection
-- Hair: dark brown hair beginning to silver at the temples, cut short and
-  neat, slightly receding hairline, parted to one side with precision
-- Build: medium height, lean but not athletic — a man whose physicality
-  is irrelevant to how he operates
+Subject — DETAILED FACE (unique original face — the controlled face of a
+medically-trained legal consultant; must NOT resemble an anxious nervous
+worker; must always wear glasses):
+- 50 year-old Spanish man, medically-trained legal consultant — the
+  composure of a doctor who has delivered difficult news for decades
+  without inflection
+- Face shape: a PRECISE long face with carefully-kept proportions, neither
+  thin nor full, neither round nor gaunt — average bone structure that
+  reads as intentional rather than accidental
+- Skin: clear medium olive complexion, well-cared-for, faint crow's feet
+  at the corners of the eyes from years of squinting at fine print
+- Eyes: medium dark brown eyes set behind RECTANGULAR THIN-FRAMED reading
+  glasses with metal arms — the glasses sit precisely on the bridge of
+  the nose and are NEVER ABSENT in any pose; the eyes behind them are
+  steady and unblinking
+- Brows: neat dark brown brows, controlled
+- Nose: straight narrow nose, the bridge of which the glasses rest cleanly
+  upon
+- Lips: thin lips kept deliberately still, faint vertical lines around the
+  mouth from decades of careful expressions
+- Mouth and chin: COMPLETELY CLEAN-SHAVEN with a very faint five-o'clock
+  shadow at most, NEVER a beard, NEVER a moustache, NEVER stubble more
+  than a day old
+- Hair: dark brown hair beginning to silver at the TEMPLES (not all over),
+  cut short and neat, slightly receding hairline, PARTED to one side with
+  precision — the haircut of a private clinic doctor
+- Build: medium height, lean but not athletic — average frame, a man whose
+  physicality is irrelevant to how he operates
 
-Clothing: a dark navy suit, perfectly pressed, a white shirt and a plain
-dark tie — almost identical to his father's suits, whether consciously
-or not. The thin-framed rectangular glasses on the nose. No jewellery
-except a plain wedding band.
+Clothing: a dark navy WOOLLEN suit, PERFECTLY PRESSED with no visible
+wrinkles, a crisp white dress shirt with a small formal collar, a plain
+dark tie (midnight blue or black) knotted tightly and centred at the collar
+— never loosened, never crooked. Polished black oxford shoes barely
+visible. The thin-framed rectangular glasses always present on the nose.
+No visible jewellery except a plain gold wedding band on the left hand.
+The wardrobe of a man who irons his own shirts at 6am.
 
-Pose & expression (NEUTRAL): very still, very controlled — both hands
-flat on his thighs, glasses slightly adjusted with one finger, waiting
-to answer precisely what is asked and not one word more.
+Pose & expression (NEUTRAL): standing very upright and still, very
+controlled, BOTH HANDS hanging at his sides or flat on the front of his
+thighs (NOT clasped at the wrist, NOT in pockets), shoulders square and
+level, head facing the detective directly, the glasses slightly adjusted
+by one finger as the only motion — waiting to answer precisely what is
+asked and not one word more.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: animated expression, casual clothing, without glasses, anime,
-cel-shading, flat, 3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+animated expression, casual clothing,
+WITHOUT GLASSES, GLASSES REMOVED, GLASSES IN POCKET, GLASSES ON FOREHEAD,
+SUNGLASSES, ROUND GOLD-RIM GLASSES,
+BEARD, MOUSTACHE, GOATEE, FIVE-O-CLOCK STUBBLE BEARD, UNSHAVEN APPEARANCE,
+RUMPLED SUIT, WRINKLES IN JACKET, LOOSENED TIE, OPEN COLLAR NO TIE,
+CHEAP SUIT, BAGGY SUIT, NAVY SUIT WITH OFFSET SEAMS, GREY SUIT,
+THINNING HAIR ON CROWN, BALD CROWN, COMBED-OVER STRANDS, LONG HAIR,
+NERVOUS EXPRESSION, DARTING EYES, SWEAT ON FOREHEAD, SHIFTY POSTURE,
+HUNCHED SHOULDERS, ARMS CROSSED.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
