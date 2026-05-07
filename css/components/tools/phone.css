@@ -290,14 +290,14 @@
 
 .phone-toggle {
   position: absolute;
-  top: 68px;  /* Debajo del notebook-toggle */
+  top: 80px;  /* Debajo del notebook-toggle */
   left: 12px;  /* Alineado con notebook */
   z-index: 30;
   width: 48px;
   height: 48px;
-  background: #e8dfc0;
-  border: 2px solid #8a7040;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  background: none;
+  border: none;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -310,7 +310,10 @@
 }
 
 .phone-toggle__icon {
-  font-size: 22px;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
 }
 
 .phone-toggle__badge {
@@ -363,11 +366,8 @@
    ─────────────────────────────────────────────────── */
 
 .phone-toggle--locked {
-  background: #5a554a;
-  border-color: #4a443a;
   cursor: not-allowed;
   filter: grayscale(0.85) brightness(0.7);
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .phone-toggle--locked:hover {
