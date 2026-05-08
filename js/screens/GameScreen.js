@@ -25,8 +25,6 @@ US.GameScreen = class GameScreen {
     const phoneTitle = phoneAvailable
       ? 'Teléfono de mesa'
       : 'Pieza bloqueada · Se desbloqueará más adelante';
-    const phoneIcon = phoneAvailable ? '☎️' : '❓';
-
     container.innerHTML = `
       <nav class="game-nav">
         <button class="btn btn--nav-back" data-action="go-menu">← MENÚ</button>
@@ -41,11 +39,11 @@ US.GameScreen = class GameScreen {
         <div class="desk" id="half-desk">
           <div class="desk__surface" id="desk-surface"></div>
           <div class="notebook-toggle" id="notebook-toggle">
-            <span class="notebook-toggle__icon">📓</span>
+            <img class="notebook-toggle__icon" src="assets/img/icons/Icono_libreta.png" alt="Libreta">
             <span class="notebook-toggle__badge" id="notebook-badge">0</span>
           </div>
           <div class="phone-toggle ${phoneAvailable ? '' : 'phone-toggle--locked phone-toggle--mystery'}" id="phone-toggle" title="${this.ui._esc(phoneTitle)}">
-            <span class="phone-toggle__icon">${phoneIcon}</span>
+            <img class="phone-toggle__icon" src="assets/img/icons/Icono_telefono.png" alt="Teléfono">
             <span class="phone-toggle__badge" id="phone-badge">0</span>
           </div>
           <div class="desk__label">MESA DE PRUEBAS</div>
