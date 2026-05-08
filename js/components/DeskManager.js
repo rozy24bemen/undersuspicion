@@ -31,19 +31,19 @@ US.DeskManager = class DeskManager {
       surface.innerHTML = evidence.map((ev, i) => {
         const pos = positions[i];
         const animCls = justUnlocked.includes(ev.id) ? ' desk-card--just-unlocked' : '';
+        const iconHtml = ev.iconPath
+          ? `<img src="${encodeURI(ev.iconPath)}" alt="">`
+          : `<span>${ev.icon || ''}</span>`;
         return `
           <div class="desk-card${animCls}"
                data-evidence-id="${ev.id}"
                style="left:${pos.x}px;top:${pos.y}px;transform:rotate(${pos.rot}deg);z-index:${10 + i};"
           >
-            <div class="desk-card__head">
-              <span class="desk-card__icon">${ev.icon}</span>
-              <span class="desk-card__title">${this.ui._esc(ev.title)}</span>
-            </div>
-            <div class="desk-card__body">${this.ui._esc(ev.shortDesc)}</div>
+            <div class="desk-card__icon-area">${iconHtml}</div>
+            <div class="desk-card__title">${this.ui._esc(ev.title)}</div>
             <div class="desk-card__click-hint">
-              <span class="hint-mouse">CLIC PARA VER · ARRASTRA PARA MOVER</span>
-              <span class="hint-touch">TOCA PARA VER · MANTÉN PARA MOVER</span>
+              <span class="hint-mouse">CLIC · ARRASTRA</span>
+              <span class="hint-touch">TOCA · MANTÉN</span>
             </div>
           </div>
         `;
@@ -151,12 +151,12 @@ US.DeskManager = class DeskManager {
   _generatePositions(count, surface) {
     var w = surface.clientWidth || 700;
     var h = surface.clientHeight || 500;
-    var cardW = w < 500 ? 110 : w < 700 ? 130 : 165;
+    var cardW = w < 500 ? 90 : w < 700 ? 110 : 130;
     var cols = Math.max(2, Math.floor((w - 20) / (cardW + 10)));
     var rows = Math.ceil(count / cols);
     var padX = Math.max(10, (w - cols * (cardW + 10)) / 2);
-    var padY = Math.max(10, Math.min(40, (h - rows * 100) / (rows + 1)));
-    var rowH = Math.min(140, (h - padY) / Math.max(rows, 1));
+    var padY = Math.max(10, Math.min(40, (h - rows * 120) / (rows + 1)));
+    var rowH = Math.min(130, (h - padY) / Math.max(rows, 1));
 
     var positions = [];
     for (var i = 0; i < count; i++) {

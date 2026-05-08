@@ -127,7 +127,7 @@
 
 .desk-card {
   position: absolute;
-  width: 165px;
+  width: 130px;
   border: 1px solid #999;
   background: var(--paper);
   box-shadow: 3px 3px 12px rgba(0,0,0,.6);
@@ -137,38 +137,38 @@
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  overflow: hidden;
 }
 .desk-card:hover { box-shadow: 4px 4px 18px rgba(0,0,0,.8); }
 .desk-card.dragging { cursor: grabbing; box-shadow: 6px 6px 24px rgba(0,0,0,.9); }
 
-.desk-card__head {
+.desk-card__icon-area {
   background: var(--paper-head);
   border-bottom: 1px solid #b0a060;
-  padding: 5px 8px;
+  height: 112px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+}
+.desk-card__icon-area img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+.desk-card__icon-area span {
+  font-size: 34px;
+  line-height: 1;
 }
 
-.desk-card__icon { font-size: 14px; }
-
 .desk-card__title {
-  font-size: 8px;
+  padding: 6px 8px 4px;
+  font-size: 7.5px;
   letter-spacing: 1px;
   color: #3a3a3a;
   text-transform: uppercase;
   font-weight: bold;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.desk-card__body {
-  padding: 8px;
-  font-size: 8.5px;
-  color: #555;
-  line-height: 1.6;
-  max-height: 72px;
-  overflow: hidden;
+  text-align: center;
+  line-height: 1.4;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -177,7 +177,7 @@
   padding: 3px 8px;
   background: rgba(0,0,0,.06);
   text-align: center;
-  font-size: 7.5px;
+  font-size: 7px;
   color: #999;
   letter-spacing: 1px;
 }
@@ -795,15 +795,15 @@
 }
 
 .ev-thumb {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border: 1px solid #2a2a44;
   background: #0c0c1a;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition);
 }
@@ -821,10 +821,22 @@
   color: #4a4a8a;
 }
 
-.ev-thumb__icon { font-size: 18px; }
+.ev-thumb__icon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+.ev-thumb__icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
 .ev-thumb__label {
   font-size: 6.5px;
-  color: #555;
+  color: #666;
   text-align: center;
   letter-spacing: .5px;
   line-height: 1.3;

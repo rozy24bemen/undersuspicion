@@ -75,7 +75,7 @@ US.QuestionPanel = class QuestionPanel {
           const presented = this.engine.isEvidencePresented(suspect.id, ev.id);
           return `
             <div class="ev-thumb ${presented ? 'presented' : ''}" data-evidence-id="${ev.id}">
-              <span class="ev-thumb__icon">${ev.icon}</span>
+              <span class="ev-thumb__icon">${ev.iconPath ? `<img src="${encodeURI(ev.iconPath)}" alt="">` : ev.icon}</span>
               <span class="ev-thumb__label">${this.ui._esc(ev.title)}</span>
             </div>
           `;
