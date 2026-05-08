@@ -277,11 +277,15 @@ US.ModalManager = class ModalManager {
           keypadEl.classList.add('modal__keypad--success');
           locked = true;
 
-          // Refresca la libreta y la mesa, y re-renderiza el modal en
-          // estado "abierto" para que el jugador vea el mensaje de éxito.
+          // Refresca la libreta, la mesa y el panel de preguntas (la
+          // pestaña PRUEBA muestra una rejilla paralela de pruebas que
+          // también necesita las cartas nuevas con sus click handlers).
+          // Después re-renderiza el modal en estado "abierto" para mostrar
+          // el mensaje de éxito.
           if (this.ui.notebook) this.ui.notebook.refreshContent();
           setTimeout(() => {
-            if (this.ui.desk) this.ui.desk.render({ justUnlocked: result.unlockedIds });
+            if (this.ui.desk)      this.ui.desk.render({ justUnlocked: result.unlockedIds });
+            if (this.ui.questions) this.ui.questions.render();
             this.showEvidence(evidenceId);  // re-render del modal en estado abierto
           }, 1100);
         } else {

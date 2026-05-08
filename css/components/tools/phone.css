@@ -397,6 +397,21 @@
   pointer-events: none;
 }
 
+/* ── Estado MYSTERY (caso 1-2 antes de desbloquear teléfono) ──
+   Igual que `--locked` pero el icono se sustituye por una incógnita
+   y se mantiene legible sobre el botón gris para que el jugador
+   intuya "hay algo aquí que aún no he desbloqueado".
+   ───────────────────────────────────────────────────────────────── */
+
+.phone-toggle--mystery .phone-toggle__icon {
+  font-size: 26px;
+  font-weight: bold;
+  opacity: 0.85;
+  filter: grayscale(1) contrast(0.85);
+  color: #c0b090;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 /* ── RESPONSIVE ────────────────────────────────────– */
 
 @media (max-width: 768px) {
