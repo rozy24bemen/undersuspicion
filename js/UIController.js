@@ -209,6 +209,12 @@ US.UIController = class UIController {
         if (suspect) this._lastDialogueBySuspect[suspect.id] = blockMsg;
       } else if (result.reason === 'alreadyPresented') {
         this._setDialogue('Ya has presentado esta prueba a este sospechoso.');
+      } else if (result.reason === 'notFound') {
+        // El sospechoso no tiene una respuesta específica para esta prueba.
+        // Mostramos una respuesta neutra de "no le concierne" para que el
+        // click no quede sin feedback. Si esto ocurre con frecuencia es
+        // señal de que faltan entradas en evidenceResponses del caso.
+        this._setDialogue('"No sé qué decirle de eso. No me concierne."');
       }
       return;
     }

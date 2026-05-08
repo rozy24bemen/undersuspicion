@@ -14,7 +14,13 @@ US.DeskManager = class DeskManager {
     this._drag = null;
   }
 
-  render() {
+  /**
+   * Renderiza la mesa con todas las pruebas visibles. Si se pasa un array
+   * de IDs en `opts.justUnlocked`, esas cartas reciben la clase de
+   * animación de entrada (cajón abierto → tres pruebas caen sobre la mesa).
+   */
+  render(opts) {
+    const justUnlocked = (opts && Array.isArray(opts.justUnlocked)) ? opts.justUnlocked : [];
     const surface = this.root.querySelector('#desk-surface');
     const evidence = this.engine.getEvidence();
     this._activeTool = null;
@@ -24,8 +30,9 @@ US.DeskManager = class DeskManager {
 
       surface.innerHTML = evidence.map((ev, i) => {
         const pos = positions[i];
+        const animCls = justUnlocked.includes(ev.id) ? ' desk-card--just-unlocked' : '';
         return `
-          <div class="desk-card"
+          <div class="desk-card${animCls}"
                data-evidence-id="${ev.id}"
                style="left:${pos.x}px;top:${pos.y}px;transform:rotate(${pos.rot}deg);z-index:${10 + i};"
           >

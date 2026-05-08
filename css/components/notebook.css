@@ -129,9 +129,9 @@
   z-index: 30;
   width: 48px;
   height: 48px;
-  background: none;
-  border: none;
-  box-shadow: none;
+  background: #e8dfc0;
+  border: 2px solid #8a7040;
+  box-shadow: 2px 2px 8px rgba(0,0,0,.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,10 +141,7 @@
 .notebook-toggle:hover { transform: scale(1.08); }
 
 .notebook-toggle__icon {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  display: block;
+  font-size: 22px;
 }
 
 .notebook-toggle__badge {

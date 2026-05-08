@@ -37,7 +37,12 @@ US.CASES['caso-05'] = {
     cssClass: 'scene-caso5'
   },
 
-  availableTools: ['uv-light'],
+  // Luz UV disponible en este caso. El botón aparece en TODAS las pruebas:
+  // las que tengan `toolData['uv-light']` revelan algo (con imagen UV o
+  // texto narrativo); el resto muestran "sin hallazgos" — para que el
+  // jugador tenga que investigar pista por pista. Sin toolbar de mesa: la
+  // herramienta vive dentro de cada modal. Ver ModalManager.showEvidence.
+  uvLightAvailable: true,
 
   suspects: [
     // ──────────────── AURELIA LOBERA ────────────────
@@ -100,6 +105,8 @@ US.CASES['caso-05'] = {
         'cajon_cerrado':   { response: '"Ese cajón... Hermes me dijo una vez que ahí guardaba las cosas importantes. No me dejó verlo nunca. Decía que eran papeles de familia."', pressureCost: 8 },
         'foto_1985':       { response: '"Esa foto... [silencio largo] Sí, yo estaba ese día. Era el cumpleaños de Hermes. El padre de usted estaba de muy buen humor esa tarde. Su madre era guapísima. Qué pena lo del infarto. Una mujer tan joven."', pressureCost: 10 },
         'carta_hermes':    { response: '"¿Le escribió una carta? [voz quebrada] Le dije que lo llamara, que no dependiera de los papeles. Pero él decía que quería que quedara escrito."', pressureCost: 8 },
+        'fotos_carmen':    { response: '"[silencio largo, los ojos se le humedecen] Esas fotos son de mi hermana Carmen. Era cinco años mayor que yo. La perdimos en el ochenta y seis. ¿Por qué tienen sangre en los bordes? [pausa] Hermes nunca me dijo que las guardaba. Nunca."', pressureCost: 14 },
+        'hoja_elena':      { response: '"¿Elena? [se queda muy quieta] No conozco a ninguna Elena. Aquí en el barrio no había Elenas en aquellos años. Pregunte a Roque, él anda mejor de memoria que yo para los nombres."', pressureCost: 10 },
         'sobre_dinero':    { response: '"¿Un sobre con dinero en el bolso de Inés? Eso no lo entiendo. Inés era una chica seria. O al menos eso parecía."', pressureCost: 10 },
         'movimientos_ines':{ response: '"No sé nada de eso. Lo que sé es que Hermes confiaba en ella. Y eso que Hermes no confiaba en nadie."', pressureCost: 8 },
         'calendario':      { response: '"El 14 de agosto. Hermes también lo tenía marcado. Me preguntó una vez si yo sabía qué pasó esa noche. Le dije que no. Y era verdad."', pressureCost: 12 }
@@ -166,6 +173,8 @@ US.CASES['caso-05'] = {
         'cajon_cerrado':   { response: '"No sé la combinación. Mi tío nunca me la dio. Decía que era para \'cuando llegara el momento\'."', pressureCost: 8 },
         'foto_1985':       { response: '"No reconozco a todas las personas. Esa creo que es mi tío joven. Y ese hombre de uniforme... no sé quién es."', pressureCost: 8 },
         'carta_hermes':    { response: '"¿Le escribió a usted? [sorprendido] Nunca me escribió a mí. Solo me llamaba para los recibos del piso."', pressureCost: 10 },
+        'fotos_carmen':    { response: '"¿Carmen? Eso es la hermana de Aurelia, la vecina del rellano. Murió hace mucho, antes de que yo tuviera memoria. Lo de la sangre... no sé. Pregúntele a ella."', pressureCost: 8 },
+        'hoja_elena':      { response: '"¿Elena? Pues... ¿no se llama así su mujer? [se rasca la nuca] No sé qué pinta su mujer en los papeles de mi tío. Yo no me meto en eso."', pressureCost: 10 },
         'sobre_dinero':    { response: '"Cinco mil euros en efectivo en el bolso de la enfermera... eso no es normal. Eso no es normal en absoluto."', pressureCost: 8 },
         'movimientos_ines':{ response: '"Ingresos de cinco mil euros al mes. Eso no es el sueldo de una auxiliar de geriatría. Alguien la estaba pagando."', pressureCost: 8 },
         'calendario':      { response: '"El 14 de agosto. Sí, mi tío siempre lo marcaba. Decía que era un día importante. No sé más."', pressureCost: 6 }
@@ -232,6 +241,8 @@ US.CASES['caso-05'] = {
         'cajon_cerrado':   { response: '"No sé nada de ningún cajón. Yo iba al dormitorio, hacía mi trabajo y me iba."', pressureCost: 6 },
         'foto_1985':       { response: '"No conozco a esas personas. No sé qué tiene que ver esa foto conmigo."', pressureCost: 6 },
         'carta_hermes':    { response: '"Una carta para... [traga saliva] No sé nada de eso. Hermes escribía muchas cosas cuando estaba con los recuerdos."', pressureCost: 10 },
+        'fotos_carmen':    { response: '"[mantiene los ojos en la mesa] Yo no he tocado nunca esas fotos. No sé de qué manchas me habla. No reconozco a esa mujer."', pressureCost: 18 },
+        'hoja_elena':      { response: '"[pausa breve, la voz controlada] Una hoja en blanco. Yo no he visto eso. No sé quién es Elena."', pressureCost: 14 },
         'sobre_dinero':    { response: '"[silencio] Ese sobre... yo no tengo que explicar lo que hay en mi bolso."', pressureCost: 20 },
         'movimientos_ines':{ response: '"[pausa muy larga] Tengo una razón para ese dinero. No es lo que parece. No puedo decirle más sin hablar con un abogado."', pressureCost: 22 },
         'calendario':      { response: '"El calendario de Hermes no es asunto mío. Yo venía a cuidarle, no a mirar sus paredes."', pressureCost: 6 }
@@ -298,6 +309,8 @@ US.CASES['caso-05'] = {
         'cajon_cerrado':   { response: '"Ese cajón. Hermes me lo mencionó. Dijo que la combinación la tenía el que tuviera que tenerla."', pressureCost: 10 },
         'foto_1985':       { response: '"[reconoce la foto inmediatamente] Esa foto es del 85. Ese soy yo, ese es Hermes, ese es el Comisario Mora con el uniforme. Y esa mujer de al lado... esa es tu madre, inspector. Carmen. Una mujer maravillosa."', pressureCost: 12 },
         'carta_hermes':    { response: '"¿Una carta sin terminar? Hermes siempre dejaba las cosas a medias. Pero la intención era buena. Quería que su sobrino supiera."', pressureCost: 8 },
+        'fotos_carmen':    { response: '"[se queda mirando las fotos en silencio] Carmen. Su madre, inspector. Las manchas son de aquella noche, ¿verdad? Hermes las guardó así. No tuvo el valor de limpiarlas. Yo tampoco lo habría tenido."', pressureCost: 14 },
+        'hoja_elena':      { response: '"Elena... [pausa] Hubo una Elena en aquellos años, sí. La hija menor del comisario Mora. Era una niña entonces. Si ahora aparece su nombre escrito así, en sangre, en los papeles de Hermes... pregúntele a su mujer, inspector. Pregúntele desde cuándo se llama Elena."', pressureCost: 18 },
         'sobre_dinero':    { response: '"Cinco mil euros. Alguien le pagó para callarlo antes. Lo que no supieron es que Hermes no se callaba aunque le pagaran."', pressureCost: 10 },
         'movimientos_ines':{ response: '"La enfermera cobraba de alguien. Alguien que tenía mucho que perder si Hermes hablaba."', pressureCost: 8 },
         'calendario':      { response: '"El 14 de agosto de 1986. Sí. Yo también lo tengo marcado, inspector. Por razones distintas a las tuyas. O quizás no tan distintas."', pressureCost: 14 }
@@ -325,9 +338,18 @@ US.CASES['caso-05'] = {
       shortDesc: 'Cajón del escritorio con candado numérico. Combinación desconocida.',
       fullDesc: 'Cajón de madera en el escritorio del dormitorio. Candado numérico de cuatro dígitos. La combinación no figura en ningún papel visible del piso. Lucía Solera (caso 4) no la conoce. Los papeles del caserón de Talavera mencionaban "agosto 1986, calle Goya 14". La combinación podría ser 8614.',
       metadata: { fecha: '18-07-2026', fuente: 'Inspección del piso de Hermes', ref: 'OBJ-05-002' },
+      lock: {
+        digits: 4,
+        combination: '8614',
+        prompt: 'Candado numérico de 4 dígitos. Introduce la combinación.',
+        success: 'El cajón se abre. Dentro: papeles que Hermes guardaba para ti.',
+        failure: 'La combinación no abre el candado.',
+        unlocksMessage: 'Has abierto el cajón de Hermes. Tres pruebas nuevas se han añadido a la mesa.'
+      },
       toolData: {
         'uv-light': {
-          reveals: 'COMBINACIÓN 8614 grabada en la madera bajo el cajón con tinta invisible. Agosto 1986, calle Goya 14. El cajón se abre.',
+          reveals: 'COMBINACIÓN 8614 grabada en la madera bajo el cajón con tinta invisible. Agosto 1986, calle Goya 14.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P2-UV — Cajón con Combinación bajo UV.png',
           contradictionId: 'c05-cajon-uv'
         }
       }
@@ -344,6 +366,7 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Bajo la luz UV: mancha de sangre seca sobre la figura del hombre de uniforme (el Comisario Mora). El bebé en brazos de la mujer lleva un traje de punto idéntico al de una foto del detective de niño en sus propios documentos.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P3-UV — Foto de Grupo 1985 con Sangre bajo UV.png',
           contradictionId: null
         }
       }
@@ -356,7 +379,8 @@ US.CASES['caso-05'] = {
       imagePath: 'assets/img/suspects/Caso5/Pruebas/P4 — Carta Inacabada.png',
       shortDesc: '"Querido sobrino Roberto..." — carta sin terminar en el cajón.',
       fullDesc: '"Querido sobrino Roberto, llevo tiempo queriendo decirte algunas cosas sobre tu padre y sobre tu madre. Antes de que sea demasiado tarde para los dos. Tu padre era un hombre con un peso que no supo llevar. Aquella noche de agosto..." La carta se interrumpe. Es la primera vez que el nombre "Roberto" aparece dirigido directamente al detective. Letra temblorosa pero determinada. Tinta azul reciente.',
-      metadata: { fecha: '18-07-2026', fuente: 'Cajón abierto con combinación 8614', ref: 'DOC-05-004' }
+      metadata: { fecha: '18-07-2026', fuente: 'Cajón abierto con combinación 8614', ref: 'DOC-05-004' },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'fotos_carmen',
@@ -370,9 +394,11 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Las manchas amarronadas en las fotos de Carmen son sangre seca antigua. No hay rastro de herida en las fotos. La sangre es exterior a las imágenes: alguien las manejó con manos con sangre.',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P5-UV — Fotos de Carmen Lobera con Sangre bajo UV.png',
           contradictionId: 'c05-fotos-uv'
         }
-      }
+      },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'hoja_elena',
@@ -386,9 +412,11 @@ US.CASES['caso-05'] = {
       toolData: {
         'uv-light': {
           reveals: 'Bajo la luz UV aparece un nombre escrito en sangre seca casi invisible: "ELENA". En letra cursiva, cuidadosa, como si alguien la hubiera escrito con un dedo mojado en sangre hace años. El detective observa el nombre. "Habrá muchas Elenas en el mundo. ¿Qué relación tiene mi mujer con los papeles de mi tío?"',
+          uvImagePath: 'assets/img/suspects/Caso5/Pruebas/P6-UV — Hoja Elena UV.png',
           contradictionId: null
         }
-      }
+      },
+      unlockedByLock: 'cajon_cerrado'
     },
     {
       id: 'sobre_dinero',

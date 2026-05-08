@@ -20,6 +20,9 @@ US.GameEngine = class GameEngine {
     this.toolDiscoveries = {};
     // Tabla de argumentación (caso 7): Set de pares correctamente conectados
     this.matchedArguments = new Set();
+    // Cerraduras abiertas (mecánica caso 5+): Set de IDs de pruebas con
+    // `lock` cuya combinación ha sido introducida correctamente.
+    this.openedLocks = new Set();
     this.notebook = [];
 
     // Simple event emitter
@@ -54,6 +57,7 @@ US.GameEngine = class GameEngine {
     this.presentedEvidence = {};
     this.toolDiscoveries = {};
     this.matchedArguments = new Set();
+    this.openedLocks = new Set();
     src.suspects.forEach(s => {
       this.suspectState[s.id] = { pressure: 0, suspicion: 0 };
       this.presentedEvidence[s.id] = new Set();
@@ -85,9 +89,24 @@ US.GameEngine = class GameEngine {
   // ── Getters ───────────────────────────────────────
 
   getCase()            { return this.caseData; }
-  getEvidence()        { return this.caseData.evidence; }
   getSuspects()        { return this.caseData.suspects; }
   getNotebook()        { return this.notebook; }
+
+  /**
+   * Devuelve las pruebas visibles para el jugador. Excluye las que tienen
+   * `unlockedByLock: <evidenceId>` mientras esa cerradura no haya sido
+   * abierta. Mecánica del cajón (caso 5): tres pruebas viven dentro del
+   * cajón hasta que el jugador introduce la combinación correcta.
+   */
+  getEvidence() {
+    const all = this.caseData.evidence;
+    return all.filter(e => !e.unlockedByLock || this.openedLocks.has(e.unlockedByLock));
+  }
+
+  /** Igual que getEvidence pero sin filtrar — útil para debug o save. */
+  getAllEvidence() { return this.caseData.evidence; }
+
+  isLockOpened(lockId) { return this.openedLocks.has(lockId); }
 
   getActiveSuspect() {
     return this.caseData.suspects[this.activeSuspectIdx];
@@ -300,18 +319,85 @@ US.GameEngine = class GameEngine {
       });
     }
 
-    // Comprobar contradicción ligada al hallazgo
-    const contradiction = toolEntry.contradictionId
-      ? this._checkContradictionById(toolEntry.contradictionId, toolEntry.suspectId || null)
-      : null;
+    // La contradicción NO se dispara automáticamente al revelar la prueba
+    // bajo la herramienta. El jugador debe seguir el flujo normal:
+    // descubrir el hallazgo (UV) → interrogar al sospechoso → presentar la
+    // prueba. Solo entonces, vía `_checkContradictions`, se confronta la
+    // declaración con la prueba. El campo `toolData[...].contradictionId`
+    // se conserva como pista narrativa para el writer pero no fuerza ya el
+    // disparo prematuro.
 
     this.emit('toolDiscovery', { toolId, evidenceId, reveals: toolEntry.reveals });
 
-    return { blocked: false, reveals: toolEntry.reveals, contradiction };
+    return { blocked: false, reveals: toolEntry.reveals, contradiction: null };
   }
 
   isToolDiscovered(toolId, evidenceId) {
     return !!(this.toolDiscoveries[toolId] && this.toolDiscoveries[toolId].has(evidenceId));
+  }
+
+  // ── Cerraduras (locks) ───────────────────────────
+  // Mecánica caso 5: el cajón con candado guarda 3 pruebas. El jugador debe
+  // introducir la combinación de 4 dígitos en el keypad. Solo entonces el
+  // engine deja ver esas pruebas vía getEvidence().
+
+  /**
+   * Intenta abrir la cerradura de una prueba. Devuelve un objeto con:
+   *   - success:        true si la combinación es correcta.
+   *   - alreadyOpened:  true si ya estaba abierta antes.
+   *   - unlockedIds:    IDs de las pruebas que han pasado a ser visibles
+   *                     (no presentes hasta este momento).
+   *   - lockData:       referencia al objeto `lock` original.
+   */
+  attemptOpenLock(evidenceId, combination) {
+    const evidence = this.caseData.evidence.find(e => e.id === evidenceId);
+    if (!evidence || !evidence.lock) {
+      return { success: false, alreadyOpened: false, reason: 'noLock' };
+    }
+    if (this.openedLocks.has(evidenceId)) {
+      return { success: true, alreadyOpened: true, unlockedIds: [], lockData: evidence.lock };
+    }
+    const expected = String(evidence.lock.combination);
+    const given    = String(combination);
+    if (given !== expected) {
+      if (US.Telemetry) {
+        US.Telemetry.log('lock-attempt-failed', {
+          caseId:     this.caseData.id,
+          evidenceId: evidenceId
+        });
+      }
+      return { success: false, alreadyOpened: false, reason: 'wrongCombination' };
+    }
+
+    this.openedLocks.add(evidenceId);
+    const unlockedIds = this.caseData.evidence
+      .filter(e => e.unlockedByLock === evidenceId)
+      .map(e => e.id);
+
+    // Anotación en libreta — el jugador ve qué pruebas se han desbloqueado.
+    this._addNote(
+      'lock-opened',
+      evidence.title,
+      'Cerradura abierta con la combinación ' + expected + '.',
+      evidence.lock.unlocksMessage || ('Se han desbloqueado ' + unlockedIds.length + ' pruebas.')
+    );
+
+    if (US.Telemetry) {
+      US.Telemetry.log('lock-opened', {
+        caseId:        this.caseData.id,
+        evidenceId:    evidenceId,
+        unlockedCount: unlockedIds.length
+      });
+    }
+
+    this.emit('lockOpened', { evidenceId, unlockedIds, lockData: evidence.lock });
+
+    return {
+      success:       true,
+      alreadyOpened: false,
+      unlockedIds:   unlockedIds,
+      lockData:      evidence.lock
+    };
   }
 
   // Tabla de argumentación (caso 7)
@@ -420,6 +506,7 @@ US.GameEngine = class GameEngine {
       discoveredPhoneNumbers: Array.from(this.discoveredPhoneNumbers),
       toolDiscoveries:        toolDiscoveriesPlain,
       matchedArguments:       Array.from(this.matchedArguments || []),
+      openedLocks:            Array.from(this.openedLocks || []),
       notebook:               this.notebook.slice()
     };
   }
@@ -468,6 +555,7 @@ US.GameEngine = class GameEngine {
     }
 
     this.matchedArguments = new Set(Array.isArray(snapshot.matchedArguments) ? snapshot.matchedArguments : []);
+    this.openedLocks      = new Set(Array.isArray(snapshot.openedLocks) ? snapshot.openedLocks : []);
     this.notebook         = Array.isArray(snapshot.notebook) ? snapshot.notebook.slice() : [];
 
     this.emit('caseLoaded', this.caseData);

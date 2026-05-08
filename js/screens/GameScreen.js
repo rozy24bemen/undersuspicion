@@ -12,13 +12,20 @@ US.GameScreen = class GameScreen {
 
   render(container) {
     const caseData = this.engine.getCase();
-    // El teléfono se desbloquea automáticamente cuando el caso tiene
-    // phoneNumbers definidos. Mientras no los tenga, el botón aparece
-    // bloqueado para comunicar al jugador que es una herramienta futura.
-    const phoneAvailable = !!(caseData && Array.isArray(caseData.phoneNumbers) && caseData.phoneNumbers.length > 0);
+
+    // ── Estado del teléfono ─────────────────────────────────
+    // Se desbloquea por primera vez en caso-03 (cuando tiene phoneNumbers)
+    // y permanece accesible en TODOS los casos posteriores aunque ese caso
+    // no tenga números nuevos que marcar — el detective conserva la
+    // herramienta una vez la usa.
+    //
+    // En casos previos (1-2) el botón aparece como una incógnita: el
+    // jugador ve que hay algo por desbloquear pero no se le dice qué es.
+    const phoneAvailable = US.GameScreen.isPhoneAvailableFor(caseData);
     const phoneTitle = phoneAvailable
       ? 'Teléfono de mesa'
-      : 'Función bloqueada · Disponible en futuros casos';
+      : 'Pieza bloqueada · Se desbloqueará más adelante';
+    const phoneIcon = phoneAvailable ? '☎️' : '❓';
 
     container.innerHTML = `
       <nav class="game-nav">
@@ -34,11 +41,11 @@ US.GameScreen = class GameScreen {
         <div class="desk" id="half-desk">
           <div class="desk__surface" id="desk-surface"></div>
           <div class="notebook-toggle" id="notebook-toggle">
-            <img class="notebook-toggle__icon" src="assets/img/icons/Icono_libreta.png" alt="Libreta">
+            <span class="notebook-toggle__icon">📓</span>
             <span class="notebook-toggle__badge" id="notebook-badge">0</span>
           </div>
-          <div class="phone-toggle ${phoneAvailable ? '' : 'phone-toggle--locked'}" id="phone-toggle" title="${this.ui._esc(phoneTitle)}">
-            <img class="phone-toggle__icon" src="assets/img/icons/Icono_telefono.png" alt="Teléfono">
+          <div class="phone-toggle ${phoneAvailable ? '' : 'phone-toggle--locked phone-toggle--mystery'}" id="phone-toggle" title="${this.ui._esc(phoneTitle)}">
+            <span class="phone-toggle__icon">${phoneIcon}</span>
             <span class="phone-toggle__badge" id="phone-badge">0</span>
           </div>
           <div class="desk__label">MESA DE PRUEBAS</div>
@@ -111,6 +118,28 @@ US.GameScreen = class GameScreen {
         !US._phoneIntroShownThisSession) {
       setTimeout(() => this._showPhoneIntroModal(), 200);
     }
+
+    // Mini-tutorial de la luz UV al entrar al caso-05 por primera vez.
+    if (caseData && caseData.id === 'caso-05' &&
+        !US.GameScreen.isUvIntroSeen() &&
+        !US._uvIntroShownThisSession) {
+      setTimeout(() => this._showUvIntroModal(), 200);
+    }
+  }
+
+  /**
+   * El teléfono es una herramienta persistente: se desbloquea en caso-03
+   * (cuando aparecen los primeros phoneNumbers) y permanece disponible
+   * en TODOS los casos posteriores aunque no tengan números nuevos. En
+   * casos anteriores aparece como pieza misteriosa por desbloquear.
+   */
+  static isPhoneAvailableFor(caseData) {
+    if (!caseData) return false;
+    if (Array.isArray(caseData.phoneNumbers) && caseData.phoneNumbers.length > 0) return true;
+    const order = US.PROGRESS_ORDER || [];
+    const introIdx = order.indexOf('caso-03');
+    const currIdx  = order.indexOf(caseData.id);
+    return introIdx >= 0 && currIdx >= 0 && currIdx > introIdx;
   }
 
   static isPhoneIntroSeen() {
@@ -124,6 +153,20 @@ US.GameScreen = class GameScreen {
   static markPhoneIntroSeen() {
     try {
       window.localStorage.setItem('us-phone-intro-seen', 'true');
+    } catch (_) {}
+  }
+
+  static isUvIntroSeen() {
+    try {
+      return window.localStorage.getItem('us-uv-intro-seen') === 'true';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static markUvIntroSeen() {
+    try {
+      window.localStorage.setItem('us-uv-intro-seen', 'true');
     } catch (_) {}
   }
 
@@ -233,6 +276,35 @@ US.GameScreen = class GameScreen {
           phoneToggle.classList.add('phone-toggle--highlight');
           setTimeout(() => phoneToggle.classList.remove('phone-toggle--highlight'), 5000);
         }
+      });
+  }
+
+  _showUvIntroModal() {
+    US._uvIntroShownThisSession = true;
+
+    const modal = document.createElement('div');
+    modal.className = 'tutorial-prompt-modal';
+    modal.innerHTML = `
+      <div class="tutorial-prompt__container">
+        <div class="tutorial-prompt__content">
+          <h2>NUEVA HERRAMIENTA · LUZ ULTRAVIOLETA 🔦</h2>
+          <p>El comisariato te ha dejado una <strong>linterna de luz ultravioleta</strong>. Cuando abras una prueba verás un nuevo botón <strong>🔦 LUZ UV</strong> en la cabecera del modal.</p>
+          <p>Al activarla, el cursor se convierte en una linterna violeta. <strong>Mueve la luz por la imagen</strong> para revelar detalles que el ojo desnudo no ve: sangre seca, escritura invisible, marcas grabadas en madera...</p>
+          <p>Algunas pruebas esconden hallazgos clave bajo UV. Otras no revelarán nada — eso también es información. <strong>Tendrás que investigar pista por pista.</strong></p>
+          <p style="font-size:11px;color:var(--gold-dim);margin-top:-10px;">Y atento — alguna prueba podría guardar la combinación de un candado.</p>
+          <div class="tutorial-prompt__buttons">
+            <button class="btn btn--primary" data-action="uv-intro-ok">ENTENDIDO</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    this.ui.root.appendChild(modal);
+
+    modal.querySelector('[data-action="uv-intro-ok"]')
+      .addEventListener('click', () => {
+        modal.remove();
+        US.GameScreen.markUvIntroSeen();
       });
   }
 
