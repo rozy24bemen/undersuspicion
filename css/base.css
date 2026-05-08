@@ -3,6 +3,20 @@
    Reset, typography, scrollbar, screens, app shell
    ═══════════════════════════════════════════════════ */
 
+@font-face {
+  font-family: 'Neutral Sans';
+  src: url('../fonts/WOFF2/NeutralSans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neutral Sans';
+  src: url('../fonts/WOFF2/NeutralSans-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
