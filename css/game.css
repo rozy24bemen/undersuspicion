@@ -738,6 +738,7 @@ html, body {
   font-size: 10.5px;
   color: #aaa;
   line-height: 1.5;
+  font-weight: bold;
 }
 
 .q-item__cost {
