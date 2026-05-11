@@ -18,6 +18,12 @@
   max-width: 94vw;
   background: #111;
   border: 2px solid #3a3a3a;
+  /* Layout flex column: header arriba, body en el medio (flex: 1 con
+     scroll si hace falta), botón "abrir expediente" siempre al fondo
+     fuera del body para que sea visible sin scroll. */
+  display: flex;
+  flex-direction: column;
+  max-height: 92vh;
 }
 
 .intro__header {
@@ -42,6 +48,9 @@
 }
 
 .intro__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -128,12 +137,13 @@
 .btn.intro__start {
   position: relative;
   align-self: center;
+  flex-shrink: 0;        /* nunca se aplasta — siempre visible al fondo */
   width: auto;
-  min-width: 320px;
-  max-width: 480px;
-  height: 70px;
-  padding: 0 48px;
-  margin-top: 18px;
+  min-width: 280px;
+  max-width: 420px;
+  height: 52px;
+  padding: 0 36px;
+  margin: 14px auto 16px;
 
   background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
   color: var(--gold);
@@ -143,15 +153,15 @@
   border-radius: 0;
 
   font-family: var(--font);
-  font-size: 16px;
-  letter-spacing: 6px;
+  font-size: 14px;
+  letter-spacing: 5px;
   font-weight: bold;
   text-transform: uppercase;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 14px;
 
   cursor: pointer;
   overflow: hidden;

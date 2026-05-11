@@ -53,9 +53,8 @@ US.IntroScreen = class IntroScreen {
               <span class="intro__label">SOSPECHOSOS</span>
               <span class="intro__value">${c.suspects.map(s => this.ui._esc(s.name) + ' — ' + this.ui._esc(s.role)).join('<br>')}</span>
             </div>
-            <div class="intro__divider"></div>
-            <button class="btn btn--primary btn--menu intro__start" data-action="open-case">ABRIR EXPEDIENTE</button>
           </div>
+          <button class="btn btn--primary btn--menu intro__start" data-action="open-case">ABRIR EXPEDIENTE</button>
         </div>
       </div>
     `;
