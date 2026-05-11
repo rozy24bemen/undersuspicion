@@ -319,12 +319,12 @@
   background-image: url('../../assets/img/suspects/Caso6/Escenario/Escenario-Callej%C3%B3n%20Sagasta.png');
 }
 
-.room__scene.scene-caso7 {
-  background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-Chalet%20Aravaca.png');
-}
-
+/* Caso 7 — solo hay una escena generada (el sótano de Aravaca, que es
+   la escena del crimen). Ambas clases apuntan al mismo archivo por si
+   se añade un override per-suspect en el futuro. */
+.room__scene.scene-caso7,
 .room__scene.scene-caso7-sotano {
-  background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-S%C3%B3tano.png');
+  background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-S%C3%B3tano%20Aravaca.png');
 }
 
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
