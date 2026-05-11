@@ -193,6 +193,14 @@
   justify-content: center;
   padding: 8px;
   box-sizing: border-box;
+  /* CRÍTICO: el body es `display: flex; flex-direction: column`, así que
+     sin estas reglas otros hijos (descripción larga, panel UV reveal,
+     keypad-aside en split layout) pueden comprimir la imagen hasta 0px
+     de alto y dejarla invisible. Forzamos:
+     - flex-shrink: 0 → la imagen NO se aplasta para hacer sitio.
+     - min-height → siempre hay un área visible aunque cargue lento. */
+  flex-shrink: 0;
+  min-height: 220px;
 }
 
 .modal__image-img {

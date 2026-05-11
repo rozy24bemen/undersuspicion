@@ -298,6 +298,9 @@
   .modal__body      { padding: 14px; }
   .modal__image-placeholder { height: 100px; }
   .modal__image-img { max-height: 240px; }
+  /* Min-height más bajo en móvil — deja sitio al keypad y a la
+     descripción cuando comparten alto en split layout (caso 5 cajón). */
+  .modal__image     { min-height: 180px; }
 
   /* Contradiction */
   .contradiction__body  { padding: 12px 14px; }

@@ -2847,47 +2847,121 @@ CROP, CROPPED AT WAIST.
 > Bien vestido, controlado. La publicación del libro amenazaba con destruir el
 > apellido Mora públicamente. Actuó en coordinación con Vicente Solera.
 > Comparte apellido con la víctima del caso 5 — es la misma familia.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA contra Esteban Vidal (caso 3, jefe
+> directo de Carla, también 45 años trajeado)**:
+>
+> - Esteban Vidal = pelo castaño-oscuro CON CANAS PROMINENTES en sienes,
+>   **BARBA CORTA RECORTADA gris-canosa** poblada sobre el labio y el
+>   mentón, traje TRES PIEZAS MARRÓN-BRONCE con chaleco visible, corbata
+>   granate, postura con manos en bolsillos.
+> - Elías Mora (lo opuesto) = **COMPLETAMENTE AFEITADO** con sombra azul
+>   de barba recién apurada (nunca barba, nunca stubble notable), pelo
+>   negro azabache UNIFORME y muy corto al estilo militar-empresarial
+>   moderno (sin canas marcadas, máximo un par grises sutiles), traje
+>   DOS PIEZAS NEGRO MATE o gris muy oscuro (sin chaleco), corbata azul
+>   marino fina.
+>
+> Tres rasgos signature obligatorios para Elías (impedirán que la IA caiga
+> en "empresario español genérico de 40s" o en Esteban sin barba):
+>
+> 1. **OJOS VERDE-GRISÁCEOS CLAROS** (no marrones — el contraste con el
+>    pelo muy oscuro y la piel pálida es lo que primero capta la vista).
+> 2. **CICATRIZ FINA VERTICAL** que parte la ceja izquierda hacia abajo
+>    (1cm aprox), cruzando la cresta de la ceja — recuerdo de algo
+>    antiguo, nunca explicado.
+> 3. **PIEL PÁLIDA con sombra azul de barba afeitada**, NO bronceada,
+>    NO oliva cálida (Esteban es más tostado). Mediterránea fría.
+>
+> Si la generación sale con barba, con pelo castaño con canas en sienes
+> o con traje marrón de tres piezas, **NO es Elías — es Esteban**.
+> Regenerar enfatizando los puntos en MAYÚSCULAS del NEGATIVE.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
-from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+from head to feet (full body, NOT cropped at the waist), occupying the
+central vertical axis of the image. Dark interrogation room background.
+Warm key light from upper-left at 45 degrees, soft falloff. NO table,
+NO chair, NO desk visible in the frame.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
 Subject — DETAILED FACE (unique original face — CULPABLE but must look
-entirely like a successful legitimate businessman, no villain markers):
-- 45 year-old Spanish man, successful real estate entrepreneur in Madrid
-- Face: a handsome composed face at the peak of its authority — square
-  jaw clean-shaven, prominent straight nose, dark steady eyes that assess
-  without reacting, medium-set brows, a firm well-defined mouth, slight
-  lines at the corners of the eyes from squinting in meetings, very
-  lightly tanned smooth Mediterranean complexion, a face that has never
-  been unsure of itself
-- Hair: dark hair, very slightly grey at the temples, cut with precision,
-  combed to one side, immaculate
-- Build: broad-shouldered, physically present, the body of a man who
-  still exercises and knows how to take up space in a room
+entirely like a successful legitimate businessman; must NOT resemble a
+"generic Spanish man in his forties in a suit"):
+- 45 year-old Spanish man, successful real-estate entrepreneur in Madrid
+- Face shape: handsome composed face at the peak of its authority —
+  SQUARE strong jaw, broad forehead, prominent cheekbones, the bone
+  structure of a man who has never been unsure of himself
+- Skin: PALE Mediterranean complexion with a slight cool undertone and
+  the distinct BLUE SHADOW of a heavy beard freshly shaved that morning
+  (clean-shaven but the dark beard line still visible under the skin).
+  NOT tanned, NOT warm-olive
+- Eyes: PALE GREY-GREEN eyes, light and watchful, this is his signature
+  feature. The eye colour MUST be light grey-green, NOT brown, NOT
+  hazel. The contrast with the black hair and pale skin is striking
+- Brows: dark thick well-groomed brows, set close to the eyes. CRITICAL
+  DETAIL: a FINE VERTICAL SCAR (about 1cm) crosses the LEFT brow near
+  its outer end, splitting the brow into two segments — an old injury
+  he never explains. Visible in every shot
+- Nose: straight prominent nose, slightly aquiline
+- Lips: firm well-defined mouth kept in a controlled neutral line
+- Mouth and chin: COMPLETELY CLEAN-SHAVEN, freshly shaved that morning,
+  NO beard, NO moustache, NO stubble beyond a couple of hours, NO
+  goatee, NO sideburns extending below the ear
+- Hair: BLACK / very dark hair (NOT brown, NOT grey-streaked), short
+  modern executive cut — slicked back from the forehead with hair
+  product, complete hairline (NO receding, NO widow's peak), a couple
+  of grey strands at the temples ONLY as a subtle hint, never a salt-
+  and-pepper effect at the sides
+- Build: broad-shouldered, athletic frame, physically present, 1.85m
+  reading height. The body of a man who still goes to the gym four
+  times a week
 
-Clothing: a well-tailored charcoal grey suit, not as formally expensive
-as Pinhel's but clearly quality — a plain white shirt, a dark tie, a
-simple watch on the left wrist. The look of a successful Madrid businessman
-on the younger, newer-money side.
+Clothing: a perfectly tailored TWO-PIECE charcoal-black or very dark
+grey suit in a smooth modern cut (NO three-piece, NO waistcoat
+visible), peaked lapels, a crisp white shirt with a discreet collar, a
+plain DARK NAVY silk tie knotted in a tight Windsor, a simple steel-
+strap watch on the left wrist, polished black oxford shoes barely
+visible. NO brown suit, NO bronze suit, NO three-piece set, NO
+waistcoat, NO burgundy tie. The look of a young successful Madrid
+real-estate entrepreneur — newer money, more modern silhouette than
+the patrician three-piece old-money look.
 
-Pose & expression (NEUTRAL): standing relaxed, weight on the back leg,
-one arm
-on the back of an empty chair, the other hand resting on the table, the confident
-pose of a man who has been in difficult situations before and managed them
-— controlled and slightly impatient.
+Pose & expression (NEUTRAL / STANDING UPRIGHT): standing tall and
+relaxed, weight balanced on the back leg with the front foot slightly
+forward, shoulders squared, ONE HAND in the pocket of his suit trousers
+(thumb hooked out, fingers in), the OTHER HAND at his side holding the
+edge of his suit jacket loosely. Chin level, eyes meeting the detective
+with calm appraisal — the body language of a man who has been in
+difficult situations before and managed them, controlled and slightly
+impatient with having to be here.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: villain signals, nervous expression, anime, cel-shading, flat,
-3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+villain signals, evil smirk, nervous expression, smile,
+BEARD, MOUSTACHE, GOATEE, FIVE-O-CLOCK SHADOW STUBBLE BEARD, SIDEBURNS,
+SALT-AND-PEPPER BEARD, GREY BEARD, CANAS ON BEARD,
+GREY-STREAKED HAIR, SALT-AND-PEPPER HAIR, HAIR WITH GREY TEMPLES
+PROMINENT, RECEDING HAIRLINE, BALDING, WIDOW'S PEAK,
+BROWN HAIR, CHESTNUT HAIR, AUBURN HAIR,
+BROWN EYES, DARK BROWN EYES, BLACK EYES, HAZEL EYES,
+TANNED COMPLEXION, WARM-OLIVE COMPLEXION, RUDDY COMPLEXION,
+THREE-PIECE SUIT, WAISTCOAT, VEST UNDER JACKET, BROWN SUIT,
+BRONZE SUIT, TAN SUIT, TWEED SUIT, BURGUNDY TIE, MAROON TIE,
+WIDE LAPELS PATRICIAN CUT,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON CHAIR BACK, ARM ON CHAIR, HAND ON TABLE, ELBOWS ON TABLE,
+LEANING ON TABLE, TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -2895,19 +2969,36 @@ NEGATIVE: villain signals, nervous expression, anime, cel-shading, flat,
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Elías Mora, 45, charcoal suit, white shirt, dark tie, dark
-precisely combed hair with slight grey temples. CRITICAL: same face, same
-clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet
+(full body, NOT cropped at the waist), same dark interrogation room,
+same warm lighting as the Neutral.
 
-Pose & expression (PENSATIVO): recalibrating the story — the confident
-lean has shifted to a more active forward position, both elbows on the
-table, fingers interlaced, the controlled expression has the slightest
-edge of calculation visible, as if he is running through possibilities
-and discarding them one by one.
+Same subject: Elías Mora, 45, charcoal-black two-piece suit (no
+waistcoat), white shirt, dark navy tie, BLACK slicked-back hair, PALE
+GREY-GREEN eyes, CLEAN-SHAVEN with blue shadow, fine VERTICAL SCAR
+through the LEFT brow. CRITICAL: same face, same scar, same eye colour,
+same hair, same clothes, same STANDING framing as the approved Neutral.
+NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): recalibrating the
+story — still standing upright, but the relaxed posture has tightened
+into focused calculation. ONE HAND has come up to his chin, thumb under
+the jaw and index finger pressed along the cheek in a thinking gesture,
+the OTHER HAND remains in the suit jacket pocket. Eyes slightly
+narrowed, looking off to one side at an unseen point as he runs through
+possibilities and discards them one by one. The smallest tightening
+around the lips.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+BEARD, MOUSTACHE, GOATEE, STUBBLE BEARD, GREY-STREAKED HAIR,
+THREE-PIECE SUIT, WAISTCOAT, BROWN SUIT, TANNED COMPLEXION,
+BROWN EYES, DARK BROWN EYES,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+ELBOWS ON TABLE, HANDS INTERLACED ON TABLE, HAND ON TABLE,
+LEANING ON TABLE, TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -2915,19 +3006,36 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Elías Mora. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet
+(full body, NOT cropped at the waist), same dark interrogation room,
+same lighting.
 
-Pose & expression (NERVIOSO): the vehicle has been brought up and he
-knows the camera has something — the controlled confidence is now a
-controlled threat. He is still, very still, but the stillness has changed
-quality — both hands flat on the table, jaw set, the eyes have narrowed
-very slightly, looking directly at the detective with the beginning of
-something cold in them.
+Same subject: Elías Mora. CRITICAL: same face, same SCAR through the
+LEFT brow, same BLACK slicked-back hair (no grey, no beard), same
+PALE GREY-GREEN eyes, same charcoal-black two-piece suit, same STANDING
+framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): something the detective
+has just shown him cannot be deflected — the controlled confidence is
+now a controlled threat. He is still standing very still, BOTH HANDS
+clenched into low fists at his sides, knuckles slightly white, shoulders
+squared and tightened, jaw set, the eyes have narrowed by a fraction
+and are now fixed on the detective with the beginning of something cold
+behind them. The chin slightly raised. The stillness has changed
+quality — this is the controlled danger of a man who has just decided
+to stop being polite.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral — still controlled, no panic, controlled
-tension only.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+panic, fear, obvious guilt, dishevelled, evil smirk, smile,
+BEARD, MOUSTACHE, GOATEE, STUBBLE BEARD, GREY-STREAKED HAIR,
+THREE-PIECE SUIT, WAISTCOAT, BROWN SUIT, TANNED COMPLEXION,
+BROWN EYES, DARK BROWN EYES,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HANDS ON TABLE, BOTH HANDS FLAT ON TABLE, LEANING ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST.
 ```
 
 ---
@@ -2938,46 +3046,122 @@ tension only.
 > panadero jubilado asesinado. Robusto, callado, con las manos de quien hace
 > trabajo físico. Tiene una empresa de transportes. Vino a proteger el legado
 > de su padre muerto.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA — el contraste con Elías Mora es la
+> mitad de la lectura del caso 7**:
+>
+> Vicente y Elías son **los dos culpables que actúan en coordinación**.
+> Visualmente deben leerse como opuestos socioeconómicos para que el
+> jugador entienda inmediatamente que el dúo es "el cerebro elegante +
+> el ejecutor físico":
+>
+> - **Elías Mora** = empresario inmobiliario, traje negro carbón
+>   moderno dos piezas, afeitado limpio, ojos verde-gris, pelo negro
+>   slicked-back, alto y atlético elegante (1.85m gym body).
+> - **Vicente Solera** (lo opuesto) = **transportista de clase trabajadora
+>   hecho a sí mismo**. Cuerpo ROBUSTO y compacto (NO alto delgado, NO
+>   atlético elegante — bajo y achaparrado con cuello grueso), **BARBA
+>   CORTA práctica gris-canosa** (Elías va afeitado), pelo casi al rape,
+>   chaqueta de trabajo de tela gruesa azul marino o caqui (NO traje,
+>   NO tres piezas), manos enormes nudosas de cargar camiones, piel
+>   curtida por sol y trabajo exterior.
+>
+> Otras trampas que evitar:
+>
+> - **Vicente NO es Néstor Galindo** (caso 6, 50, alto delgado con barba
+>   gris, traje gris arrugado). Néstor es socio de bufete trajeado.
+>   Vicente es transportista en chaqueta de trabajo: ropa funcional,
+>   construcción robusta no esbelta.
+> - **Vicente NO es Roque Vellido** (caso 5, 66, calvo con bigote blanco
+>   poblado, cazadora verde, jubilado de barrio). Vicente es 16 años
+>   más joven, todavía en activo y físicamente sólido, con barba CORTA
+>   (no bigote), pelo casi al rape (Roque calvo total con franja).
+>
+> Si la generación sale alto y delgado, con bigote en vez de barba, o
+> trajeado, regenerar.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
-from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+from head to feet (full body, NOT cropped at the waist), occupying the
+central vertical axis of the image. Dark interrogation room background.
+Warm key light from upper-left at 45 degrees, soft falloff. NO table,
+NO chair, NO desk visible in the frame.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
 Subject — DETAILED FACE (unique original face — CULPABLE with a physical
-presence that is not aggressive but imposing):
-- 50 year-old Spanish man, owner of a transport company, son of a village baker
-- Face: a broad strong face with the marks of a physical life — wide flat
-  nose, a strong square jaw with a short, neat practical beard, dark eyes
-  that are watchful and unhurried, thick dark brows, slight scarring on
-  the chin from old work injuries, medium olive complexion darkened by
-  outdoor work, deep lines from nose to chin, a low forehead
-- Hair: short dark hair cut very short, slightly receding at the temples,
-  barely maintained
-- Build: broad-chested, stocky, large hands visible — the hands of a man
-  who has loaded and unloaded lorries, larger and rougher than those of
-  the lawyers around him
+presence that is not aggressive but imposing; must read as a working-class
+transport-company owner, NOT as a lawyer or executive in a suit):
+- 50 year-old Spanish man, owner of a transport company, son of a village
+  baker — self-made working class
+- Face shape: BROAD strong face with the marks of a physical life — wide
+  square jaw, low forehead, broad flat nose with a slightly broken
+  bridge, slight scarring on the chin from old work injuries, weathered
+  by years of outdoor work
+- Skin: medium olive complexion DARKENED by years of sun and outdoor
+  work, leathery texture across the cheeks and forehead, deep lines
+  from nose to chin. NOT pale, NOT smooth-office-skin
+- Eyes: small dark brown eyes set deep under thick dark brows, watchful
+  and unhurried — the patient eyes of a man used to silence
+- Brows: thick dark brows, slightly furrowed at rest
+- Nose: wide flat nose with a small bump on the bridge
+- Lips: firm wide lips kept in a closed practical line
+- Mouth and chin: SHORT NEAT BEARD covering the jaw and chin, well-kept
+  but practical (not a stylish design, not a goatee, not just stubble)
+  — about 1-1.5cm long, dark with grey threads woven through. Signature
+  feature, MUST be present in every shot. Moustache continuous with the
+  beard
+- Hair: VERY SHORT cropped dark hair, almost shaved at the sides,
+  slightly receding at the temples but kept too short to look balding,
+  no styling product
+- Build: BROAD-CHESTED, STOCKY, COMPACT — shorter than average (1.72m
+  reading height), thick neck, big shoulders, heavy frame. NOT tall,
+  NOT slim, NOT athletic-elegant. The proportions of a man who lifts
+  heavy things for a living
+- Hands: LARGE rough hands with thick knuckles visible at the sides of
+  his body, larger and broader than expected — the hands of a man who
+  has loaded and unloaded lorries his whole life
 
-Clothing: a dark navy work jacket or a practical heavy fabric jacket —
-not a suit jacket, not a fashionable jacket, just a good warm jacket.
-A plain dark sweater underneath. Practical dark trousers. The no-nonsense
-clothes of a self-made working-class business owner.
+Clothing: a heavy dark navy WORK JACKET (chaqueta de faena tipo
+americano) with two chest pockets and metal snap buttons — NOT a suit
+jacket, NOT a fashionable bomber, NOT a windbreaker. A plain dark
+charcoal sweater visible at the open neck. Practical dark grey or
+brown work trousers (NO jeans-skinny, NO suit trousers — workwear cut),
+sturdy dark work boots visible at the bottom. No tie, no watch visible,
+no jewellery. The no-nonsense clothes of a self-made working-class
+business owner.
 
-Pose & expression (NEUTRAL): standing with arms crossed, occupying the
-frame with a
-physical solidity, gaze level and patient — a man who rarely speaks but
-when he does, people listen. The silence itself is a kind of pressure.
+Pose & expression (NEUTRAL / STANDING UPRIGHT): standing tall and solid,
+feet shoulder-width apart in a stable rooted stance, ARMS CROSSED firmly
+across his broad chest (large hands visible tucked into the opposite
+elbows), shoulders square and level, chin slightly raised, gaze level
+and patient — a man who rarely speaks but when he does, people listen.
+The silence itself is a kind of pressure.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: skinny build, elegant clothing, nervous posture, anime,
-cel-shading, flat, 3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+skinny build, slim slender frame, tall slender executive, elegant
+clothing, nervous posture, evil smirk, smile,
+SUIT JACKET, BUSINESS SUIT, THREE-PIECE SUIT, WAISTCOAT, NECKTIE,
+DRESS SHIRT WITH TIE, EXECUTIVE LOOK, LAWYER LOOK,
+NO BEARD, CLEAN-SHAVEN, JUST STUBBLE, FIVE-O-CLOCK SHADOW ONLY,
+GOATEE, LONG BEARD PAST CHIN, WHITE BUSHY BEARD, MOUSTACHE WITHOUT
+BEARD, HANDLEBAR MOUSTACHE,
+BALD CROWN, COMBED-OVER STRANDS, RECEDING HAIRLINE FORWARD, LONG HAIR,
+PALE WAXY SKIN, ROSY CHEEKS, SMOOTH UNLINED FACE,
+GREEN WINDBREAKER, CASUAL POLO SHIRT, T-SHIRT, HOODIE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, HANDS ON TABLE, ELBOW ON TABLE, LEANING ON TABLE,
+LEANING FORWARD, TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -2985,18 +3169,36 @@ cel-shading, flat, 3D, photorealistic.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Vicente Solera, 50, dark navy work jacket, plain sweater,
-short near-cropped dark hair, broad-faced with short beard, large hands.
-CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet
+(full body, NOT cropped at the waist), same dark interrogation room,
+same warm lighting as the Neutral.
 
-Pose & expression (PENSATIVO): thinking about his dead father — the arms
-have uncrossed and one large hand rests open on the table, the head has
-dropped slightly, the weight of a man carrying grief disguised as loyalty,
-the quiet of someone for whom the motive was real and simple.
+Same subject: Vicente Solera, 50, dark navy work jacket, charcoal
+sweater, very short cropped dark hair, BROAD STOCKY build, SHORT NEAT
+DARK BEARD with grey threads, large rough hands. CRITICAL: same face,
+same beard, same clothes, same STANDING framing as the approved Neutral.
+NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): thinking about his
+dead father — still standing solid and rooted, but the arms have
+uncrossed. ONE LARGE HAND has come up to his chin, the broad fingers
+covering the lower half of his face in a heavy thinking gesture
+(thumb under the jaw, the rest of the hand over the mouth and beard),
+the OTHER HAND hangs at his side, fingers slightly curled. Head dropped
+a few degrees, eyes focused on the floor in front of him at middle
+distance. The weight of a man carrying grief disguised as loyalty, the
+quiet of someone for whom the motive was real and simple.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+SUIT JACKET, BUSINESS SUIT, EXECUTIVE LOOK,
+SKINNY BUILD, SLIM SLENDER FRAME, TALL ELEGANT FRAME,
+NO BEARD, CLEAN-SHAVEN, GOATEE, HANDLEBAR MOUSTACHE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND OPEN ON TABLE, HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -3004,19 +3206,40 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Vicente Solera. CRITICAL: same face, same clothes, same
-broad physical presence.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet
+(full body, NOT cropped at the waist), same dark interrogation room,
+same lighting.
 
-Pose & expression (NERVIOSO): the vehicle registration has been raised —
-he has shifted his stance, the arms are no longer crossed but both
-hands are now flat on the table, he is looking at the table surface
-rather than at the detective, the jaw is set hard, a man who knows the
-physical evidence places him there and is deciding in real time whether
-there is any way out.
+Same subject: Vicente Solera. CRITICAL: same face, same SHORT DARK
+BEARD, same clothes, same broad STOCKY physical presence, same STANDING
+framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): the vehicle
+registration has been raised — he knows the physical evidence places
+him at the scene. Still standing rooted and solid, but the arms are no
+longer crossed: BOTH HANDS hang heavy at his sides, the large fingers
+slowly CLENCHING into low fists at thigh level, knuckles whitening,
+shoulders pulled forward by a centimetre, jaw set hard under the beard,
+the dark eyes have dropped to look at the floor in front of him rather
+than at the detective. The heavy stillness of a man calculating in real
+time whether there is any way out — not the panic of an innocent, the
+controlled tension of an accomplice who has just realised he is going
+to have to choose.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+panic, fear, raised arms in surrender, evil smirk, smile,
+SUIT JACKET, BUSINESS SUIT, EXECUTIVE LOOK,
+SKINNY BUILD, SLIM SLENDER FRAME, TALL ELEGANT FRAME,
+NO BEARD, CLEAN-SHAVEN, GOATEE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HANDS ON TABLE, BOTH HANDS FLAT ON TABLE, PALMS ON TABLE,
+LEANING ON TABLE, LEANING FORWARD OVER TABLE, BENDING OVER TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND, FILE FOLDER ON TABLE,
+DOCUMENTS ON TABLE,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ---
