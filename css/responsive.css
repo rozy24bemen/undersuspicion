@@ -83,15 +83,56 @@
   .ev-thumb         { width: 54px; height: 54px; }
   .ev-thumb__label  { font-size: 6px; }
 
-  /* Desk cards smaller */
-  .desk-card        { width: 130px; }
-  .desk-card__body  { max-height: 50px; font-size: 8px; }
-  .desk-card__title { font-size: 7px; }
+  /* Desk cards smaller — escalamos card, área de icono e imagen
+     en proporción para que no se vean gigantescas en móvil. */
+  .desk-card             { width: 130px; }
+  .desk-card__icon-area  { height: 86px; }
+  .desk-card__icon-area img  { width: 68px; height: 68px; }
+  .desk-card__icon-area span { font-size: 26px; }
+  .desk-card__title          { font-size: 7px; }
+  .desk-card__click-hint     { font-size: 6px; padding: 2px 4px; }
 
   /* Long-press visual feedback on touch */
   .desk-card.dragging {
     box-shadow: 0 0 0 3px var(--gold), 4px 4px 18px rgba(0,0,0,.9);
   }
+
+  /* ── CENA EN CASA — pantalla de cena tras el caso ───
+     El `.dinner-split` hereda flex-direction: column-reverse del
+     `.game-split` global, pero los hijos `.dinner-table` y
+     `.dinner-room` siguen con width: 50% del desktop. En móvil eso
+     desborda y colapsa el layout. Forzamos 100% ancho y alturas
+     razonables (mujer arriba, mesa con velita abajo). */
+  .dinner-table, .dinner-room { width: 100%; }
+  .dinner-table {
+    height: 38%;
+    border-left: none;
+    border-bottom: 2px solid #2a1a08;
+  }
+  .dinner-room {
+    height: 62%;
+    border-left: none;
+    border-top: 2px solid #2a1a08;
+  }
+
+  /* Items de la mesa escalados — las posiciones siguen siendo % del
+     contenedor pero el tamaño absoluto se reduce. */
+  .dinner-table__plate  { width: 130px; height: 130px; bottom: 18%; }
+  .dinner-table__food   { width: 80px;  height: 80px; }
+  .dinner-table__glass  { width: 22px;  height: 56px; bottom: 26%; left: 14%; }
+  .dinner-table__candle { width: 11px;  height: 30px; top: 14%; right: 16%; }
+  .dinner-table__label  { font-size: 9px; }
+
+  /* Figura de la mujer más pequeña — deja sitio al panel de diálogo. */
+  .dinner-figure img        { max-height: 38vh; }
+  .dinner-figure__silhouette { width: 130px; height: 200px; }
+
+  /* Panel de diálogo: scroll interno para que las respuestas quepan. */
+  .dinner-panel             { max-height: 100%; min-height: 0; }
+  .dinner-panel__line       { font-size: 12px; padding: 10px 12px; min-height: 0; }
+  .dinner-panel__response   { font-size: 10px; padding: 8px 10px; }
+  .dinner-room__name        { font-size: 11px; letter-spacing: 2px; }
+  .dinner-room__role        { font-size: 8px; }
 
   /* Notebook toggle */
   .notebook-toggle  { width: 40px; height: 40px; top: 8px; left: 8px; }
@@ -225,15 +266,27 @@
   .ev-thumb__label  { font-size: 5.5px; }
 
   /* Desk cards even smaller */
-  .desk-card        { width: 110px; }
-  .desk-card__head  { padding: 3px 6px; gap: 4px; }
-  .desk-card__icon  { font-size: 12px; }
-  .desk-card__title { font-size: 7px; }
-  .desk-card__body  { padding: 5px 6px; max-height: 40px; font-size: 7.5px; }
-  .desk-card__click-hint { font-size: 6.5px; padding: 2px 6px; }
+  .desk-card             { width: 110px; }
+  .desk-card__icon-area  { height: 72px; }
+  .desk-card__icon-area img  { width: 56px; height: 56px; }
+  .desk-card__icon-area span { font-size: 22px; }
+  .desk-card__title          { font-size: 7px; padding: 5px 6px 3px; }
+  .desk-card__click-hint     { font-size: 6px; padding: 2px 6px; }
 
   /* Desk label hide */
   .desk__label      { display: none; }
+
+  /* ── Cena móvil pequeño ────────────────────────────── */
+  .dinner-table { height: 32%; }
+  .dinner-room  { height: 68%; }
+  .dinner-table__plate   { width: 100px; height: 100px; bottom: 16%; }
+  .dinner-table__food    { width: 62px;  height: 62px; }
+  .dinner-table__glass   { width: 20px;  height: 48px; bottom: 22%; left: 12%; }
+  .dinner-table__candle  { width: 9px;   height: 24px; top: 12%; right: 14%; }
+  .dinner-figure img        { max-height: 32vh; }
+  .dinner-figure__silhouette { width: 110px; height: 170px; }
+  .dinner-panel__line       { font-size: 11px; padding: 8px 10px; }
+  .dinner-panel__response   { font-size: 9.5px; padding: 7px 9px; }
 
   /* Notebook toggle smaller */
   .notebook-toggle  { width: 36px; height: 36px; top: 6px; left: 6px; }
@@ -283,8 +336,12 @@
   .portrait__img     { --portrait-scale: 1.45; height: 66%; }
 
   /* Desk cards minimal */
-  .desk-card         { width: 96px; }
-  .desk-card__body   { max-height: 32px; font-size: 7px; }
+  .desk-card             { width: 96px; }
+  .desk-card__icon-area  { height: 62px; }
+  .desk-card__icon-area img  { width: 46px; height: 46px; }
+  .desk-card__icon-area span { font-size: 18px; }
+  .desk-card__title          { font-size: 6.5px; padding: 4px 4px 2px; }
+  .desk-card__click-hint     { font-size: 5.5px; padding: 1px 4px; }
 
   /* Resolution */
   .resolution        { gap: 12px; padding: 12px; }

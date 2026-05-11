@@ -154,6 +154,15 @@
   width: 90px;
   height: 90px;
   object-fit: contain;
+  /* Evita que el long-press móvil abra el menú nativo "copiar/guardar
+     imagen" y que el icono intercepte el touch del drag. El pointerdown
+     pasa directo a .desk-card. */
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .desk-card__icon-area span {
   font-size: 34px;

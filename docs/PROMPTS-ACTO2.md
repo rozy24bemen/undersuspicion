@@ -5,21 +5,41 @@
 > sótano"). Formato validado con la v3 del style-bible (Disco Elysium /
 > digital oil painting). **Eliminar tras finalizar producción**.
 
-> ## ⚠️ CONVENCIÓN DE FRAMING (alineada con Acto 1)
+> ## ⚠️ CONVENCIÓN DE FRAMING — STANDING ONLY (alineada con Acto 1)
 >
-> Todos los prompts de sospechosos en este documento generan retratos a
-> **CUERPO ENTERO DE PIE** (Full-body standing, head to feet), igual que en
-> Acto 1. El framing se ha unificado tras detectar que la versión inicial
-> (half-body, sentados) producía sospechosos sentados, inconsistente con
-> Hugo, Lucía, Marta y los demás del Acto 1.
+> **TODOS los prompts de sospechosos generan retratos a CUERPO ENTERO DE
+> PIE** (Full-body standing, head to feet), iguales a los del Acto I. Si el
+> generador te devuelve un sospechoso sentado, recortado a la cintura,
+> apoyado en una mesa o con codo sobre la mesa, **descártala y regenera**.
 >
-> **Cuando generes**: si el modelo te devuelve un sospechoso sentado o
-> recortado a la cintura, añade al final del NEGATIVE: `seated, sitting,
-> chair, hands on lap, half-body framing, waist-up crop, bust crop`.
+> ### Reglas críticas para evitar la trampa "sentado":
 >
-> Las referencias residuales a "chair" o "table" en algunas poses son
-> deliberadas: el sospechoso está de pie *junto* a la mesa o *apoyado*
-> en el respaldo de una silla vacía — nunca sentado.
+> 1. **NUNCA** describas la pose con "elbow on the table", "hand on the
+>    table", "leaning on the table" o "gripping the edge of the table".
+>    Estos son los detonantes principales que llevan al modelo a renderizar
+>    al personaje sentado al estilo entrevista.
+>
+> 2. Sustituye los gestos "de mesa" por equivalentes verticales:
+>    - "Hand at her temple, elbow on the table" → "hand at her temple, the
+>      other arm folded across her body holding the elbow"
+>    - "Both hands on the table" → "both hands clasped at waist height" o
+>      "both hands raised in defensive open-palm gesture at chest height"
+>    - "Hand resting on chair back" → "hand in suit jacket pocket"
+>
+> 3. Cada NEGATIVE debe incluir explícitamente:
+>    `SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+>    ELBOW ON TABLE, HAND ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+>    DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+>    CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE`. Los prompts
+>    de este documento ya lo llevan; respétalos al copiar.
+>
+> 4. En la línea inicial de framing del prompt, repite **"head to feet
+>    (full body, NOT cropped at the waist)"**. La redundancia funciona.
+>
+> 5. En la descripción del sujeto, añade **"NO table, NO chair, NO desk
+>    visible in the frame"**. Esto elimina el escenario de mesa de
+>    interrogación que el modelo asume por defecto cuando ve "interrogation
+>    room background".
 >
 > El Acto II introduce la **luz UV** (Caso 5), la **prueba plantada** (Caso 6)
 > y la **tabla de argumentación** (Caso 7). Ninguno de esos sistemas necesita
@@ -1261,17 +1281,33 @@ photorealistic, revealing clothing, tears.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Sara Caracedo, 38, navy pinstripe blazer, white shirt, dark
-chignon. CRITICAL: same face, same hair, same clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, character framed
+from head to feet (full body, NOT cropped at the waist). Same dark
+interrogation room background, same warm key light from upper-left as the
+Neutral.
 
-Pose & expression (PENSATIVA): the professional mask has developed a crack —
-she is looking sideways and slightly down, one hand at her temple, elbow on
-the table, processing something that conflicts with what she has rehearsed,
-the chin is no longer elevated, a faint furrow between the brows.
+Same subject as reference: Sara Caracedo, 38, navy pinstripe blazer over
+white shirt, dark low chignon, gold stud earrings. CRITICAL: same face,
+same hair, same clothing, same STANDING framing as the approved Neutral.
+NO table, NO chair, NO desk visible in the frame.
+
+Pose & expression (PENSATIVA / STANDING UPRIGHT): she remains standing but
+the professional mask has developed a crack — head tilted slightly down,
+eyes looking sideways and slightly down at the floor in front of her, ONE
+HAND brought up loosely to her temple in a small thinking gesture
+(fingertips touching the side of the forehead), the OTHER ARM folded
+across her body at the waist holding her own elbow, weight subtly shifted
+to one leg. Chin no longer elevated, faint furrow between the brows.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D,
+deformed, text, watermark, casual clothing, dishevelled, revealing clothing,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+ELBOW ON TABLE, HAND RESTING ON TABLE, LEANING ON TABLE, TABLE IN
+FOREGROUND, TABLETOP VISIBLE, DESK IN FOREGROUND, ARMS RESTING ON
+SURFACE, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Nerviosa (adjuntar NEUTRAL aprobada)
@@ -1279,18 +1315,30 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Sara Caracedo. CRITICAL: same face, same hair, same clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting
+as the Neutral.
 
-Pose & expression (NERVIOSA): she is holding together but barely — a
-barely contained tension in the set of her jaw, one hand is gripping the
-edge of the table, her eyes are slightly wider than controlled, the
-composed mouth is pressed into a thin line, the overall impression of
-someone who has just been asked the question she prepared for but hoped
-would not come.
+Same subject as reference: Sara Caracedo. CRITICAL: same face, same hair,
+same clothing, same STANDING framing. NO table, NO chair, NO desk in the
+frame.
+
+Pose & expression (NERVIOSA / STANDING UPRIGHT): she is holding together but
+barely. Still standing upright, the stance has tensed up: BOTH HANDS clasped
+tightly in front of her at waist height, knuckles slightly white from the
+grip, shoulders squared forward defensively, jaw set, eyes slightly wider
+than the controlled neutral, the composed mouth pressed into a thin line,
+weight evenly on both feet. The impression of someone who has just been
+asked the question she prepared for but hoped would not come.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D,
+deformed, text, watermark, casual clothing, dishevelled, revealing clothing,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+GRIPPING TABLE EDGE, HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP,
+BUST CROP, CROPPED AT WAIST, KNEES NOT VISIBLE.
 ```
 
 ---
@@ -1393,17 +1441,29 @@ WORKING-CLASS APPEARANCE.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Néstor Galindo, 50, rumpled charcoal suit, loosened grey tie.
-CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting
+as the Neutral.
 
-Pose & expression (PENSATIVO): realising something about how he is being
-perceived — he is choosing his next words very carefully, the nervous energy
-momentarily stilled into calculation, eyes fixed on a point in front of him,
-lips slightly parted, one hand flat on the table.
+Same subject: Néstor Galindo, 50, rumpled charcoal suit with loosened grey
+tie, salt-and-pepper beard. CRITICAL: same face, same beard, same clothes,
+same STANDING framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): the nervous energy
+momentarily stilled into calculation. Still standing with the slight forward
+hunch of the Neutral, but now ONE HAND has come up to the chin/jaw stroking
+the beard absent-mindedly, the OTHER HAND hangs at his side. Eyes fixed on
+a point in middle distance — he is choosing his next words very carefully.
+Lips slightly parted in concentration.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic, calm confident
+posture, neat well-pressed appearance,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -1411,17 +1471,28 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Néstor Galindo. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting.
 
-Pose & expression (NERVIOSO): barely contained panic — the evidence about
-the fountain pen has just been placed in front of him, he is leaning
-forward with both hands on the table, eyes wide and blinking rapidly, an
-agitated half-rise from the seat, the knot of his tie is now pulled even
-further down, his mouth is open mid-speech defending himself.
+Same subject: Néstor Galindo. CRITICAL: same face, same beard, same clothes,
+same STANDING framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): barely contained panic —
+he has recoiled half a step backward as if struck, BOTH HANDS raised in
+front of him in a defensive open-palm gesture at chest height (palms toward
+the detective), eyes wide and blinking rapidly, mouth open mid-speech
+defending himself, the knot of his tie pulled even further down, a thin
+sheen of sweat at the temples and brow. The whole body language reads as
+"I had nothing to do with this" — a man backing away from an accusation
+without leaving the room.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, HALF-RISE FROM SEAT, RISING FROM
+CHAIR, AT A TABLE, AT A DESK, HANDS ON TABLE, LEANING ON TABLE, TABLE IN
+FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST
+CROP, CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ---
@@ -1496,12 +1567,13 @@ the bottom of the frame. Everything speaks of old money and precision.
 NOT a single-breasted suit, NOT a casual jacket, NOT a turtleneck, NOT
 any kind of windbreaker or zip-up.
 
-Pose & expression (NEUTRAL): standing tall and centered, weight balanced
-on the back leg with the front foot slightly forward, shoulders relaxed
-and squared, one arm resting along the back of an empty wooden chair, the
-other hand at his side or lightly on the front of his thigh, eyes meeting
-the detective with absolute calm — the body language of a man who has
-never felt guilty in his life.
+Pose & expression (NEUTRAL / STANDING UPRIGHT): standing tall and centered,
+weight balanced on the back leg with the front foot slightly forward,
+shoulders relaxed and squared, ONE HAND resting in the pocket of his suit
+jacket (showing the cufflink at the wrist), the OTHER HAND at his side
+holding the corner of his pocket square loosely between two fingers, eyes
+meeting the detective with absolute calm — the body language of a man who
+has never felt guilty in his life.
 
 Composition: subject vertically centered, eyes at upper third.
 
@@ -1519,7 +1591,11 @@ TURTLENECK, OPEN-COLLAR NO TIE, T-SHIRT, POLO SHIRT,
 PYJAMA, CARDIGAN, FORMAL VESTMENTS,
 WORKING-CLASS APPEARANCE, RETIRED-WORKER LOOK, DOORMAN UNIFORM,
 RUDDY COMPLEXION, RED-VEINED NOSE, ROSY CHEEKS, PALE WAXY SKIN,
-ROUND CHUBBY FACE, DOUBLE CHIN, JOWLS.
+ROUND CHUBBY FACE, DOUBLE CHIN, JOWLS,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+ARM RESTING ON CHAIR BACK, HAND ON TABLE, ELBOW ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP,
+BUST CROP, CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -1527,20 +1603,33 @@ ROUND CHUBBY FACE, DOUBLE CHIN, JOWLS.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Pedro Pinhel, 65, double-breasted charcoal suit, burgundy
-silk tie, silver hair swept back. CRITICAL: same face, same hair, same
-clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same warm
+lighting as the Neutral.
 
-Pose & expression (PENSATIVO): an almost imperceptible adjustment — he
-has heard something he did not expect and is calculating the response.
-Nothing visible except a half-second flicker in the grey eyes and the
-faintest tightening of the already minimal lips. He might be thinking
-about what to have for dinner, or deciding how to destroy someone — his
-expression gives no information.
+Same subject: Pedro Pinhel, 65, double-breasted charcoal suit, burgundy
+silk tie, silver hair swept back, completely clean-shaven. CRITICAL: same
+face, same hair, same clothing, same STANDING framing as the approved
+Neutral. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): an almost imperceptible
+adjustment — he has heard something he did not expect and is calculating
+the response. Still standing tall, ONE HAND in his suit jacket pocket, the
+OTHER HAND raised to his chin, thumb under the jaw and index finger pressed
+to the side of his cheek in a classical thinking gesture. Eyes looking
+slightly off to one side, narrowed by a fraction. The faintest tightening
+of the already minimal lips. He might be thinking about what to have for
+dinner, or deciding how to destroy someone — his expression gives no
+information.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+shifty eyes, smirk, sneer, dishevelled appearance, panic, fear,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+ARM RESTING ON CHAIR BACK, HAND ON TABLE, ELBOW ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP,
+BUST CROP, CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -1548,19 +1637,29 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Pedro Pinhel. CRITICAL: same face, same clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting.
 
-Pose & expression (NERVIOSO): the mask remains almost intact but one
-crack: he has shifted forward very slightly and his hands are now both
-on the table, fingers slightly spread — a micro-aggression in his
-posture, a man claiming space because he feels it being taken from him.
-The eyes are still calm but the lips are fractionally compressed, and
-the jaw muscle is just perceptibly tighter. The most dangerous he ever
-looks is not rage — it is this.
+Same subject: Pedro Pinhel. CRITICAL: same face, same hair, same clothing,
+same STANDING framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): the mask remains almost
+intact but one crack — still standing tall, but he has rolled his shoulders
+forward by a centimetre and BOTH HANDS are now clasped low in front of him
+at waist height, fingers interlaced firmly, knuckles whitening — a
+micro-aggression in his posture, a man claiming space because he feels it
+being taken from him. The eyes still calm but the lips fractionally
+compressed, the jaw muscle just perceptibly tighter. The most dangerous he
+ever looks is not rage — it is this.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: panic, fear, obvious guilt, dishevelled, same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+panic, fear, obvious guilt, dishevelled appearance,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HANDS ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ---
@@ -1574,16 +1673,26 @@ NEGATIVE: panic, fear, obvious guilt, dishevelled, same as neutral.
 > ⚠️ **DIFERENCIACIÓN OBLIGATORIA**:
 > - Marina NO es Inés Quirós (caso 5, culpable de 40 con uniforme clínico
 >   y moño bajo tenso). Inés es 12 años MAYOR, lleva uniforme blanco
->   sanitario y forro polar marino, moño de aspecto institucional. Marina
->   es VISIBLEMENTE de los 20-30, abrigo de lana civil sobre jersey de
->   cuello vuelto negro, pelo más libre.
+>   sanitario y forro polar marino, moño institucional.
 > - Marina NO es Olalla Bermejo (caso 3, ingeniera amiga de la víctima de
->   35). Olalla viste casual neutra con pelo suelto castaño. Marina debe
->   verse MÁS DURA, más afilada, ropa más urbano-elegante negra.
+>   35). Olalla viste casual neutra con pelo suelto castaño.
+> - **Marina NO es Carla Vinyets** (caso 3, víctima de 31, ingeniera con
+>   gafas de pasta negras, pelo oscuro recogido bajo, cara oval suave,
+>   piel oliva mediterránea, ojos marrones oscuros, expresión amable). El
+>   riesgo de generar una "cara mediterránea joven con pelo oscuro
+>   recogido" es altísimo y se solapa con Carla. Marina debe distinguirse
+>   por TRES rasgos imposibles de confundir:
+>      - **OJOS VERDE GRISÁCEOS CLAROS** (no marrones — Carla los tiene
+>        marrón oscuro), llamativos, casi felinos.
+>      - **PELO LARGO HASTA MEDIA ESPALDA, suelto con ondulación natural**,
+>        nunca recogido (Carla lo lleva siempre tirante).
+>      - **PÓMULOS MUY ANGULARES Y ALTOS, casi felinos**, con mandíbula
+>        que se afina hasta una barbilla puntiaguda (Carla tiene óvalo
+>        suave sin esos ángulos).
 >
-> La clave es la EDAD VISIBLE — Marina debe leer como mujer joven (28),
-> con la energía nerviosa de una becaria ambiciosa, NO como una
-> profesional asentada de 35-40.
+> Si la generación devuelve una mujer con pelo oscuro recogido + ojos
+> marrones + cara ovalada suave, **NO es Marina — es Carla**. Regenerar
+> enfatizando los descriptores en MAYÚSCULAS.
 
 ### Neutral
 
@@ -1598,27 +1707,37 @@ art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
 Subject — DETAILED FACE (unique original face — must read as a young woman
-in her late twenties, sharp and ambitious, NOT a clinical nurse, NOT a
-relaxed professional):
+in her late twenties, sharp and ambitious, with a striking memorable look
+that does NOT resemble a generic "young Spanish brunette professional"):
 - 28 year-old Spanish woman, recently-graduated lawyer intern at a
   prestigious Madrid law firm — visibly young, late-twenties not
   thirties
-- Face shape: SHARP NARROW face with HIGH ANGULAR cheekbones giving a
-  slightly feline quality, a defined chin tapering to a slight point,
-  the youthful firmness of skin still tight against the bone
-- Skin: clear LIGHT olive complexion, smooth and youthful (NOT weathered,
-  NOT tired)
-- Eyes: dark brown eyes set slightly close together, quick and assessing,
-  bright with intelligence — the eyes of a young woman calculating angles,
-  NOT the controlled mask of a senior professional
-- Brows: thin neatly groomed arched brows
-- Nose: straight slightly pointed nose, narrow at the bridge
-- Lips: well-defined lips with a slight natural pout, kept in a controlled
-  line that occasionally hints at impatience
-- Hair: dark brown straight hair, shoulder-length, worn LOOSE or in a
-  LOW MESSY HALF-BUN with strands escaping at the front — modern, free,
-  NOT a tight institutional bun, NOT a smooth corporate chignon. Slight
-  natural movement to it
+- Face shape: VERY SHARP NARROW face with VERY HIGH and PROMINENT angular
+  cheekbones giving a strongly FELINE / CAT-LIKE quality (this is her
+  signature feature — the cheekbones must dominate the face, casting
+  small shadows below them under the warm key light); jaw tapering down
+  to a noticeably POINTED chin; the youthful firmness of skin tight
+  against the bone
+- Skin: clear LIGHT olive complexion with a slight cool undertone, smooth
+  and youthful (NOT weathered, NOT tired, NOT warm-Mediterranean)
+- Eyes: PALE GREY-GREEN eyes (light, almost translucent, like sea-glass)
+  — this is the SECOND signature feature. The eye colour MUST be light
+  green-grey, NOT brown, NOT dark, NOT hazel. Set slightly close together,
+  quick and assessing, bright with intelligence; the contrast between the
+  pale eyes and the dark hair is striking and unmistakable
+- Brows: thin almost-straight horizontal dark brows, sharply defined, with
+  a small downward angle at the outer end (NOT softly arched, NOT rounded)
+- Nose: straight narrow nose with a slightly aquiline bridge and a fine
+  pointed tip
+- Lips: well-defined lips with a natural slight pout, the upper lip with
+  a clear cupid's bow, kept in a controlled line that occasionally hints
+  at impatience or a private smirk
+- Hair: VERY DARK BROWN almost-black hair, LONG (reaching mid-back), worn
+  COMPLETELY LOOSE with natural soft waves and a slight middle parting;
+  some volume around the face. NOT pulled back, NOT tied, NOT in a bun,
+  NOT in a chignon, NOT in a ponytail, NOT in a half-bun. The hair must
+  read as deliberately untied — a young woman who refuses the institutional
+  hairstyle. This is her THIRD signature feature.
 - Build: slim and angular, the energy of someone who moves quickly and
   purposefully, average height
 
@@ -1644,11 +1763,20 @@ revealing clothing, dramatic gore, obvious villainy, evil smirk, glowing
 eyes,
 WHITE CLINICAL UNIFORM, NURSE UNIFORM, MEDICAL SCRUBS, BLUE CLINICAL TOP,
 NAVY FLEECE ZIP-UP, INSTITUTIONAL EMBROIDERY ON CHEST POCKET,
-TIGHT INSTITUTIONAL LOW BUN, SMOOTH CORPORATE CHIGNON,
 40 YEARS OLD, MIDDLE-AGED FACE, WEATHERED SKIN, TIRED EYES,
 HEAVY FACE, ROUND CHEEKS, MATERNAL ENERGY,
 CASUAL CLOTHING, JEANS, T-SHIRT, HOODIE, SWEATSHIRT,
-LOOSE FLOWING HAIR PAST WAIST, CURLY HAIR, BLONDE HAIR, RED HAIR.
+CURLY HAIR, BLONDE HAIR, RED HAIR,
+BROWN EYES, DARK BROWN EYES, HAZEL EYES, BLACK EYES,
+HAIR PULLED BACK, HAIR IN A PONYTAIL, HAIR IN A BUN, HAIR IN A CHIGNON,
+HAIR IN A HALF-BUN, HAIR TIED, HAIR PINNED, LOW BUN, HIGH BUN,
+INSTITUTIONAL HAIRSTYLE, CORPORATE CHIGNON, SLEEK PONYTAIL,
+SOFT ROUNDED FACE, OVAL FACE, GENTLE FACIAL FEATURES, ROUND CHEEKBONES,
+WEAK CHEEKBONES, SOFT JAWLINE, BLACK PLASTIC GLASSES, ANY GLASSES,
+THICK-FRAMED GLASSES, READING GLASSES, GENTLE WARM SMILE,
+APPROACHABLE FRIENDLY EXPRESSION, WARM SOFT MEDITERRANEAN LOOK,
+WHITE COLLARED SHIRT UNDER BLAZER, BUSINESS-CASUAL CORPORATE LOOK,
+SOFTWARE-ENGINEER LOOK.
 ```
 
 ### Pensativa (adjuntar NEUTRAL aprobada)
@@ -1656,17 +1784,34 @@ LOOSE FLOWING HAIR PAST WAIST, CURLY HAIR, BLONDE HAIR, RED HAIR.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Marina Caracedo, 28, dark wool coat, black turtleneck, dark
-loose hair. CRITICAL: same face, same hair, same clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same warm
+lighting as the Neutral.
 
-Pose & expression (PENSATIVA): she is deciding which version of the story
-to tell — the arms have uncrossed, one hand is now at her chin, elbow on
-the table, the eyes have gone slightly inward, calculating rather than
-deflecting.
+Same subject: Marina Caracedo, 28, knee-length dark wool coat open over
+black turtleneck, dark loose shoulder-length hair. CRITICAL: same face,
+same hair, same clothing, same STANDING framing as the approved Neutral.
+NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVA / STANDING UPRIGHT): she is deciding which
+version of the story to tell. Still standing, the arms have uncrossed —
+ONE HAND is now at her chin in a calculating thinking gesture (index
+finger along the jaw, thumb under), the OTHER HAND has dropped to her hip
+inside the open coat. Weight shifted to one leg, body turned slightly
+three-quarter away from the detective. Eyes gone slightly inward,
+calculating rather than deflecting.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+revealing clothing, obvious villainy, evil smirk,
+WHITE CLINICAL UNIFORM, NURSE UNIFORM, MEDICAL SCRUBS, NAVY FLEECE,
+INSTITUTIONAL EMBROIDERY ON CHEST POCKET, TIGHT INSTITUTIONAL LOW BUN,
+40 YEARS OLD, MIDDLE-AGED FACE, MATERNAL ENERGY,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+ELBOW ON TABLE, HAND ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Nerviosa (adjuntar NEUTRAL aprobada)
@@ -1674,18 +1819,31 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Marina Caracedo. CRITICAL: same face, same hair, same clothing.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting.
 
-Pose & expression (NERVIOSA): caught — the sharpness is now defensive.
-Both feet flat on the floor, both hands gripping the edge of the table,
-chin forward, eyes slightly wider and darting between the detective and
-the evidence on the table. This is not the panic of the innocent — it is
-the controlled aggression of someone who knows exactly which pieces of
-evidence are dangerous and is trying to stay ahead of them.
+Same subject: Marina Caracedo. CRITICAL: same face, same hair, same clothing,
+same STANDING framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSA / STANDING UPRIGHT): caught — the sharpness is
+now defensive. Still standing, both feet planted firmly shoulder-width
+apart on the floor, BOTH HANDS clenched tightly at her sides, knuckles
+whitening. Chin pushed forward in challenge, eyes slightly wider and
+darting between the detective and an unseen point off-frame. This is not
+the panic of the innocent — it is the controlled aggression of someone who
+knows exactly which pieces of evidence are dangerous and is trying to stay
+ahead of them.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+revealing clothing, obvious villainy, evil smirk,
+WHITE CLINICAL UNIFORM, NURSE UNIFORM, MEDICAL SCRUBS, NAVY FLEECE,
+TIGHT INSTITUTIONAL LOW BUN, 40 YEARS OLD, MATERNAL ENERGY,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+GRIPPING TABLE EDGE, HANDS ON TABLE, ELBOW ON TABLE, LEANING ON TABLE,
+TABLE IN FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP,
+BUST CROP, CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ---
@@ -1785,17 +1943,34 @@ HUNCHED SHOULDERS, ARMS CROSSED.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Eulogio Pacheco hijo, 50, dark navy suit, white shirt, dark tie,
-thin rectangular glasses, silvering temples. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same warm
+lighting as the Neutral.
 
-Pose & expression (PENSATIVO): he is choosing how much to reveal about what
-he knows — one hand at his chin, index finger pressed to his lips, the glasses
-catching a glint of light as he looks slightly upward, a deliberate pause before
-speaking.
+Same subject: Eulogio Pacheco hijo, 50, dark navy suit perfectly pressed,
+white shirt, plain dark tie knotted tightly, thin-framed rectangular glasses
+on the nose, silvering temples. CRITICAL: same face, same clothes, same
+glasses STILL ON, same STANDING framing. NO table, NO chair, NO desk in the
+frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): he is choosing how much
+to reveal about what he knows. Still standing very upright, ONE HAND raised
+to his chin with the index finger pressed lightly to his lips in a deliberate
+"I am thinking" gesture, the OTHER HAND in front of his thigh holding his
+own opposite wrist. Glasses catching a faint glint of light as he tilts his
+head slightly upward, a deliberate pause before speaking.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+animated expression, casual clothing,
+WITHOUT GLASSES, GLASSES REMOVED, GLASSES IN POCKET, GLASSES ON FOREHEAD,
+SUNGLASSES, ROUND GOLD-RIM GLASSES, BEARD, MOUSTACHE, GOATEE,
+RUMPLED SUIT, LOOSENED TIE, CHEAP SUIT, OPEN COLLAR NO TIE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -1803,17 +1978,31 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Eulogio Pacheco hijo. CRITICAL: same face, same clothes, same glasses.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting.
 
-Pose & expression (NERVIOSO): the control is still there but applied with visible
-effort — he has removed his glasses and is holding them in one hand, rubbing the
-bridge of his nose with the other, looking down at the table, the most exposed we
-ever see him — the glasses in the hand rather than on the face, the symbolic
-removal of his professional barrier.
+Same subject: Eulogio Pacheco hijo. CRITICAL: same face, same clothes, same
+STANDING framing. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): the control is still there
+but applied with visible effort. Still standing rigid, but he has removed
+his glasses for the first time and is holding them in ONE HAND down at chest
+height, while the OTHER HAND has come up to pinch the bridge of his nose
+with thumb and index finger, eyes closed or looking down at the floor in
+front of him. Head tilted slightly down. The most exposed we ever see him
+— the glasses in the hand rather than on the face, the symbolic removal of
+his professional barrier.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+animated expression, casual clothing,
+GLASSES STILL ON FACE, GLASSES STILL ON NOSE, BEARD, MOUSTACHE, GOATEE,
+RUMPLED SUIT, LOOSENED TIE, CHEAP SUIT, OPEN COLLAR NO TIE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST, KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ---
@@ -2209,44 +2398,104 @@ anime, 3D, photorealistic.
 > 33 años. Hijo de Camino. Delgado, ojeroso, distante. Ruptura familiar hace
 > cinco años por desacuerdo sobre el libro. Coartada sólida (hospital en
 > Valencia). Parece sospechoso pero no lo es.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA contra Iván Cienfuegos** (caso 2,
+> sospechoso de 30-y-tantos):
+> - Iván = pelo castaño-oscuro despeinado, cara estrecha angulosa, barba
+>   de pocos días, ojos marrones con ojeras, chaqueta vaquera con
+>   bandolera, constitución delgada-normal, pose con manos en bolsillos.
+>   Prácticamente cualquier "joven español delgado y ojeroso con look
+>   descuidado" caerá en su silueta.
+> - Isma debe leer como **otro hombre** desde el primer vistazo. Tres
+>   rasgos signature obligatorios:
+>      - **PELO CASTAÑO CLARO con CANAS PREMATURAS visibles** en sienes
+>        y mechones sueltos (hombre de 33 desgastado, no oscuro
+>        uniforme). Iván tiene pelo castaño oscuro y uniforme.
+>      - **CARA ANCHA CUADRADA con MANDÍBULA MARCADA** y un cuello más
+>        grueso (anti-Iván cara estrecha). La estructura ósea es
+>        rectangular, no afilada.
+>      - **OJOS AZUL-GRIS o VERDE-GRIS CLAROS** (Iván los tiene marrones
+>        oscuros). El contraste con la piel pálida y las canas es lo
+>        que primero capta la vista.
+>
+> Si la generación devuelve un hombre delgado con pelo oscuro uniforme,
+> cara estrecha y ojos marrones, **NO es Isma — es Iván**. Regenerar.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
-from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+from head to feet (full body, NOT cropped at the waist), occupying the
+central vertical axis of the image. Dark interrogation room background.
+Warm key light from upper-left at 45 degrees, soft falloff. NO table, NO
+chair, NO desk visible in the frame.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
-Subject — DETAILED FACE (unique original face — must look suspicious but
-be innocent):
-- 33 year-old Spanish man, hospital nurse, estranged from his mother
-- Face: thin narrow face with sharp features inherited from his mother
-  (slightly modified — masculine version), very dark circles under
-  wary brown eyes, a thin straight nose, tight thin lips that default to
-  a closed defensive line, pale olive complexion with a slightly sallow
-  undertone from too many night shifts, minimal beard — a few days of
-  unshaved sparse stubble
-- Hair: short dark hair slightly too long to be styled but too short to
-  fall, slightly unwashed-looking, pushed back with fingers
-- Build: slim and slightly gaunt, narrow shoulders, the posture of
-  someone who braces for impact
+Subject — DETAILED FACE (unique original face — a hospital nurse who has
+just driven through the night to identify his mother; must look suspicious
+but be innocent; must NOT resemble a generic "thin Spanish man with dark
+hair and dark circles"):
+- 33 year-old Spanish man, hospital nurse working night shifts in Valencia
+- Face shape: WIDE RECTANGULAR face with a strong square JAW and a
+  slightly thick neck — NOT a thin narrow face, NOT angular. The
+  bone structure reads as solid and broad, the kind of face that
+  carries weight even when tired
+- Skin: pale olive complexion with a slightly sallow undertone from too
+  many night shifts; small permanent dark circles under the eyes; a few
+  faint chickenpox-scars on the cheek and forehead, barely visible
+- Eyes: PALE BLUE-GREY eyes (cool, watery, slightly bloodshot) — this is
+  his most distinctive feature. The eye colour MUST be light blue-grey,
+  NOT brown, NOT dark. The contrast between the pale eyes, the pale skin
+  and the prematurely-greying hair is what makes him recognisable
+- Brows: dark ash-brown brows, naturally thick, slightly furrowed
+- Nose: straight wide nose with a small bump on the bridge, nostrils
+  slightly flared at rest
+- Lips: average lips, kept in a closed defensive line
+- Mouth and chin: minimal beard — five-day uneven stubble across the jaw
+  and chin, peppered with grey hairs visible at the corners of the mouth
+  and on the chin (premature greying, very characteristic)
+- Hair: ASH-BROWN / LIGHT CHESTNUT hair (NOT dark, NOT black) cut short
+  and slightly grown out, pushed back with fingers, with VISIBLE PREMATURE
+  GREY at the temples and a few grey strands through the top — a man of
+  33 whose hair is going early. The hair must read as light brown with
+  grey streaks, never dark uniform.
+- Build: TALL and broad-shouldered with the working frame of a hospital
+  nurse who lifts patients — wider than average across the chest, thicker
+  arms; NOT slim, NOT gaunt, NOT narrow-shouldered. Slightly hunched
+  forward as someone who braces for impact, but still clearly a big man
 
-Clothing: a dark grey hoodie or sweatshirt, a plain T-shirt visible at
-the collar, dark jeans — the clothes of someone who drove through the
-night to identify his mother.
+Clothing: a dark grey or charcoal HOODIE / sweatshirt with the strings
+hanging loose, a plain white T-shirt visible at the V of the collar, dark
+jeans, scuffed grey sneakers. A HOSPITAL ID CARD on a navy lanyard hangs
+visible from his neck (the photo and text on it illegible) — the hospital
+of Valencia ID he forgot to take off after his shift. A small dark TATTOO
+visible on the inside of his left forearm where the hoodie sleeve has
+ridden up — a simple geometric line, not decorative, just there.
 
-Pose & expression (NEUTRAL): arms crossed, slightly turned away from the
-detective, eyes holding contact reluctantly, the closed body language
-of someone who has learned that openness gets you hurt.
+Pose & expression (NEUTRAL / STANDING UPRIGHT): standing with weight
+slightly on the back foot, ARMS CROSSED tightly across his chest, body
+turned three-quarter away from the detective in a closed defensive
+posture, eyes holding contact reluctantly, jaw set. The body language of
+someone who has learned that openness gets you hurt.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: healthy appearance, well-rested, suit, anime, cel-shading,
-flat, 3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+healthy well-rested appearance, suit, formal clothing, smile,
+DARK BROWN HAIR, BLACK HAIR, UNIFORMLY DARK HAIR, NO GREY HAIR,
+DARK BROWN EYES, BLACK EYES, HAZEL EYES,
+THIN NARROW FACE, ANGULAR CHEEKBONES, GAUNT FACE, SUNKEN CHEEKS,
+NARROW SHOULDERS, SLIM BUILD, SKINNY FRAME, SLENDER PHYSIQUE,
+DENIM JACKET, JEAN JACKET, CROSS-BODY BAG, MESSENGER BAG, BANDOLIER,
+HANDS IN POCKETS, HOOD OVER THE HEAD,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -2254,17 +2503,36 @@ flat, 3D, photorealistic.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Isma Quintela, 33, grey hoodie, dark jeans, thin face, dark
-circles. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist). Same dark interrogation room, same warm
+lighting as the Neutral.
 
-Pose & expression (PENSATIVO): thinking about what his mother was working on
-and what it cost her — the arms have uncrossed, one hand at the side of his
-face, eyes distant and looking at nothing, a visible grief he has been trying
-to keep at arm's length now arriving at the edges of his expression.
+Same subject: Isma Quintela, 33, grey hoodie over white T-shirt, dark
+jeans, ASH-BROWN hair WITH PREMATURE GREY at the temples, PALE BLUE-GREY
+eyes, wide rectangular face with strong jaw, hospital ID lanyard, small
+forearm tattoo. CRITICAL: same face, same hair colour, same eye colour,
+same clothes, same STANDING framing as the approved Neutral. NO table, NO
+chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): thinking about what his
+mother was working on and what it cost her. Still standing, the arms have
+uncrossed — ONE HAND has come up to the side of his face, fingers pressed
+against the temple, the OTHER HAND hangs at his side holding the hoodie
+string between thumb and finger. Eyes distant and looking at nothing in
+particular, a visible grief he has been trying to keep at arm's length
+now arriving at the edges of his expression.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, 3D, photorealistic,
+DARK BROWN HAIR, BLACK HAIR, UNIFORMLY DARK HAIR,
+DARK BROWN EYES, BLACK EYES, THIN NARROW FACE, GAUNT FACE,
+NARROW SHOULDERS, SLIM SLENDER FRAME,
+DENIM JACKET, CROSS-BODY BAG, MESSENGER BAG,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -2272,16 +2540,34 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Isma Quintela. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist). Same dark interrogation room, same warm
+lighting.
 
-Pose & expression (NERVIOSO): being misread as a suspect — he has
-straightened up, arms coming out to the table, eyes wide with something
-between indignation and fear of not being believed, an urgency in his
-posture, mouth slightly open, leaning forward.
+Same subject: Isma Quintela. CRITICAL: same face, same ASH-BROWN hair with
+grey at temples, same PALE BLUE-GREY eyes, same wide rectangular face,
+same clothes, same STANDING framing. NO table, NO chair, NO desk in the
+frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): being misread as a suspect
+when he is grieving — still standing, but he has straightened up sharply
+and stepped half a pace forward, BOTH HANDS now raised in front of him at
+chest height palms forward in an "I had nothing to do with this" gesture,
+eyes wide with something between indignation and fear of not being
+believed, mouth slightly open mid-protest, jaw tight, the hospital ID
+lanyard swinging slightly off-center from the sudden movement.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat colors, anime, 3D, photorealistic,
+DARK BROWN HAIR, BLACK HAIR, UNIFORMLY DARK HAIR,
+DARK BROWN EYES, BLACK EYES, THIN NARROW FACE, GAUNT FACE,
+NARROW SHOULDERS, SLIM SLENDER FRAME,
+DENIM JACKET, CROSS-BODY BAG, MESSENGER BAG,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, RISING FROM SEAT, HALF-RISE FROM
+CHAIR, AT A TABLE, AT A DESK, HANDS ON TABLE, LEANING ON TABLE, TABLE IN
+FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST
+CROP, CROPPED AT WAIST.
 ```
 
 ---
@@ -2375,48 +2661,111 @@ NEGATIVE: same as neutral.
 > de Camino para el libro del 2001. Pelo blanco, pose de quien ha visto
 > demasiado. Conoció al padre del detective. Cuando éste entra, le mira
 > con una mezcla de pena y alivio.
+>
+> ⚠️ **DIFERENCIACIÓN OBLIGATORIA — tres trampas frecuentes**:
+>
+> 1. **No es un anciano frágil de 75-80**. Manuel tiene **67** y debe leer
+>    como un hombre **todavía fuerte**: ex-policía que sigue caminando
+>    todos los días, pecho amplio, postura erguida. La cara está
+>    desgastada por décadas de servicio pero la piel está TIRANTE sobre
+>    los huesos, no caída ni descolgada. Si la generación devuelve un
+>    abuelo encorvado y arrugado en exceso, regenerar.
+>
+> 2. **No es calvo ni tiene calva incipiente**. El **pelo blanco
+>    abundante peinado hacia atrás es signature**. Cubre toda la cabeza,
+>    incluida la coronilla. NO entradas, NO ralo, NO clareo en la parte
+>    superior. Si sale calva por arriba, regenerar enfatizando los puntos
+>    en MAYÚSCULAS del NEGATIVE.
+>
+> 3. **No es Roque Vellido (caso 5, vecino antiguo de 66 años)**. Roque
+>    es **calvo total con franja blanca lateral, bigote blanco poblado,
+>    cazadora verde oscuro**. Manuel es justo lo opuesto: pelo blanco
+>    abundante, **completamente afeitado sin bigote**, chaqueta de tweed.
+>    Si sale con bigote o calva, NO es Manuel.
+>
+> Manuel mantiene la presencia física de ex-comisario incluso en
+> retirada: el peso narrativo viene de los OJOS y el silencio, no de
+> aparentar fragilidad.
 
 ### Neutral
 
 ```
 Full-body standing portrait, 3:4 vertical aspect ratio, character framed
-from head to feet, occupying the central vertical axis of the image.
-Dark interrogation room background. Warm key light.
+from head to feet (full body, NOT cropped at the waist), occupying the
+central vertical axis of the image. Dark interrogation room background.
+Warm key light from upper-left at 45 degrees, soft falloff. NO table, NO
+chair, NO desk visible in the frame.
 
 Art style: digital oil painting illustration, semi-realistic stylized character
 art (Disco Elysium tradition). NOT cel-shading, NOT flat, NOT anime, NOT 3D,
 NOT photorealistic.
 
 Subject — DETAILED FACE (unique original face — KEY CHARACTER carrying
-narrative weight, must look like someone bearing a decades-old burden):
-- 67 year-old Spanish man, retired police commissioner
-- Face: a heavy weathered face with a gravitas that comes from having
-  seen everything — deeply lined forehead, strong prominent cheekbones,
-  a broad flat nose, firm lips that say less than the eyes, deep-set
-  dark eyes that carry both sadness and something like relief when they
-  meet the detective's gaze, pronounced jowls, a strong jaw, deep
-  nasolabial folds, tan complexion marked by outdoor decades, thick
-  white brows, the face of institutional authority in retirement
-- Hair: full thick white hair, swept back from a strong forehead —
-  the hair of a man whose face has aged but whose hair remained
-- Build: broad-chested, slightly stooped now, but the posture of an
-  ex-officer still visible in the set of the shoulders
+narrative weight, must read as a still-strong 67-year-old retired police
+commissioner, NOT as a frail elderly man):
+- 67 year-old Spanish man, retired police commissioner — visibly active
+  in retirement (walks every day, never let himself go), age reads
+  clearly as MID-SIXTIES, NOT seventies, NOT eighties
+- Face shape: heavy SQUARE face with a strong straight jawline still
+  clearly defined under faint jowls, broad forehead, broad cheekbones —
+  the bones still hold the face up. Skin TIGHT on the bone, NOT sagging,
+  NOT excessively wrinkled
+- Skin: weathered tan complexion (decades of outdoor police work) with
+  fine lines at the corners of the eyes and across the forehead, but
+  the cheeks and chin are still firm. Healthy color, NOT pale, NOT ashen
+- Eyes: deep-set DARK EYES (dark brown to black) under thick white brows.
+  The eyes carry both sadness and something like relief when they meet
+  the detective's gaze — this is the emotional center of the portrait
+- Nose: broad straight nose, distinctive but not large
+- Lips: firm thin lips kept in a closed line, the mouth of a man who
+  spent forty years saying less than he knew
+- Mouth and chin: COMPLETELY CLEAN-SHAVEN, freshly shaved that morning,
+  NO MOUSTACHE under any circumstances, NO BEARD, NO STUBBLE
+- Hair: ABUNDANT THICK FULL WHITE HAIR covering the entire scalp
+  including the crown, swept BACK from a STRONG complete hairline (no
+  receding at temples, no widow's peak), well-cut and neat — the hair of
+  a man whose face has aged but whose hair remained dense. The crown
+  must be FULL of white hair, never showing scalp through it. Volume
+  reads as significant
+- Build: broad-shouldered solid frame, broad chest, the build of an
+  ex-officer who still keeps himself in shape. Standing UPRIGHT — slight
+  weight on the back foot but spine straight, shoulders squared. NOT
+  hunched, NOT stooped, NOT slumped
 
-Clothing: a well-worn tweed jacket in brown-grey over a dark rollneck
-sweater — retired clothes, but clean and self-respecting. No tie. A
-plain watch on the left wrist. The look of a man who no longer has
+Clothing: a well-worn tweed jacket in brown-grey herringbone over a dark
+charcoal rollneck sweater — retired clothes, but clean and self-respecting.
+No tie. A plain leather-strap watch on the left wrist. Dark wool trousers,
+dark leather shoes barely visible. The look of a man who no longer has
 anything to prove but still dresses like someone who did once.
 
-Pose & expression (NEUTRAL): standing with a slight forward lean, hands
-resting on the
-table, large hands loosely clasped, looking at the detective with a
-directness that has a weight to it — not intimidating, but full of
-things unsaid for a very long time.
+Pose & expression (NEUTRAL / STANDING UPRIGHT): standing tall and
+centered, weight balanced on both feet shoulder-width apart, BOTH HANDS
+clasped LOW in front of him at waist height (right hand over left, large
+weathered hands clearly visible), shoulders squared and level, chin
+neither raised nor lowered, eyes meeting the detective directly with a
+steady weight. Slight forward lean of the head only — the body remains
+upright. The pose of an ex-officer at attention but at ease.
+
+Composition: subject vertically centered, eyes at upper third.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: animated happy expression, casual tourist clothes, anime,
-cel-shading, flat, 3D, photorealistic.
+NEGATIVE: cel-shading, flat colors, anime, manga, 3D render, photorealistic,
+animated happy expression, smile, casual tourist clothes,
+BALD CROWN, BALDING TOP, CALVA, RECEDING HAIRLINE, RECEDING TEMPLES,
+THIN WHITE HAIR, SPARSE HAIR ON CROWN, COMBED-OVER STRANDS, SCALP VISIBLE
+THROUGH HAIR, WIDOW'S PEAK,
+WHITE MOUSTACHE, ANY MOUSTACHE, BEARD, GOATEE, FIVE-O'CLOCK STUBBLE BEARD,
+GREEN WINDBREAKER, CASUAL JACKET, ZIP-UP JACKET, ANORAK,
+WORKING-CLASS RETIRED-WORKER LOOK, DOORMAN UNIFORM,
+75 YEARS OLD, 80 YEARS OLD, FRAIL ELDERLY MAN, STOOPED OLD MAN,
+HUNCHED SHOULDERS, SAGGING SKIN, EXCESSIVE WRINKLES, GAUNT FACE,
+SUNKEN CHEEKS, COLLAPSED CHIN, WEAK JAWLINE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HANDS RESTING ON TABLE, HANDS ON TABLE, ELBOWS ON TABLE, LEANING ON TABLE,
+LEANING FORWARD, BENT FORWARD, TABLE IN FOREGROUND, DESK IN FOREGROUND,
+HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP, CROPPED AT WAIST,
+KNEES NOT VISIBLE, FEET NOT VISIBLE.
 ```
 
 ### Pensativo (adjuntar NEUTRAL aprobada)
@@ -2424,17 +2773,36 @@ cel-shading, flat, 3D, photorealistic.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Manuel Ródenas, 67, brown-grey tweed jacket, dark rollneck,
-white hair swept back, large hands. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same warm
+lighting as the Neutral.
 
-Pose & expression (PENSATIVO): he is forty years back — one hand at his
-mouth, the big-knuckled fingers pressed over his lips, eyes unfocused and
-looking far past the wall of the interrogation room, the weight of something
-he has carried for a long time visible in the set of his shoulders.
+Same subject: Manuel Ródenas, 67, brown-grey tweed jacket over dark
+rollneck, ABUNDANT THICK WHITE HAIR swept back covering the FULL CROWN,
+clean-shaven, large weathered hands. CRITICAL: same face, same FULL HAIR
+(not balding, not thinning), same clothes, same STANDING UPRIGHT framing
+as the approved Neutral. NO table, NO chair, NO desk in the frame.
+
+Pose & expression (PENSATIVO / STANDING UPRIGHT): he is forty years back.
+Still standing upright but the weight has shifted slightly inward — ONE
+HAND has come up to his mouth, the big-knuckled fingers loosely pressed
+over his lips in a thinking gesture, the OTHER HAND hangs at his side.
+Eyes unfocused, looking far past the wall of the interrogation room. The
+weight of something he has carried for a long time visible in the slight
+furrow of the brow, but the spine remains straight — this is a man
+remembering, not collapsing.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic,
+BALD CROWN, BALDING TOP, THIN WHITE HAIR, RECEDING HAIRLINE, SPARSE HAIR,
+WHITE MOUSTACHE, ANY MOUSTACHE, BEARD, STUBBLE BEARD,
+75 YEARS OLD, 80 YEARS OLD, FRAIL ELDERLY MAN, STOOPED OLD MAN,
+HUNCHED SHOULDERS, COLLAPSED POSTURE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, AT A TABLE, AT A DESK,
+HAND ON TABLE, ELBOW ON TABLE, LEANING ON TABLE, TABLE IN FOREGROUND,
+DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST CROP,
+CROPPED AT WAIST.
 ```
 
 ### Nervioso (adjuntar NEUTRAL aprobada)
@@ -2442,17 +2810,33 @@ NEGATIVE: same as neutral.
 ```
 [ATTACH approved Neutral as reference image]
 
-Same subject: Manuel Ródenas. CRITICAL: same face, same clothes.
+Full-body standing portrait, 3:4 vertical aspect ratio, head to feet (full
+body, NOT cropped at the waist), same dark interrogation room, same lighting.
 
-Pose & expression (NERVIOSO): choosing to tell more than he planned — he
-has unclenched his hands and one palm is now flat on the table, open, he
-is leaning slightly forward, the eyes are direct and slightly pained, not
-frightened — this is the nervousness of a man about to unburden himself of
-something heavy, not of a man protecting himself.
+Same subject: Manuel Ródenas. CRITICAL: same face, same FULL ABUNDANT
+WHITE HAIR (not balding), same clothes, same STANDING UPRIGHT framing.
+NO table, NO chair, NO desk in the frame.
+
+Pose & expression (NERVIOSO / STANDING UPRIGHT): choosing to tell more
+than he planned — still standing upright, but he has unclasped his hands
+and ONE HAND has opened palm-out at chest height in an offering gesture
+(as if releasing something he has held for forty years), the OTHER HAND
+forms a loose fist at his side. Eyes direct and slightly pained, not
+frightened — this is the nervousness of a man about to unburden himself
+of something heavy, not of a man protecting himself. Chin slightly
+raised, jaw tight.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: same as neutral.
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic,
+BALD CROWN, BALDING TOP, THIN WHITE HAIR, RECEDING HAIRLINE, SPARSE HAIR,
+WHITE MOUSTACHE, ANY MOUSTACHE, BEARD, STUBBLE BEARD,
+75 YEARS OLD, 80 YEARS OLD, FRAIL ELDERLY MAN, STOOPED OLD MAN,
+HUNCHED SHOULDERS, COLLAPSED POSTURE,
+SEATED, SITTING, ON A CHAIR, IN A CHAIR, RISING FROM SEAT, AT A TABLE,
+AT A DESK, HAND ON TABLE, PALM ON TABLE, LEANING ON TABLE, TABLE IN
+FOREGROUND, DESK IN FOREGROUND, HALF-BODY FRAMING, WAIST-UP CROP, BUST
+CROP, CROPPED AT WAIST.
 ```
 
 ---
