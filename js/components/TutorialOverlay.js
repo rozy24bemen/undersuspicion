@@ -243,9 +243,14 @@ US.TutorialOverlay = class TutorialOverlay {
       },
 
       // ───────── Paso 6: leer detalle y cerrar modal ─────────
+      // El target es la TARJETA (.modal-card), NO el overlay completo
+      // (#modal-evidence) — el overlay ocupa toda la pantalla y haría
+      // que el spotlight cubriera el viewport entero. El ResizeObserver
+      // de _reposition reajusta el spotlight cuando la imagen termina
+      // de cargar y la tarjeta crece.
       {
         id: 'read-evidence',
-        target: () => this.root.querySelector('#modal-evidence'),
+        target: () => this.root.querySelector('#modal-evidence .modal-card'),
         title: 'CONTRASTA LA PRUEBA',
         text: 'La cámara de seguridad muestra a Hugo en el pasillo del despacho a las 22:15h. ¡Pero él dijo que no salió de la cocina! Cierra la prueba pulsando la X o ESC.',
         showButton: false,
