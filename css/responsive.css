@@ -172,10 +172,15 @@
     .intro__victim-portrait {
       width: 100px;
     }
-    .intro__start {
+    /* La especificidad `.btn.intro__start` mantiene el override del
+       estilo cinematográfico (ver intro.css). */
+    .btn.intro__start {
       min-width: 80vw;
       max-width: 95vw;
       font-size: 15px;
+      letter-spacing: 5px;
+      height: 64px;
+      padding: 0 32px;
       margin-top: 12px;
       margin-bottom: 2px;
       position: sticky;
@@ -215,10 +220,14 @@
     max-width: 180px;
     align-self: center;
   }
-  .intro__start {
+  .btn.intro__start {
     min-width: 90vw;
     max-width: 98vw;
     font-size: 14px;
+    letter-spacing: 4px;
+    height: 58px;
+    padding: 0 24px;
+    gap: 14px;
     margin-top: 10px;
     margin-bottom: 2px;
     position: sticky;
