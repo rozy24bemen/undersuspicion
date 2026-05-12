@@ -87,7 +87,7 @@
      en proporción para que no se vean gigantescas en móvil. */
   .desk-card             { width: 130px; }
   .desk-card__icon-area  { height: 86px; }
-  .desk-card__icon-area img  { width: 68px; height: 68px; }
+  .desk-card__icon-area img  { width: 84px; height: 84px; }
   .desk-card__icon-area span { font-size: 26px; }
   .desk-card__title          { font-size: 7px; }
   .desk-card__click-hint     { font-size: 6px; padding: 2px 4px; }
@@ -268,7 +268,7 @@
   /* Desk cards even smaller */
   .desk-card             { width: 110px; }
   .desk-card__icon-area  { height: 72px; }
-  .desk-card__icon-area img  { width: 56px; height: 56px; }
+  .desk-card__icon-area img  { width: 70px; height: 70px; }
   .desk-card__icon-area span { font-size: 22px; }
   .desk-card__title          { font-size: 7px; padding: 5px 6px 3px; }
   .desk-card__click-hint     { font-size: 6px; padding: 2px 6px; }
@@ -341,7 +341,7 @@
   /* Desk cards minimal */
   .desk-card             { width: 96px; }
   .desk-card__icon-area  { height: 62px; }
-  .desk-card__icon-area img  { width: 46px; height: 46px; }
+  .desk-card__icon-area img  { width: 58px; height: 58px; }
   .desk-card__icon-area span { font-size: 18px; }
   .desk-card__title          { font-size: 6.5px; padding: 4px 4px 2px; }
   .desk-card__click-hint     { font-size: 5.5px; padding: 1px 4px; }

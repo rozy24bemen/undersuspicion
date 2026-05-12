@@ -72,10 +72,24 @@
       "Bash(python)",
       "Bash(python -m http.server 8765)",
       "Bash(curl -sI http://localhost:8765/index.html)",
-      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/index.html)"
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/index.html)",
+      "Bash(mkdir -p assets/img/suspects/Caso6/Sospechosos/_originales_con_fondo && \\\\ *)",
+      "Bash(git check-ignore *)",
+      "Bash(git config *)",
+      "Bash(mkdir -p assets/img/suspects/Caso7/Sospechosos/_originales_con_fondo && \\\\ *)",
+      "Bash(ls \"c:/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/icons/pruebas/\")",
+      "Bash(ls \"c:/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/icons/\")",
+      "Bash(ls \"c:/Users/damasa/Documents/PROYECTOFINAL/undersuspicion/assets/img/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:8765/\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:8765/assets/img/icons/Pruebas/icon_informe.png\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:8765/assets/img/icons/Pruebas/icon_registro_porteria.png\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:8765/assets/img/icons/Pruebas/icon_papeles_ardidos.png\")",
+      "Bash(python -m rembg i \"Pruebas/icon_cuchillo.png\" \"Pruebas_test/icon_cuchillo.png\")"
     ],
     "additionalDirectories": [
-      "C:\\Users\\damasa\\Documents\\PROYECTOFINAL\\undersuspicion\\assets\\img\\suspects\\Caso5\\Sospechosos"
+      "C:\\Users\\damasa\\Documents\\PROYECTOFINAL\\undersuspicion\\assets\\img\\suspects\\Caso5\\Sospechosos",
+      "C:\\Users\\damasa\\Documents\\PROYECTOFINAL\\undersuspicion\\assets\\img\\suspects\\Caso6\\Sospechosos",
+      "C:\\Users\\damasa\\Documents\\PROYECTOFINAL\\undersuspicion\\assets\\img\\suspects\\Caso7\\Sospechosos"
     ]
   }
 }

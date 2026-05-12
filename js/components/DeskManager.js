@@ -31,15 +31,19 @@ US.DeskManager = class DeskManager {
       surface.innerHTML = evidence.map((ev, i) => {
         const pos = positions[i];
         const animCls = justUnlocked.includes(ev.id) ? ' desk-card--just-unlocked' : '';
+        const lockCls = ev.unlockedByLock ? ' desk-card--from-lock' : '';
         const iconHtml = ev.iconPath
           ? `<img src="${encodeURI(ev.iconPath)}" alt="">`
           : `<span>${ev.icon || ''}</span>`;
+        const lockBadge = ev.unlockedByLock
+          ? `<div class="desk-card__lock-badge" aria-label="Hallada en el cajón cerrado" title="Hallada en el cajón cerrado">🔓</div>`
+          : '';
         return `
-          <div class="desk-card${animCls}"
+          <div class="desk-card${animCls}${lockCls}"
                data-evidence-id="${ev.id}"
                style="left:${pos.x}px;top:${pos.y}px;transform:rotate(${pos.rot}deg);z-index:${10 + i};"
           >
-            <div class="desk-card__icon-area">${iconHtml}</div>
+            <div class="desk-card__icon-area">${iconHtml}${lockBadge}</div>
             <div class="desk-card__title">${this.ui._esc(ev.title)}</div>
             <div class="desk-card__click-hint">
               <span class="hint-mouse">CLIC · ARRASTRA</span>
