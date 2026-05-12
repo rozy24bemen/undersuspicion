@@ -1,0 +1,18 @@
+# Python (scripts auxiliares de procesado de assets)
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Sistema operativo
+Thumbs.db
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backups locales de assets (no entran al repo)
+**/Pruebas_original/
+**/*_backup/
