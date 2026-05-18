@@ -444,6 +444,28 @@
   animation: dinner-ending-fade .9s ease forwards;
 }
 
+/* Variante de scene: el texto puede llevar saltos de línea reales (\n) y
+   diálogos en varias líneas. Respetar saltos pero colapsar espacios. */
+.dinner-panel__line.dinner-panel__line--scene {
+  white-space: pre-line;
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 18px 22px;
+  min-height: 0;
+}
+
+/* Imagen de cinemática final (4 escenas por final). Se coloca encima del
+   texto, ocupa todo el ancho del panel manteniendo aspect ratio 16:9. */
+.dinner-panel__ending-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #050302;
+  border-bottom: 1px solid #1a0e04;
+  animation: dinner-ending-fade .9s ease forwards;
+}
+
 @keyframes dinner-ending-fade {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }

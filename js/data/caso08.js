@@ -5,19 +5,22 @@
  * Víctima: Elena Solana (35). El cuerpo es el de la "mujer del detective".
  * El forense dice que lleva meses, no horas. El detective lo niega.
  *
- * Sospechosos visibles: Felipe Saiz (vecino), Octavio Brán (conserje),
- *                       Eulogio Pacheco hijo (médico-abogado).
- * Sospechoso oculto: EL PROPIO DETECTIVE — solo accesible si los ejes y las
- *                    flags acumuladas a lo largo del juego lo permiten.
+ * Sospechosos visibles: Felipe Saiz (vecino), Octavio Brán (conserje).
+ * Sospechoso siempre acusable: EL PROPIO DETECTIVE — sin gate de ejes ni
+ *                    flags; aparece desde el principio como cuarta opción
+ *                    en el dropdown de Resolución. La decisión moral es del
+ *                    jugador, no una puerta cerrada por mecánicas.
  *
  * Mecánica: las tres herramientas (UV + teléfono + lectura de pistas falsas)
  * son necesarias en combinación. Sembrados de los 7 casos anteriores se
- * recogen aquí.
+ * recogen aquí. La verdad sobre el padre del detective (inocente del crimen
+ * del 86) ha sido revelada en el caso 7 por Manuel Ródenas.
  *
- * Dos finales:
- *   - Bueno: lucidez ≥ 60 + integridad ≥ 60 + ≥5 flags clave + acusarse
- *     a sí mismo. Despedida con Elena. El detective se entrega.
- *   - Malo: cualquier otra combinación. La alucinación gana. Suicidio.
+ * Cuatro finales (matriz 2x2 — acusación × métricas con Elena):
+ *   - A. Despedida (entrega + buenas) — revelación completa del lore.
+ *   - B. Cobardía creepy (entrega + malas) — entrega como huida del terror.
+ *   - C. Te pillan igual (no entrega + buenas) — prisión permanente.
+ *   - D. No pudiste aguantarlo (no entrega + malas) — suicidio.
  *
  * Ver docs/HISTORIA-MODO-HISTORIA.md (Acto III) y docs/METAARCO-CENAS.md (sección 8).
  */
@@ -48,22 +51,13 @@ US.CASES['caso-08'] = {
   uvLightAvailable: true,
 
   // ─────────────────────────────────────────────────────────────────
-  // GATE de sospechosos — el 4º sospechoso (el detective) solo aparece
-  // como opción acusable en la pantalla de Resolución si se cumplen
-  // las condiciones de ejes y de flags acumuladas en cenas previas.
-  // ResolutionScreen lo filtra leyendo este bloque.
+  // SIN gateUnlock: los cuatro sospechosos (Felipe, Octavio, detective)
+  // aparecen siempre en el dropdown de Resolución. La acusación al
+  // detective es decisión moral del jugador, no condicional a ejes ni
+  // flags. Las métricas de las cenas con Elena modulan el TIPO de final
+  // (matriz 2x2 evaluada en DinnerPanel._pickEnding), no el acceso al
+  // cuarto sospechoso. Ver docs/PROMPTS-ACTO3.md § FINALES.
   // ─────────────────────────────────────────────────────────────────
-  gateUnlock: {
-    detective: {
-      requireAxes:      { lucidez: 60, integridad: 60 },
-      requireFlagCount: 5,
-      requireFlagsAny:  [
-        'recuerda_padre', 'fotos_en_cajon', 'cajon_prohibido',
-        'promete_contar_todo', 'lee_manuscrito', 'recuerda_calle_goya',
-        'papeles_elena'
-      ]
-    }
-  },
 
   suspects: [
     // ──────────────── FELIPE SAIZ ────────────────
@@ -129,7 +123,8 @@ US.CASES['caso-08'] = {
         'fotos_cajon':       { response: '"Las fotos de su boda. Las teníamos también nosotros. Mi mujer guarda una de ese día, cuando bajaron al portal."', pressureCost: 10 },
         'mancha_sofa':       { response: '"Yo no entro en su salón, inspector. Pero si la luz UV dice que la sangre es vieja, la sangre es vieja."', pressureCost: 12 },
         'alarma_vecino':     { response: '"La alarma confirma que no he salido. La empresa puede certificarlo en cinco minutos."', pressureCost: 5 },
-        'olor_descomposicion': { response: '"Lo he olido en el rellano alguna vez. No quería pensar lo que pensaba. Lo siento."', pressureCost: 14 }
+        'olor_descomposicion': { response: '"Lo he olido en el rellano alguna vez. No quería pensar lo que pensaba. Lo siento."', pressureCost: 14 },
+        'excedencia_laboral': { response: '"Recuerdo aquel septiembre. Usted estuvo cuatro meses sin pisar la calle. Cuando volvió, otro hombre. Nos dijo a mi mujer y a mí en el ascensor que la señora se había ido al sur. Le dimos el pésame por el divorcio y no preguntamos más. Cuántas veces habrá maldito uno la educación, inspector."', pressureCost: 16 }
       }
     },
 
@@ -191,86 +186,19 @@ US.CASES['caso-08'] = {
       evidenceResponses: {
         'forense_elena':     { response: '"El forense dice meses. Yo bajé el cuerpo hace tres años. Las dos cosas pueden ser verdad si lo piensa, inspector."', pressureCost: 16 },
         'dos_copas':         { response: '"En este bloque solo una persona ha entrado a ese piso en tres años, inspector. Usted. Las dos copas las llena usted."', pressureCost: 20 },
-        'calendario_rojo':   { response: '"Ese calendario es del 86. Mi madre tenía uno igual. El día rojo es el del aniversario de su padre, ¿verdad?"', pressureCost: 16 },
+        'calendario_rojo':   { response: '"Ese calendario es del 86. Mi madre tenía uno igual. El día rojo es el del día en que su padre se mató, ¿verdad? Mi mujer me contó esa historia hace años. Una pena terrible para un niño tan pequeño."', pressureCost: 16 },
         'grabadora':         { response: '"Esa grabadora la trajo usted del trabajo hace un año. Se la dejaba encendida en la mesa. La voz es la suya, inspector. Hablándole a una mujer que no está."', pressureCost: 22 },
         'fotos_cajon':       { response: '"Esas fotos las tenían ustedes en el comedor. Cuando le ayudé a... a aquello, las quité de la pared y las puse en el cajón. Era lo único que sabía hacer."', pressureCost: 24 },
         'mancha_sofa':       { response: '"En el sofá. Lo limpiamos juntos, ¿se acuerda? Tres veces. Aún así la luz UV lo dice. La sangre no se va."', pressureCost: 22 },
         'alarma_vecino':     { response: '"Felipe es buen hombre. Si dice que lo oyó, lo oyó."', pressureCost: 10 },
-        'olor_descomposicion': { response: '"Llevo tres años oliéndolo cada vez que paso por su rellano. Pensé que me lo imaginaba."', pressureCost: 18 }
-      }
-    },
-
-    // ──────────────── DON EULOGIO PACHECO HIJO ────────────────
-    {
-      id: 'eulogio_hijo',
-      name: 'Don Eulogio Pacheco (hijo)',
-      age: 50,
-      role: 'Médico-abogado del Estudio Caracedo — amigo de la familia',
-      description: 'El mismo del caso 6. Aquí aparece como "amigo de la familia" del detective. Firmó el certificado de defunción de Elena en 2023 como "muerte súbita por enfermedad". La conexión institucional que impidió que el crimen apareciera en ningún registro. Su padre cubrió al padre del detective en 1986. Patrón generacional.',
-      isGuilty: false,
-      portraits: {
-        neutral:  'assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Neutral.png',
-        talking:  'assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Pensativo.png',
-        nervous:  'assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Nervioso.png'
-      },
-      questions: {
-        vinculo: [
-          {
-            id: 'eulogio8-v1',
-            text: '¿Por qué firmó usted el certificado de defunción de Elena Solana en septiembre de 2023?',
-            response: '"[pausa larga] Porque me lo pidió usted, inspector. Me llamó a las ocho de la mañana del 9 de septiembre. Me dijo que su mujer había muerto durante la noche de causas naturales. Yo le creí. Firmé un certificado de muerte súbita por enfermedad. No pedí autopsia."',
-            pressureCost: 22
-          },
-          {
-            id: 'eulogio8-v2',
-            text: '¿Por qué no pidió autopsia?',
-            response: '"Porque éramos amigos de la familia. Porque su padre y el mío fueron compañeros toda la vida. Porque mi padre cubrió al suyo en una ocasión parecida en el 86. Porque pensé que era lo que se hace cuando un amigo lo está pasando mal. Pensé mal."',
-            pressureCost: 24
-          },
-          {
-            id: 'eulogio8-v3',
-            text: '¿Sabe usted lo que mi padre hizo en el 86?',
-            response: '"[silencio muy largo] Sí, inspector. Lo sé desde siempre. Mi padre me lo contó en su lecho de muerte. Y usted... usted hizo lo mismo. Y yo, con mi firma, hice lo que hizo mi padre. La rueda completa, como dicen."',
-            pressureCost: 28
-          }
-        ],
-        coartada: [
-          {
-            id: 'eulogio8-c1',
-            text: '¿Dónde estaba esta noche entre las 21 y las 23?',
-            response: '"En mi consulta del paseo de la Castellana. Tengo cita con un paciente a las 21:30. La secretaria puede confirmarlo. No he estado en Hermosilla."',
-            pressureCost: 8
-          },
-          {
-            id: 'eulogio8-c2',
-            text: '¿Sigue usted teniendo copia del certificado del 2023?',
-            response: '"Sí. La tengo guardada. Si quiere, esta misma noche se la doy a Beltrán. Y le explico todo lo que firmé sin haber visto el cuerpo. Es hora."',
-            pressureCost: 24
-          },
-          {
-            id: 'eulogio8-c3',
-            text: '¿Por qué confiesa esto ahora?',
-            response: '"Porque mi padre, antes de morir, me hizo prometer que si algún día Roberto Mora me llamaba con la misma pregunta que su padre le hizo a él en el 86, yo no haría lo mismo. Hace tres años fallé esa promesa. Hoy la cumplo."',
-            pressureCost: 30
-          }
-        ]
-      },
-      evidenceResponses: {
-        'forense_elena':     { response: '"Don Octaviano es el mejor forense de Madrid. Si dice que el cuerpo lleva meses, lleva meses. Yo firmé sin ver."', pressureCost: 16 },
-        'dos_copas':         { response: '"Dos copas en la mesa de un hombre que vive solo. Eso lo entendería un colega de psiquiatría, inspector."', pressureCost: 20 },
-        'calendario_rojo':   { response: '"El calendario del 14 de agosto. La fecha que aprendí en mi infancia y que tenía prohibido nombrar."', pressureCost: 18 },
-        'grabadora':         { response: '"Es su voz, inspector. La he oído mil veces. Y le habla a su mujer como si estuviera ahí."', pressureCost: 22 },
-        'fotos_cajon':       { response: '"Las fotos de su boda. Yo asistí. Recuerdo el día. Ahora están en un cajón, polvorientas."', pressureCost: 18 },
-        'mancha_sofa':       { response: '"Si hay sangre vieja bajo UV en ese sofá, eso es del 2023. Es lo que yo debí buscar entonces y no busqué."', pressureCost: 22 },
-        'alarma_vecino':     { response: '"Felipe es buen hombre. No se atreve a mentir. Si dice que oyó, oyó."', pressureCost: 10 },
-        'olor_descomposicion': { response: '"He sentido ese olor en mi consulta cuando un familiar viene a hablarme de un muerto reciente. Aquí lleva años."', pressureCost: 20 }
+        'olor_descomposicion': { response: '"Llevo tres años oliéndolo cada vez que paso por su rellano. Pensé que me lo imaginaba."', pressureCost: 18 },
+        'excedencia_laboral': { response: '"Cuatro meses sin verle. Cuando volvió, dijo que la señora se había ido a Cádiz. Yo sabía que no, inspector. Lo sabía. Pero ya le había ayudado a bajar las cosas y guardé silencio. Eso me ha pesado más que cualquier mueble."', pressureCost: 20 }
       }
     },
 
     // ──────────────── EL PROPIO DETECTIVE ────────────────
-    // Solo accesible como opción de acusación si se cumple gateUnlock.
-    // En GameScreen aparece siempre (es el cuarto sospechoso desde el
-    // principio), pero ResolutionScreen filtra el dropdown.
+    // Siempre acusable: el dropdown lo muestra desde el principio. La
+    // decisión de acusarse o no es del jugador, no condicional a ejes.
     {
       id: 'detective',
       name: 'Roberto Mora',
@@ -324,12 +252,13 @@ US.CASES['caso-08'] = {
       evidenceResponses: {
         'forense_elena':     { response: '"Octaviano nunca se equivoca con las horas. Lo he dicho mil veces. Si dice meses, son meses. Yo lo sabía."', pressureCost: 22 },
         'dos_copas':         { response: '"Las llené yo. Las dos. Cada noche. Le contaba el día y le respondía con la voz que recordaba."', pressureCost: 24 },
-        'calendario_rojo':   { response: '"El 14 de agosto. Aniversario del crimen de mi padre. Y, sin que yo lo supiera marcar, aniversario del mío. Llevo tres años durmiendo bajo esa fecha."', pressureCost: 26 },
+        'calendario_rojo':   { response: '"El 14 de agosto. El día en que mi padre se metió en el coche en el garaje. Yo tenía once años. Llevaba toda la vida creyendo que se mató por culpa de algo que hizo. Ayer un viejo me dijo que no. Que se mató porque no podía con la vida sin mi madre y conmigo. Esa fecha la marqué yo. No recuerdo cuándo."', pressureCost: 26 },
         'grabadora':         { response: '"La grabadora la encendí yo. Hace meses. Me dejé un mensaje a mí mismo y luego lo olvidé. Esa voz suplicándome que me acordara es la mía."', pressureCost: 30 },
         'fotos_cajon':       { response: '"En la foto de la boda hay una sombra detrás de Elena. Bajo UV se ve quién era. Era yo. Con algo en la mano. Aquella foto la mandé revelar yo mismo aquel mes."', pressureCost: 30 },
         'mancha_sofa':       { response: '"En el sofá. Donde la dejé. Llevamos tres años limpiando lo que no se limpia."', pressureCost: 30 },
         'alarma_vecino':     { response: '"Felipe oyó lo que ocurrió. Le pido perdón por haberle dejado vivir tres años con ese silencio encima."', pressureCost: 18 },
-        'olor_descomposicion': { response: '"Lo bloqueé. Eso es lo que hace la mente con lo que no puede aguantar. Lo bloquea."', pressureCost: 24 }
+        'olor_descomposicion': { response: '"Lo bloqueé. Eso es lo que hace la mente con lo que no puede aguantar. Lo bloquea."', pressureCost: 24 },
+        'excedencia_laboral': { response: '"Pedí cuatro meses. Cuando volví dije a Beltrán que Elena se había ido a Cádiz. Nadie preguntó. Nadie subió a casa. La asistenta la despedí esa misma semana. He vivido tres años en un piso sin que nadie entre. Esa es la única razón por la que el cuerpo sigue donde está."', pressureCost: 32 }
       }
     }
   ],
@@ -365,7 +294,7 @@ US.CASES['caso-08'] = {
       iconPath: 'assets/img/icons/Pruebas/icon_calendario.png',
       imagePath: 'assets/img/suspects/Caso8/Pruebas/P3 — Calendario.png',
       shortDesc: 'Calendario del 86 colgado en la pared. El 14 de agosto marcado en rojo. Bajo UV: la palabra "perdón" en sangre seca.',
-      fullDesc: 'Calendario antiguo, año 1986, colgado en la pared del salón. El 14 de agosto está marcado con un círculo rojo de tinta gruesa. La fecha es el aniversario del crimen del padre del detective (Comisario Esteban Mora, 1986). Bajo luz UV, sobre la propia fecha y atravesando el círculo rojo, aparece escrita en sangre seca y oscurecida por el tiempo la palabra "perdón". La caligrafía es la del propio detective.',
+      fullDesc: 'Calendario antiguo, año 1986, colgado en la pared del salón. El 14 de agosto está marcado con un círculo rojo de tinta gruesa. La fecha es el aniversario del suicidio del padre del detective (Comisario Esteban Mora, 14 de agosto de 1988, dos años después de la muerte de la mujer en el parto). Bajo luz UV, sobre la propia fecha y atravesando el círculo rojo, aparece escrita en sangre seca y oscurecida por el tiempo la palabra "perdón". La caligrafía es la del propio detective.',
       metadata: { fecha: '09-11-2026', fuente: 'Pared del salón — junto a la ventana', ref: 'OBJ-08-003' },
       toolData: {
         'uv-light': {
@@ -439,15 +368,15 @@ US.CASES['caso-08'] = {
       metadata: { fecha: '09-11-2026', fuente: 'Análisis ambiental — equipo forense', ref: 'DOC-08-008' }
     },
     {
-      id: 'certificado_2023',
-      title: 'Certificado de Defunción de 2023',
+      id: 'excedencia_laboral',
+      title: 'Expediente Laboral del Inspector Mora',
       type: 'documento',
-      icon: '📜',
-      iconPath: 'assets/img/icons/Pruebas/icon_certificado.png',
-      imagePath: 'assets/img/suspects/Caso8/Pruebas/P9 — Certificado.png',
-      shortDesc: 'Certificado del 9 de septiembre de 2023 firmado por Don Eulogio Pacheco hijo: "muerte súbita por enfermedad".',
-      fullDesc: 'Copia del certificado de defunción de Elena Solana, fechado el 9 de septiembre de 2023, firmado por Don Eulogio Pacheco (hijo) como facultativo, sin autopsia previa. Causa declarada: "muerte súbita por enfermedad cardíaca no diagnosticada". El cuerpo no fue trasladado ni enterrado: el certificado existe pero el registro civil nunca recibió comunicación posterior. Don Eulogio entrega esta copia voluntariamente y declara que la guardó tres años sin enviarla, esperando que el detective la pidiera él mismo algún día.',
-      metadata: { fecha: '09-11-2026', fuente: 'Don Eulogio Pacheco (hijo) — entrega voluntaria', ref: 'DOC-08-009' }
+      icon: '📂',
+      iconPath: 'assets/img/icons/Pruebas/icon_carpeta.png',
+      imagePath: 'assets/img/suspects/Caso8/Pruebas/P9 — Excedencia Laboral.png',
+      shortDesc: 'Excedencia voluntaria entre sep 2023 y ene 2024. Reincorporación con la versión: "Elena se ha ido a vivir con su madre a Cádiz".',
+      fullDesc: 'Expediente de Recursos Humanos del Cuerpo Nacional de Policía sobre el inspector Roberto Mora. Solicitud de excedencia voluntaria firmada el 10 de septiembre de 2023 (día siguiente al crimen), motivo declarado: "asuntos personales graves". Aprobada sin más preguntas. Reincorporación el 15 de enero de 2024 con una nota del propio Mora ante el comisario Beltrán: "Elena se ha ido a vivir con su madre a Cádiz. Prefiero no hablar del tema. Estoy listo para volver al trabajo." Desde esa fecha: cero visitas al piso de Hermosilla por parte de compañeros, cero llamadas familiares devueltas, cero contactos sociales. Nadie volvió a preguntar por Elena. Octavio Brán (conserje) declara que la asistenta del piso fue despedida la misma semana del 9 de septiembre de 2023. El aislamiento social del detective ha sido total y deliberado. Por eso, durante tres años, nadie pudo certificar nada: nadie supo nada.',
+      metadata: { fecha: '09-11-2026', fuente: 'Recursos Humanos CNP — expediente personal', ref: 'DOC-08-009' }
     }
   ],
 
@@ -458,14 +387,6 @@ US.CASES['caso-08'] = {
   // La grabación es la voz del propio detective dejándose un aviso.
   // ─────────────────────────────────────────────────────────────────
   phoneNumbers: [
-    {
-      id: 'eulogio_consulta',
-      number: '914 21 33 18',
-      source: 'Tarjeta de la consulta de Don Eulogio Pacheco hijo',
-      response: {
-        content: 'La secretaria responde y confirma que Don Eulogio atendió a un paciente desde las 21:30 hasta las 22:45 en su consulta. Coartada verificada.'
-      }
-    },
     {
       id: 'octavio_garita',
       number: '915 78 02 91',
@@ -485,7 +406,7 @@ US.CASES['caso-08'] = {
     {
       id: 'el_propio_telefono',
       number: '9 8 6 1 4',
-      source: 'No te lo dice nadie. Solo lo compones tú si recuerdas el patrón de los calendarios del 86 y de hoy.',
+      source: 'No te lo dice nadie. Solo lo compones tú si recuerdas la fecha de la pared (14 de agosto del 86 — el día en que tu padre se mató).',
       response: {
         content: 'Suena el propio teléfono del despacho del detective. Al descolgar la línea entrante, una grabación antigua reproduce la voz del propio Roberto Mora dejándose un mensaje a sí mismo hace meses: "Roberto. Roberto, escúchame. Acuérdate. Acuérdate de lo que pasó la noche del 9 de septiembre. No te lo cuentes otra vez como si Elena estuviera de viaje. Acuérdate, por favor."'
       },
@@ -496,11 +417,12 @@ US.CASES['caso-08'] = {
   ],
 
   // ─────────────────────────────────────────────────────────────────
-  // CONTRADICCIONES — Las de los tres sospechosos visibles son red
-  // herrings honestas (clarification): los tres dicen verdad. El caso
+  // CONTRADICCIONES — Las de los dos sospechosos visibles son red
+  // herrings honestas (clarification): los dos dicen verdad. El caso
   // está diseñado para que el jugador NO encuentre culpable visible
-  // si lee bien las pistas. Si los ejes acompañan, la cuarta tarjeta
-  // (el detective) se desbloquea en Resolución.
+  // si lee bien las pistas. La cuarta opción (el detective) siempre
+  // está disponible en el dropdown de Resolución: la decisión de
+  // acusarse o no es moral, no condicional.
   // ─────────────────────────────────────────────────────────────────
   contradictions: [
     {
@@ -524,17 +446,6 @@ US.CASES['caso-08'] = {
       suspicionBonus: 0,
       isRedHerring: true,
       clarification: 'Octavio es cómplice del encubrimiento parcial, no del crimen. La cara mecánica de su pista falsa es esta: el detective recuerda haber enterrado algo y proyecta sobre Octavio una culpa que no le corresponde. El cuerpo está en el sofá. Octavio lo sabe y lleva tres años queriendo decirlo.'
-    },
-    {
-      id: 'c08-eulogio-aparente',
-      suspectId: 'eulogio_hijo',
-      questionIds: ['eulogio8-v1'],
-      evidenceId: 'certificado_2023',
-      statement: 'Don Eulogio firmó un certificado de defunción en 2023 sin autopsia.',
-      proof: 'El certificado existe, sí, pero nunca fue enviado al registro civil: Don Eulogio lo guardó tres años esperando que el detective lo pidiera él mismo. La firma es un acto de complicidad institucional, no de asesinato. Acusarle es cometer el mismo error que cometió su padre en el 86.',
-      suspicionBonus: 0,
-      isRedHerring: true,
-      clarification: 'Don Eulogio cubrió al detective en 2023 como su padre cubrió al padre del detective en 1986. Patrón generacional cerrado. Pero su firma no mata: cubre. El crimen lo cometió otra persona. Y esa persona está leyendo este texto.'
     },
     {
       id: 'c08-detective-verdadera',
@@ -565,12 +476,12 @@ US.CASES['caso-08'] = {
     { id: 'perdida_alcohol_negacion', text: 'Una discusión bajo alcohol, un arrebato, y tres años de negación posterior' },
     { id: 'celos',                    text: 'Celos hacia una relación de Elena con un tercero' },
     { id: 'herencia_economica',       text: 'Disputa económica sobre bienes familiares' },
-    { id: 'venganza_familiar',        text: 'Venganza derivada del caso Mora del 86' }
+    { id: 'duelo_hijo_no_nacido',     text: 'La pérdida del hijo nacido muerto, vivida como traición y proyectada en ella' }
   ],
 
-  correctExplanation: 'Tú mataste a Elena Solana la noche del 9 de septiembre de 2023, en un arrebato bajo el efecto del alcohol, en este mismo sofá. No lo recuerdas con nitidez porque tu mente bloqueó el episodio para que pudieras seguir viviendo. Octavio Brán te ayudó a la mañana siguiente sin saber del todo qué cargaba (cajas con sus cosas, no el cuerpo). Don Eulogio Pacheco hijo firmó un certificado de defunción sin autopsia, pero no llegó a enviarlo al registro: lo guardó tres años esperando que un día tú mismo lo pidieras. Has vivido tres años cenando con una alucinación, sirviendo dos copas, hablándole y respondiéndote con su voz. Cada caso de este verano ha sido tu propia mente desenterrando fragmentos del recuerdo. Esta noche, con todas las pruebas en la mano y con las cenas pesando lo suficiente, has podido nombrarte a ti mismo. Es el primer paso para entregarte.',
+  correctExplanation: 'Tú mataste a Elena Solana la noche del 9 de septiembre de 2023, en un arrebato bajo el efecto del alcohol, en este mismo sofá. La discusión empezó por algo pequeño y se fue al fondo: el hijo que habíais perdido meses antes, nacido muerto. Le dijiste que una madre de verdad nunca habría dejado morir a su hijo — la misma estructura que tu padre te dejó dicha durante toda la infancia sin pronunciarla en voz alta. Tu mente bloqueó lo que vino después para que pudieras seguir viviendo. Octavio Brán te ayudó a la mañana siguiente a bajar cajas con la ropa y los enseres de Elena — no su cuerpo, que jamás salió del sofá. Pediste excedencia laboral cuatro meses y volviste con la versión de que Elena se había mudado a Cádiz. Nadie cuestionó nada. Has vivido tres años en aislamiento total, cenando con una alucinación que respondía con la voz que recordabas. Cada caso de este verano ha sido tu propia mente sacando fragmentos del recuerdo — y el caso 7 te entregó la verdad final que tu psicosis sostenía como excusa: tu padre era inocente del crimen del 86. No hay patrón generacional. Tu crimen es solo tuyo. Esta noche, con las pruebas en la mano, has podido nombrarte por primera vez.',
 
-  wrongExplanation: 'El culpable eras tú. Tú mataste a Elena Solana hace tres años en este mismo sofá, bajo el efecto del alcohol, durante una discusión que se te escapó de las manos. Tu mente lo enterró para poder seguir viviendo, y construyó la alucinación de Elena para que cada noche el silencio no te aplastara. Los tres sospechosos que has acusado esta noche son testigos honestos: Felipe oyó, Octavio cargó, Don Eulogio firmó. Pero ninguno mató. La acusación contra cualquiera de ellos es la última coartada que tu mente buscaba para no enfrentarse al espejo. Has fallado el caso porque has fallado lo que las cenas con Elena llevaban siete casos pidiéndote: la lucidez para verlo y la integridad para decirlo.',
+  wrongExplanation: 'El culpable eras tú. Tú mataste a Elena Solana hace tres años en este mismo sofá, bajo el efecto del alcohol, en una discusión que se fue al fondo: la pérdida del hijo nacido muerto, que volcaste sobre ella con la misma frase con la que tu padre te marcó durante toda la infancia. Tu mente lo enterró para poder seguir viviendo y construyó la alucinación de Elena para que cada noche el silencio no te aplastara. Los dos sospechosos visibles son testigos honestos: Felipe oyó, Octavio cargó cajas. Ninguno mató. La acusación contra cualquiera de ellos es la última coartada que tu mente buscaba para no enfrentarse al espejo. Has fallado el caso porque has fallado lo que las cenas con Elena llevaban siete casos pidiéndote: la lucidez para verlo y la integridad para decirlo.',
 
   // ═══════════════════════════════════════════════════
   // CENA EN CASA — La última cena con Elena
@@ -642,7 +553,7 @@ US.CASES['caso-08'] = {
         { id: 'a', texto: 'Fui yo. Te maté yo.',
           efecto: { sinceridad: +20, integridad: +20, lucidez: +14, flags: ['acepta_culpa', 'promete_contar_todo'] },
           replica: '[silencio enorme. Te mira con algo parecido a alivio.] Gracias por decírmelo. Llevaba tres años esperándolo.' },
-        { id: 'b', texto: 'Fue Octavio. O Eulogio. Alguien que sigue libre.',
+        { id: 'b', texto: 'Fue Octavio. O Felipe. Alguien que sigue libre por estas calles.',
           efecto: { sinceridad: -22, integridad: -20, lucidez: -16, flags: ['calla_por_proteccion', 'rechaza_recordar'] },
           replica: '[te mira durante mucho tiempo en silencio. Luego, muy despacio, niega con la cabeza una sola vez.]' },
         { id: 'c', texto: '[silencio. No puedes decirlo.]',
@@ -653,47 +564,134 @@ US.CASES['caso-08'] = {
   },
 
   // ═══════════════════════════════════════════════════
-  // FINALES — DOS CINEMÁTICAS POSIBLES
-  // Se reproducen en DinnerPanel tras el cierre de la
-  // cena en lugar de "siguiente caso" / "volver al menú".
-  // El engine decide cuál según acusación + ejes + flags.
+  // FINALES — 4 CINEMÁTICAS (matriz 2x2)
+  //
+  // Eje X (acusación):   detective sí / no
+  // Eje Y (métricas):    buenas / malas — "buenas" si los 3 ejes ≥ 60
+  //                      O ≥4 flags clave (evaluado en DinnerPanel).
+  //
+  //                BUENAS MÉTRICAS              MALAS MÉTRICAS
+  // ENTREGAS   │  A. Despedida              │  B. Cobardía creepy   │
+  // NO         │  C. Te pillan igual        │  D. No pudiste más    │
+  //
+  // Cada final son 4 escenas (kind: 'scene'): imagen + texto bajo un
+  // botón CONTINUAR. Los blocks legacy (narration/dialogue/credit)
+  // siguen soportados por DinnerPanel para compatibilidad.
   // ═══════════════════════════════════════════════════
   endings: {
-    good: {
-      id: 'ending-good',
-      title: 'EL DETECTIVE SE ENTREGA',
-      subtitle: 'Final · Conciencia limpia',
-      // Condiciones para acceder a este final. Se evalúan en DinnerPanel.
-      requireAccusedWho: 'detective',
-      requireAxes:       { lucidez: 60, integridad: 60 },
-      requireFlagCount:  5,
+    A: {
+      id: 'ending-A-despedida',
+      title: 'DESPEDIDA',
+      subtitle: 'Final 1 / 4 · Conciencia limpia',
+      match: { accuseDetective: true, metrics: 'good' },
       blocks: [
-        { kind: 'narration', text: '[La pantalla de la cena se ilumina. Elena está sentada al otro lado de la mesa. La miras. Por primera vez en años la ves. Ya no como esposa viva. Como recuerdo.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Ya lo sabes, ¿verdad?' },
-        { kind: 'dialogue',  who: 'Detective', text: 'Sí.' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Yo no te odio. Nunca te he odiado. Pero no puedo seguir aquí, Roberto. Tienes que dejarme ir.' },
-        { kind: 'narration', text: '[Lloras. Le coges la mano. Está fría. Lleva años fría. Os despedís en silencio durante mucho tiempo.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Ve. Llama. Diles lo que has hecho. Diles también que has venido a decirlo tú mismo.' },
-        { kind: 'narration', text: '[Cuando Elena desaparece, descuelgas el teléfono. El mismo de los casos. Marcas el 091.]' },
-        { kind: 'dialogue',  who: 'Detective', text: 'Soy el inspector Roberto Mora. Quiero entregarme. He matado a alguien. Hace tres años.' },
-        { kind: 'narration', text: '[Plano final: estás sentado a la mesa con dos copas. Una de las dos se evapora literalmente bajo tu mirada. Te queda la tuya. La levantas. La dejas. Tienes la conciencia limpia por primera vez en años.]' },
-        { kind: 'credit',    text: 'UNDER SUSPICION — Final 1 / 2 · "Conciencia limpia"' }
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/A1.png',
+          text: '[La cena lúcida. Elena al otro lado de la mesa. Por primera vez en años la ves de verdad.]\n\nELENA — "Empieza por tu madre. Cuéntamela como nunca me la has contado."\n\nDETECTIVE — "Murió cuando yo nací. Mi padre me dijo toda la vida que se sacrificó por mí. Yo lo creí. Crecí debiéndole una vida que no le pedí."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/A2.png',
+          text: '[El cuarto del fondo.]\n\nELENA — "Y tu padre."\n\nDETECTIVE — "Mi padre era un hombre bueno. Una mañana se metió en el coche en el garaje cerrado. Yo tenía once años. Nunca me echó la culpa con la boca. Pero la cara era una sola pregunta."\n\nELENA (más bajo) — "El cuarto del fondo."\n\nDETECTIVE — "Nuestro hijo. Nació muerto. Te dije que una madre de verdad nunca habría dejado morir a su hijo. Te dije con tu cara la misma frase que mi padre me dijo a mí sin decirla nunca. Y después llegó el 9 de septiembre."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/A3.png',
+          text: '[La mano fría.]\n\nELENA — "Tu padre era inocente, Roberto. Llevas treinta años creyendo que hizo lo que tú hiciste para que tu crimen no fuera solo tuyo. Pero es solo tuyo."\n\nDETECTIVE — "Lo sé. Ya lo sé."\n\n[Le coges la mano. Está fría. La sostienes mucho tiempo.]\n\nELENA — "Llama. Diles que vas tú."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/A4.png',
+          text: 'DETECTIVE (al teléfono) — "Soy el inspector Roberto Mora. Vengo a entregarme. Maté a mi mujer hace tres años. Estaré esperando en la puerta del portal."\n\n[Cuando cuelgas, una de las dos copas se evapora bajo tu mirada. Te queda la tuya. Llaman al telefonillo.]\n\nUNDER SUSPICION — Final 1 / 4 · "Despedida"'
+        }
       ]
     },
 
-    bad: {
-      id: 'ending-bad',
-      title: 'LA ALUCINACIÓN GANÓ',
-      subtitle: 'Final · No pudiste verlo',
+    B: {
+      id: 'ending-B-cobardia',
+      title: 'LAS VOCES TE TRAJERON',
+      subtitle: 'Final 2 / 4 · Cobardía',
+      match: { accuseDetective: true, metrics: 'bad' },
       blocks: [
-        { kind: 'narration', text: '[La pantalla de la cena se vuelve tensa. Elena se levanta de la mesa. Viene hacia ti. La cámara se sacude. Por un momento crees que ella era la asesina. Que tú no. Que has acusado bien fuera, en el caso, porque dentro de casa había otra cosa.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Roberto. Roberto, por favor. Una vez más, mírame.' },
-        { kind: 'narration', text: '[Corte a negro. Silencio largo. Demasiado largo.]' },
-        { kind: 'narration', text: '[Vuelve la imagen. Plano fijo, cámara estática, frontal. Una silueta cuelga de una viga del techo del salón. La silla está volcada bajo los pies. La mesa intacta con las dos copas. Sin Elena. Sin nadie.]' },
-        { kind: 'narration', text: '[En la mesa, la grabadora antigua se ha quedado encendida. Reproduce en bucle una voz que ya conoces:]' },
-        { kind: 'dialogue',  who: 'Grabadora', text: 'Mañana hablamos, Elena. Mañana hablamos. Mañana hablamos. Mañana...' },
-        { kind: 'narration', text: '[La alucinación ganó. Te has suicidado solo. Elena nunca estuvo ahí esta noche. Nunca estuvo ahí desde hace tres años.]' },
-        { kind: 'credit',    text: 'UNDER SUSPICION — Final 2 / 2 · "La alucinación ganó"' }
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/B1.png',
+          text: '[Elena no se sienta. Se queda de pie detrás de tu silla. Habla muy bajo. No respira entre frases.]\n\nELENA — "No me has dejado dormir en tres años. No me has dejado irme. No me has dejado decirte adiós. Solo querías que viniera a cenar y a callarme la boca."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/B2.png',
+          text: '[La grabadora se enciende sola. Empieza a reproducir tu voz. Tres bucles distintos a la vez.]\n\nELENA (en bucle, distintos volúmenes) — "Una madre de verdad. Una madre de verdad. Una madre de verdad."\n\n[El cuchillo del pan está en la mesa. Lo miras mucho rato. La mano no se mueve.]'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/B3.png',
+          text: 'DETECTIVE — "No puedo. No puedo. No puedo."\n\n[Marcas el 091 con dedos que tiemblan tanto que tienes que reintentar tres veces.]\n\nDETECTIVE (al teléfono) — "Vengan ya. Por favor. Vengan ya. Hagan que pare. Hagan que pare. La he matado yo. Vengan a por mí. Por favor."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/B4.png',
+          text: '[Estás esposado en el asiento trasero. La sirena suena. La voz de Elena sigue dentro. Va a seguir contigo en el calabozo. Va a seguir contigo siempre.]\n\nUNDER SUSPICION — Final 2 / 4 · "Las voces te trajeron"'
+        }
+      ]
+    },
+
+    C: {
+      id: 'ending-C-detenido',
+      title: 'TE PILLARON IGUAL',
+      subtitle: 'Final 3 / 4 · Prisión permanente',
+      match: { accuseDetective: false, metrics: 'good' },
+      blocks: [
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/C1.png',
+          text: '[Las cuatro de la mañana. La mesa puesta. Te sientas. La silla de enfrente no se mueve. Elena no aparece.]\n\nELENA (off, voz lejana sin imagen) — "El cuarto del fondo se queda cerrado, Roberto. Como dijimos. Lo demás lo decides tú solo desde ahora."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/C2.png',
+          text: '[Las siete de la mañana. Llaman. Es tu jefe. Detrás, dos uniformados. Detrás, dos cámaras de prensa que ya estaban abajo cuando llegaron.]\n\nBELTRÁN — "Roberto. El forense me ha pasado el informe a las cinco. He estado leyéndolo dos horas. Acompáñanos."'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/C3.png',
+          text: '[Te esposan en el rellano. Felipe abre su puerta, te ve, cierra. Bajas las escaleras escoltado. Abajo, Octavio espera también esposado por la acusación falsa que has firmado. Os cruzáis la mirada. Él baja la cara primero.]'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/C4.png',
+          text: '[Titular en negro, fundido lento:]\n\n"Inspector de homicidios detenido por el asesinato de su mujer hace tres años y por intentar inculpar al conserje del edificio. La Audiencia Nacional pedirá prisión permanente revisable."\n\n[Celda. Catre. Pared. Te ofrecen un abogado. No lo coges. Encima de la pared, sin que tú hayas pegado nada, la cuenta de los días empieza a la una.]\n\nUNDER SUSPICION — Final 3 / 4 · "Te pillaron igual"'
+        }
+      ]
+    },
+
+    D: {
+      id: 'ending-D-suicidio',
+      title: 'NO PUDISTE AGUANTARLO',
+      subtitle: 'Final 4 / 4 · Suicidio',
+      match: { accuseDetective: false, metrics: 'bad' },
+      blocks: [
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/D1.png',
+          text: '[La cena se vuelve agresiva. Elena, sentada enfrente, abre la boca como si gritara. No sale sonido. Los ojos vacíos. Te tapas los oídos. Las voces siguen dentro.]'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/D2.png',
+          text: '[Te levantas. Llevas una silla debajo de la viga del techo del salón. Sigues sin entender que es tu mano la que ata el nudo. Crees que la mirada de reproche de Elena viene de fuera.]'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/D3.png',
+          text: '[Cámara estática. La silueta cuelga de la viga. La silla volcada. La grabadora encendida en la mesa.]\n\nGRABADORA (en bucle) — "Mañana hablamos, Elena. Mañana hablamos. Mañana hablamos…"'
+        },
+        {
+          kind: 'scene',
+          image: 'assets/img/endings/D4.png',
+          text: '[Las primeras horas de la mañana. La mesa sigue puesta. Las dos copas siguen llenas. Elena nunca estuvo esta noche. Elena nunca estuvo desde hace tres años.]\n\nUNDER SUSPICION — Final 4 / 4 · "No pudiste aguantarlo"'
+        }
       ]
     }
   }

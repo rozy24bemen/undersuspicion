@@ -3,18 +3,26 @@
  * Acto II — Cierre. Mecánica nueva: dos culpables + tabla de argumentación manual.
  * Sin herramienta nueva.
  *
- * Culpables: Elías Mora (primo lejano del detective) + Vicente Solera (hermano
- *            de Lucía Solera del caso 4). Ambos descendientes de las dos familias
- *            del 86 que colaboraron para proteger el legado de sus padres.
+ * Culpables: Vicente Solera (hijo de Andrés Solera, verdadero autor del crimen
+ *            del 86 encubierto durante 40 años) + Elías Mora (primo lejano del
+ *            detective, colabora creyendo la versión oficial — piensa que
+ *            protege el apellido Mora de la publicación que confirmaría el
+ *            crimen del tío-abuelo, sin saber que los documentos de Camino
+ *            probaban exactamente lo contrario: la inocencia de Esteban Mora).
  *
  * Víctima: Camino Quintela (60), periodista jubilada que preparaba la segunda
- *          edición de su libro sobre crímenes encubiertos de la Transición.
+ *          edición de su libro. La nueva edición incluía pruebas documentales
+ *          de que Andrés Solera fue el verdadero autor del crimen del 86 y de
+ *          que el Comisario Esteban Mora (padre del detective) fue inculpado
+ *          injustamente por la institución mientras estaba destrozado por la
+ *          muerte de su mujer en el parto.
  *
  * Sembrado decisivo para el caso 8:
+ * - Manuel Ródenas (sospechoso, antiguo comisario) le entrega al detective
+ *   la verdad sobre su padre por primera vez en cuarenta años.
  * - El manuscrito menciona "la mujer del inspector M." sin aparecer en redes
  *   desde hace tres años.
  * - El cuaderno de Camino tiene la dirección de la calle Hermosilla subrayada.
- * - Manuel Ródenas: "Hombres que llevan algo dentro hasta que se les sale."
  */
 var US = US || {};
 US.CASES = US.CASES || {};
@@ -23,7 +31,7 @@ US.CASES['caso-07'] = {
   id: 'caso-07',
   title: 'El sótano',
   subtitle: 'Caso Nº 2026-1020',
-  intro: 'Camino Quintela, periodista jubilada de 60 años, ha aparecido muerta en el sótano de su chalet de Aravaca. Ahogada en la pila industrial donde revelaba fotografías analógicas. Estaba preparando la segunda edición de su libro sobre crímenes encubiertos en la Transición española. El libro original, publicado en los 2000, incluía una mención al "caso Mora del 86". Alguien pensó que lo que iba a publicar en la nueva edición era demasiado.',
+  intro: 'Camino Quintela, periodista jubilada de 60 años, ha aparecido muerta en el sótano de su chalet de Aravaca. Ahogada en la pila industrial donde revelaba fotografías analógicas. Estaba preparando la segunda edición de su libro sobre crímenes encubiertos en la Transición española. El libro original, publicado en los 2000, mencionaba el "caso Mora del 86" siguiendo la versión oficial de cuarenta años. Lo que la nueva edición iba a publicar era distinto. Alguien pensó que era demasiado.',
 
   victim: {
     name: 'Camino Quintela',
@@ -193,20 +201,20 @@ US.CASES['caso-07'] = {
           {
             id: 'manuel-v1',
             text: '¿Qué información aportó usted al libro original de Camino?',
-            response: '"Conocía el caso Mora del 86 de primera mano. Trabajé con el Comisario Mora durante cuatro años. Un hombre brillante en el trabajo. Y también, claramente, un hombre con un peso que no supo llevar."',
+            response: '"Conocía el caso del 86 de primera mano. Trabajé con el Comisario Mora durante cuatro años. Un hombre brillante en el trabajo. Y también, claramente, un hombre al que se le pidió cargar con algo que no era suyo en el peor momento de su vida."',
             pressureCost: 10
           },
           {
             id: 'manuel-v2',
             text: '¿Sabe por qué alguien querría impedir la segunda edición?',
-            response: '"Porque la primera edición era vaga en los nombres. La segunda era concreta. Camino tenía documentos nuevos. Documentos que probaban lo que el primero solo insinuaba. Para ciertas familias eso es suficiente para perderlo todo."',
+            response: '"Porque la primera edición repetía la versión oficial. La segunda venía a desmontarla. Camino tenía documentos nuevos. Documentos que daban la vuelta a cuarenta años. Para ciertas familias eso es suficiente para perderlo todo."',
             pressureCost: 10
           },
           {
             id: 'manuel-v3',
             text: '¿Usted trabajó con el padre del detective?',
-            response: '"[te mira a los ojos] Trabajé con tu padre. Tú deberías saberlo todo, ¿no? ¿Por qué no lo sabes, muchacho? Eras pequeño aquella noche, supongo que lo bloqueaste. Tu padre era una buena persona. Hasta una noche. Pasa más a menudo de lo que crees. Hombres que van por la vida sin saber lo que llevan dentro hasta que se les sale."',
-            pressureCost: 16
+            response: '"[te mira a los ojos durante mucho tiempo antes de contestar] Trabajé con tu padre, sí. Y voy a decirte hoy lo que llevo cuarenta años sin poder decir en voz alta. Tu padre era inocente del crimen del 86. ¿Me oyes, muchacho? Inocente. Estaba investigando el caso cuando tu madre se fue en el parto. No pudo seguir. Otros aprovecharon su silencio para colgarle lo que era de Andrés Solera. Tu padre nunca se defendió porque ya no tenía con qué. Se mató dos años después y todos dieron por hecho que era confesión. No lo era. Era un hombre roto que no podía con un hijo al que cada día miraba como si fuera la causa de su pérdida. Esa fue su única culpa. La otra, la del 86, no era suya."',
+            pressureCost: 18
           }
         ],
         coartada: [
@@ -219,13 +227,13 @@ US.CASES['caso-07'] = {
           {
             id: 'manuel-c2',
             text: '¿Sabía que Camino iba a citar a Elías Mora y a Vicente Solera?',
-            response: '"Me lo dijo. Le advertí que eso era peligroso. Que los Mora y los Solera no son familias que acepten bien que le recuerden sus muertos. No me hizo caso."',
+            response: '"Me lo dijo. Le advertí que eso era peligroso. Cada uno por su motivo distinto. Vicente sabe perfectamente qué hizo su padre y vive de proteger ese silencio. Elías cree la versión oficial de cuarenta años y piensa que él protege a un muerto culpable. Ninguno iba a recibir bien lo que ella tenía entre manos."',
             pressureCost: 12
           },
           {
             id: 'manuel-c3',
             text: '¿Conoce a Elías Mora o a Vicente Solera personalmente?',
-            response: '"A Elías le conozco de vista. Es el tipo de hombre que protege el apellido como si fuera el apellido lo que le diera vida. Vicente Solera... el hijo del Andrés Solera del 86. Otro que vive con un muerto encima."',
+            response: '"A Elías le conozco de vista. Es el tipo de hombre que protege un apellido sin haberse preguntado nunca qué hay debajo. Vicente Solera... el hijo del Andrés Solera del 86. Ese sabe perfectamente lo que tiene dentro. Por eso es peligroso de verdad."',
             pressureCost: 10
           }
         ]
@@ -247,7 +255,7 @@ US.CASES['caso-07'] = {
       name: 'Elías Mora',
       age: 45,
       role: 'Primo lejano del detective — empresario en Madrid',
-      description: 'Bien vestido, controlado. Primo lejano del detective por parte paterna. La publicación del libro amenazaba con destruir el apellido Mora públicamente. Actuó en coordinación con Vicente Solera para silenciar a Camino.',
+      description: 'Bien vestido, controlado. Primo lejano del detective por parte paterna. Creció con el peso de un apellido marcado por la versión oficial del 86. Actuó en coordinación con Vicente Solera convencido de que silenciaba una publicación que iba a confirmar el crimen de su tío-abuelo. No sabe que los documentos de Camino demostraban exactamente lo contrario.',
       isGuilty: true,
       portraits: {
         neutral:  'assets/img/suspects/Caso7/Sospechosos/ElíasMora-Neutral.png',
@@ -265,7 +273,7 @@ US.CASES['caso-07'] = {
           {
             id: 'elias-v2',
             text: '¿Qué amenazaba publicar sobre su familia?',
-            response: '"Nada que sea cierto. Esa mujer iba a hundir el apellido de mi familia basándose en rumores y en documentos que ella misma no entendía. Era una amenaza sin fundamento."',
+            response: '"Lo de siempre. Que mi tío-abuelo, Esteban Mora, fue el responsable de un crimen en el 86 y que se suicidó por culpa. Cuarenta años cargando con eso. Esa mujer decía tener documentos nuevos. Yo no he visto esos documentos, pero qué más da: que vuelva a salir a la luz manchaba el apellido otra vez. Mi hijo va a la universidad este año. No puedo permitirme que un periódico empiece a llamarle el descendiente del Comisario Mora."',
             pressureCost: 14
           },
           {
@@ -313,7 +321,7 @@ US.CASES['caso-07'] = {
       name: 'Vicente Solera',
       age: 50,
       role: 'Hermano de Lucía Solera (caso 4) — hijo de Andrés Solera',
-      description: 'Robusto, callado, con las manos de quien hace trabajo físico. Es el hermano de Lucía Solera, la hija del panadero del caso 4. Su padre Andrés Solera fue testigo del encubrimiento del 86. El libro de Camino iba a publicar ese testimonio. Actuó junto a Elías para proteger el legado de su padre.',
+      description: 'Robusto, callado, con las manos de quien hace trabajo físico. Es el hermano de Lucía Solera, la hija del panadero del caso 4. Su padre Andrés Solera fue el verdadero autor del crimen del 86, encubierto durante cuarenta años a costa del Comisario Esteban Mora, sobre quien la institución dejó caer la sospecha mientras estaba destrozado por la muerte de su mujer en el parto. Vicente lo sabe desde siempre. El libro de Camino iba a destapar la verdad. Actuó junto a Elías para enterrarla por segunda vez.',
       isGuilty: true,
       portraits: {
         neutral:  'assets/img/suspects/Caso7/Sospechosos/VicenteSolera-Neutral.png',
@@ -331,7 +339,7 @@ US.CASES['caso-07'] = {
           {
             id: 'vicente-v2',
             text: '¿Qué decían esos documentos sobre su padre?',
-            response: '"Que mi padre firmó como testigo de algo que no debía firmar. Hace cuarenta años. Mi padre ya no está para defenderse. Eso no es periodismo, es ensañamiento."',
+            response: '"Cosas viejas. Cosas que ya nadie tendría por qué remover. Mi padre ya no está para defenderse. Lo que esa periodista iba a publicar era un destrozo, no un periodismo. Y le caía a un hombre muerto que no podía contestar."',
             pressureCost: 14
           },
           {
@@ -369,7 +377,7 @@ US.CASES['caso-07'] = {
         'cuaderno_camino':   { response: '"[ve su nombre y el de Elías] Ella apuntaba con quién quedaba. No significa nada."', pressureCost: 16 },
         'camara_exterior':   { response: '"Un vehículo gris. No es único ese color."', pressureCost: 16 },
         'movil_camino':      { response: '"Me citó. No fui."', pressureCost: 18 },
-        'libro_original':    { response: '"Ese libro manchó el nombre de mi padre. El nuevo lo habría destruido."', pressureCost: 14 }
+        'libro_original':    { response: '"Ese libro repetía la versión que durante cuarenta años nos ha venido bien a unos cuantos. El nuevo iba a darle la vuelta. Eso es lo que cambia todo."', pressureCost: 14 }
       }
     }
   ],
@@ -548,9 +556,9 @@ US.CASES['caso-07'] = {
     { id: 'chantaje_previo',      text: 'Respuesta a un chantaje que Camino ejercía sobre las familias' }
   ],
 
-  correctExplanation: 'Elías Mora y Vicente Solera acudieron juntos al chalet de Camino en Aravaca la noche del martes, coordinando su actuación para silenciar la segunda edición del libro antes de que se publicara. Los dos tenían el mismo motivo: proteger el legado de sus respectivos padres, implicados en el encubrimiento del 86. La fuerza de dos personas era necesaria, como certifica el forense. La cámara exterior los identifica. El cuaderno de Camino los nombra juntos. La tabla de argumentación conecta cada declaración contradictoria con la prueba que la desmiente.',
+  correctExplanation: 'Vicente Solera y Elías Mora acudieron juntos al chalet de Camino en Aravaca la noche del martes para silenciar la segunda edición del libro. Vicente tenía el motivo real: su padre Andrés Solera fue el verdadero autor del crimen del 86, encubierto a costa del Comisario Esteban Mora, padre del detective, sobre quien la institución dejó caer la sospecha mientras estaba destrozado por la muerte de su mujer en el parto. Los documentos de Camino lo probaban. Elías Mora colaboró sin conocer la verdad: creía la versión oficial de cuarenta años y pensaba que protegía el apellido Mora de la confirmación pública del crimen de su tío-abuelo. La ironía es que Elías mató para enterrar la inocencia de su propio tío-abuelo. La fuerza de dos personas era necesaria, como certifica el forense. La cámara exterior los identifica. El cuaderno de Camino los nombra juntos. Manuel Ródenas le ha entregado al detective, por primera vez en cuarenta años, la verdad sobre su padre.',
 
-  wrongExplanation: 'Los culpables eran Elías Mora y Vicente Solera, que actuaron juntos para impedir que la segunda edición del libro de Camino revelara la implicación de sus familias en el crimen del 86. El forense confirma que fue necesaria la fuerza de dos personas. La cámara exterior los registra entrando y saliendo. El cuaderno de Camino los nombra juntos para esa noche. Las huellas de dos calzados distintos rodean la pila. La mecánica de la tabla de argumentación requería conectar las declaraciones contradictorias de cada uno con las pruebas concretas que las desmontaban.',
+  wrongExplanation: 'Los culpables eran Vicente Solera y Elías Mora. Vicente actuó para enterrar definitivamente la verdad de que su padre fue el verdadero autor del crimen del 86. Elías actuó creyendo la versión oficial de toda la vida: que su tío-abuelo Esteban Mora fue el responsable y que la publicación reabriría la herida del apellido. Ninguno de los dos podía permitir la segunda edición. El forense confirma que fue necesaria la fuerza de dos personas. La cámara exterior los registra entrando y saliendo. El cuaderno de Camino los nombra juntos para esa noche. Las huellas de dos calzados distintos rodean la pila. La mecánica de la tabla de argumentación requería conectar las declaraciones contradictorias de cada uno con las pruebas concretas que las desmontaban.',
 
   // ═══════════════════════════════════════════════════
   // CENA EN CASA — Tras resolver el caso
@@ -584,15 +592,15 @@ US.CASES['caso-07'] = {
           acusoIncorrecto: '¿Algo o alguien que te llamara la atención?'
         },
         respuestas: [
-          { id: 'a', texto: 'Un comisario retirado. Dijo que hay hombres que llevan algo dentro hasta que se les sale.',
-            efecto: { sinceridad: +12, lucidez: -8, flags: ['recuerda_padre'] },
-            replica: '[larga pausa] ¿Y tú qué piensas de eso?' },
+          { id: 'a', texto: 'Un comisario retirado. Trabajó con mi padre. Me dijo que mi padre no fue lo que durante cuarenta años todos creímos.',
+            efecto: { sinceridad: +14, integridad: +6, lucidez: -8, flags: ['recuerda_padre'] },
+            replica: '[muy quieta] ¿Qué quieres decir con eso, Roberto?' },
           { id: 'b', texto: 'Nadie especial. El caso era claro al final.',
-            efecto: { sinceridad: -6 },
+            efecto: { sinceridad: -8 },
             replica: 'Te pones rígido cuando mientes.' },
-          { id: 'c', texto: 'Alguien que conocía a mi padre. Me habló de él.',
+          { id: 'c', texto: 'Alguien que conocía a mi padre. Llevo el día intentando colocar lo que me dijo.',
             efecto: { sinceridad: +10, flags: ['recuerda_padre'] },
-            replica: '¿Qué te dijo?' }
+            replica: '¿Y vas a contármelo en algún momento?' }
         ]
       }
     ],

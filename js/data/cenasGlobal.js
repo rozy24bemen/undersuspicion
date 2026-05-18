@@ -228,6 +228,23 @@ US.CENAS_GLOBAL = {
       ]
     },
 
+    {
+      id: 'pre_cuarto_cerrado',
+      tono: 'preocupada',
+      linea: 'He pensado en hacer algo con el cuarto del fondo. Lleva años cerrado. [Lo dice sin mirarte. Sigue cortando el pan.] Pero al final no sé. Igual no toca todavía.',
+      respuestas: [
+        { id: 'a', texto: 'Déjalo cerrado. No toca todavía.',
+          efecto: { sinceridad: +8, integridad: +6, flags: ['recuerda_hijo_muerto'] },
+          replica: '[asiente sin levantar la vista] Ya. Eso pensaba yo.' },
+        { id: 'b', texto: '¿Qué cuarto? No tenemos ningún cuarto cerrado.',
+          efecto: { sinceridad: -10, lucidez: -6 },
+          replica: '[silencio muy largo] Vale, Roberto.' },
+        { id: 'c', texto: 'Haz lo que quieras con él.',
+          efecto: { sinceridad: -4, lucidez: -3 },
+          replica: 'No te he preguntado eso.' }
+      ]
+    },
+
     // ── CONFRONTACIONAL ─────────────────────────────
     {
       id: 'con_mentira_martes',

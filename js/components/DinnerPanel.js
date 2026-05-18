@@ -48,19 +48,39 @@ US.DinnerPanel = class DinnerPanel {
     if (!panel) return;
 
     const isEnding = this.phase === 'ending';
-    const endingKey = isEnding && this.ending && this.ending.id && /good/i.test(this.ending.id) ? 'good' : (isEnding ? 'bad' : '');
-    const lineCls = isEnding ? 'dinner-panel__line dinner-panel__line--ending' : 'dinner-panel__line';
+    const endingKey = isEnding && this.ending && this.ending.match && this.ending.match.metrics
+      ? this.ending.match.metrics
+      : '';
+    const sceneBlock = this._currentSceneBlock();
+
+    const lineCls = isEnding
+      ? (sceneBlock ? 'dinner-panel__line dinner-panel__line--ending dinner-panel__line--scene'
+                    : 'dinner-panel__line dinner-panel__line--ending')
+      : 'dinner-panel__line';
+
+    const imageHtml = sceneBlock
+      ? `<img class="dinner-panel__ending-image" src="${this.ui._esc(sceneBlock.image)}" alt="">`
+      : '';
+
+    const lineStyle = sceneBlock ? ' style="white-space: pre-line"' : '';
 
     panel.innerHTML = `
       <div class="dinner-panel__header">
         <span class="dinner-panel__phase" ${endingKey ? `data-ending="${endingKey}"` : ''}>${this._phaseLabel()}</span>
         <span class="dinner-panel__caseRef">${this.ui._esc(this.caseData.subtitle || '')}</span>
       </div>
-      <div class="${lineCls}" id="dinner-line">${this.ui._esc(this._currentLine())}</div>
+      ${imageHtml}
+      <div class="${lineCls}" id="dinner-line"${lineStyle}>${this.ui._esc(this._currentLine())}</div>
       <div class="dinner-panel__body" id="dinner-body"></div>
     `;
 
     this._renderBody();
+  }
+
+  _currentSceneBlock() {
+    if (this.phase !== 'ending' || !this.ending || !Array.isArray(this.ending.blocks)) return null;
+    const b = this.ending.blocks[this.endingBlockIdx];
+    return b && b.kind === 'scene' && b.image ? b : null;
   }
 
   // ── Phase logic ──────────────────────────────────
@@ -96,6 +116,7 @@ US.DinnerPanel = class DinnerPanel {
     if (!this.ending || !Array.isArray(this.ending.blocks)) return '';
     const b = this.ending.blocks[this.endingBlockIdx];
     if (!b) return '';
+    if (b.kind === 'scene')    return b.text || '';
     if (b.kind === 'dialogue') return (b.who ? b.who.toUpperCase() + ' — ' : '') + b.text;
     return b.text || '';
   }
@@ -271,8 +292,16 @@ US.DinnerPanel = class DinnerPanel {
         break;
 
       case 'gancho':
-        this.phase = 'personal';
-        this.exchangeIdx = 0;
+        // En casos con cinemática propia (caso 8) saltamos la fase 'personal'
+        // — sus preguntas del banco global rompen el clímax narrativo. El
+        // gancho enlaza directo con la cinemática del final.
+        if (this.ending) {
+          this.phase = 'ending';
+          this.endingBlockIdx = 0;
+        } else {
+          this.phase = 'personal';
+          this.exchangeIdx = 0;
+        }
         break;
 
       case 'personal':
@@ -429,10 +458,18 @@ US.DinnerPanel = class DinnerPanel {
     if (!result) return '';
     if (this.ending) {
       // En el caso final no hablamos de "rating" — el veredicto es el final.
-      const isGood = this.ending.id && /good/i.test(this.ending.id);
-      return isGood
-        ? 'Caso cerrado. Te entregaste tú mismo.'
-        : 'Caso sin cerrar. La verdad nunca salió de este piso.';
+      // Soporta tanto el formato nuevo (4 cuadrantes con match) como el
+      // legacy (good/bad por id).
+      const m = this.ending.match || {};
+      const isAccuse = (typeof m.accuseDetective === 'boolean')
+        ? m.accuseDetective
+        : (this.ending.id && /good/i.test(this.ending.id));
+      const isGoodMetrics = (m.metrics === 'good');
+
+      if (isAccuse && isGoodMetrics)  return 'Caso cerrado. Te entregaste tú mismo.';
+      if (isAccuse && !isGoodMetrics) return 'Caso cerrado. Te entregaste antes de que las voces te llevaran.';
+      if (!isAccuse && isGoodMetrics) return 'Caso sin cerrar por ti. Te pillaron al amanecer.';
+      return 'Caso sin cerrar. La verdad nunca salió de este piso.';
     }
     if (result.allCorrect)    return 'Caso resuelto. Lo cogieron gracias a ti.';
     if (result.correct.who)   return 'Caso cerrado a medias. El nombre correcto, el resto no.';
@@ -469,26 +506,70 @@ US.DinnerPanel = class DinnerPanel {
   }
 
   /**
-   * Elige qué ending mostrar (caso 8) en función de la acusación, los
-   * ejes y las flags acumuladas. Devuelve null si el caso no tiene
-   * cinemáticas finales (cualquier caso anterior).
+   * Elige qué ending mostrar (caso 8) en función de la matriz 2x2:
+   *   eje X = acusación (detective sí / no)
+   *   eje Y = métricas con Elena (buenas / malas)
+   *
+   * Soporta dos formatos:
+   *   - Nuevo (4 finales): caseData.endings = { A, B, C, D } con match
+   *     { accuseDetective: bool, metrics: 'good'|'bad' }.
+   *   - Legacy (2 finales): caseData.endings = { good, bad } — se sigue
+   *     respetando para no romper si algún día se reusa en otro caso.
+   *
+   * Devuelve null si el caso no tiene cinemáticas finales.
    */
   _pickEnding(caseData, caseResult) {
     const endings = caseData && caseData.endings;
-    if (!endings || (!endings.good && !endings.bad)) return null;
+    if (!endings) return null;
 
+    // Formato nuevo: 4 cuadrantes.
+    if (endings.A || endings.B || endings.C || endings.D) {
+      const accuseDetective = !!(caseResult && caseResult.accusedWho === 'detective');
+      const metrics = this._evaluateMetrics() ? 'good' : 'bad';
+      const candidates = [endings.A, endings.B, endings.C, endings.D].filter(Boolean);
+      for (const e of candidates) {
+        const m = e.match || {};
+        if (m.accuseDetective === accuseDetective && m.metrics === metrics) return e;
+      }
+      // Fallback defensivo: si la matriz no devuelve nada, devolver el
+      // primero disponible (no debería pasar nunca con los 4 definidos).
+      return candidates[0] || null;
+    }
+
+    // Formato legacy: good/bad por umbrales explícitos en el propio ending.
     const good = endings.good;
-    if (good && this._meetsEndingRequirements(good, caseResult)) return good;
+    if (good && this._meetsLegacyEndingRequirements(good, caseResult)) return good;
     return endings.bad || null;
   }
 
-  _meetsEndingRequirements(ending, caseResult) {
+  /**
+   * Evalúa si las métricas de las cenas son "buenas". Criterio (OR):
+   *   - los 3 ejes ≥ 60, O BIEN
+   *   - ≥ 4 flags clave del lore (memoria del detective).
+   * El OR evita penalizar perfiles "memoria sí, dialéctica no" o viceversa.
+   */
+  _evaluateMetrics() {
+    if (!US.MetaStore || typeof US.MetaStore.get !== 'function') return true;
+    const meta = US.MetaStore.get();
+    const ejesOK = ['sinceridad', 'integridad', 'lucidez']
+      .every(eje => (meta[eje] || 0) >= 60);
+    if (ejesOK) return true;
+
+    const flagsClave = [
+      'recuerda_padre', 'fotos_en_cajon', 'cajon_prohibido',
+      'promete_contar_todo', 'lee_manuscrito', 'recuerda_calle_goya',
+      'papeles_elena', 'recuerda_hijo_muerto'
+    ];
+    const count = flagsClave.filter(f => meta.memoria && meta.memoria[f]).length;
+    return count >= 4;
+  }
+
+  _meetsLegacyEndingRequirements(ending, caseResult) {
     if (!ending) return false;
     if (ending.requireAccusedWho && (!caseResult || caseResult.accusedWho !== ending.requireAccusedWho)) {
       return false;
     }
     if (!US.MetaStore || typeof US.MetaStore.get !== 'function') return true;
-
     const meta = US.MetaStore.get();
     const axes = ending.requireAxes || {};
     for (const eje of ['sinceridad', 'integridad', 'lucidez']) {

@@ -1625,7 +1625,793 @@ aging, multiple sheets, cartoon.
 
 ---
 
-# Notas finales de producción
+# FINALES — 4 cinemáticas (16 escenas, 4×4)
+
+> **REFACTOR EN CURSO.** Las antiguas `endings.good` / `endings.bad` del
+> caso 8 (paradigma binario) están migrando a **4 finales** definidos
+> por una matriz 2×2:
+>
+> ```
+>                  BUENAS MÉTRICAS              MALAS MÉTRICAS
+> TE ENTREGAS    │  A. Despedida              │  B. Cobardía creepy   │
+> NO TE ENTREGAS │  C. Te pillan igual        │  D. No pudiste más    │
+> ```
+>
+> Cada final son **4 escenas** (imagen + texto bajo botón CONTINUAR),
+> 16 escenas en total. Las poses ya existentes de Elena
+> (`Elena_despedida`, `Elena_ausente`) **se siguen usando** en A y D
+> respectivamente. **B y C requieren imágenes nuevas o reusan
+> Elena_confrontacional / Elena_ausente con composiciones distintas**.
+>
+> Aspect ratio común: **16:9 horizontal** (cinemática, NO retrato).
+> Naming sugerido: `assets/img/endings/{A1..A4, B1..B4, C1..C4, D1..D4}.png`.
+> Style ID común: `undersuspi-noir-v1`.
+
+---
+
+## FINAL A · DESPEDIDA · entrega + buenas métricas
+
+> **Función narrativa:** el único final donde el jugador entiende **todo
+> el lore real** (madre muerta en parto, padre roto pero inocente que
+> se suicidó, hijo nacido muerto, paralelismo generacional como
+> alucinación). Elena pregunta en oblicuo, el detective verbaliza.
+> Tono: doloroso, lúcido, soportable. Cierre con despedida real.
+
+### A1 — La cena lúcida
+
+> **Texto bajo la imagen:**
+> *Elena:* "Empieza por tu madre. Cuéntamela como nunca me la has contado."
+> *Detective:* "Murió cuando yo nací. Mi padre me dijo toda la vida que se sacrificó por mí. Yo lo creí. Crecí debiéndole una vida que no le pedí."
+
+```
+Cinematic establishing shot, 16:9 horizontal aspect ratio. Wide
+two-shot of a man and a woman sitting across a vintage wooden dining
+table in a Salamanca-district Madrid apartment, viewed from the side
+so both faces are visible in three-quarter profile.
+
+Background: heavy dark green wallpaper, framed black-and-white family
+photos slightly out of focus on the back wall, a sideboard with a
+half-drunk bottle of red wine, an unlit standing lamp in the corner.
+The dining table is set for two: two filled red wine glasses, bread,
+a pot of stew already going cold.
+
+Lighting: one warm pendant lamp above the table casting a tight circle
+of amber light over the wood, the rest of the room sinking into deep
+brown shadow. Practical lamp source visible. No fill from outside.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+character art (Disco Elysium tradition). Soft painterly brush strokes,
+smooth volumetric rendered shading. NOT cel-shading, NOT flat, NOT
+anime, NOT 3D, NOT photorealistic.
+
+Subjects:
+- Roberto Mora (detective), early 40s, worn dark wool coat over an
+  open-collar shirt, three-day stubble, eyes bloodshot but lucid for
+  the first time. Body leaning slightly forward over the table.
+- Elena Solana (same face as Elena_neutral.png — CRITICAL), 38, same
+  chestnut waves, same charcoal cardigan and off-white blouse as
+  Elena_confrontacional, hands folded on the table, listening.
+
+Atmosphere: intimate, heavy, the moment before something irreversible
+is finally said out loud. No fear. No anger. Just weight.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic, cartoon, horror,
+ghost effects, transparency, halos, supernatural lighting, blood,
+weapons visible, multiple extra people, modern smartphone, modern
+laptop, bright clinical lighting, daylight, sunny scene.
+```
+
+### A2 — El cuarto del fondo
+
+> **Texto bajo la imagen:**
+> *Elena:* "Y tu padre."
+> *Detective:* "Mi padre era un hombre bueno. Una mañana se metió en el coche en el garaje cerrado. Yo tenía once años. Nunca me echó la culpa con la boca. Pero la cara era una sola pregunta."
+> *Elena (más bajo):* "El cuarto del fondo."
+> *Detective:* "Nuestro hijo. Nació muerto. Te dije que una madre de verdad nunca habría dejado morir a su hijo. Te dije con tu cara la misma frase que mi padre me dijo a mí sin decirla nunca. Y después llegó el 9 de septiembre."
+
+```
+Cinematic still life shot, 16:9 horizontal aspect ratio. Empty corridor
+of the same Madrid apartment seen from the dining room threshold. NO
+people in frame. The camera sits at eye level just inside the dining
+room arch, looking down a long hallway toward a closed wooden door at
+the far end.
+
+Background: parquet floor, dark wood wainscoting waist-high, family
+photographs in mismatched frames hung slightly crooked along both walls,
+a faded runner rug along the centerline, a single brass coat hook
+holding nothing.
+
+Composition: strong central perspective, all lines converging on the
+closed door. The door is plain dark wood with a brass handle.
+
+Lighting: warm tungsten light from a wall sconce halfway down the
+corridor, AND a thin band of pale warm light bleeding from under the
+closed door at the far end as if the room behind it were lit (it is
+not). Dust suspended in the air, catching the amber light.
+
+Art style: digital oil painting illustration, semi-realistic, Disco
+Elysium tradition. Soft painterly brush strokes, smooth volumetric
+rendered shading. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
+photorealistic.
+
+Atmosphere: melancholic stillness, the weight of something behind the
+closed door that has not been opened in three years.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: people, characters, figures, faces, hands, horror, blood,
+ghost, supernatural, halo, transparency, bright daylight, neon,
+modern decor, sci-fi elements, fantasy elements.
+```
+
+### A3 — La mano fría
+
+> **Texto bajo la imagen:**
+> *Elena:* "Tu padre era inocente, Roberto. Llevas treinta años creyendo que hizo lo que tú hiciste para que tu crimen no fuera solo tuyo. Pero es solo tuyo."
+> *Detective:* "Lo sé. Ya lo sé."
+> [Le coges la mano. Está fría. La sostienes mucho tiempo.]
+> *Elena:* "Llama. Diles que vas tú."
+
+```
+Extreme close-up cinematic detail shot, 16:9 horizontal aspect ratio.
+Two hands meeting on the dark wooden dining table, shallow depth of
+field. NO faces in frame.
+
+Subjects (hands only):
+- A man's hand (Roberto's), worn knuckles, a thin scar across the
+  middle finger, slight tremor visible in the wrist, warm skin tone,
+  gently cupping the woman's hand from above and around.
+- A woman's hand (Elena's), pale, almost bluish-grey under the warm
+  light, completely still, fingers limp, gold wedding band visible on
+  the ring finger.
+
+Background: blurred edge of one wine glass on the right, blurred
+wooden table grain falling out of focus behind, almost completely
+dark in the upper third.
+
+Lighting: warm amber lamp from above-left grazing across the table
+surface, picking out the grain. The contrast between his warm-toned
+living hand and her cold pale hand is the entire emotional point of
+the frame — make it visible without exaggerating.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes, smooth volumetric
+rendered shading. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
+photorealistic.
+
+Atmosphere: profound quiet intimacy, the moment of acceptance.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: faces visible, full bodies, ghost effect, transparency,
+gore, blood, wounds, horror, bright lighting, daylight, neon,
+multiple hands beyond two, gloves, jewelry beyond a single thin gold
+wedding band, painted nails, cartoon.
+```
+
+### A4 — La copa que se evapora
+
+> **Texto bajo la imagen:**
+> *Detective al teléfono:* "Soy el inspector Roberto Mora. Vengo a entregarme. Maté a mi mujer hace tres años. Estaré esperando en la puerta del portal."
+> [Cuando cuelgas, una de las dos copas se evapora bajo tu mirada. Te queda la tuya. Llaman al telefonillo.]
+> **UNDER SUSPICION — Final 1 / 4 · "Despedida"**
+
+```
+Cinematic static frontal shot, 16:9 horizontal aspect ratio. Wide
+shot of the dining table at first dawn light. NO people in frame.
+
+Composition: dead-center frontal symmetry. One filled wine glass on
+the near side of the table solid and sharp. A second wine glass on
+the far side mid-dissolve into rising soft mist, faint enough that
+the silhouette is still readable as a wine glass but transparent
+enough that the wallpaper behind it is partially visible through it.
+The wooden chair across the table empty and very slightly pushed back.
+
+Background: same dining room as A1, sideboard, family photos, but
+now bathed in two competing light sources crossing each other.
+
+Lighting: cold pale blue dawn light streaming horizontally from a
+window on the left, AND lingering warm tungsten lamp from above
+catching the table from the right. The two lights cross over the
+dissolving glass at the center of the frame. The mist where the
+glass dissolves catches BOTH lights, picking up gold and blue.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: melancholic but peaceful. The end of the night. Something
+has been let go.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: people, characters, hands, faces, horror, gore, blood,
+weapons, supernatural halos, ghost faces in the mist, religious
+iconography, bright sunshine, midday, neon, modern objects, smartphones.
+```
+
+---
+
+## FINAL B · COBARDÍA CREEPY · entrega + malas métricas
+
+> **Función narrativa:** terror psicológico. Elena ya no es la mujer de
+> la cena — es la culpa con su cara, hostil, en bucle. El detective
+> intenta matarse, no le da el valor, y marca el 091 en pánico para
+> que paren las voces. La entrega como huida, no como duelo.
+> Tono: claustrofóbico, asfixiante, voces solapadas.
+
+### B1 — La voz detrás de la nuca
+
+> **Texto bajo la imagen:**
+> Elena no se sienta. Se queda de pie detrás de tu silla. Habla muy bajo. No respira entre frases.
+> *Elena:* "No me has dejado dormir en tres años. No me has dejado irme. No me has dejado decirte adiós. Solo querías que viniera a cenar y a callarme la boca."
+
+```
+Cinematic psychological horror shot, 16:9 horizontal aspect ratio.
+Low-angle close-up from behind a seated man's head and shoulders at
+a dining table. The back of his neck and skull in sharp focus showing
+visible tension.
+
+Composition: man's head occupies the lower-left third in sharp focus.
+A blurred female silhouette stands impossibly close behind his chair,
+out of focus but unmistakable — only her PALE HAND visible in mid
+focus resting on the wooden backrest of his chair, fingers slightly
+too long, knuckles slightly too still. No face visible. The body of
+the woman dissolves into the dark background.
+
+Background: same dining room as A1 but the lighting has gone wrong:
+the warm lamp now sickly yellow, the room beyond drained of color,
+shadows on the back wall reaching outward in shapes that are not
+quite right.
+
+Lighting: harsh cold blue source from one side (window, off-camera,
+unrealistic intensity), sickly yellow tungsten from above, the two
+sources never resolving. The female hand on the chair is lit from
+beneath as if by a light that should not exist.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic, but with deliberately unsettling exaggeration of
+proportion and shadow. NOT cel-shading, NOT flat, NOT anime, NOT 3D,
+NOT photorealistic.
+
+Atmosphere: claustrophobic dread. The viewer should not feel safe
+behind the camera.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: jump-scare face, screaming face, blood on hand, decaying
+flesh, zombie skin, white sheet ghost, halo, religious imagery,
+photorealistic horror, cheap jumpscare, gore, weapons drawn,
+multiple ghosts, transparent body fully visible.
+```
+
+### B2 — Las tres voces tuyas
+
+> **Texto bajo la imagen:**
+> La grabadora se enciende sola. Empieza a reproducir tu voz. Tres bucles distintos a la vez.
+> *Elena (en bucle, distintos volúmenes):* "Una madre de verdad. Una madre de verdad. Una madre de verdad."
+> [El cuchillo del pan está en la mesa. Lo miras mucho rato. La mano no se mueve.]
+
+```
+Macro cinematic close-up, 16:9 horizontal aspect ratio. Tabletop level,
+shallow depth of field. NO people in frame.
+
+Composition: a vintage 1990s Sanyo cassette recorder occupies the
+center of the frame, two reels spinning rapidly and slightly
+asymmetrically. Foreground left: a bread knife lying across a smear
+of dark red wine on the wood (NOT blood — wine, the texture and
+color must read as wine). Background right: a wine bottle and one
+of the two filled glasses partially in frame, out of focus.
+
+Lighting: one harsh overhead light source creating high-contrast
+shadows that fall at slightly wrong angles, as if the lamp were
+swinging gently. The reels catch reflective glints that pulse with
+the implied audio loop. Dust visible in the air.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes but with sharper grain
+on the recorder casing to convey deteriorating physical reality. NOT
+cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: oppressive, ringing-in-the-ears horror. The viewer should
+hear the loop without sound.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: blood (the red is WINE), human gore, modern Bluetooth speaker,
+smartphone, laptop, digital screen, cartoon, anime, bright lighting,
+people, hands.
+```
+
+### B3 — La mano que no se mueve
+
+> **Texto bajo la imagen:**
+> *Detective:* "No puedo. No puedo. No puedo."
+> [Marcas el 091 con dedos que tiemblan tanto que tienes que reintentar tres veces.]
+> *Detective al teléfono:* "Vengan ya. Por favor. Vengan ya. Hagan que pare. Hagan que pare. La he matado yo. Vengan a por mí. Por favor."
+
+```
+Wide cinematic shot, 16:9 horizontal aspect ratio. The detective alone
+on the floor.
+
+Composition: Roberto Mora, early 40s in dark coat and rumpled shirt,
+sitting on the wooden parquet floor of the living room, his back
+pressed flat against a wall, knees pulled up. Right hand turned palm
+up on his lap, empty, fingers curled slightly. Left hand limp on the
+floor next to him. The corded telephone receiver is on the floor
+beside him off the hook, still connected. His face is half in shadow,
+mouth slightly open, eyes lost.
+
+Background: the dining table for two visible across the room in
+mid-ground, the two filled glasses still on it, the cassette
+recorder spinning faintly. Empty bottle on the floor near him.
+
+Lighting: harsh moonlight from a window on the left creating cold
+blue bands across the floor. ONE dim lamp on the dining table giving
+sickly amber to the table area. The detective sits in the seam
+between the two — half cold blue, half amber. The body itself is
+the boundary.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
+photorealistic.
+
+Atmosphere: broken, desolate, the body of a man who has tried to do
+something and could not.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: blood, wounds, knife in hand, gun in hand, suicide depiction,
+graphic gore, multiple people, ghost overlays, screaming face,
+photorealism, neon, modern smartphone in hand (it MUST be a 1990s
+corded receiver), daylight.
+```
+
+### B4 — La voz dentro del coche patrulla
+
+> **Texto bajo la imagen:**
+> Estás esposado en el asiento trasero. La sirena suena. La voz de Elena sigue dentro. Va a seguir contigo en el calabozo. Va a seguir contigo siempre.
+> **UNDER SUSPICION — Final 2 / 4 · "Las voces te trajeron"**
+
+```
+Cinematic noir exterior night shot, 16:9 horizontal aspect ratio.
+Street level, slightly low angle. Wet Madrid street at night.
+
+Composition: medium close-up on a Spanish national police patrol car
+(Policía Nacional livery, dark blue with the standard chevrons),
+the rear passenger window in sharp focus. Behind the rain-streaked
+glass: Roberto Mora handcuffed in the back seat, forehead pressed
+against the window from the inside, eyes closed. His lips slightly
+parted as if still hearing a voice no one else can hear. Out-of-focus
+silhouette of a uniformed officer in the front seat.
+
+Background: blurred Salamanca-district building façades, ornate iron
+balconies, wet asphalt reflecting alternating red and blue patrol
+strobes. The whole street drained of warm light — only police lights
+and a distant streetlamp.
+
+Lighting: alternating red and blue strobes from atop the patrol car
+washing across Roberto's face in slow rhythm. Wet reflections
+multiplying the lights on the road. NO neon signs, NO commercial
+lighting beyond the street.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic, with rain texture rendered as soft painterly
+streaks not photographic droplets. NOT cel-shading, NOT flat, NOT
+anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: defeated, oppressive, the noise inside his head louder
+than the sirens.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: American police uniforms, American police car, NYPD style,
+neon Las Vegas lighting, daylight, sunny, multiple suspects in the
+car, blood on his face, visible weapon, photorealistic raindrops,
+cartoon, anime.
+```
+
+---
+
+## FINAL C · TE PILLAN IGUAL · no entrega + buenas métricas
+
+> **Función narrativa:** acusas a otro pero las pruebas son
+> demoledoras. Don Octaviano (forense) lleva el informe a Beltrán
+> (jefe). Te detienen al amanecer con prensa en el portal. La
+> acusación falsa a un inocente añade cargos (acusación falsa +
+> encubrimiento) → **prisión permanente revisable**. Tono:
+> humillación, justicia inevitable, ironía.
+
+### C1 — La cena tras cerrar mal el caso
+
+> **Texto bajo la imagen:**
+> Las cuatro de la mañana. La mesa puesta. Te sientas. La silla de enfrente no se mueve. Elena no aparece.
+> *Elena (off, voz lejana sin imagen):* "El cuarto del fondo se queda cerrado, Roberto. Como dijimos. Lo demás lo decides tú solo desde ahora."
+
+```
+Symmetrical cinematic frontal shot, 16:9 horizontal aspect ratio.
+Wide medium shot, dead-center composition.
+
+Composition: Roberto Mora, early 40s in dark coat, sitting ALONE at
+a dining table set for two. The wooden chair across from him is
+empty. On his side: a filled red wine glass and a plate of food
+untouched. On the empty side: a second wine glass turned BOWL-DOWN
+on its rim. His hands rest flat on the table. He stares forward
+into nothing. The frame is perfectly symmetrical around the empty
+chair across from him — the lonely composition is the entire shot.
+
+Background: same dining room as A1, but the warm lamp now feels too
+small, the room too large, deep brown shadows pressing in from the
+edges.
+
+Lighting: single overhead amber lamp creating a perfect circle of
+light around the table while the rest of the room sinks into deep
+brown shadow. No moonlight. No competing sources. Just the lamp and
+the dark.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: austere, lonely, the silence of having been told goodbye
+and not having done anything with it.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: Elena visible, ghost effects, transparent woman, halos,
+horror, blood, weapons, modern smartphones, multiple people,
+daylight, neon, bright lighting, cartoon, anime.
+```
+
+### C2 — Beltrán en la puerta
+
+> **Texto bajo la imagen:**
+> Las siete de la mañana. Llaman. Es tu jefe. Detrás, dos uniformados. Detrás, dos cámaras de prensa que ya estaban abajo cuando llegaron.
+> *Beltrán:* "Roberto. El forense me ha pasado el informe a las cinco. He estado leyéndolo dos horas. Acompáñanos."
+
+```
+Cinematic interior shot, 16:9 horizontal aspect ratio. Camera placed
+inside the apartment looking outward through the open front door
+toward the building stairwell.
+
+Composition: in the doorway frame, a grey-haired man in his late
+50s (Comisario Beltrán) wearing a long dark wool coat, regretful but
+firm expression, lower jaw set, hands in his pockets. Behind him in
+the stairwell, two uniformed Spanish national police officers
+standing slightly apart with hands resting on their duty belts.
+Behind the officers, the suggestion of a stairwell landing.
+
+Background: the apartment interior on this side of the camera is
+in lingering warm tungsten light, deep brown shadows. The stairwell
+behind the men is lit by cold pale morning daylight from a stairwell
+window — the threshold of the doorway is the boundary between two
+worlds.
+
+Lighting: warm amber from the apartment side (camera side), cold
+blue dawn from the stairwell side. The figures are silhouetted at
+the boundary, their faces lit by the cold side.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: the weight of inevitability. Nobody raises their voice
+in this image because nobody needs to.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: SWAT team gear, raised firearms, drawn weapons, American
+police uniforms, NYPD style, broken door, violence, blood, multiple
+suspects, daylight outside the stairwell, cartoon, anime, civilians
+visible.
+```
+
+### C3 — El portal con prensa
+
+> **Texto bajo la imagen:**
+> Te esposan en el rellano. Felipe abre su puerta, te ve, cierra. Bajas las escaleras escoltado. Abajo, Octavio espera también esposado por la acusación falsa que has firmado. Os cruzáis la mirada. Él baja la cara primero.
+
+```
+Cinematic high-angle shot, 16:9 horizontal aspect ratio. Top-down
+oblique angle looking down the main staircase of a grand 19th-century
+Madrid apartment building.
+
+Composition: ornate iron banister in the foreground curving down.
+Mid-frame: a handcuffed Roberto Mora descending the marble steps
+flanked by two uniformed Spanish national police officers. Lower
+mid-frame: at the lobby landing, an older handcuffed man in his
+late 50s (Octavio Brán, the building's concierge) standing with his
+head bowed, hands cuffed in front, accompanied by one officer.
+Lower right edge of frame: through the open street door, a glimpse
+of two press photographers' cameras with flash and one boom microphone.
+
+Background: marble steps, ornate iron-and-brass railing scrolling
+down, period wallpaper, a single hanging brass lamp.
+
+Lighting: harsh white morning daylight flooding in from the street
+door at the bottom, washing out the lobby. Warmer interior light
+on the upper landings from old building sconces. The two light
+worlds meet on the staircase. Roberto is descending from warmth
+into harshness.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: public humiliation, the irony of a public servant being
+walked through the public space he was supposed to protect.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: SWAT team, drawn weapons, gunfire, helicopter, modern
+glass-and-steel staircase, generic American precinct, blood, gore,
+violence, multiple uniformed officers beyond three, cartoon, anime,
+night scene, neon.
+```
+
+### C4 — La cuenta de los días
+
+> **Texto bajo la imagen:**
+> *(Titular en negro, fundido lento):* "Inspector de homicidios detenido por el asesinato de su mujer hace tres años y por intentar inculpar al conserje del edificio. La Audiencia Nacional pedirá prisión permanente revisable."
+> [Celda. Catre. Pared. Te ofrecen un abogado. No lo coges. Encima de la pared, sin que tú hayas pegado nada, la cuenta de los días empieza a la una.]
+> **UNDER SUSPICION — Final 3 / 4 · "Te pillaron igual"**
+
+```
+Cinematic frontal static shot, 16:9 horizontal aspect ratio. Wide
+shot of a stark Spanish prison cell at midday.
+
+Composition: dead-center symmetry. Narrow metal cot bolted to the
+left wall with a thin grey wool blanket. Roberto Mora, early 40s,
+sitting upright on the edge of the cot, back perfectly straight, in
+grey-blue Spanish prison clothes, hands folded between his knees.
+He stares at the bare grey concrete wall directly across from him,
+where a single scratched mark — a vertical line, "I" — has just
+appeared etched into the concrete. NO other objects in the cell.
+NO window. NO bars in frame (the door is behind camera).
+
+Background: grey concrete walls on three sides, lightly textured.
+A drain in the floor. A single ventilation grille high on the back
+wall.
+
+Lighting: harsh greenish-white fluorescent ceiling light creating
+flat, sterile, shadowless illumination. The kind of light that does
+not flatter anything. No warmth anywhere in the frame.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes but with deliberately
+reduced color saturation to convey institutional sterility. NOT
+cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: terminal stillness. The first day of a very long sentence.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: American prison orange jumpsuit (must be Spanish prison
+grey-blue), bars in frame, prison yard, multiple inmates, violence,
+blood, suicide depiction, religious iconography, halos, ghost overlays,
+cartoon, anime, warm lighting, daylight through window.
+```
+
+---
+
+## FINAL D · NO PUDISTE AGUANTARLO · no entrega + malas métricas
+
+> **Función narrativa:** la culpa y las voces ganan. No se acusa, no
+> se entrega, se mata. El más simple y el más oscuro. **Reusa
+> conceptualmente la `endings.bad` anterior** pero con cuatro escenas
+> en lugar de una cinemática lineal.
+
+### D1 — La cara que grita sin sonido
+
+> **Texto bajo la imagen:**
+> La cena se vuelve agresiva. Elena, sentada enfrente, abre la boca como si gritara. No sale sonido. Los ojos vacíos. Te tapas los oídos. Las voces siguen dentro.
+
+```
+Cinematic psychological horror close-up, 16:9 horizontal aspect ratio.
+Asymmetric two-shot, Elena dominant in frame.
+
+Composition: Elena (same face as Elena_neutral.png — CRITICAL) in
+sharp focus on the right side of frame, looking directly at the
+camera. Her mouth is slightly open as if mid-scream BUT COMPLETELY
+SILENT — no extension of jaw, no exaggerated horror-mouth, just a
+slack opening as if the scream is happening inside her head not
+hers. Her eyes are vacant, almost glassy, emotionless. Pale skin
+slightly grey. In the blurred left foreground, the back of
+Roberto's head with both hands pressed flat against his ears.
+
+Background: the same dining room as A1, but the single hanging
+overhead lamp is swinging slightly, creating shifting bands of light
+and shadow across Elena's face mid-frame. The wallpaper behind her
+seems to ripple.
+
+Lighting: hard top-down light from the swinging lamp, creating
+unstable shadows that move across Elena's face. The shadow bars
+should be the only visible motion in the otherwise still frame.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic, with deliberately destabilized geometry around Elena
+to convey that the viewer is inside Roberto's collapsing perception.
+NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: psychological horror. The viewer should feel that the
+silence in the image is louder than any scream.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: stretched mouth, demon mouth, fangs, black eyes, white
+contacts, ghost effects, transparency, blood from mouth, gore,
+photorealistic horror, cheap jumpscare, multiple Elenas, halo, religious
+iconography, cartoon, anime, bright lighting.
+```
+
+### D2 — La cuerda
+
+> **Texto bajo la imagen:**
+> Te levantas. Llevas una silla debajo de la viga del techo del salón. Sigues sin entender que es tu mano la que ata el nudo. Crees que la mirada de reproche de Elena viene de fuera.
+
+```
+Low-angle cinematic shot, 16:9 horizontal aspect ratio. Camera placed
+at floor level looking up.
+
+Composition: Roberto Mora in silhouette, standing on a wooden dining
+chair in the middle of the living room, arms raised tying a rope
+to an exposed dark wooden ceiling beam directly overhead. His face
+is in deep shadow, only his silhouette readable against the single
+hanging lamp. The rope is plain hemp. In the blurred foreground
+mid-ground: the dining table for two with two filled red wine
+glasses still untouched. Slightly visible in the background to
+the right: the cassette recorder on the table with its small red
+recording light glowing.
+
+Background: living room walls in deep shadow, the exposed wooden
+ceiling beam dominating the upper third of frame.
+
+Lighting: the single hanging lamp creates a hard backlight on
+Roberto, leaving him as a silhouette. The dining table is lit by
+the residual lamp light. NO other sources. Strong chiaroscuro.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes but with deep deep
+shadows. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
+photorealistic.
+
+Atmosphere: fated, horrified-but-restrained. The act is being shown
+in preparation, NOT in completion. No graphic horror.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: completed hanging shown explicitly, face in close-up,
+crying face, screaming face, gore, blood, multiple ropes, multiple
+nooses, religious iconography, halo, ghost overlay, multiple bodies,
+cartoon, anime, daylight, neon.
+```
+
+### D3 — Plano fijo
+
+> **Texto bajo la imagen:**
+> Cámara estática. La silueta cuelga de la viga. La silla volcada. La grabadora encendida en la mesa.
+> *Grabadora (en bucle):* "Mañana hablamos, Elena. Mañana hablamos. Mañana hablamos…"
+
+```
+Static wide cinematic shot, 16:9 horizontal aspect ratio. Locked-off
+camera, no motion implied. Restrained, NOT graphic.
+
+Composition: full living room visible. In the upper-center of the
+frame, the silhouette of a hanging man from the dark wooden ceiling
+beam — IN DEEP SHADOW, suggested by shape only, NO graphic detail,
+NO visible face, NO visible neck detail, just the suspended dark
+shape. Beneath him, an overturned wooden chair on the parquet floor.
+In the mid-ground: the dining table for two still intact, both red
+wine glasses still full, untouched. On the table: the cassette
+recorder with its small red light glowing. NO other figures in frame.
+
+Background: deep shadow on all walls, the wallpaper barely readable.
+
+Lighting: ONE single overhead lamp from above the table, illuminating
+the table and the floor immediately beneath it. Everything above
+the lamp falls into total shadow — including the hanging silhouette,
+which is silhouetted by ambient bleed only. The viewer reads the
+shape but never the detail. This is the entire ethical/visual
+constraint of the frame: tell the truth without spectacle.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic, restrained painterly approach. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic. NO body horror.
+
+Atmosphere: terminal silence. The viewer should feel the room hold
+its breath.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: detailed face of the hanged man, visible eyes of the hanged
+man, blood, distended limbs, gore, autopsy details, multiple bodies,
+religious iconography, halos, ghost effects, cartoon, anime, bright
+clinical lighting, daylight, neon, horror-genre exaggeration.
+```
+
+### D4 — Amanecer sin nadie
+
+> **Texto bajo la imagen:**
+> Las primeras horas de la mañana. La mesa sigue puesta. Las dos copas siguen llenas. Elena nunca estuvo esta noche. Elena nunca estuvo desde hace tres años.
+> **UNDER SUSPICION — Final 4 / 4 · "No pudiste aguantarlo"**
+
+```
+Static wide cinematic shot, 16:9 horizontal aspect ratio. Same camera
+position as D3 but at first dawn light. NO people in frame. The
+ceiling beam itself is now OUT OF FRAME above — only the table area
+and floor are visible.
+
+Composition: dining table for two intact in mid-ground with both red
+wine glasses still full and untouched. In the foreground, on the
+parquet floor: the overturned wooden chair from D3. The cassette
+recorder on the table is now silent, its red light dark.
+
+Background: same living room as D3, walls now lit by cold pale
+horizontal dawn light streaming in from a window on the left out of
+frame.
+
+Lighting: cold pale blue dawn light coming horizontally across the
+parquet floor from the left, casting long thin shadows of the
+overturned chair across the room. The warm overhead lamp from D3
+is OFF. The light has changed completely. Morning has arrived
+without an observer.
+
+Art style: digital oil painting illustration, Disco Elysium tradition,
+semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Atmosphere: abandoned aftermath. The room continues without anyone
+in it. The world did not stop.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: any body in the frame, any hanging silhouette in the frame,
+shadow of a hanging body, blood, gore, police tape, forensic markers,
+multiple people, ghost overlays, religious iconography, daylight
+sunny, neon, cartoon, anime.
+```
+
+---
+
+## Naming + orden de prioridad de los 16
+
+```
+assets/img/endings/A1.png  ·  La cena lúcida
+assets/img/endings/A2.png  ·  El cuarto del fondo (sin personas)
+assets/img/endings/A3.png  ·  La mano fría (detalle de manos)
+assets/img/endings/A4.png  ·  La copa que se evapora (sin personas)
+
+assets/img/endings/B1.png  ·  La voz detrás de la nuca
+assets/img/endings/B2.png  ·  Las tres voces (grabadora close-up)
+assets/img/endings/B3.png  ·  La mano que no se mueve
+assets/img/endings/B4.png  ·  La voz dentro del coche patrulla
+
+assets/img/endings/C1.png  ·  La cena tras cerrar mal el caso
+assets/img/endings/C2.png  ·  Beltrán en la puerta
+assets/img/endings/C3.png  ·  El portal con prensa
+assets/img/endings/C4.png  ·  La cuenta de los días (celda)
+
+assets/img/endings/D1.png  ·  La cara que grita sin sonido
+assets/img/endings/D2.png  ·  La cuerda
+assets/img/endings/D3.png  ·  Plano fijo (silueta colgada — RESTRAINED)
+assets/img/endings/D4.png  ·  Amanecer sin nadie
+```
+
+**Orden de prioridad de producción** (si hay que cortar):
+1. **A4, D4** — los dos planos finales icónicos (copa que se evapora vs amanecer sin nadie). Son los frames que el jugador "se lleva" como recuerdo del juego.
+2. **A1, D3** — los dos pivotes narrativos (cena lúcida vs silueta colgada). Son los que cierran la historia emocionalmente.
+3. **C3, B4** — los dos finales "mecánicos" (portal con prensa vs coche patrulla). Si faltan, el jugador necesita entender visualmente la consecuencia.
+4. **B1, D1** — las dos imágenes de Elena hostil/silenciosa. Son las que más se desvían del style-bible amable de Elena, requieren más iteración.
+5. **A2, A3, B2, B3, C1, C2, C4, D2** — el resto.
+
+**Reusos posibles:**
+- `Elena_despedida.png` puede inspirar la pose de Elena en A1 (sentada en lugar de de pie).
+- `Elena_ausente.png` puede inspirar D4 (cuerpo en silueta — descartar para D3 que es solo silueta sin detalle).
+- `Elena_confrontacional.png` puede inspirar la pose hostil de B1 (vista desde detrás solo) y el rostro vacío de D1.
+
+---
 
 ## Orden de prioridad de generación
 
