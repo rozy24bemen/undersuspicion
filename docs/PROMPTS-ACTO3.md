@@ -79,7 +79,7 @@
 
 **Naming al guardar**:
 ```
-assets/img/suspects/Elena_neutral.png              (ya existe — referencia maestra)
+assets/img/suspects/Elena_neutral.png              (REGENERAR — sustituye al actual, será la maestra)
 assets/img/suspects/Elena_calida.png               (NUEVO — tono casual, cenas 1-2)
 assets/img/suspects/Elena_preocupada.png           (NUEVO — tono preocupada, cenas 3-7)
 assets/img/suspects/Elena_confrontacional.png      (NUEVO — tono confrontacional, cenas 6-8)
@@ -96,6 +96,9 @@ assets/img/suspects/Caso8/Sospechosos/OctavioBran-Nervioso.png
 assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Neutral.png    (COPIAR desde Caso6)
 assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Pensativo.png  (COPIAR desde Caso6)
 assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Nervioso.png   (COPIAR desde Caso6)
+assets/img/suspects/Caso8/Sospechosos/RobertoMora-Neutral.png           (NUEVO — espejo, cuarta tarjeta)
+assets/img/suspects/Caso8/Sospechosos/RobertoMora-Pensativo.png         (NUEVO — espejo)
+assets/img/suspects/Caso8/Sospechosos/RobertoMora-Nervioso.png          (NUEVO — espejo, momento de reconocimiento)
 
 assets/img/suspects/Caso8/Pruebas/P1 — Informe Forense.png
 assets/img/suspects/Caso8/Pruebas/P2 — Dos Copas.png
@@ -118,6 +121,7 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
 # ÍNDICE
 
 - [ELENA — Personaje recurrente (cenas)](#elena--personaje-recurrente)
+  - [Elena NEUTRAL · maestra (REGENERAR — sustituye al actual)](#elena--neutral-regenerar--sustituye-al-actual)
   - [Elena Cálida (tono casual)](#elena-cálida--tono-casual)
   - [Elena Preocupada (tono preocupada)](#elena-preocupada--tono-preocupada)
   - [Elena Confrontacional (tono confrontacional)](#elena-confrontacional--tono-confrontacional)
@@ -128,6 +132,7 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
   - [Felipe Saiz · 3 poses](#felipe-saiz)
   - [Octavio Brán · 3 poses](#octavio-brán)
   - [Don Eulogio Pacheco hijo · reutilizar Caso 6](#don-eulogio-pacheco-hijo--reutilizar-caso-6)
+  - [Roberto Mora · 3 poses (cuarta tarjeta C8 — espejo del recibidor)](#roberto-mora--detective-cuarta-tarjeta-c8--espejo-del-recibidor)
   - [Escenario · Salón Hermosilla](#escenario--salón-hermosilla)
   - [Pruebas (9 + 3 variantes UV)](#pruebas-caso-8)
 
@@ -151,9 +156,125 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
 > cambia, Elena se aleja, la silla queda vacía. Son los únicos momentos
 > en que el juego visualmente "rompe" la alucinación.
 >
-> **Referencia maestra**: `Elena_neutral.png` (ya producida). Cara, peinado,
-> pendientes y complexión deben mantenerse idénticos en TODAS las poses.
-> Sólo cambian expresión, gesto, ropa según pose y atmósfera.
+> **Referencia maestra**: `Elena_neutral.png`. **El asset actual NO sirve**
+> (pelirroja en estudio negro con vaqueros — fuera de canon). Hay que
+> regenerarla con la pose maestra del bloque siguiente, y a partir de ahí
+> todas las demás poses la adjuntan como `[ATTACH approved Elena_neutral.png
+> as reference image]`. Cara, peinado, pendientes y complexión idénticos en
+> TODAS las poses; sólo cambian expresión, gesto, ropa y atmósfera según
+> pose.
+
+---
+
+## Elena — NEUTRAL (REGENERAR — sustituye al actual)
+
+> **Esta pose sustituye al `Elena_neutral.png` actual** (pelirroja en estudio
+> negro con vaqueros, fuera de canon). Es la referencia maestra: toda la
+> cadena de poses la adjunta como referencia. Genera primero esta y, una
+> vez aprobada, las demás se enganchan limpiamente.
+>
+> Tono visual: **neutral acogedor**. No sonríe como la cálida ni se preocupa
+> como la preocupada; te mira con la atención cálida de quien acaba de
+> abrir la puerta y se alegra de que hayas vuelto, sin decir nada todavía.
+> Es la "página en blanco" emocional de Elena.
+
+```
+Half-body portrait, 3:4 vertical aspect ratio, character framed from
+mid-thigh to top of head, occupying the central vertical axis of the
+image. Background: warm dimly-lit dining room of a Madrid bourgeois
+apartment — out-of-focus glimpse of a wooden dining table corner with
+a candle, the suggestion of a kitchen doorway with warm yellow light
+behind. Soft amber key light from upper-right at 30 degrees, very
+soft falloff, golden-hour interior glow. NO black studio background,
+NO neutral grey backdrop — this is a home.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+character art for a noir detective adventure game (Disco Elysium /
+classic 1990s point-and-click mystery game tradition). Soft painterly
+brush strokes, smooth volumetric rendered shading, visible texture of
+digital oil paint. NOT cel-shading, NOT flat colors, NOT anime, NOT 3D,
+NOT photorealistic, NOT commercial-catalogue stock-illustration polish.
+
+Subject — DETAILED FACE (unique original face, NOT a stock-illustration
+cheerful redhead, NOT a magazine catalogue model, NOT a fashion editorial
+shot — this is a Spanish literature teacher in her own home):
+- 38 year-old Spanish woman, literature teacher at the Instituto
+  Cervantes in Madrid, daughter of a middle-class Salamanca family,
+  married fifteen years to a homicide inspector — kindness has settled
+  into her face like weather settles into a stone
+- Face shape: gentle oval, soft cheekbones, slightly rounded chin, the
+  proportions of a face that aged into warmth rather than into beauty
+  — fine smile lines fanning at the corners of the eyes, very faint
+  vertical line between the brows from years of careful listening, a
+  small kind upturned nose, full but not exaggerated lips
+- Skin: light olive-Mediterranean complexion with subtle warmth across
+  the cheeks, NOT pale, NOT tanned, NOT made-up — the complexion of a
+  woman who walks home from teaching and reads in the evening light
+- Eyes: medium-set warm HAZEL-BROWN eyes (NOT green, NOT blue, NOT
+  pale), soft and direct, eyes that meet the detective's without
+  performance and that the player will later remember when shown the
+  corpse photograph — these eyes are the emotional anchor of the
+  entire game
+- Hair: shoulder-length CHESTNUT BROWN hair with soft natural waves,
+  parted slightly off-centre, loose and worn down, one strand falling
+  gently in front of the right ear, slightly tucked behind the left.
+  NOT bright red, NOT copper, NOT auburn-fiery, NOT blonde, NOT
+  platinum, NOT pixie-cut, NOT updone, NOT salon-styled — the hair of
+  a schoolteacher who washes it and lets it dry naturally
+- Build: average height, naturally proportioned slim frame, soft
+  shoulders, hands soft from holding paperbacks rather than weight
+
+Clothing: a BURGUNDY (deep wine-red) wool TURTLENECK SWEATER, hand-
+knitted texture clearly visible in the painterly rendering, sleeves
+worn at full length to the wrists. Paired with a high-waisted
+charcoal-grey wool PENCIL SKIRT that ends just below mid-thigh in
+the framing of this shot (full skirt continues out of frame). Small
+PEARL STUD EARRINGS in both ears, prominent enough to be a recurring
+identifying detail in every pose. A thin gold WEDDING BAND on the
+left ring finger, visible where her hands rest. NO scarf, NO
+necklace, NO bracelets, NO casual blouse, NO jeans, NO denim, NO
+floral prints — this is the wardrobe of a literature teacher having
+a quiet dinner with her husband at home, NEVER noir, NEVER stark,
+NEVER fashionable.
+
+Pose & expression (NEUTRAL MASTER REFERENCE): standing relaxed, weight
+even on both feet, body angled five degrees toward the camera. Both
+hands held loosely at the front of her body at waist height, one
+hand gently resting over the back of the other, fingers relaxed, the
+gold wedding band visible. Head tilted very slightly to the right
+(about 5 degrees), eyes meeting the camera directly with calm
+welcoming attention, lips composed in a soft neutral line — NOT
+smiling broad, NOT half-smiling, NOT worried, NOT confrontational,
+NOT sad, NOT seductive — the face she shows her husband when she
+opens the door and is glad he is home but has not yet said anything.
+A reference face that other poses can deviate from without losing
+identity.
+
+Atmosphere: warm domestic intimacy, the gold-amber glow of a single
+wall lamp from the upper right, the deep wine of the sweater echoing
+the dining room's burgundy upholstery in the soft-focus background.
+This is the visual master of all five other Elena dinner poses —
+every other Elena prompt will attach THIS image as reference.
+
+Composition: subject slightly off-center to the right, eyes at the
+upper third, the warm dining-room background occupying the upper-left
+third behind her with a candle visible just over her left shoulder.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D
+render, children cartoon, deformed, text, watermark, REDHEAD, RED
+HAIR, GINGER, COPPER HAIR, AUBURN HAIR, FIERY HAIR, BRIGHT RED HAIR,
+BLONDE, PLATINUM, PIXIE CUT, UPDONE, SALON STYLED, JEANS, DENIM,
+CASUAL BLOUSE, FLORAL BLOUSE, FLORAL PRINT, BLACK STUDIO BACKGROUND,
+NEUTRAL GREY BACKDROP, STOCK-ILLUSTRATION POLISH, MAGAZINE CATALOGUE
+POSE, HANDS IN POCKETS, COMMERCIAL CHEERFUL POSE, COLD LIGHTING,
+FLUORESCENT LIGHTING, NOIR LIGHTING, BLUE TONE, smiling broad,
+laughing, sad, fearful, accusatory, seductive, revealing clothing,
+multiple people, masculine features, elderly woman, teenager,
+transparent, ghostly, halo, angel wings, religious iconography,
+blood, scars, makeup heavy, lipstick visible.
+```
 
 ---
 
@@ -923,6 +1044,277 @@ Copy-Item assets/img/suspects/Caso6/Sospechosos/EulogioPachecoHijo-Nervioso.png 
 
 ---
 
+## Roberto Mora — DETECTIVE (cuarta tarjeta C8 — espejo del recibidor)
+
+> El propio detective. Hasta ahora invisible: durante los 7 primeros casos
+> el canon visual ([ASSETS-VISUALES.md:49](../docs/ASSETS-VISUALES.md#L49))
+> dice "**no se ve la cara directamente**: silueta, manos, primer plano del
+> bloc. Su retrato sólo aparece en C8 como 'cuarta tarjeta'". El cuarto
+> sospechoso de C8 es él, y se desbloquea sólo si los ejes y flags de cenas
+> previas lo permiten ([caso08.js:56-66](../js/data/caso08.js#L56-L66)).
+>
+> **Concepto de framing — ESPEJO DEL RECIBIDOR**: el rostro del detective
+> no se renderiza nunca en plano frontal directo. Las tres poses son **el
+> mismo hombre mirándose en el espejo del recibidor de su propia casa**,
+> el mismo espejo en el que [caso08.js:299](../js/data/caso08.js#L299) dice
+> *"El detective se sienta frente a su propio reflejo en el espejo del
+> recibidor"*. La cara se revela siempre **a través del reflejo**, no
+> directamente. Esto refuerza la disociación: durante el caso 8, su mente
+> le mira desde fuera.
+>
+> Estructura visual común a las 3 poses:
+> - Plano vertical 3:4, **medio cuerpo** (no full-body — esta vez es una
+>   excepción al standing-only convencional; el espejo lo justifica)
+> - **El espejo ocupa el tercio superior y medio del frame**: marco
+>   dorado antiguo (gusto de Elena, de cuando lo eligieron juntos), óvalo
+>   o rectangular ornamentado
+> - **En el reflejo del espejo se ve la cara del detective de frente**:
+>   primer plano cara-y-hombros
+> - **Fuera del espejo, en primer plano de la imagen real (no reflejo)**:
+>   la nuca y los hombros del detective de espaldas a la cámara, más
+>   borrosos / desenfocados, anclando que es un reflejo
+> - Una **consola del recibidor** debajo del espejo: madera oscura, con
+>   un cuenco para las llaves, un teléfono fijo (el del juego), y según
+>   la pose un vaso/botella
+> - **Iluminación**: una sola lámpara de pared cálida amarilla a un lado
+>   del espejo. Detrás del detective (al fondo del recibidor) se ve la
+>   entrada al salón con la mesa puesta para dos en luz cálida — un
+>   recordatorio visual de Elena al fondo
+>
+> Esto es nuevo respecto al canon original (que decía "silueta"), y es
+> intencional: la **silueta seguía vigente para Resolución de los 7 casos
+> anteriores**, pero en C8 la cuarta tarjeta SÍ enseña su cara — porque
+> la confesión exige verse.
+
+### Roberto Mora — Características físicas canónicas
+
+> Ancladas a [ASSETS-VISUALES.md:49](../docs/ASSETS-VISUALES.md#L49) y a
+> los diálogos del juego:
+> - Hombre español, 45 años (canon "~45"), inspector de Homicidios de
+>   Madrid, lleva 18 años en el cuerpo
+> - **Cara**: fuerte mandíbula bajo barba de tres días sin afeitar
+>   uniformemente, ojos oscuros profundamente cansados con bolsas
+>   marcadas (no duerme bien desde 2023), pómulos ligeramente hundidos,
+>   nariz recta, frente ancha, labio inferior más grueso que el superior
+>   — una cara que fue capaz y se ha ido erosionando
+> - **Pelo**: castaño oscuro corto a los lados, ligeramente más largo y
+>   despeinado por arriba, **canas marcadas en las sienes**, peinado sin
+>   producto, mechón cayendo a veces sobre la frente
+> - **Complexión**: complexión mediterránea con palidez de oficina y
+>   alcohol, cierto enrojecimiento facial sutil bajo los ojos por noches
+>   sin dormir y por la botella de licor de Cadaqués que ha vaciado de
+>   más
+> - **Construcción**: 1,80m aproximadamente, hombros anchos pero
+>   ligeramente caídos por el peso de tres años, complexión normal sin
+>   ser atlética
+> - **Ropa fija** (canon ASSETS-VISUALES): gabardina gris oscura **sobre
+>   los hombros sin abrochar** (acaba de llegar al piso desde la
+>   comisaría), debajo traje gris con **corbata negra fina aflojada**,
+>   camisa blanca arrugada con primer botón desabrochado, **reloj de
+>   cuerda** mecánico en muñeca izquierda visible
+> - **Nunca lleva** insignia visible, placa colgando, pistola
+>   reglamentaria a la vista — esto es su casa, no la comisaría
+
+### Neutral
+
+```
+Half-body portrait, 3:4 vertical aspect ratio, character framed from
+mid-chest to top of frame, through a MIRROR REFLECTION composition.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+character art for a noir detective adventure game (Disco Elysium /
+classic 1990s point-and-click mystery game tradition). Soft painterly
+brush strokes, smooth volumetric rendered shading, visible texture of
+digital oil paint. NOT cel-shading, NOT flat colors, NOT anime, NOT
+3D, NOT photorealistic.
+
+Composition (CRITICAL — read carefully):
+- Foreground in front of the viewer: the BACK of the detective's head
+  and shoulders, slightly out of focus, occupying the lower-third of
+  the frame, partially silhouetted against the warm light. We see the
+  back of his neck, his dark hair, the dark grey trench coat over his
+  shoulders. He is facing AWAY from the camera, INTO the mirror.
+- Middle/upper two-thirds of the frame: an ANTIQUE GILDED MIRROR
+  hanging on a wall, oval or rectangular with ornate gold frame
+  (Elena's taste, chosen together in 2014). The mirror DOMINATES the
+  upper portion of the composition.
+- INSIDE THE MIRROR REFLECTION: the DETECTIVE'S FACE seen frontally,
+  half-body, mid-chest up. This is the first time the player sees
+  Roberto Mora's face in the entire game — through the reflection,
+  not directly.
+- Below the mirror, on a dark walnut hallway console table: a small
+  ceramic bowl with house keys, a polished brass landline telephone
+  (the in-game telephone), and an envelope with handwritten
+  Spanish address (illegible, painterly)
+- Behind the detective (visible in the mirror's reflection, far
+  background): the open doorway to the salon with the dining table
+  set for two, warm candle glow at distance — Elena's domain
+  glimpsed in the reflection behind him.
+
+Subject in the mirror (FRONTAL — this is the face reveal):
+- 45 year-old Spanish man, Roberto Mora, homicide inspector
+- Face: strong jaw under three-day uneven stubble, dark tired brown
+  eyes with marked under-eye bags, slightly hollow cheekbones,
+  straight nose, broad forehead, fuller lower lip — a face that was
+  capable and has eroded across three years
+- Skin: warm Mediterranean complexion with the dullness of bad sleep
+  and habitual drink, faint redness under the eyes, NOT ruddy, NOT
+  pale-ill — just worn
+- Hair: dark brown short on the sides, slightly longer and
+  unstyled-tousled on top, MARKED GREY AT THE TEMPLES, one strand
+  fallen across the forehead, no product
+- Build: 1.80m approx, broad-shouldered but slightly slumped, normal
+  build neither athletic nor soft
+
+Clothing visible in the reflection:
+- Dark grey wool trench coat draped over the shoulders unbuttoned,
+  not worn through the sleeves — just arrived home from the precinct
+- Underneath: grey suit jacket with a THIN BLACK TIE LOOSENED at the
+  collar, WHITE WRINKLED SHIRT with top button undone
+- Wrist visible in the mirror: a vintage mechanical wristwatch with
+  a brown leather strap on the left wrist
+- NO visible badge, NO visible gun, NO holster — this is his home
+
+Pose & expression (NEUTRAL): standing motionless in front of the
+mirror, both hands resting flat on the edge of the console table
+below the mirror (visible in the lower-third foreground from behind).
+In the mirror reflection: he stares directly at his own eyes with a
+blank, unreadable expression — neither sad nor angry nor frightened.
+The face of a man who has just come home from a case and has not yet
+processed what he saw on his own sofa upstairs. The blankness is
+itself the emotion: pre-recognition, dissociated stillness.
+
+Lighting: a single warm amber wall sconce mounted to the right of
+the mirror, casting hard warm light across half of his face in the
+reflection (right side of his face warmly lit, left side in soft
+shadow). The salon at the back in the reflection glows with a deeper
+amber. The foreground (back of his head) is in cooler shadow because
+the lamp is behind him from the camera's viewpoint.
+
+Atmosphere: silent, suspended, the moment before everything starts
+collapsing. The mirror is the focal anchor — the player understands
+intuitively that this man is looking at someone he does not yet
+recognise.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D
+render, children cartoon, deformed, text, watermark, NO MIRROR (the
+mirror is the whole point), full-body, athletic-hero pose, smiling,
+laughing, holding a gun, holding a badge, uniformed police, modern
+LED lighting, fluorescent lighting, cold blue clinical light, multiple
+people in the mirror, ghostly reflection of someone else, two
+different faces (his reflection must be HIS face, just shown
+frontally), bloody face, scarred face, action-movie aesthetic,
+crime-scene gore.
+```
+
+### Pensativo (adjuntar NEUTRAL aprobada)
+
+```
+[ATTACH approved Neutral as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio, same mirror-reflection
+composition as Neutral, same antique gilded mirror, same hallway
+console table, same back-of-head foreground.
+
+Same subject as reference: Roberto Mora, 45 year-old Spanish homicide
+inspector, dark grey trench coat over shoulders, grey suit, thin black
+tie loosened, white wrinkled shirt, dark hair with grey temples,
+three-day stubble. CRITICAL: same face, same hair, same clothing as
+the approved Neutral. Same mirror, same hallway.
+
+Pose & expression (PENSATIVO / TALKING): the blankness has cracked.
+In the foreground from behind: he has leaned slightly closer to the
+mirror, his hands now gripping the edge of the console table more
+firmly (knuckles whitening, painterly suggestion). In the mirror's
+reflection: his brows are pulled down into a faint frown, eyes have
+narrowed and dropped from his own gaze to somewhere lower on the
+reflected face (he is looking at his own mouth, his own jaw, as if
+they are someone else's). Lips are slightly compressed. The
+expression is that of a man being told something difficult by his
+own face — like he has caught a stranger making a confession in his
+voice. Still calm, but no longer blank.
+
+A small detail change: a TUMBLER GLASS with two fingers of amber
+liquor has appeared on the console table next to the bowl of keys —
+he poured himself one between the Neutral and this pose. The bottle
+of Cadaqués liqueur (mentioned in [caso08.js:313](../js/data/caso08.js#L313))
+is visible at the edge of the console, half empty.
+
+Lighting: same warm wall sconce, but the salon at the back of the
+reflection is now slightly dimmer, as if a candle there is starting
+to burn down. The contrast on his face is sharper, the shadow side
+deeper.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as Neutral — no fists raised, no shouting, no anger,
+no tears running, no full-body, no different face, no second person
+visible in the mirror, the mirror remains the focal device.
+```
+
+### Nervioso (adjuntar NEUTRAL aprobada)
+
+```
+[ATTACH approved Neutral as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio, same mirror-reflection
+composition as Neutral and Pensativo, same antique gilded mirror,
+same hallway console table.
+
+Same subject as reference: Roberto Mora. CRITICAL: same face, same
+hair, same clothing as the approved Neutral. Same mirror, same
+hallway.
+
+Pose & expression (NERVIOSO / NERVOUS — THE MOMENT OF RECOGNITION):
+the wall has come down. In the foreground from behind: he has taken
+half a step BACK from the console, one hand has come up to grip the
+back of his own neck (gesture of self-restraint), the other hand
+remains flat on the console but visibly trembles — the painterly
+suggestion of a slight blur on that hand. In the mirror's reflection:
+his eyes are WIDE OPEN and locked on his own eyes for the first time
+fully, his mouth is slightly open as if mid-breath, no shouting, no
+expressive horror — just the controlled-thunderclap recognition of a
+man who has just understood, in his own reflected face, that the
+killer he was looking for in the case file is himself. The expression
+is **adult horror**, not jump-scare horror. Quiet. Unshareable. The
+moment of internal collapse.
+
+Detail changes: the TUMBLER GLASS on the console is now empty,
+tipped on its side, a small amber puddle visible on the dark walnut.
+The bottle of Cadaqués liqueur is also visible, FULLY empty. The
+brass landline telephone receiver has been LIFTED off its cradle and
+laid on the console next to it (he was about to call Beltrán to turn
+himself in, and the recognition just hit him mid-gesture). The
+envelope on the console has fallen to the floor.
+
+Lighting: the warm wall sconce flickers slightly (painterly
+suggestion of an unstable lamp), and the salon at the back of the
+mirror's reflection has gone almost dark — only a single candle
+flame still visible on the dining table. The shadow on the left side
+of his reflected face has DEEPENED noticeably, the warm side of his
+face is more orange than amber now. The mirror frame catches a sharp
+gold reflection on its upper edge.
+
+Atmosphere: the apartment has stopped pretending. The detective is
+seeing himself for the first time in three years. Nothing dramatic
+happens visually — but the painterly weight of the image must make
+the player understand that this is the moment.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as Neutral — NO scream, NO open-mouth shout, NO
+crying, NO blood on the face, NO action-movie collapse, NO sweat
+beads photorealistic, NO body horror, NO mirror cracking (the mirror
+stays intact — the breaking happens inside the man), NO second
+person visible, NO ghost of Elena in the mirror behind him (she is
+NOT in this image — that is the point), full-body, supernatural
+imagery, gore.
+```
+
+---
+
 ## Escenario — Salón Hermosilla
 
 > El salón del piso de la calle de Hermosilla. Es **la casa del
@@ -1631,22 +2023,24 @@ aging, multiple sheets, cartoon.
 
 Si el tiempo es limitado, generar en este orden de impacto narrativo:
 
-1. **Elena_preocupada.png** — es el tono que aparece en MÁS cenas (casos 3, 4, 5, 7). Sin esta imagen, la mayoría del juego va con la Elena neutral genérica.
-2. **Elena_confrontacional.png** — domina las últimas tres cenas, incluida la del Caso 8.
-3. **Retrato_Victima_caso8.png** — sin esta imagen el Caso 8 abre sin gancho visual.
-4. **FelipeSaiz, OctavioBran (Neutral × 2)** — los dos sospechosos nuevos del Caso 8 necesitan al menos la pose Neutral para que la pantalla del juego no quede vacía.
-5. **Escenario_Hermosilla.png** — el salón del Caso 8 (CSS class `scene-caso8`). Reusable de `Escenario_Salon.png` como fallback mientras se produce.
-6. **Pruebas Caso 8 (P1 a P9)** — orden por importancia: P2 dos copas, P3 calendario, P6 sofá, P5 fotos cajón, P1 forense, P4 grabadora, P9 certificado, P8 aire, P7 alarma.
-7. **Pensativo/Nervioso de Felipe y Octavio** — segunda tanda, una vez aprobadas las Neutrales.
-8. **Elena_calida.png** — refuerza tono casual de cenas 1 y 2 (las cenas tutorial).
-9. **Elena_despedida.png** y **Elena_ausente.png** — finales del Caso 8. Importantes pero sólo se ven en los dos finales — si falta, fallback a Elena_neutral / pantalla negra con texto.
-10. **Variantes UV (P3, P5, P6)** — al final, ya con las versiones normales aprobadas.
+1. **Elena_neutral.png (REGENERAR maestra)** — bloqueador absoluto. Toda la cadena de poses la adjunta como referencia, así que el actual (pelirroja en estudio negro) debe sustituirse antes que ninguna otra cosa.
+2. **Elena_preocupada.png** — es el tono que aparece en MÁS cenas (casos 3, 4, 5, 7). Sin esta imagen, la mayoría del juego va con la Elena neutral.
+3. **Elena_confrontacional.png** — domina las últimas tres cenas, incluida la del Caso 8.
+4. **Retrato_Victima_caso8.png** — sin esta imagen el Caso 8 abre sin gancho visual.
+5. **FelipeSaiz, OctavioBran (Neutral × 2)** — los dos sospechosos nuevos del Caso 8 necesitan al menos la pose Neutral para que la pantalla del juego no quede vacía.
+6. **RobertoMora-Neutral.png (espejo)** — sin esto, la cuarta tarjeta del Caso 8 queda sin retrato. Es la única vez en todo el juego que se ve la cara del detective. Pensativo/Nervioso pueden venir después.
+7. **Escenario_Hermosilla.png** — el salón del Caso 8 (CSS class `scene-caso8`). Reusable de `Escenario_Salon.png` como fallback mientras se produce.
+8. **Pruebas Caso 8 (P1 a P9)** — orden por importancia: P2 dos copas, P3 calendario, P6 sofá, P5 fotos cajón, P1 forense, P4 grabadora, P9 certificado, P8 aire, P7 alarma.
+9. **Pensativo/Nervioso de Felipe, Octavio y Roberto Mora** — segunda tanda, una vez aprobadas las Neutrales.
+10. **Elena_calida.png** — refuerza tono casual de cenas 1 y 2 (las cenas tutorial).
+11. **Elena_despedida.png** y **Elena_ausente.png** — finales del Caso 8. Importantes pero sólo se ven en los dos finales — si falta, fallback a Elena_neutral / pantalla negra con texto.
+12. **Variantes UV (P3, P5, P6)** — al final, ya con las versiones normales aprobadas.
 
 ## Lo que NO hay que producir aún
 
 - Las 3 poses de Don Eulogio Pacheco hijo en `Caso8/Sospechosos/` — son **copias** de las del Caso 6. No regenerar.
 - El retrato de la **víctima Elena post-mortem** NO debe confundirse con las poses vivas: son archivos distintos en paths distintos. Ver "Naming al guardar" arriba.
-- El **rostro del detective**: NO se produce nunca en este caso. La "cuarta tarjeta" en ResolutionScreen del Caso 8 muestra una silueta abstracta — la convención canónica de los 7 primeros casos se mantiene hasta el final.
+- **Rostro del detective en los 7 primeros casos**: NO se produce. El canon de los Actos I-II ([ASSETS-VISUALES.md:49](../docs/ASSETS-VISUALES.md#L49)) sigue vigente — silueta, manos, primer plano del bloc. **Sólo el Caso 8** revela su cara, y exclusivamente a través del espejo del recibidor (las 3 poses Roberto Mora — ver sección dedicada arriba). No usar esas imágenes como retrato del detective en ninguna otra pantalla del juego.
 
 ## Wiring de código pendiente (NO toca a este doc, se hace después)
 
@@ -1655,5 +2049,14 @@ Cuando las imágenes de Elena estén producidas, hay que tocar dos archivos para
 1. [`js/data/cenasGlobal.js`](../js/data/cenasGlobal.js) — convertir `esposa.portrait` (actualmente `null`) en un objeto `{ casual, preocupada, confrontacional, despedida, ausente }` con los paths a cada pose.
 2. [`js/screens/DinnerScreen.js`](../js/screens/DinnerScreen.js) — en `render()`, en lugar de leer `esposa.portrait` plano, elegir la pose según el tono activo de la pregunta meta en curso (con fallback a `Elena_neutral.png`).
 3. [`js/data/caso08.js`](../js/data/caso08.js) — en los `endings.bueno` / `endings.malo`, marcar los beats de cena final con un campo nuevo `elenaPose: 'despedida' | 'ausente'` que `DinnerScreen` pueda leer.
+4. [`js/data/caso08.js:281`](../js/data/caso08.js#L281) — el sospechoso `detective` tiene hoy `portraits: { neutral: '', talking: '', nervous: '' }` (placeholders vacíos). Una vez generadas las 3 poses Roberto Mora, rellenar con:
+   ```js
+   portraits: {
+     neutral:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Neutral.png',
+     talking:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Pensativo.png',
+     nervous:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Nervioso.png'
+   }
+   ```
+   Esto activa la cuarta tarjeta visualmente en `ResolutionScreen` cuando el `gateUnlock` se cumple.
 
 Estos cambios son aparte del trabajo de prompts y se hacen en otra sesión.
