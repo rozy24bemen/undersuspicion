@@ -668,16 +668,16 @@ US.CASES['caso-08'] = {
       requireAxes:       { lucidez: 60, integridad: 60 },
       requireFlagCount:  5,
       blocks: [
-        { kind: 'narration', text: '[La pantalla de la cena se ilumina. Elena está sentada al otro lado de la mesa. La miras. Por primera vez en años la ves. Ya no como esposa viva. Como recuerdo.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Ya lo sabes, ¿verdad?' },
-        { kind: 'dialogue',  who: 'Detective', text: 'Sí.' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Yo no te odio. Nunca te he odiado. Pero no puedo seguir aquí, Roberto. Tienes que dejarme ir.' },
-        { kind: 'narration', text: '[Lloras. Le coges la mano. Está fría. Lleva años fría. Os despedís en silencio durante mucho tiempo.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Ve. Llama. Diles lo que has hecho. Diles también que has venido a decirlo tú mismo.' },
-        { kind: 'narration', text: '[Cuando Elena desaparece, descuelgas el teléfono. El mismo de los casos. Marcas el 091.]' },
-        { kind: 'dialogue',  who: 'Detective', text: 'Soy el inspector Roberto Mora. Quiero entregarme. He matado a alguien. Hace tres años.' },
-        { kind: 'narration', text: '[Plano final: estás sentado a la mesa con dos copas. Una de las dos se evapora literalmente bajo tu mirada. Te queda la tuya. La levantas. La dejas. Tienes la conciencia limpia por primera vez en años.]' },
-        { kind: 'credit',    text: 'UNDER SUSPICION — Final 1 / 2 · "Conciencia limpia"' }
+        { kind: 'narration', elenaPose: 'confrontacional', text: '[La pantalla de la cena se ilumina. Elena está sentada al otro lado de la mesa. La miras. Por primera vez en años la ves. Ya no como esposa viva. Como recuerdo.]' },
+        { kind: 'dialogue',  elenaPose: 'confrontacional', who: 'Elena',    text: 'Ya lo sabes, ¿verdad?' },
+        { kind: 'dialogue',  elenaPose: 'confrontacional', who: 'Detective', text: 'Sí.' },
+        { kind: 'dialogue',  elenaPose: 'despedida',       who: 'Elena',    text: 'Yo no te odio. Nunca te he odiado. Pero no puedo seguir aquí, Roberto. Tienes que dejarme ir.' },
+        { kind: 'narration', elenaPose: 'despedida',       text: '[Lloras. Le coges la mano. Está fría. Lleva años fría. Os despedís en silencio durante mucho tiempo.]' },
+        { kind: 'dialogue',  elenaPose: 'despedida',       who: 'Elena',    text: 'Ve. Llama. Diles lo que has hecho. Diles también que has venido a decirlo tú mismo.' },
+        { kind: 'narration', elenaPose: 'ausente',         text: '[Cuando Elena desaparece, descuelgas el teléfono. El mismo de los casos. Marcas el 091.]' },
+        { kind: 'dialogue',  elenaPose: 'ausente',         who: 'Detective', text: 'Soy el inspector Roberto Mora. Quiero entregarme. He matado a alguien. Hace tres años.' },
+        { kind: 'narration', elenaPose: 'ausente',         text: '[Plano final: estás sentado a la mesa con dos copas. Una de las dos se evapora literalmente bajo tu mirada. Te queda la tuya. La levantas. La dejas. Tienes la conciencia limpia por primera vez en años.]' },
+        { kind: 'credit',    elenaPose: 'ausente',         text: 'UNDER SUSPICION — Final 1 / 2 · "Conciencia limpia"' }
       ]
     },
 
@@ -686,14 +686,14 @@ US.CASES['caso-08'] = {
       title: 'LA ALUCINACIÓN GANÓ',
       subtitle: 'Final · No pudiste verlo',
       blocks: [
-        { kind: 'narration', text: '[La pantalla de la cena se vuelve tensa. Elena se levanta de la mesa. Viene hacia ti. La cámara se sacude. Por un momento crees que ella era la asesina. Que tú no. Que has acusado bien fuera, en el caso, porque dentro de casa había otra cosa.]' },
-        { kind: 'dialogue',  who: 'Elena',    text: 'Roberto. Roberto, por favor. Una vez más, mírame.' },
-        { kind: 'narration', text: '[Corte a negro. Silencio largo. Demasiado largo.]' },
-        { kind: 'narration', text: '[Vuelve la imagen. Plano fijo, cámara estática, frontal. Una silueta cuelga de una viga del techo del salón. La silla está volcada bajo los pies. La mesa intacta con las dos copas. Sin Elena. Sin nadie.]' },
-        { kind: 'narration', text: '[En la mesa, la grabadora antigua se ha quedado encendida. Reproduce en bucle una voz que ya conoces:]' },
-        { kind: 'dialogue',  who: 'Grabadora', text: 'Mañana hablamos, Elena. Mañana hablamos. Mañana hablamos. Mañana...' },
-        { kind: 'narration', text: '[La alucinación ganó. Te has suicidado solo. Elena nunca estuvo ahí esta noche. Nunca estuvo ahí desde hace tres años.]' },
-        { kind: 'credit',    text: 'UNDER SUSPICION — Final 2 / 2 · "La alucinación ganó"' }
+        { kind: 'narration', elenaPose: 'preocupada', text: '[La pantalla de la cena se vuelve tensa. Elena se levanta de la mesa. Viene hacia ti. La cámara se sacude. Por un momento crees que ella era la asesina. Que tú no. Que has acusado bien fuera, en el caso, porque dentro de casa había otra cosa.]' },
+        { kind: 'dialogue',  elenaPose: 'preocupada', who: 'Elena',    text: 'Roberto. Roberto, por favor. Una vez más, mírame.' },
+        { kind: 'narration', elenaPose: 'ausente',    text: '[Corte a negro. Silencio largo. Demasiado largo.]' },
+        { kind: 'narration', elenaPose: 'ausente',    text: '[Vuelve la imagen. Plano fijo, cámara estática, frontal. Una silueta cuelga de una viga del techo del salón. La silla está volcada bajo los pies. La mesa intacta con las dos copas. Sin Elena. Sin nadie.]' },
+        { kind: 'narration', elenaPose: 'ausente',    text: '[En la mesa, la grabadora antigua se ha quedado encendida. Reproduce en bucle una voz que ya conoces:]' },
+        { kind: 'dialogue',  elenaPose: 'ausente',    who: 'Grabadora', text: 'Mañana hablamos, Elena. Mañana hablamos. Mañana hablamos. Mañana...' },
+        { kind: 'narration', elenaPose: 'ausente',    text: '[La alucinación ganó. Te has suicidado solo. Elena nunca estuvo ahí esta noche. Nunca estuvo ahí desde hace tres años.]' },
+        { kind: 'credit',    elenaPose: 'ausente',    text: 'UNDER SUSPICION — Final 2 / 2 · "La alucinación ganó"' }
       ]
     }
   }

@@ -79,12 +79,12 @@
 
 **Naming al guardar**:
 ```
-assets/img/suspects/Elena_neutral.png              (REGENERAR — sustituye al actual, será la maestra)
-assets/img/suspects/Elena_calida.png               (NUEVO — tono casual, cenas 1-2)
-assets/img/suspects/Elena_preocupada.png           (NUEVO — tono preocupada, cenas 3-7)
-assets/img/suspects/Elena_confrontacional.png      (NUEVO — tono confrontacional, cenas 6-8)
-assets/img/suspects/Elena_despedida.png            (NUEVO — final bueno C8)
-assets/img/suspects/Elena_ausente.png              (NUEVO — final malo C8)
+assets/img/suspects/Elena-Neutral.png              (maestra — ya producida)
+assets/img/suspects/Elena-Calida.png               (tono casual, cenas 1-2 — ya producida)
+assets/img/suspects/Elena-Preocupada.png           (tono preocupada, cenas 3-7 — ya producida)
+assets/img/suspects/Elena-Confrontacional.png      (tono confrontacional, cenas 6-8 — ya producida)
+assets/img/suspects/Elena-Despedida.png            (final bueno C8 — ya producida)
+assets/img/suspects/Elena-Ausente.png              (final malo C8, comedor vacío — ya producida)
 
 assets/img/suspects/Caso8/Retrato_Victima_caso8.png          (NUEVO — víctima archivo)
 assets/img/suspects/Caso8/Sospechosos/FelipeSaiz-Neutral.png
