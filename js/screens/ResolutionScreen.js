@@ -143,7 +143,12 @@ US.ResolutionScreen = class ResolutionScreen {
 
   _renderAccusation(container) {
     const c = this.engine.getCase();
-    const suspects = this.engine.getSuspects();
+    const allSuspects = this.engine.getSuspects();
+    // Gate condicional: en el caso 8 el 4º sospechoso (el propio detective)
+    // solo aparece como opción acusable si los ejes y las flags acumuladas
+    // en las cenas previas lo permiten. Si no, se le filtra del dropdown
+    // para forzar una acusación errónea → ruta del final malo.
+    const suspects = allSuspects.filter(s => this._isSuspectUnlocked(s.id, c));
     const hasAccomplice = !!c.solution.who2;
 
     container.innerHTML = `
@@ -236,5 +241,33 @@ US.ResolutionScreen = class ResolutionScreen {
     const result = this.engine.resolveCase(who, how, why, who2);
     this.ui._lastResult = result;
     this.ui.showScreen('dinner');
+  }
+
+  /**
+   * Decide si un sospechoso aparece como opción acusable. Por defecto sí.
+   * En el caso 8, `gateUnlock[suspectId]` puede exigir umbrales de ejes y
+   * un mínimo de flags de memoria para que el detective aparezca como
+   * cuarta tarjeta. Si MetaStore no está disponible, se asume desbloqueado
+   * (modo libre / debug).
+   */
+  _isSuspectUnlocked(suspectId, caseData) {
+    const gate = caseData.gateUnlock && caseData.gateUnlock[suspectId];
+    if (!gate) return true;
+    if (!US.MetaStore || typeof US.MetaStore.get !== 'function') return true;
+
+    const meta = US.MetaStore.get();
+    const axes = gate.requireAxes || {};
+    for (const eje of ['sinceridad', 'integridad', 'lucidez']) {
+      if (typeof axes[eje] === 'number' && (meta[eje] || 0) < axes[eje]) return false;
+    }
+
+    if (typeof gate.requireFlagCount === 'number') {
+      const haveAny = gate.requireFlagsAny;
+      const count = haveAny
+        ? haveAny.filter(f => meta.memoria && meta.memoria[f]).length
+        : Object.keys(meta.memoria || {}).filter(k => meta.memoria[k]).length;
+      if (count < gate.requireFlagCount) return false;
+    }
+    return true;
   }
 };

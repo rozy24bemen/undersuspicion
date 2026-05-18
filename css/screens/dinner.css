@@ -418,3 +418,33 @@
   text-align: center;
   margin-bottom: 8px;
 }
+
+/* ── ENDING CINEMATIC (caso 8) ────────────────────── */
+/* La fase 'ending' del DinnerPanel renderiza una cinemática de bloques.
+   Se aprovecha el mismo .dinner-panel__line pero el contenido alterna
+   entre diálogo ("HABLA — texto") y narración ("[texto]"). El header
+   muestra el título del ending en lugar de "CIERRE". */
+
+.dinner-panel__phase {
+  text-transform: uppercase;
+}
+
+/* Cuando el header empieza por "EL DETECTIVE SE ENTREGA" o
+   "LA ALUCINACIÓN GANÓ" estamos en cinemática final: ponemos el panel
+   en un tono más sombrío y la línea con más aire para que respire. */
+.dinner-panel:has(.dinner-panel__phase:is([data-ending="good"], [data-ending="bad"])) .dinner-panel__line,
+.dinner-panel__line.dinner-panel__line--ending {
+  font-size: 14px;
+  line-height: 1.75;
+  background: rgba(8, 4, 2, .85);
+  color: #f0e6cc;
+  border-bottom-color: #1a0e04;
+  padding: 22px 20px;
+  min-height: 120px;
+  animation: dinner-ending-fade .9s ease forwards;
+}
+
+@keyframes dinner-ending-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

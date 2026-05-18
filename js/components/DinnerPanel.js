@@ -29,6 +29,13 @@ US.DinnerPanel = class DinnerPanel {
     this.personal      = this._pickPersonal(caseData);
     this.veredictoNota = this._veredictoLinea(caseResult);
 
+    // Final de juego (caso 8). Si el caso define `endings`, se intercala una
+    // fase 'ending' tras la fase 'personal' que reproduce una cinemática de
+    // bloques narration/dialogue. El cierre del banco global se omite porque
+    // el final propio del caso reemplaza el "cierre genérico".
+    this.ending           = this._pickEnding(caseData, caseResult);
+    this.endingBlockIdx   = 0;
+
     this.phase       = 'apertura';
     this.exchangeIdx = 0;
     this.replica     = null;
@@ -40,12 +47,16 @@ US.DinnerPanel = class DinnerPanel {
     const panel = this.root.querySelector('#dinner-panel');
     if (!panel) return;
 
+    const isEnding = this.phase === 'ending';
+    const endingKey = isEnding && this.ending && this.ending.id && /good/i.test(this.ending.id) ? 'good' : (isEnding ? 'bad' : '');
+    const lineCls = isEnding ? 'dinner-panel__line dinner-panel__line--ending' : 'dinner-panel__line';
+
     panel.innerHTML = `
       <div class="dinner-panel__header">
-        <span class="dinner-panel__phase">${this._phaseLabel()}</span>
+        <span class="dinner-panel__phase" ${endingKey ? `data-ending="${endingKey}"` : ''}>${this._phaseLabel()}</span>
         <span class="dinner-panel__caseRef">${this.ui._esc(this.caseData.subtitle || '')}</span>
       </div>
-      <div class="dinner-panel__line" id="dinner-line">${this.ui._esc(this._currentLine())}</div>
+      <div class="${lineCls}" id="dinner-line">${this.ui._esc(this._currentLine())}</div>
       <div class="dinner-panel__body" id="dinner-body"></div>
     `;
 
@@ -60,6 +71,7 @@ US.DinnerPanel = class DinnerPanel {
       repaso:    'SOBRE EL CASO',
       gancho:    'SOBRE EL CASO',
       personal:  'ELLA PREGUNTA',
+      ending:    this.ending ? (this.ending.title || 'FINAL') : 'FINAL',
       cierre:    'CIERRE',
       done:      'CIERRE'
     })[this.phase] || '';
@@ -73,10 +85,19 @@ US.DinnerPanel = class DinnerPanel {
       case 'repaso':    return this._resolveLinea(this.repaso[this.exchangeIdx]);
       case 'gancho':    return this._resolveLinea(this.gancho);
       case 'personal':  return this._resolveLinea(this.personal[this.exchangeIdx]);
+      case 'ending':    return this._currentEndingLine();
       case 'cierre':    return this._pickCierre();
       case 'done':      return '';
       default:          return '';
     }
+  }
+
+  _currentEndingLine() {
+    if (!this.ending || !Array.isArray(this.ending.blocks)) return '';
+    const b = this.ending.blocks[this.endingBlockIdx];
+    if (!b) return '';
+    if (b.kind === 'dialogue') return (b.who ? b.who.toUpperCase() + ' — ' : '') + b.text;
+    return b.text || '';
   }
 
   _currentExchange() {
@@ -108,6 +129,16 @@ US.DinnerPanel = class DinnerPanel {
       body.innerHTML = `<button class="btn dinner-panel__continue" data-action="dinner-continue">CONTINUAR</button>`;
       body.querySelector('[data-action="dinner-continue"]')
         .addEventListener('click', () => this._advance());
+      return;
+    }
+
+    if (this.phase === 'ending') {
+      const isLast = this.ending && Array.isArray(this.ending.blocks)
+        && this.endingBlockIdx >= this.ending.blocks.length - 1;
+      const label = isLast ? 'TERMINAR' : 'CONTINUAR';
+      body.innerHTML = `<button class="btn dinner-panel__continue" data-action="dinner-continue">${label}</button>`;
+      body.querySelector('[data-action="dinner-continue"]')
+        .addEventListener('click', () => this._advanceEnding());
       return;
     }
 
@@ -248,8 +279,21 @@ US.DinnerPanel = class DinnerPanel {
         if (this.exchangeIdx + 1 < this.personal.length) {
           this.exchangeIdx += 1;
         } else {
-          this.phase = 'cierre';
+          // Si el caso tiene cinemática de final propia (caso 8), saltamos
+          // el cierre genérico del banco global y enlazamos con la cinemática.
+          if (this.ending) {
+            this.phase = 'ending';
+            this.endingBlockIdx = 0;
+          } else {
+            this.phase = 'cierre';
+          }
         }
+        break;
+
+      case 'ending':
+        // El avance de bloques de la cinemática se maneja en _advanceEnding().
+        // Cuando se llega aquí desde _stepPhase es porque la cinemática terminó.
+        this.phase = 'done';
         break;
 
       case 'cierre':
@@ -383,8 +427,77 @@ US.DinnerPanel = class DinnerPanel {
 
   _veredictoLinea(result) {
     if (!result) return '';
+    if (this.ending) {
+      // En el caso final no hablamos de "rating" — el veredicto es el final.
+      const isGood = this.ending.id && /good/i.test(this.ending.id);
+      return isGood
+        ? 'Caso cerrado. Te entregaste tú mismo.'
+        : 'Caso sin cerrar. La verdad nunca salió de este piso.';
+    }
     if (result.allCorrect)    return 'Caso resuelto. Lo cogieron gracias a ti.';
     if (result.correct.who)   return 'Caso cerrado a medias. El nombre correcto, el resto no.';
     return 'Caso sin cerrar. El culpable sigue fuera.';
+  }
+
+  // ── Endings (caso 8) ─────────────────────────────
+
+  /**
+   * Avanza un bloque de la cinemática final. Si era el último bloque,
+   * registra telemetría y pasa la fase a 'done' para que _renderBody
+   * pinte el botón de salida + autosave + marca de caso completado.
+   */
+  _advanceEnding() {
+    if (!this.ending || !Array.isArray(this.ending.blocks)) {
+      this.phase = 'done';
+      this.render();
+      return;
+    }
+    if (this.endingBlockIdx < this.ending.blocks.length - 1) {
+      this.endingBlockIdx += 1;
+      this.render();
+      return;
+    }
+    // Fin de la cinemática.
+    if (US.Telemetry) {
+      US.Telemetry.log('ending-shown', {
+        caseId:   this.caseData.id,
+        endingId: this.ending.id || null,
+        title:    this.ending.title || null
+      });
+    }
+    this._advance();
+  }
+
+  /**
+   * Elige qué ending mostrar (caso 8) en función de la acusación, los
+   * ejes y las flags acumuladas. Devuelve null si el caso no tiene
+   * cinemáticas finales (cualquier caso anterior).
+   */
+  _pickEnding(caseData, caseResult) {
+    const endings = caseData && caseData.endings;
+    if (!endings || (!endings.good && !endings.bad)) return null;
+
+    const good = endings.good;
+    if (good && this._meetsEndingRequirements(good, caseResult)) return good;
+    return endings.bad || null;
+  }
+
+  _meetsEndingRequirements(ending, caseResult) {
+    if (!ending) return false;
+    if (ending.requireAccusedWho && (!caseResult || caseResult.accusedWho !== ending.requireAccusedWho)) {
+      return false;
+    }
+    if (!US.MetaStore || typeof US.MetaStore.get !== 'function') return true;
+
+    const meta = US.MetaStore.get();
+    const axes = ending.requireAxes || {};
+    for (const eje of ['sinceridad', 'integridad', 'lucidez']) {
+      if (typeof axes[eje] === 'number' && (meta[eje] || 0) < axes[eje]) return false;
+    }
+    if (typeof ending.requireFlagCount === 'number') {
+      const count = Object.keys(meta.memoria || {}).filter(k => meta.memoria[k]).length;
+      if (count < ending.requireFlagCount) return false;
+    }
+    return true;
   }
 };
