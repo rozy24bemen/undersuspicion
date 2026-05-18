@@ -161,8 +161,46 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
 > regenerarla con la pose maestra del bloque siguiente, y a partir de ahí
 > todas las demás poses la adjuntan como `[ATTACH approved Elena_neutral.png
 > as reference image]`. Cara, peinado, pendientes y complexión idénticos en
-> TODAS las poses; sólo cambian expresión, gesto, ropa y atmósfera según
-> pose.
+> TODAS las poses.
+>
+> ### ⚠️ WARDROBE LOCK — vestuario INMUTABLE en las 5 poses
+>
+> Las 5 poses de Elena (neutral / cálida / preocupada / confrontacional /
+> despedida) llevan **EXACTAMENTE el mismo vestuario**:
+>
+> - **Cuello vuelto de lana granate (burgundy / deep wine red)**, textura
+>   de punto a mano visible, mangas completas a la muñeca
+> - **Falda lápiz de lana gris antracita (charcoal grey)**, talle alto
+> - **Pendientes perla pequeños** en las dos orejas
+> - **Alianza de oro fina** en el anular izquierdo
+> - **Pelo castaño chocolate** ondas media melena, suelto
+> - Sin collares, sin pañuelos, sin pulseras, sin cárdigans encima
+>
+> Razón: en las cenas con tonos mixtos (casos 3-7), el motor cambia la pose
+> de Elena pregunta a pregunta según el tono. Si cada pose tuviera vestuario
+> distinto, Elena se cambiaría de ropa mid-conversación — efecto cómico que
+> rompe la inmersión. Además, en términos narrativos, **el vestuario
+> inmutable a lo largo de 8 casos es un guiño visual a la alucinación**:
+> Elena lleva 3 años muerta y el detective la ve siempre igual. Que jamás
+> se cambie de ropa es un síntoma sutil del spoiler estructural.
+>
+> Lo que SÍ cambia entre poses:
+> - **Expresión facial**: cálida-sonrisa pequeña / preocupada-frunce sutil
+>   / confrontacional-labios apretados sin parpadear / despedida-sonrisa
+>   triste que llega a los ojos
+> - **Posición y gesto de manos**: mano sobre clavícula + copa / manos
+>   entrelazadas frotándose pulgares / manos sobre respaldo de silla /
+>   palma alzada en despedida
+> - **Postura del cuerpo**: relajada y angulada / peso en una pierna /
+>   hombros cuadrados / en el umbral medio girada
+> - **Atmósfera y luz**: ámbar cálido y suave / ámbar denso / luz más
+>   esculpida y candela más viva / luz dorada irreal trasera
+> - **Detalles del fondo**: copa servida / copa intacta / copa servida y
+>   candela central / sin copas, puerta dorada al pasillo
+>
+> Sólo la pose `ausente` rompe esta regla (no hay personaje en el frame —
+> mesa vacía, silla retirada). Y la víctima archivo policial es un retrato
+> aparte que no se rige por estas reglas.
 
 ---
 
@@ -378,11 +416,17 @@ same hair, same earrings, same complexion as the cálida pose):
 - Skin: same warm Mediterranean complexion, but the area under her
   eyes is just slightly darker — she also is not sleeping well
 
-Clothing: a mustard-yellow soft cotton blouse with small buttons up
-the front, top button open, sleeves rolled to mid-forearm, a slim
-gold chain at her neck — domestic warmth still present but quieter,
-less "celebrating", more "watching". Same gold wedding band, same
-pearl earrings.
+Clothing (WARDROBE LOCK — identical to cálida/neutral master):
+the SAME burgundy (deep wine red) wool turtleneck sweater as the
+neutral master and cálida pose, hand-knitted texture, sleeves at
+full length to the wrist. The SAME high-waisted charcoal-grey wool
+pencil skirt. The SAME small pearl stud earrings in both ears. The
+SAME thin gold wedding band on the left ring finger. NO scarf, NO
+necklace, NO bracelets, NO cardigan over the turtleneck — strictly
+the same outfit as the master Elena. CRITICAL: do NOT add a mustard
+blouse, a yellow top, an open collar, a gold chain at the neck or
+any other variation. The wardrobe of Elena is FROZEN across all
+five dinner poses by design.
 
 Pose & expression (PREOCUPADA / WORRIED): standing with weight on
 her left leg, body angled slightly toward the detective but the head
@@ -444,11 +488,19 @@ same hair, same earrings, same complexion):
   the lower lid, as if she has cried earlier in the evening and washed
   her face
 
-Clothing: a dark charcoal-grey wool cardigan over a plain off-white
-blouse buttoned to the throat, no decorative scarf, the gold wedding
-band visible on her left hand, no other jewellery besides the small
-pearl studs. Slightly more formal than the warmer poses — the visual
-of a woman who has decided this is a conversation, not a dinner.
+Clothing (WARDROBE LOCK — identical to cálida/neutral master):
+the SAME burgundy (deep wine red) wool turtleneck sweater, hand-
+knitted texture, sleeves at full length to the wrist. The SAME high-
+waisted charcoal-grey wool pencil skirt. The SAME small pearl stud
+earrings, the SAME thin gold wedding band visible on the left ring
+finger. CRITICAL: do NOT add a cardigan over the turtleneck, do
+NOT replace with an off-white blouse, do NOT add a scarf, do NOT
+add additional jewellery. The wardrobe is the SAME outfit Elena
+wore at the start of the dinner — what has changed is her body
+language and her gaze, NOT her clothes. The formality of this
+scene comes from her POSTURE (shoulders squared, hair pulled
+tightly behind both ears as if she has composed herself before
+this conversation), not from a wardrobe change.
 
 Pose & expression (CONFRONTACIONAL / DIRECT): standing very upright,
 shoulders squared toward the detective for the first time in any pose,
@@ -518,14 +570,20 @@ same hair, same earrings):
 - The face is fully solid and clear — NOT transparent, NOT pale,
   NOT ghostly in the cheap horror sense
 - ONLY the very outer contour of her body (along the edges of her
-  cardigan and hair) shows the faintest soft fade into the golden
-  backlight — like a person photographed against a window at sunset
-  whose silhouette dissolves at the edges only
+  turtleneck shoulders and hair) shows the faintest soft fade into
+  the golden backlight — like a person photographed against a
+  window at sunset whose silhouette dissolves at the edges only
 
-Clothing: the same dark charcoal cardigan from the confrontational
-pose over the off-white blouse, gold wedding band, pearl studs —
-visually anchoring this as the SAME woman who confronted him at
-the start of the dinner, not a different costume
+Clothing (WARDROBE LOCK — identical to cálida/neutral/preocupada/
+confrontacional master): the SAME burgundy (deep wine red) wool
+turtleneck sweater, hand-knitted texture, sleeves at full length
+to the wrist. The SAME high-waisted charcoal-grey wool pencil
+skirt. The SAME small pearl stud earrings, the SAME thin gold
+wedding band visible on the left ring finger. CRITICAL: do NOT
+add a cardigan, do NOT change to a goodbye-dress, do NOT swap to
+funeral attire — visually anchoring this as the SAME woman she has
+been across all eight dinners. The departure is in her face and
+her gesture, not in her clothes.
 
 Pose & expression (DESPEDIDA / GOODBYE): standing in the doorway
 to the corridor, one foot already across the threshold, body
