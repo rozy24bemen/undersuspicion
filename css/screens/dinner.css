@@ -243,6 +243,15 @@
   filter: drop-shadow(0 0 24px rgba(212, 168, 69, .25));
 }
 
+/* La pose `ausente` (final malo C8) NO es un retrato de Elena: es el
+   comedor 16:9 vacío con la sombra colgada. Quitamos el halo dorado
+   (pensado para silueta humana) y dejamos que se expanda a ancho
+   completo del slot, manteniendo el límite de altura. */
+.dinner-figure[data-pose="ausente"] img {
+  max-width: 100%;
+  filter: none;
+}
+
 .dinner-figure__silhouette {
   width: 180px;
   height: 280px;

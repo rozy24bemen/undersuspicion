@@ -74,6 +74,7 @@ US.DinnerPanel = class DinnerPanel {
       <div class="dinner-panel__body" id="dinner-body"></div>
     `;
 
+    this._updateElenaPose();
     this._renderBody();
   }
 
@@ -81,6 +82,52 @@ US.DinnerPanel = class DinnerPanel {
     if (this.phase !== 'ending' || !this.ending || !Array.isArray(this.ending.blocks)) return null;
     const b = this.ending.blocks[this.endingBlockIdx];
     return b && b.kind === 'scene' && b.image ? b : null;
+  }
+
+  // ── Pose de Elena (sprite en el slot derecho) ───────
+  // Escoge la pose según fase + tono activo y actualiza #dinner-elena.
+  // Fases neutras (apertura/repaso/gancho/cierre) → 'neutral'.
+  // Fase 'personal' → tono de la pregunta actual.
+  // Fase 'ending' → `elenaPose` del bloque actual, o fallback por id de ending.
+  _updateElenaPose() {
+    const G = US.CENAS_GLOBAL || {};
+    const esposa = G.esposa || {};
+    const portraits = esposa.portraits || {};
+    if (!portraits.neutral) return;
+
+    const pose = this._pickElenaPose();
+    const src = portraits[pose] || portraits.neutral;
+
+    const figure = this.root.querySelector('#dinner-figure');
+    const img    = this.root.querySelector('#dinner-elena');
+    if (!figure || !img) return;
+
+    if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+    figure.setAttribute('data-pose', pose);
+  }
+
+  _pickElenaPose() {
+    if (this.phase === 'ending') {
+      // Si el bloque actual marca elenaPose, mandar.
+      const block = this.ending && Array.isArray(this.ending.blocks)
+        ? this.ending.blocks[this.endingBlockIdx]
+        : null;
+      if (block && block.elenaPose) return block.elenaPose;
+      // Fallback por id de ending: A (despedida limpia) o legacy good → 'despedida'.
+      // B/C/D (cobardía, te pillan, suicidio) o legacy bad → 'ausente'.
+      if (this.ending && this.ending.id) {
+        if (/ending-A|good/i.test(this.ending.id)) return 'despedida';
+        return 'ausente';
+      }
+      return 'neutral';
+    }
+
+    if (this.phase === 'personal') {
+      const q = this.personal && this.personal[this.exchangeIdx];
+      if (q && q.tono) return q.tono;
+    }
+
+    return 'neutral';
   }
 
   // ── Phase logic ──────────────────────────────────

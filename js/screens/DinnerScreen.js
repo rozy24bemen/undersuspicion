@@ -15,6 +15,9 @@ US.DinnerScreen = class DinnerScreen {
     const esposa = (US.CENAS_GLOBAL && US.CENAS_GLOBAL.esposa) || { nombre: 'Ella' };
     const result = this.ui._lastResult;
 
+    const portraits = esposa.portraits || {};
+    const initialSrc = portraits.neutral || '';
+
     container.innerHTML = `
       <nav class="game-nav dinner-nav">
         <div class="game-nav__title">UNDER SUSPICION · CENA EN CASA</div>
@@ -33,9 +36,9 @@ US.DinnerScreen = class DinnerScreen {
         </div>
         <div class="dinner-room">
           <div class="dinner-room__scene">
-            <div class="dinner-figure" id="dinner-figure">
-              ${esposa.portrait
-                ? `<img src="${this.ui._esc(esposa.portrait)}" alt="${this.ui._esc(esposa.nombre)}">`
+            <div class="dinner-figure" id="dinner-figure" data-pose="neutral">
+              ${initialSrc
+                ? `<img id="dinner-elena" src="${this.ui._esc(initialSrc)}" alt="${this.ui._esc(esposa.nombre)}">`
                 : `<div class="dinner-figure__silhouette"></div>`}
             </div>
           </div>

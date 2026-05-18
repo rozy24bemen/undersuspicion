@@ -9,10 +9,20 @@ var US = US || {};
 
 US.CENAS_GLOBAL = {
 
-  // Identidad de la mujer (usar placeholder hasta que haya retrato).
+  // Identidad de la mujer. `portraits` mapea pose → ruta. El tono activo
+  // de cada pregunta meta selecciona la pose en DinnerPanel; el resto de
+  // fases (apertura, repaso, gancho, cierre) usa `neutral`. Los finales
+  // del Caso 8 marcan poses específicas en sus bloques (`elenaPose`).
   esposa: {
     nombre: 'Elena',
-    portrait: null
+    portraits: {
+      neutral:         'assets/img/suspects/Elena-Neutral.png',
+      casual:          'assets/img/suspects/Elena-Calida.png',
+      preocupada:      'assets/img/suspects/Elena-Preocupada.png',
+      confrontacional: 'assets/img/suspects/Elena-Confrontacional.png',
+      despedida:       'assets/img/suspects/Elena-Despedida.png',
+      ausente:         'assets/img/suspects/Elena-Ausente.png'
+    }
   },
 
   // Tonos permitidos por nº de caso (1–8). Arco narrativo.
