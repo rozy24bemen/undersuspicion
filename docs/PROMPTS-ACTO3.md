@@ -2612,45 +2612,76 @@ multiple hands beyond two, gloves, jewelry beyond a single thin gold
 wedding band, painted nails, cartoon.
 ```
 
-### A4 — La copa que se evapora
+### A4 — La entrega
 
 > **Texto bajo la imagen:**
 > *Detective al teléfono:* "Soy el inspector Roberto Mora. Vengo a entregarme. Maté a mi mujer hace tres años. Estaré esperando en la puerta del portal."
-> [Cuando cuelgas, una de las dos copas se evapora bajo tu mirada. Te queda la tuya. Llaman al telefonillo.]
+> [Cuelgas. Bajas las escaleras. Empujas la puerta. Cuando llegan, levantas las manos.]
 > **UNDER SUSPICION — Final 1 / 4 · "Despedida"**
 
 ```
-Cinematic static frontal shot, 16:9 horizontal aspect ratio. Wide
-shot of the dining table at first dawn light. NO people in frame.
+Cinematic static shot, 16:9 horizontal aspect ratio. Medium shot from
+BEHIND the protagonist, his back centered in the frame, both arms
+raised high above his head in surrender, palms open and showing.
 
-Composition: dead-center frontal symmetry. One filled wine glass on
-the near side of the table solid and sharp. A second wine glass on
-the far side mid-dissolve into rising soft mist, faint enough that
-the silhouette is still readable as a wine glass but transparent
-enough that the wallpaper behind it is partially visible through it.
-The wooden chair across the table empty and very slightly pushed back.
+Subject (foreground, seen from behind, slightly off-center to lower
+frame): Roberto Mora, mid-fifties, short dark hair with grey at the
+temples, wearing a worn taupe wool overcoat over a white shirt. His
+back fills the lower-center third of the frame. Both arms raised
+straight up, hands wide open, fingers spread, palms toward the
+police. The wrinkled tail of an envelope (his written confession)
+pokes out of his coat's back pocket. He is calm — shoulders dropped,
+not tense.
 
-Background: same dining room as A1, sideboard, family photos, but
-now bathed in two competing light sources crossing each other.
+On the wet asphalt at his feet, slightly to the left: a vintage
+cream-colored rotary telephone lying on its side, receiver
+disconnected, cable trailing back toward the open building door
+behind him — the phone he used to call himself in. Symbolic, NOT
+realistic — a painted noir object, like in Disco Elysium.
 
-Lighting: cold pale blue dawn light streaming horizontally from a
-window on the left, AND lingering warm tungsten lamp from above
-catching the table from the right. The two lights cross over the
-dissolving glass at the center of the frame. The mist where the
-glass dissolves catches BOTH lights, picking up gold and blue.
+Middle ground: two Spanish national police patrol cars angled across
+the narrow street, headlights on, red and blue lightbars active but
+painted as soft glowing halos rather than crisp LEDs. Two uniformed
+officers in dark blue advancing on foot toward Roberto from the
+center-right, one with handcuffs visible in hand, the other with hand
+raised in a "halt" gesture, faces neutral and professional — not
+hostile, not heroic.
+
+Background: yellow police tape (cinta policial) stretched across the
+street from a lamppost to a parked car, painted as ribbons of yellow
+brushwork. Behind the tape on the right side of the frame, a small
+crowd of press photographers, six or seven figures, cameras raised
+toward Roberto, painted as silhouettes with a few flash bursts
+catching their faces. On the left, the stone façade and lit-up
+hallway of Roberto's apartment building, the heavy wooden portal
+door still ajar behind him, warm amber light spilling out.
+
+Lighting: cold pale blue dawn light flooding the street from camera
+front-left. Warm tungsten amber light from inside Roberto's portal
+behind him, edging his silhouette and the back of his head in gold.
+Red and blue police lights wash the wet asphalt in painterly
+reflections — long smudges of color, not crisp. The two natural
+lights (blue dawn / amber portal) cross on Roberto's raised palms —
+half cold, half warm — the same crossed light used elsewhere in the
+A ending.
 
 Art style: digital oil painting illustration, Disco Elysium tradition,
-semi-realistic. Soft painterly brush strokes. NOT cel-shading, NOT
-flat, NOT anime, NOT 3D, NOT photorealistic.
+semi-realistic. Visible painterly brush strokes, smooth volumetric
+shading on cloth and skin, slightly impressionistic on background
+crowd and reflections. NOT photorealistic, NOT cel-shading, NOT flat,
+NOT anime, NOT 3D render, NOT photograph.
 
-Atmosphere: melancholic but peaceful. The end of the night. Something
-has been let go.
+Atmosphere: surrender as relief, not defeat. The whole street has
+come to watch one man finally tell the truth. Conciencia limpia.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: people, characters, hands, faces, horror, gore, blood,
-weapons, supernatural halos, ghost faces in the mist, religious
-iconography, bright sunshine, midday, neon, modern objects, smartphones.
+NEGATIVE: photorealistic, photograph, 3D render, octane, unreal
+engine, sharp LED lights, drawn weapons, guns pointed, gore, blood,
+wounds, horror, ghosts, the protagonist's face visible (must be from
+behind only), bright midday sunshine, modern smartphones held up by
+the crowd (only old press cameras), neon advertising, anime, manga,
+chibi, cartoon, painted nails, jewelry on Roberto.
 ```
 
 ---
@@ -3067,46 +3098,65 @@ photorealistic horror, cheap jumpscare, multiple Elenas, halo, religious
 iconography, cartoon, anime, bright lighting.
 ```
 
-### D2 — La cuerda
+### D2 — El nudo
 
 > **Texto bajo la imagen:**
-> Te levantas. Llevas una silla debajo de la viga del techo del salón. Sigues sin entender que es tu mano la que ata el nudo. Crees que la mirada de reproche de Elena viene de fuera.
+> Sigues sin entender que es tu mano la que ata el nudo. Crees que la mirada de reproche de Elena viene de fuera.
 
 ```
-Low-angle cinematic shot, 16:9 horizontal aspect ratio. Camera placed
-at floor level looking up.
+Cinematic medium close-up shot, 16:9 horizontal aspect ratio. Camera
+placed across the dining table looking back at the protagonist seated
+on the opposite side. Tabletop level eye line.
 
-Composition: Roberto Mora in silhouette, standing on a wooden dining
-chair in the middle of the living room, arms raised tying a rope
-to an exposed dark wooden ceiling beam directly overhead. His face
-is in deep shadow, only his silhouette readable against the single
-hanging lamp. The rope is plain hemp. In the blurred foreground
-mid-ground: the dining table for two with two filled red wine
-glasses still untouched. Slightly visible in the background to
-the right: the cassette recorder on the table with its small red
-recording light glowing.
+Subject: Roberto Mora, mid-fifties, sitting at his own dining table.
+He looks down at his hands, which are working a length of plain hemp
+rope into a tangled knot on the wooden tabletop in front of him.
+His hands are tense, knuckles white, fingers moving in a methodical
+loop. The rope is a simple coil of rope, no loop formed, no noose,
+no specific shape — just rope being worked by hands.
 
-Background: living room walls in deep shadow, the exposed wooden
-ceiling beam dominating the upper third of frame.
+His face: this is the focus of the image. Sweat on his forehead.
+Wide, unfocused eyes staring at his own hands as if they belong to
+someone else. One eye twitches subtly. The corner of his mouth pulled
+into a thin, joyless half-smile that doesn't reach his eyes — the
+smile of a man who has stopped recognizing himself. His three-day
+stubble is darker on one cheek than the other. A thin trickle of
+sweat or tear at his right temple. NOT screaming. NOT crying. Just
+unraveling, in silence.
 
-Lighting: the single hanging lamp creates a hard backlight on
-Roberto, leaving him as a silhouette. The dining table is lit by
-the residual lamp light. NO other sources. Strong chiaroscuro.
+Composition: Roberto centered in the upper two thirds of the frame.
+His hands and the rope on the table fill the lower third. To his
+left on the table: a single red wine glass, still full. To his
+right: a small reel-to-reel cassette recorder with its tiny red REC
+light glowing.
+
+Background: same dining room as A1, deep shadow, wallpaper barely
+readable. Behind Roberto, the doorway to the hallway is a pure black
+rectangle. No ceiling beam in frame. No silhouettes. Just the dim
+room dissolving into dark.
+
+Lighting: single hanging overhead lamp casting a hard pool of warm
+amber light onto the table and on Roberto's face from above,
+creating heavy shadows under his brow and below his lower lip,
+making his eyes look hollow. Strong chiaroscuro. Everything outside
+the lamp's cone falls into deep umber shadow.
 
 Art style: digital oil painting illustration, Disco Elysium tradition,
-semi-realistic. Soft painterly brush strokes but with deep deep
-shadows. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
-photorealistic.
+semi-realistic. Heavy painterly brush strokes, deep volumetric
+shadows, the face rendered with the same painterly impasto used for
+Harry Du Bois portraits — psychological deterioration as texture.
+NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
 
-Atmosphere: fated, horrified-but-restrained. The act is being shown
-in preparation, NOT in completion. No graphic horror.
+Atmosphere: dissociation. A man no longer in command of his own
+hands. The horror is on his face, not on the rope.
 
 Style ID: undersuspi-noir-v1.
 
-NEGATIVE: completed hanging shown explicitly, face in close-up,
-crying face, screaming face, gore, blood, multiple ropes, multiple
-nooses, religious iconography, halo, ghost overlay, multiple bodies,
-cartoon, anime, daylight, neon.
+NEGATIVE: ceiling beam, noose formed, rope around neck, rope tied to
+anything, body hanging, body lifted, screaming mouth, demon eyes,
+white contact lenses, ghost overlay, blood, gore, wounds, religious
+iconography, halo, multiple Robertos, cartoon, anime, manga, chibi,
+daylight, neon, smartphone.
 ```
 
 ### D3 — Plano fijo
@@ -3202,7 +3252,7 @@ sunny, neon, cartoon, anime.
 assets/img/endings/A1.png  ·  La cena lúcida
 assets/img/endings/A2.png  ·  El cuarto del fondo (sin personas)
 assets/img/endings/A3.png  ·  La mano fría (detalle de manos)
-assets/img/endings/A4.png  ·  La copa que se evapora (sin personas)
+assets/img/endings/A4.png  ·  La entrega (Roberto en el portal al amanecer)
 
 assets/img/endings/B1.png  ·  La voz detrás de la nuca
 assets/img/endings/B2.png  ·  Las tres voces (grabadora close-up)
@@ -3215,13 +3265,13 @@ assets/img/endings/C3.png  ·  El portal con prensa
 assets/img/endings/C4.png  ·  La cuenta de los días (celda)
 
 assets/img/endings/D1.png  ·  La cara que grita sin sonido
-assets/img/endings/D2.png  ·  La cuerda
+assets/img/endings/D2.png  ·  El nudo (Roberto disociado en la mesa)
 assets/img/endings/D3.png  ·  Plano fijo (silueta colgada — RESTRAINED)
 assets/img/endings/D4.png  ·  Amanecer sin nadie
 ```
 
 **Orden de prioridad de producción** (si hay que cortar):
-1. **A4, D4** — los dos planos finales icónicos (copa que se evapora vs amanecer sin nadie). Son los frames que el jugador "se lleva" como recuerdo del juego.
+1. **A4, D4** — los dos planos finales icónicos (Roberto entregándose en el portal vs amanecer sin nadie). Son los frames que el jugador "se lleva" como recuerdo del juego.
 2. **A1, D3** — los dos pivotes narrativos (cena lúcida vs silueta colgada). Son los que cierran la historia emocionalmente.
 3. **C3, B4** — los dos finales "mecánicos" (portal con prensa vs coche patrulla). Si faltan, el jugador necesita entender visualmente la consecuencia.
 4. **B1, D1** — las dos imágenes de Elena hostil/silenciosa. Son las que más se desvían del style-bible amable de Elena, requieren más iteración.

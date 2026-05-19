@@ -10,7 +10,14 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\Roman\\\\Documents\\\\ROMAN\\\\UnderSuspi\" -Recurse -File | Where-Object {$_.Extension -in @\\(\".tscn\", \".gd\", \".html\", \".js\", \".tres\"\\)} | Select-Object -First 50 | ForEach-Object {$_.FullName})",
-      "Bash(dir \"c:\\\\Users\\\\Roman\\\\Documents\\\\ROMAN\\\\UnderSuspi\\\\assets\\\\img\\\\icons\")"
+      "Bash(dir \"c:\\\\Users\\\\Roman\\\\Documents\\\\ROMAN\\\\UnderSuspi\\\\assets\\\\img\\\\icons\")",
+      "Bash(dir \"assets\\\\img\\\\suspects\\\\Caso6\\\\Pruebas\")",
+      "Bash(dir \"assets\\\\img\\\\suspects\\\\Caso7\\\\Pruebas\")",
+      "Bash(git status *)",
+      "Bash(dir assets\\\\img\\\\icons /b)",
+      "Bash(python -c \"from PIL import Image; print\\('Pillow OK'\\)\")",
+      "Bash(python -c \"import rembg; print\\('rembg OK'\\)\")",
+      "Bash(python -c ' *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Roman\\Documents\\ROMAN\\UnderSuspi\\js"
