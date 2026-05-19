@@ -364,9 +364,15 @@ US.ModalManager = class ModalManager {
     if (US.audio) {
       US.audio.playSFX('contradiction-hit');
       // Sting musical largo encima del impacto seco — refuerzo del beat
-      // narrativo "lo has descubierto". Si suena demasiado, basta con
-      // bajar SFX en el modal de ajustes (afecta a los dos).
+      // narrativo "lo has descubierto". Recortado a los 5 primeros
+      // segundos con un fade-out corto para que no se mezcle con la
+      // música de juego cuando el jugador cierre el overlay.
       US.audio.playSFX('revelation-sting');
+      if (this._revelationTimer) clearTimeout(this._revelationTimer);
+      this._revelationTimer = setTimeout(() => {
+        if (US.audio) US.audio.stopSFX('revelation-sting', 300);
+        this._revelationTimer = null;
+      }, 5000);
     }
 
     // No diferenciamos visualmente las pistas falsas: el jugador debe deducir
@@ -429,6 +435,11 @@ US.ModalManager = class ModalManager {
   dismissContradiction() {
     const wasOpen = this.contradictionEl.classList.contains('active');
     this.contradictionEl.classList.remove('active');
+    // Cortar el sting de revelación al cerrar el overlay para que no se
+    // solape con la música de juego. Cancela también el auto-cut a 5s
+    // si seguía pendiente.
+    if (this._revelationTimer) { clearTimeout(this._revelationTimer); this._revelationTimer = null; }
+    if (US.audio) US.audio.stopSFX('revelation-sting', 200);
     this.ui._setSuspectMood('neutral', 0);
     this.ui.notebook.updateBadge();
     if (wasOpen && this.ui.tutorial) this.ui.tutorial.notify('contradiction-modal-closed', null);
