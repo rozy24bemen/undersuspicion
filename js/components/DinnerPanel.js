@@ -46,38 +46,169 @@ US.DinnerPanel = class DinnerPanel {
   }
 
   render() {
-    const panel = this.root.querySelector('#dinner-panel');
+    // Caso 8: a partir de la fase 'ending' (y mientras dura el wrap-up en
+    // 'done' con this.ending), la cinemática toma la pantalla completa:
+    // imagen 16:9 centrada arriba/centro, texto + botón debajo. El split
+    // mesa/Elena queda oculto. Ver `.dinner-ending` en dinner.css.
+    if (this._isFullscreenEnding()) {
+      this._renderFullscreenEnding();
+      return;
+    }
+    this._renderDinnerPanel();
+  }
+
+  _isFullscreenEnding() {
+    if (this.phase === 'ending') return true;
+    if (this.phase === 'done' && this.ending) return true;
+    return false;
+  }
+
+  _renderDinnerPanel() {
+    const panel   = this.root.querySelector('#dinner-panel');
+    const split   = this.root.querySelector('.dinner-split');
+    const overlay = this.root.querySelector('#dinner-ending');
+    if (overlay) { overlay.hidden = true; overlay.innerHTML = ''; }
+    if (split)   { split.hidden = false; }
     if (!panel) return;
-
-    const isEnding = this.phase === 'ending';
-    const endingKey = isEnding && this.ending && this.ending.match && this.ending.match.metrics
-      ? this.ending.match.metrics
-      : '';
-    const sceneBlock = this._currentSceneBlock();
-
-    const lineCls = isEnding
-      ? (sceneBlock ? 'dinner-panel__line dinner-panel__line--ending dinner-panel__line--scene'
-                    : 'dinner-panel__line dinner-panel__line--ending')
-      : 'dinner-panel__line';
-
-    const imageHtml = sceneBlock
-      ? `<img class="dinner-panel__ending-image" src="${this.ui._esc(sceneBlock.image)}" alt="">`
-      : '';
-
-    const lineStyle = sceneBlock ? ' style="white-space: pre-line"' : '';
 
     panel.innerHTML = `
       <div class="dinner-panel__header">
-        <span class="dinner-panel__phase" ${endingKey ? `data-ending="${endingKey}"` : ''}>${this._phaseLabel()}</span>
+        <span class="dinner-panel__phase">${this._phaseLabel()}</span>
         <span class="dinner-panel__caseRef">${this.ui._esc(this.caseData.subtitle || '')}</span>
       </div>
-      ${imageHtml}
-      <div class="${lineCls}" id="dinner-line"${lineStyle}>${this.ui._esc(this._currentLine())}</div>
+      <div class="dinner-panel__line" id="dinner-line">${this.ui._esc(this._currentLine())}</div>
       <div class="dinner-panel__body" id="dinner-body"></div>
     `;
 
     this._updateElenaPose();
     this._renderBody();
+  }
+
+  _renderFullscreenEnding() {
+    const split   = this.root.querySelector('.dinner-split');
+    const overlay = this.root.querySelector('#dinner-ending');
+    if (split)   { split.hidden = true; }
+    if (!overlay) return;
+    overlay.hidden = false;
+
+    const ending  = this.ending || {};
+    const block   = this._currentSceneBlock();
+    const isDone  = this.phase === 'done';
+    const isLast  = !isDone && ending && Array.isArray(ending.blocks)
+      && this.endingBlockIdx >= ending.blocks.length - 1;
+
+    const metricsKey = ending.match && ending.match.metrics ? ending.match.metrics : '';
+
+    const image   = block && block.image ? block.image : '';
+    const lineTxt = isDone ? '' : this._currentEndingLine();
+
+    overlay.setAttribute('data-ending', metricsKey || (ending.id || ''));
+
+    const headerHtml = `
+      <div class="dinner-ending__header">
+        <span class="dinner-ending__title">${this.ui._esc(ending.title || 'FINAL')}</span>
+        ${ending.subtitle ? `<span class="dinner-ending__subtitle">${this.ui._esc(ending.subtitle)}</span>` : ''}
+      </div>
+    `;
+
+    let stageHtml;
+    if (isDone) {
+      stageHtml = `
+        <div class="dinner-ending__stage dinner-ending__stage--done">
+          <div class="dinner-ending__veredicto">${this.ui._esc(this.veredictoNota || '')}</div>
+        </div>
+      `;
+    } else {
+      stageHtml = `
+        <div class="dinner-ending__stage">
+          ${image
+            ? `<img class="dinner-ending__image" src="${this.ui._esc(image)}" alt="">`
+            : ''}
+          <div class="dinner-ending__text">${this.ui._esc(lineTxt)}</div>
+        </div>
+      `;
+    }
+
+    let actionsHtml;
+    if (isDone) {
+      actionsHtml = this._buildDoneActionsHtml();
+    } else {
+      const label = isLast ? 'TERMINAR' : 'CONTINUAR';
+      actionsHtml = `
+        <div class="dinner-ending__actions">
+          <button class="btn dinner-ending__continue" data-action="dinner-ending-continue">${label}</button>
+        </div>
+      `;
+    }
+
+    overlay.innerHTML = headerHtml + stageHtml + actionsHtml;
+
+    if (isDone) {
+      this._wireDoneActions(overlay);
+    } else {
+      const btn = overlay.querySelector('[data-action="dinner-ending-continue"]');
+      if (btn) btn.addEventListener('click', () => this._advanceEnding());
+    }
+  }
+
+  /**
+   * Construye el HTML de las acciones del wrap-up post-cinemática (autosave,
+   * marca de caso completado, decisión de siguiente caso/menú). La lógica
+   * de qué botón mostrar replica _renderBody case 'cierre'/'done', adaptada
+   * al overlay full-screen.
+   */
+  _buildDoneActionsHtml() {
+    if (US.Progress && this.caseData && this.caseData.id) {
+      US.Progress.markCompleted(this.caseData.id);
+    }
+    if (US.SaveManager && US.SaveManager.getActiveSlot()) {
+      US.SaveManager.autosaveBetweenCases();
+      if (US.Telemetry) {
+        US.Telemetry.log('autosave', {
+          caseId: this.caseData.id,
+          slot:   US.SaveManager.getActiveSlot(),
+          phase:  'between-cases'
+        });
+      }
+    }
+
+    const nextId   = US.Progress ? US.Progress.getNext() : null;
+    const nextCase = nextId && US.CASES ? US.CASES[nextId] : null;
+    const allDone  = US.Progress && US.Progress.isAllCompleted();
+
+    let actionLabel;
+    if (nextCase) {
+      const num = this._caseNumberOf(nextId);
+      actionLabel = num ? `SIGUIENTE CASO · ${num}` : 'SIGUIENTE CASO';
+    } else if (allDone) {
+      actionLabel = 'VOLVER AL MENÚ · INVESTIGACIÓN COMPLETADA';
+    } else {
+      actionLabel = 'VOLVER AL MENÚ';
+    }
+    this._pendingDoneAction = { nextId: nextCase ? nextId : null, allDone };
+
+    return `
+      <div class="dinner-ending__actions">
+        <button class="btn btn--primary dinner-ending__exit" data-action="dinner-ending-exit">${this.ui._esc(actionLabel)}</button>
+      </div>
+    `;
+  }
+
+  _wireDoneActions(overlay) {
+    const btn = overlay.querySelector('[data-action="dinner-ending-exit"]');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const action = this._pendingDoneAction || {};
+      if (action.nextId) {
+        if (US.TutorialOverlay && typeof US.TutorialOverlay.markCompleted === 'function') {
+          US.TutorialOverlay.markCompleted();
+        }
+        this.ui.engine.loadCase(action.nextId);
+        this.ui.showScreen('intro');
+      } else {
+        this.ui.showScreen('menu');
+      }
+    });
   }
 
   _currentSceneBlock() {

@@ -32,6 +32,16 @@ SUSPECT_DIRS = [
 ELENA_DIR = ROOT / "assets" / "img" / "suspects"
 ELENA_EXCLUDE = {"Elena-Despedida.png", "Elena-Ausente.png"}
 
+# Excepciones globales por nombre de archivo: estos retratos traen su
+# escena horneada (recibidor con espejo, console table, lámpara) y no
+# son simples retratos sobre fondo neutro. rembg les eliminaría la
+# escena que es parte intencional del asset.
+GLOBAL_EXCLUDE = {
+    "RobertoMora-Neutral.png",
+    "RobertoMora-Pensativo.png",
+    "RobertoMora-Nervioso.png",
+}
+
 def collect_elena_portraits():
     """Devuelve los Elena-*.png que SÍ se procesan (idle + hablando)."""
     if not ELENA_DIR.is_dir():
@@ -61,6 +71,9 @@ def main():
             files.extend(sorted(d.glob("*.png")))
     if not case_filter:
         files.extend(collect_elena_portraits())
+
+    # Excluir retratos con escena horneada (ej. Roberto Mora con su recibidor)
+    files = [f for f in files if f.name not in GLOBAL_EXCLUDE]
 
     print(f"Procesando {len(files)} imágenes...")
     failures = []

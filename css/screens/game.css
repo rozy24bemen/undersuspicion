@@ -379,13 +379,32 @@
 }
 
 /* Override para la "cuarta tarjeta" — Roberto Mora interrogándose en
-   el espejo del recibidor de su piso. El escenario propio incluye el
-   marco vacío donde se compositará el retrato (que trae el espejo
-   con el reflejo y la nuca), el console table debajo, la puerta al
-   salón a la izquierda con continuidad de luz cálida desde el comedor,
-   y el coat rack con la gabardina del detective a la derecha. */
+   el espejo del recibidor de su piso. CLAVE: el retrato de Roberto
+   Mora YA incluye toda la escena (recibidor con papel granate, console
+   table con teléfono, lámpara de pared, doorway al salón visible en
+   el reflejo). No se composita sobre un escenario aparte — el retrato
+   ES la escena. Para preservar esto:
+   - No se aplica rembg a RobertoMora-*.png (excluidos en scripts/
+     rembg_suspects.py). El retrato viene con la escena horneada.
+   - El bg de la pantalla es un color oscuro sólido que solo se ve si
+     el retrato no llena el slot por completo (letterbox lateral).
+   - El retrato se muestra al 100% sin scale-up para que no se recorte
+     la cara del detective. */
 .room__scene.scene-caso8-recibidor {
-  background-image: url('../../assets/img/suspects/Caso8/Escenario/Escenario-Recibidor.png');
+  background-image: none;
+  background: #0f0805;
+  /* Sin override de align-items: hereda flex-end del .room__scene base,
+     igual que los otros casos. El retrato se ancla abajo y el
+     room__hud-bottom (dialogue + question panel) se solapa por encima
+     en su z-index:2, exactamente como pasa con Felipe/Octavio. */
+}
+
+.room__scene.scene-caso8-recibidor .portrait__img {
+  --portrait-scale: 1;
+  height: 95%;
+  max-width: 85%;
+  object-fit: contain;
+  object-position: top center;
 }
 
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
