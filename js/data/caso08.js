@@ -206,7 +206,11 @@ US.CASES['caso-08'] = {
       role: 'Inspector de Homicidios — el que está investigando',
       description: 'Tú. El detective. La silueta sin rostro porque hace años que no se mira al espejo. Cuando los testigos le miran a los ojos, le hablan a él directamente. Cuando él mira las pruebas, las pruebas hablan de él. La cuarta tarjeta solo está disponible si la lucidez y la integridad acumuladas en las cenas lo permiten.',
       isGuilty: true,
-      portraits: { neutral: '', talking: '', nervous: '' },
+      portraits: {
+        neutral:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Neutral.png',
+        talking:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Pensativo.png',
+        nervous:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Nervioso.png'
+      },
       questions: {
         vinculo: [
           {
