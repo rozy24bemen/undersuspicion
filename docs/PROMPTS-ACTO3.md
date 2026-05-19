@@ -79,12 +79,17 @@
 
 **Naming al guardar**:
 ```
-assets/img/suspects/Elena-Neutral.png              (maestra — ya producida)
-assets/img/suspects/Elena-Calida.png               (tono casual, cenas 1-2 — ya producida)
-assets/img/suspects/Elena-Preocupada.png           (tono preocupada, cenas 3-7 — ya producida)
-assets/img/suspects/Elena-Confrontacional.png      (tono confrontacional, cenas 6-8 — ya producida)
-assets/img/suspects/Elena-Despedida.png            (final bueno C8 — ya producida)
-assets/img/suspects/Elena-Ausente.png              (final malo C8, comedor vacío — ya producida)
+assets/img/suspects/Elena-Neutral.png                 (maestra idle — ya producida)
+assets/img/suspects/Elena-Calida.png                  (idle, tono casual — ya producida)
+assets/img/suspects/Elena-Preocupada.png              (idle, tono preocupada — ya producida)
+assets/img/suspects/Elena-Confrontacional.png         (idle, tono confrontacional — REGENERAR: fix pelo suelto)
+assets/img/suspects/Elena-Neutral-Hablando.png        (NUEVO — apertura/repaso/gancho/cierre)
+assets/img/suspects/Elena-Calida-Hablando.png         (NUEVO — personal casual)
+assets/img/suspects/Elena-Preocupada-Hablando.png     (NUEVO — personal preocupada)
+assets/img/suspects/Elena-Confrontacional-Hablando.png (NUEVO — personal confrontacional + final C8)
+assets/img/suspects/Elena-Despedida.png               (final bueno C8 — ya producida)
+assets/img/suspects/Elena-Ausente.png                 (final malo C8, comedor vacío — ya producida)
+assets/img/scenes/Escenario_Comedor.png               (NUEVO — bg compositado sin personajes)
 
 assets/img/suspects/Caso8/Retrato_Victima_caso8.png          (NUEVO — víctima archivo)
 assets/img/suspects/Caso8/Sospechosos/FelipeSaiz-Neutral.png
@@ -125,6 +130,8 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
   - [Elena Cálida (tono casual)](#elena-cálida--tono-casual)
   - [Elena Preocupada (tono preocupada)](#elena-preocupada--tono-preocupada)
   - [Elena Confrontacional (tono confrontacional)](#elena-confrontacional--tono-confrontacional)
+  - [Elena Hablando · 4 variantes (Neutral/Cálida/Preocupada/Confrontacional)](#elena--variantes-hablando--sensación-de-conversación)
+  - [Escenario Comedor (bg sin personajes)](#escenario--comedor-de-elena-sin-personajes--bg-compositado)
   - [Elena Despedida (final bueno C8)](#elena-despedida--final-bueno-c8)
   - [Elena Ausente (final malo C8)](#elena-ausente--final-malo-c8)
 - [CASO 8 — La última cena](#caso-8--la-última-cena)
@@ -479,10 +486,14 @@ NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
 Subject (same as reference Elena_neutral.png — CRITICAL: same face,
 same hair, same earrings, same complexion):
 - 38 year-old Spanish woman, Elena Solana
-- Hair: shoulder-length chestnut brown, this time pulled tightly behind
-  both ears — she has done something deliberate with her hair before
-  this conversation, the same way she does before parent-teacher
-  meetings at the Cervantes high school
+- Hair: shoulder-length chestnut brown with soft natural waves,
+  IDENTICAL to the neutral / cálida / preocupada poses — loose and
+  worn down, parted slightly off-centre, one strand falling gently
+  in front of the right ear, slightly tucked behind the left. CRITICAL:
+  do NOT pull her hair back behind both ears, do NOT tie it up, do
+  NOT bun, do NOT change the hairstyle between poses. The hair stays
+  CONSTANT across all dinner poses by the wardrobe lock — the
+  emotional shift is in posture and gaze, not in styling
 - Skin: same complexion, but a faint flush on the cheekbones — controlled
   emotion, not anger; her eyes are slightly redder than usual along
   the lower lid, as if she has cried earlier in the evening and washed
@@ -498,9 +509,11 @@ NOT replace with an off-white blouse, do NOT add a scarf, do NOT
 add additional jewellery. The wardrobe is the SAME outfit Elena
 wore at the start of the dinner — what has changed is her body
 language and her gaze, NOT her clothes. The formality of this
-scene comes from her POSTURE (shoulders squared, hair pulled
-tightly behind both ears as if she has composed herself before
-this conversation), not from a wardrobe change.
+scene comes from her POSTURE (shoulders squared, torso facing him
+fully, hands flat on the back of the chair, mouth composed in a
+firm neutral line), NOT from a wardrobe change and NOT from
+re-styling her hair. The hair stays loose chestnut waves as in
+the master and all other poses.
 
 Pose & expression (CONFRONTACIONAL / DIRECT): standing very upright,
 shoulders squared toward the detective for the first time in any pose,
@@ -523,7 +536,336 @@ NEGATIVE: cel-shading, flat, anime, 3D, photorealistic, cartoon,
 shouting, finger pointing, raised hand, raised eyebrows, dramatic
 fury, mouth wide open, tears running, smeared makeup, cold lighting,
 blue light, fluorescent, noir-thriller mood, ghostly, transparent,
-pale-ill, multiple people, seductive pose, revealing clothing.
+pale-ill, multiple people, seductive pose, revealing clothing, hair
+pulled back, hair tied behind ears, updo, bun, ponytail.
+```
+
+---
+
+## Elena — Variantes "Hablando" · sensación de conversación
+
+> ## ⚠️ POR QUÉ EXISTEN ESTAS VARIANTES
+>
+> Convención de aventura gráfica (igual que los sospechosos del juego, que
+> alternan Neutral ↔ Pensativo cuando hablan): cada tono de Elena necesita
+> **dos variantes**, una *idle* (escuchando, calladita) y una *hablando*
+> (boca a media frase). DinnerPanel alterna entre las dos según el estado:
+> cuando se muestra una línea de Elena → variante **hablando**; cuando
+> aparecen los botones de respuesta del jugador → variante **idle**.
+>
+> ### Reglas comunes a las 4 variantes Hablando
+>
+> 1. **Wardrobe lock vigente**: cuello vuelto granate + falda lápiz
+>    antracita + perlas + alianza + pelo castaño chocolate ondas media
+>    melena suelto. **NO** se cambia ropa, **NO** se cambia peinado.
+> 2. **Mismo fondo y misma luz** que la variante idle correspondiente
+>    (mismo comedor cálido — sirve para que rembg recorte limpio luego).
+> 3. **Misma cara** y misma identidad — usar la idle como `[ATTACH]`.
+> 4. **Lo único que cambia**:
+>    - **Boca a media frase**: ligeramente entreabierta (NO grito, NO
+>      sonrisa amplia), labios separados unos milímetros mostrando
+>      un destello de dientes superiores en algunas variantes
+>    - **Sutil micro-gesto de mano** que sugiere expresividad de
+>      hablar: una mano subida unos centímetros desde la idle, con
+>      la palma ligeramente abierta hacia el detective como
+>      acompañando la frase
+>    - **Mirada idéntica** o muy parecida a la idle del mismo tono
+> 5. **Sutileza**: el cambio entre idle y hablando debe ser perceptible
+>    pero discreto. NO debe parecer otra mujer ni otra escena — es la
+>    misma Elena en el segundo de medio en que pronuncia una palabra.
+
+### Neutral-Hablando (apertura / repaso / gancho / cierre — fases neutras)
+
+```
+[ATTACH approved Elena-Neutral.png as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio, character framed from
+mid-thigh to top of head. SAME warm dimly-lit dining room background
+as the neutral master pose. SAME soft amber key light from upper-
+right at 30 degrees. CRITICAL: identical framing, identical
+composition, identical background to the approved Elena-Neutral.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+character art (Disco Elysium tradition). Soft painterly brush strokes,
+smooth volumetric rendered shading. NOT cel-shading, NOT flat, NOT
+anime, NOT 3D, NOT photorealistic.
+
+Subject (CRITICAL: same as Elena-Neutral master):
+- 38 year-old Spanish woman, Elena Solana, same face, same hazel-
+  brown eyes, same complexion
+- Hair: IDENTICAL to neutral master — shoulder-length chestnut brown
+  loose natural waves, parted slightly off-centre, one strand in
+  front of the right ear, tucked behind the left
+- Build: same proportions
+
+Clothing (WARDROBE LOCK — identical to neutral master and all other
+Elena poses): SAME burgundy wool turtleneck, SAME charcoal-grey
+pencil skirt, SAME pearl studs, SAME gold wedding band. NO changes.
+
+Pose & expression (NEUTRAL — HABLANDO / SPEAKING): she is in the
+middle of saying a calm domestic sentence — something like
+"¿Qué tal el turno?" or "Te he calentado la cena". Mouth is
+SLIGHTLY OPEN at mid-syllable, lips parted about three millimetres,
+showing only the faintest hint of upper teeth (NOT grinning, NOT
+smiling broadly, NOT shouting). Head tilted the same five degrees
+to the right as the idle. ONE hand has lifted very slightly from
+the clasped waist position — the right hand now resting palm-half-
+open at chest height in a soft "talking" gesture, fingers relaxed
+and curved, accompanying the word she is saying. The left hand
+stays where it was in the idle. Eyes meet the camera with the same
+calm warmth as the idle.
+
+Atmosphere: same warm domestic intimacy as the idle. The shift is
+purely in the mouth and in the right hand — everything else is
+identical to the master.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat, anime, 3D, photorealistic, cartoon,
+shouting, screaming, broad smile, full teeth grin, both hands raised,
+finger pointing, hair pulled back, hair tied, changed hairstyle,
+changed outfit, different background, different lighting, different
+woman, exaggerated expression, mouth wide open, laughing, crying.
+```
+
+### Cálida-Hablando (tono casual — cenas 1-2)
+
+```
+[ATTACH approved Elena-Calida.png as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio. SAME warm dining room
+background, SAME amber key light, SAME framing as the cálida idle.
+
+Art style: same as cálida idle — digital oil painting illustration,
+Disco Elysium tradition. Soft painterly brush strokes. NOT cel-
+shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Subject (CRITICAL: same as Elena-Calida master):
+- 38 year-old Elena Solana, same face, same hazel-brown eyes
+- Hair: IDENTICAL to cálida idle — loose chestnut chocolate waves,
+  one strand in front of the right ear, tucked behind the left
+- Wardrobe lock vigente: same burgundy turtleneck, same charcoal
+  pencil skirt, same pearl studs, same wedding band
+
+Pose & expression (CÁLIDA — HABLANDO / SPEAKING): she is in the
+middle of saying something warm — a small affectionate sentence
+like "Cómo no, mi amor" or "¿Qué te pongo?". Mouth SLIGHTLY OPEN
+mid-word with a soft small smile that still reaches the eyes,
+lips parted gently, the faintest hint of upper teeth visible.
+Head tilted same as the idle (slight right tilt). Gesture: the
+hand that holds the wine glass remains at chest height with the
+glass; the OTHER hand, previously resting on her own collarbone
+in the idle, has now lifted very slightly outward — palm open
+toward the detective in a soft welcoming-gesture, fingers relaxed
+and slightly spread, accompanying her words. Eyes meeting the
+detective's with the same warmth as the idle.
+
+Atmosphere: same warm golden interior intimacy as the cálida idle.
+The mouth and the open palm are the only differences.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as cálida idle, plus: NO broad grin, NO laughter,
+NO raised palm pointing accusatively, NO sad expression, NO worry
+(this is the casual pose), hair pulled back, hair tied, changed
+hairstyle, changed outfit, different background.
+```
+
+### Preocupada-Hablando (tono preocupada — cenas 3-7)
+
+```
+[ATTACH approved Elena-Preocupada.png as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio. SAME warm dining room
+background, slightly cooler shadow on the left side of the face same
+as the preocupada idle. SAME framing.
+
+Art style: same as preocupada idle — digital oil painting
+illustration, Disco Elysium tradition. Soft painterly brush strokes.
+NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Subject (CRITICAL: same as Elena-Preocupada master):
+- 38 year-old Elena Solana, same face, same eyes
+- Hair: IDENTICAL to preocupada idle — loose chestnut chocolate
+  waves, one strand fallen forward across her cheek, NOT pushed
+  back, NOT tied
+- Wardrobe lock vigente: same burgundy turtleneck, same charcoal
+  pencil skirt, same pearl studs, same wedding band
+
+Pose & expression (PREOCUPADA — HABLANDO / SPEAKING): she is in
+the middle of asking a concerned question — something like "¿Por
+qué no me lo cuentas?" or "¿Estás durmiendo bien?". Mouth
+SLIGHTLY OPEN mid-syllable, lips parted softly, NO smile, brows
+still pulled in faintly (worry is preserved), the question is
+sincere. Head turned the same two degrees away as the idle.
+Gesture change: the previously clasped hands at her waist have
+separated by a small distance — one hand has lifted up about
+ten centimetres and opened palm-up in a soft questioning gesture,
+fingers slightly curled, while the other hand remains at her own
+collarbone or just below it (touching the neckline of the
+turtleneck for self-comfort). Eyes searching the detective's face
+with the same soft concern as the idle, but a fraction more open
+because she is asking.
+
+Atmosphere: same warm interior tone with the slight density of
+unspoken worry as the preocupada idle.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as preocupada idle, plus: NO smile, NO laughter,
+NO cheerful expression, NO confrontational stare, NO dramatic
+crying, NO accusatory finger, hair pulled back, hair tied, changed
+hairstyle, changed outfit, different background.
+```
+
+### Confrontacional-Hablando (tono confrontacional — cenas 6-8 + final C8)
+
+```
+[ATTACH approved Elena-Confrontacional.png as reference image]
+
+Half-body portrait, 3:4 vertical aspect ratio. SAME warm dining room
+background, SAME more sculpted lighting from the candle and side lamp,
+SAME framing as the confrontacional idle.
+
+Art style: same as confrontacional idle — digital oil painting
+illustration, Disco Elysium tradition. Soft painterly brush strokes.
+NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Subject (CRITICAL: same as Elena-Confrontacional master, with the
+corrected loose-hair fix already applied):
+- 38 year-old Elena Solana, same face, same eyes
+- Hair: IDENTICAL to confrontacional idle (and to all other Elena
+  poses) — loose chestnut chocolate waves, parted slightly off-
+  centre, one strand falling in front of the right ear, tucked
+  behind the left. CRITICAL: NOT pulled back, NOT tied — the
+  wardrobe lock and hair lock are absolute
+- Wardrobe lock vigente: same burgundy turtleneck, same charcoal
+  pencil skirt, same pearl studs, same wedding band
+
+Pose & expression (CONFRONTACIONAL — HABLANDO / SPEAKING): she is
+in the middle of saying a firm but calm sentence — something like
+"Tenemos que hablar" or "Mírame, Roberto". Mouth SLIGHTLY OPEN
+mid-word, lips parted with a firm precise shape (NO yelling, NO
+trembling), brows level (NOT furrowed in anger). The expression
+is the same firmness as the idle — only the mouth has moved.
+Gesture: the body stays squared as in the idle (shoulders facing
+the detective fully). ONE hand still rests on the back of the
+unseen chair as in the idle; the OTHER hand has lifted very
+slightly off the chair back and is now angled palm-half-open
+toward the detective at chest height, fingers spread for clarity
+of speech, accompanying her words. Eyes locked on his without
+looking away, brows level.
+
+Atmosphere: same sculpted warm-with-shadow as the confrontacional
+idle. The candle behind her shoulder still alive. NOT colder, NOT
+noir.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as confrontacional idle, plus: NO shouting, NO
+yelling, NO furrowed angry brows, NO finger pointing, NO raised
+fist, NO trembling lips, NO tears, NO weakness — this is firm
+direct speech, NOT anger and NOT distress. Hair pulled back, hair
+tied, changed hairstyle, changed outfit, different background.
+```
+
+---
+
+## Escenario — Comedor de Elena (sin personajes — bg compositado)
+
+> Asset 16:9 que va de `background-image` en `.dinner-room__scene`
+> debajo de los retratos transparentes de Elena (tras pasarlos por
+> `rembg`). Es el comedor del piso de Hermosilla **sin nadie**: la
+> mesa puesta para dos, candela viva, puerta de cocina iluminada al
+> fondo, todo cálido. Es el mismo comedor que se ve borroso detrás
+> de los retratos idle de Elena, pero ahora **nítido y completo** y
+> sin personaje, porque Elena se compositará encima en runtime.
+>
+> Naming: `assets/img/scenes/Escenario_Comedor.png` (NUEVO).
+>
+> CSS objetivo (lo cableo yo después):
+> ```css
+> .dinner-room__scene {
+>   background-image: url('../../assets/img/scenes/Escenario_Comedor.png');
+>   background-size: cover;
+>   background-position: center;
+> }
+> ```
+
+```
+Establishing shot of a domestic dining-room interior, 16:9 aspect
+ratio, wide cinematic framing. NO PEOPLE in frame — fully empty
+stage for character compositing.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+environment art (Disco Elysium / classic mystery adventure game
+tradition). Painterly detailed background, warm atmospheric lighting,
+rich textures, soft focus on background depth. NOT cel-shading, NOT
+flat, NOT anime, NOT 3D, NOT photorealistic.
+
+Location: the dining room of Elena Solana and Roberto Mora's
+apartment in the Salamanca district of Madrid (calle de Hermosilla),
+exactly the same room that appears softly out of focus behind every
+Elena dinner pose. This time the camera pulls back: we see the full
+room cleanly.
+
+Furniture (place naturally, painterly soft focus):
+- CENTRE of the frame: a dark wooden rectangular dining table set
+  for two, photographed at a slight angle from the LEFT side of
+  the table so that the chair on the RIGHT is the natural slot
+  where Elena will be composited in runtime. On the table: two
+  identical red wine glasses (both with a small amount of wine
+  visible), two ceramic plates (one with food, one empty), a low
+  half-melted candle in a small brass holder at centre lit and
+  alive (warmest light source in the room), two folded cream cloth
+  napkins
+- BEHIND the table, slightly off-centre to the right: a wide
+  doorway leading to the KITCHEN, the kitchen lit by a warm
+  yellow ceiling lamp, suggestion of dishes on a counter,
+  glimpse of a stovetop and cupboards in soft focus, NO PEOPLE
+  in the kitchen
+- LEFT side of the frame: a wooden sideboard with framed family
+  photographs (faces not readable, painterly), a small ceramic
+  vase with no flowers, soft amber wall lamp above the
+  sideboard providing ambient fill
+- RIGHT side of the frame: an old burgundy velvet sofa partially
+  visible at the edge, the corner of a coffee table, a folded
+  newspaper
+- BACK WALL behind the kitchen doorway: faint floral wallpaper
+  in deep burgundy and gold, slightly faded, lived-in
+- The wooden floor reflects the warm candle light gently
+
+Lighting: the centre table candle is the warm focal point. A
+secondary warm amber wall lamp on the left-side sideboard provides
+ambient fill. The kitchen doorway at the back-right glows with
+warm yellow light spilling into the dining room. There is NO cold
+moonlight from a window (NOT in this scene — this is the warm,
+intimate version of the room). All tones are amber, gold, deep
+burgundy, soft brown. Lived-in domestic warmth.
+
+Atmosphere: warm domestic intimacy, the soft glow of a couple's
+dining room set for two in the early evening. Cosy, slightly aged,
+faintly dusty in a homely way. NO ominous mood, NO noir shadows,
+NO ghost atmosphere — this is the "happy memory" version of the
+room that the detective sees every night when his alucinación
+puts Elena across the table.
+
+Camera: 50mm equivalent, eye-level, mid-distance. Framing leaves
+the RIGHT THIRD of the frame relatively unoccupied at human-
+torso height so the compositing of an Elena portrait (3:4
+vertical, half-body) sits naturally over that area. The left
+side of the frame holds the sideboard for visual balance.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: modern minimalist interior, IKEA furniture, bright clean
+showroom, people, human figures, silhouettes, ghosts, supernatural
+effects, glowing apparitions, blood, gore, crime scene tape,
+police presence, daylight, cold moonlight, blue lighting, kitchen
+drama, party setting, romance movie aesthetic, multiple table
+settings beyond two, modern technology (laptops, mobile phones,
+smart TVs, flat screens), text on walls or items, cartoon,
+children illustration.
 ```
 
 ---
@@ -2866,6 +3208,14 @@ assets/img/endings/D4.png  ·  Amanecer sin nadie
 ## Orden de prioridad de generación
 
 Si el tiempo es limitado, generar en este orden de impacto narrativo:
+
+### Pendiente actual (después del primer batch de Elena)
+
+0a. **Elena-Confrontacional.png (REGENERAR)** — el actual lleva el pelo recogido tras las orejas (cambio brusco respecto a las otras poses). El prompt ya está corregido para forzar pelo suelto idéntico a las demás. Sustituir el archivo.
+0b. **Escenario_Comedor.png** — bg 16:9 sin personajes; bloqueador del refactor a CSS-composite. Sin esto los retratos transparentes no tendrían escenario.
+0c. **Elena-Calida-Hablando.png / Elena-Preocupada-Hablando.png / Elena-Confrontacional-Hablando.png / Elena-Neutral-Hablando.png** — 4 nuevas variantes "Hablando" que el motor alternará con las idle para dar sensación de conversación. Sin estas la cena se siente rígida.
+
+### Ya producido (no tocar)
 
 1. **Elena_neutral.png (REGENERAR maestra)** — bloqueador absoluto. Toda la cadena de poses la adjunta como referencia, así que el actual (pelirroja en estudio negro) debe sustituirse antes que ninguna otra cosa.
 2. **Elena_preocupada.png** — es el tono que aparece en MÁS cenas (casos 3, 4, 5, 7). Sin esta imagen, la mayoría del juego va con la Elena neutral.
