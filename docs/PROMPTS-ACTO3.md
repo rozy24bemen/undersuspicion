@@ -1729,6 +1729,99 @@ imagery, gore.
 
 ---
 
+## Escenario — Recibidor (polish opcional para la cuarta tarjeta)
+
+> Asset 16:9 opcional para sustituir el degradado oscuro provisional
+> que el caso 8 muestra cuando el sospechoso activo es Roberto Mora.
+> El retrato de Roberto Mora ya trae el espejo y la nuca como parte
+> de la composición — este escenario va **detrás** y debe ser el
+> recibidor del piso de Hermosilla **sin que se vea el espejo** (lo
+> aporta el retrato), para que al compositar todo encaje como un
+> mismo plano: pasillo en penumbra, hueco en la pared donde "estaría"
+> el espejo, console table debajo.
+>
+> Naming: `assets/img/scenes/Escenario_Recibidor.png` (NUEVO, OPCIONAL).
+>
+> CSS objetivo (cuando exista el asset, sustituye el degradado en
+> `.room__scene.scene-caso8-recibidor` de `css/screens/game.css`):
+> ```css
+> .room__scene.scene-caso8-recibidor {
+>   background-image: url('../../assets/img/scenes/Escenario_Recibidor.png');
+> }
+> ```
+
+```
+Establishing shot of a domestic entryway interior, 16:9 aspect ratio,
+wide cinematic framing. NO PEOPLE in frame — fully empty stage for
+character compositing.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+environment art (Disco Elysium / classic mystery adventure game
+tradition). Painterly detailed background, warm atmospheric lighting,
+rich textures. NOT cel-shading, NOT flat, NOT anime, NOT 3D, NOT
+photorealistic.
+
+Location: the entryway / hallway (recibidor) of a Madrid third-floor
+bourgeois apartment in the Salamanca district (calle de Hermosilla).
+This is the small corridor between the front door and the salon,
+inhabited by a single forty-year-old man for the past three years.
+
+Composition (CRITICAL): the camera looks at a wall where a mirror
+would hang. THE MIRROR ITSELF IS NOT IN THIS SCENE — leave the
+mirror area as an empty oval-shaped blank on the wall (will be filled
+in runtime by the Roberto Mora portrait, which already contains the
+mirror with its reflection and the back of the detective's head).
+
+Furniture and details (place naturally):
+- CENTRE of the wall, slightly upper-third: an empty oval area where
+  the antique gilded mirror will be composited later. Surround it
+  with subtle wallpaper texture (faded floral burgundy and gold,
+  slightly aged) so the mirror frame has a visual context to "hang"
+  on
+- DIRECTLY BELOW that empty oval: a dark walnut hallway CONSOLE
+  TABLE — narrow, with curved legs, holding a small ceramic bowl
+  for house keys, a polished brass landline telephone, and an
+  envelope with handwritten address (illegible). The drawer of the
+  console table is slightly open
+- FAR LEFT of the frame: the suggestion of a partially-open doorway
+  leading to the salon — a glimpse of the warm dining room glow
+  behind it (very out of focus, just a hint of amber light from
+  the previous Escenario_Comedor.png to feel continuous)
+- FAR RIGHT of the frame: the front door of the apartment, dark
+  wood with brass details, a coat rack with the detective's grey
+  trench coat hanging (NOT worn — just hanging, indicating he has
+  arrived home from the precinct)
+- The floor is dark parquet wood, slightly worn
+- Faint cobweb in one upper corner
+
+Lighting: a single warm amber wall sconce mounted to the right side
+of the (empty) mirror area, casting hard warm light across the wall
+and the console. The salon doorway on the left admits a deeper amber
+glow. The corner near the front door is in deeper shadow. Hard
+chiaroscuro between the warm wall sconce and the dark hallway corners.
+
+Atmosphere: late-night domestic intimacy turned slightly oppressive
+— the hallway of a man who lives alone, a place that hasn't been
+fully used in years. Slight dustiness. Cosy and wrong at the same
+time.
+
+Camera: 50mm equivalent, eye-level, slightly off-centre so the empty
+mirror area is in the RIGHT-MIDDLE third of the frame (matches where
+the Roberto Mora portrait will composite). Left third holds the
+hint of the salon doorway; right edge holds the coat rack.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: mirror visible (the mirror is provided by the portrait —
+do NOT include it in this scene), people visible, human silhouettes,
+ghosts, supernatural effects, blood, gore, modern minimalist
+interior, IKEA furniture, daylight, cold moonlight, multiple console
+tables, modern technology, text on walls, cartoon, children
+illustration.
+```
+
+---
+
 ## Escenario — Salón Hermosilla
 
 > El salón del piso de la calle de Hermosilla. Es **la casa del
