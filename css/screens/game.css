@@ -379,17 +379,13 @@
 }
 
 /* Override para la "cuarta tarjeta" — Roberto Mora interrogándose en
-   el espejo del recibidor. El retrato ya trae el espejo y la nuca,
-   así que el bg del comedor (mesa, calendario, cocina) era demasiado
-   ruido visual. Mientras no se genere un `Escenario_Recibidor.png`
-   propio (prompt en docs/PROMPTS-ACTO3.md), usamos un degradado
-   oscuro cálido tipo pasillo en penumbra — deja el espejo dominar la
-   composición sin elementos que choquen con su contexto. */
+   el espejo del recibidor de su piso. El escenario propio incluye el
+   marco vacío donde se compositará el retrato (que trae el espejo
+   con el reflejo y la nuca), el console table debajo, la puerta al
+   salón a la izquierda con continuidad de luz cálida desde el comedor,
+   y el coat rack con la gabardina del detective a la derecha. */
 .room__scene.scene-caso8-recibidor {
-  background-image: none;
-  background:
-    radial-gradient(ellipse at 50% 25%, rgba(60, 38, 18, 0.85) 0%, transparent 60%),
-    linear-gradient(180deg, #1c0f06 0%, #0a0503 100%);
+  background-image: url('../../assets/img/suspects/Caso8/Escenario/Escenario-Recibidor.png');
 }
 
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
