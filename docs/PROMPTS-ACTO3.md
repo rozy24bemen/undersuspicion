@@ -62,7 +62,7 @@
 | Elena poses (cálida / preocupada / confrontacional / despedida / ausente) | **SÍ** — adjuntar `Elena_neutral.png` aprobada |
 | Sospechoso NEUTRAL Caso 8 (Felipe, Octavio) | **NO** — sólo texto |
 | Sospechoso PENSATIVO/A o NERVIOSO/A Caso 8 | **SÍ** — adjuntar la NEUTRAL aprobada del MISMO personaje |
-| Don Eulogio Pacheco hijo (Caso 8) | **REUTILIZAR** las 3 poses ya producidas en Caso 6 — ver [ACTO2 §Eulogio Pacheco hijo](PROMPTS-ACTO2.md#eulogio-pacheco-hijo). Sólo copiar archivos a `Caso8/Sospechosos/EulogioPachecoHijo-*.png` |
+| ~~Don Eulogio Pacheco hijo (Caso 8)~~ | ⚠️ **OBSOLETO tras refactor Camino B** — Eulogio NO participa en el caso 8. No copiar nada a `Caso8/Sospechosos/`. |
 | Víctima Elena Solana (foto archivo policial) | **NO** — sólo texto. **NO confundir** con las poses vivas de Elena: ésta es post-mortem, fría, formato carnet |
 | Escenario — Salón del piso de Hermosilla | **NO** — sólo texto |
 | Pruebas (objeto / documento) | **NO** — sólo texto |
@@ -98,9 +98,7 @@ assets/img/suspects/Caso8/Sospechosos/FelipeSaiz-Nervioso.png
 assets/img/suspects/Caso8/Sospechosos/OctavioBran-Neutral.png
 assets/img/suspects/Caso8/Sospechosos/OctavioBran-Pensativo.png
 assets/img/suspects/Caso8/Sospechosos/OctavioBran-Nervioso.png
-assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Neutral.png    (COPIAR desde Caso6)
-assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Pensativo.png  (COPIAR desde Caso6)
-assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-Nervioso.png   (COPIAR desde Caso6)
+# assets/img/suspects/Caso8/Sospechosos/EulogioPachecoHijo-*.png  ← OBSOLETO tras Camino B: Eulogio no participa en caso 8.
 assets/img/suspects/Caso8/Sospechosos/RobertoMora-Neutral.png           (NUEVO — espejo, cuarta tarjeta)
 assets/img/suspects/Caso8/Sospechosos/RobertoMora-Pensativo.png         (NUEVO — espejo)
 assets/img/suspects/Caso8/Sospechosos/RobertoMora-Nervioso.png          (NUEVO — espejo, momento de reconocimiento)
@@ -116,7 +114,7 @@ assets/img/suspects/Caso8/Pruebas/P6 — Sofa.png                (versión norma
 assets/img/suspects/Caso8/Pruebas/P6 — Sofa UV.png             (versión UV)
 assets/img/suspects/Caso8/Pruebas/P7 — Alarma Vecino.png
 assets/img/suspects/Caso8/Pruebas/P8 — Aire.png
-assets/img/suspects/Caso8/Pruebas/P9 — Certificado.png
+assets/img/suspects/Caso8/Pruebas/P9 — Excedencia Laboral.png  ← antes "P9 — Certificado" (obsoleto en Camino B)
 
 assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/detective)
 ```
@@ -138,7 +136,7 @@ assets/img/scenes/Escenario_Hermosilla.png         (NUEVO — salón de Elena/de
   - [Víctima · Elena Solana](#elena-solana--víctima-archivo-policial)
   - [Felipe Saiz · 3 poses](#felipe-saiz)
   - [Octavio Brán · 3 poses](#octavio-brán)
-  - [Don Eulogio Pacheco hijo · reutilizar Caso 6](#don-eulogio-pacheco-hijo--reutilizar-caso-6)
+  - ~~Don Eulogio Pacheco hijo · reutilizar Caso 6~~ ⚠️ obsoleto (Camino B)
   - [Roberto Mora · 3 poses (cuarta tarjeta C8 — espejo del recibidor)](#roberto-mora--detective-cuarta-tarjeta-c8--espejo-del-recibidor)
   - [Escenario · Salón Hermosilla](#escenario--salón-hermosilla)
   - [Pruebas (9 + 3 variantes UV)](#pruebas-caso-8)
@@ -1419,6 +1417,22 @@ CHAIR, AT A TABLE, ELBOW ON TABLE, HALF-BODY CROP.
 
 ## Don Eulogio Pacheco hijo · REUTILIZAR Caso 6
 
+> ⚠️ **SECCIÓN OBSOLETA — NO PRODUCIR**
+>
+> En el refactor *Camino B* del lore (commit 61e0980), Don Eulogio Pacheco
+> hijo fue **eliminado como sospechoso del caso 8**. El personaje sigue
+> existiendo en el Caso 6 con normalidad, pero ya no participa en el caso
+> final. La premisa narrativa cambió: el cuerpo de Elena lleva tres años
+> en el sofá sin certificar ni enterrar, porque nadie supo (no porque un
+> médico amigo firmara un certificado). Ver memoria
+> `undersuspi-lore-detective` y la P9 "Excedencia Laboral" que sustituye
+> al P9 "Certificado".
+>
+> **No copies los ficheros a `Caso8/Sospechosos/`. No regeneres.** Las
+> instrucciones de abajo se mantienen solo como referencia histórica.
+>
+> ---
+
 > Don Eulogio Pacheco hijo es el **mismo personaje** que aparece en
 > el Caso 6 ("Estudio Caracedo"). Sus tres poses ya están producidas
 > en [PROMPTS-ACTO2.md §Eulogio Pacheco hijo](PROMPTS-ACTO2.md#eulogio-pacheco-hijo)
@@ -2356,6 +2370,21 @@ whole point), cartoon.
 
 ### P9 — Certificado
 
+> ⚠️ **PRUEBA OBSOLETA — NO PRODUCIR**
+>
+> En el refactor *Camino B* (commit 61e0980), la prueba P9 cambió:
+>   - **Antes**: certificado de defunción firmado por Eulogio en 2023.
+>   - **Ahora**: **Expediente Laboral · Excedencia voluntaria del
+>     detective entre sep 2023 y ene 2024**, que explica cómo nadie supo
+>     de la muerte de Elena durante tres años (aislamiento social
+>     deliberado, "Elena se ha ido a Cádiz" como tapadera).
+>
+> Genera el prompt nuevo de "Expediente Laboral" (a redactar como
+> sucesor de este bloque) en lugar de este. El prompt de abajo se
+> mantiene solo como referencia histórica.
+>
+> ---
+
 ```
 Document evidence shot, 4:5 vertical aspect ratio, top-down flat-lay
 view, document placed flat on a dark wooden desk surface, soft
@@ -3232,18 +3261,28 @@ Si el tiempo es limitado, generar en este orden de impacto narrativo:
 
 ## Lo que NO hay que producir aún
 
-- Las 3 poses de Don Eulogio Pacheco hijo en `Caso8/Sospechosos/` — son **copias** de las del Caso 6. No regenerar.
+- Las 3 poses de Don Eulogio Pacheco hijo en `Caso8/Sospechosos/` — ⚠️ **Camino B**: Eulogio ya no participa en el caso 8. No copiar nada. Las poses originales del Caso 6 quedan intactas en su propio directorio.
 - El retrato de la **víctima Elena post-mortem** NO debe confundirse con las poses vivas: son archivos distintos en paths distintos. Ver "Naming al guardar" arriba.
 - **Rostro del detective en los 7 primeros casos**: NO se produce. El canon de los Actos I-II ([ASSETS-VISUALES.md:49](../docs/ASSETS-VISUALES.md#L49)) sigue vigente — silueta, manos, primer plano del bloc. **Sólo el Caso 8** revela su cara, y exclusivamente a través del espejo del recibidor (las 3 poses Roberto Mora — ver sección dedicada arriba). No usar esas imágenes como retrato del detective en ninguna otra pantalla del juego.
 
 ## Wiring de código pendiente (NO toca a este doc, se hace después)
 
+> ℹ️ **PARCIALMENTE OBSOLETO**: los puntos 1, 2 y 3 ya están aplicados en
+> el repo a fecha del commit 6a42f61 + refactor 61e0980. El punto 3 además
+> cambió: el formato `endings.bueno / endings.malo` se sustituyó por la
+> **matriz 2×2 con 4 cinemáticas** (A/B/C/D) que viven en `caso08.js`
+> bajo `endings.{A,B,C,D}.blocks` con tipo `kind: 'scene'` (imagen + texto).
+> Ver la sección `# FINALES — 4 cinemáticas (16 escenas, 4×4)` más arriba
+> y la implementación en `DinnerPanel._pickEnding` + `_enterEndingPhase`.
+> El punto 4 (rellenar `portraits` de Roberto Mora) sigue vigente cuando
+> se generen las 3 poses.
+
 Cuando las imágenes de Elena estén producidas, hay que tocar dos archivos para que el juego las consuma:
 
-1. [`js/data/cenasGlobal.js`](../js/data/cenasGlobal.js) — convertir `esposa.portrait` (actualmente `null`) en un objeto `{ casual, preocupada, confrontacional, despedida, ausente }` con los paths a cada pose.
-2. [`js/screens/DinnerScreen.js`](../js/screens/DinnerScreen.js) — en `render()`, en lugar de leer `esposa.portrait` plano, elegir la pose según el tono activo de la pregunta meta en curso (con fallback a `Elena_neutral.png`).
-3. [`js/data/caso08.js`](../js/data/caso08.js) — en los `endings.bueno` / `endings.malo`, marcar los beats de cena final con un campo nuevo `elenaPose: 'despedida' | 'ausente'` que `DinnerScreen` pueda leer.
-4. [`js/data/caso08.js:281`](../js/data/caso08.js#L281) — el sospechoso `detective` tiene hoy `portraits: { neutral: '', talking: '', nervous: '' }` (placeholders vacíos). Una vez generadas las 3 poses Roberto Mora, rellenar con:
+1. ✅ [`js/data/cenasGlobal.js`](../js/data/cenasGlobal.js) — `esposa.portraits` ya es un objeto `{ neutral, casual, preocupada, confrontacional, despedida, ausente }` con paths.
+2. ✅ [`js/components/DinnerPanel.js`](../js/components/DinnerPanel.js) — `_pickElenaPose()` elige según fase/tono/ending y `_updateElenaPose()` actualiza el sprite.
+3. ✅/🔄 [`js/data/caso08.js`](../js/data/caso08.js) — el formato pasó de `endings.good/bad` a **`endings.{A,B,C,D}`** con `kind: 'scene'`. Cada bloque puede opcionalmente llevar `elenaPose` para sobrescribir el fallback por id de ending (A → despedida, B/C/D → ausente).
+4. 🔄 [`js/data/caso08.js`](../js/data/caso08.js) — el sospechoso `detective` tiene hoy `portraits: { neutral: '', talking: '', nervous: '' }` (placeholders vacíos). Una vez generadas las 3 poses Roberto Mora, rellenar con:
    ```js
    portraits: {
      neutral:  'assets/img/suspects/Caso8/Sospechosos/RobertoMora-Neutral.png',

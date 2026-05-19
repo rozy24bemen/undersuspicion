@@ -96,9 +96,58 @@
     }
     var payload = _slotPayload(f.label, f.meta);
     var ok = US.SaveManager.importSlot(f.slot, JSON.stringify(payload));
-    console.log('[Test] Final ' + letra.toUpperCase() + ' instalado en slot ' + f.slot + ':', ok ? 'OK' : 'FAIL');
-    console.log('[Test] Recarga la pestaña y carga el slot ' + f.slot + ' desde el menú.');
-    return ok;
+    if (!ok) {
+      console.error('[Test] Falló importSlot.');
+      return false;
+    }
+    // Si el slot reinstalado es el activo, refrescar buffers para que la
+    // sesión actual coja los nuevos valores sin recargar la pestaña.
+    // loadSlot() llama internamente a Progress.reload() y MetaStore.reload().
+    var active = US.SaveManager.getActiveSlot && US.SaveManager.getActiveSlot();
+    if (active === f.slot) {
+      US.SaveManager.loadSlot(f.slot);
+      console.log('[Test] Final ' + letra.toUpperCase() + ' instalado en slot ' + f.slot + ' (activo, buffers refrescados).');
+      console.log('[Test] Vuelve al menú principal y entra al caso 8 directamente.');
+    } else {
+      console.log('[Test] Final ' + letra.toUpperCase() + ' instalado en slot ' + f.slot + '.');
+      console.log('[Test] Carga el slot ' + f.slot + ' desde el menú.');
+    }
+    return true;
+  }
+
+  /**
+   * Borra solo `caso-08` de `progress.completed` del slot indicado, sin
+   * tocar las métricas. Útil cuando ya tienes el slot con métricas
+   * específicas (custom o de una pasada anterior) y solo quieres volver a
+   * jugar el caso 8 con el mismo estado.
+   */
+  function resetCaso8(slotNum) {
+    slotNum = slotNum || 1;
+    var slot = US.SaveManager.getSlot(slotNum);
+    if (!slot) {
+      console.error('[Test] Slot ' + slotNum + ' vacío.');
+      return false;
+    }
+    // Clonamos para no mutar la referencia interna del SaveManager.
+    var copy = JSON.parse(JSON.stringify(slot));
+    copy.progress = copy.progress || { completed: [] };
+    copy.progress.completed = (copy.progress.completed || []).filter(function(id) {
+      return id !== 'caso-08';
+    });
+    copy.runtime = null;
+    var ok = US.SaveManager.importSlot(slotNum, JSON.stringify(copy));
+    if (!ok) {
+      console.error('[Test] Falló importSlot al resetear caso-08.');
+      return false;
+    }
+    var active = US.SaveManager.getActiveSlot && US.SaveManager.getActiveSlot();
+    if (active === slotNum) {
+      US.SaveManager.loadSlot(slotNum);
+      console.log('[Test] Slot ' + slotNum + ' (activo): caso-08 borrado de progress.completed. Buffers refrescados.');
+    } else {
+      console.log('[Test] Slot ' + slotNum + ': caso-08 borrado de progress.completed.');
+    }
+    return true;
   }
 
   // Instala los dos slots base por defecto.
@@ -119,7 +168,11 @@
   console.log('  US.Test.cargarFinal("B")  → Final B (slot 2, métricas malas)');
   console.log('  US.Test.cargarFinal("C")  → Final C (slot 1, métricas buenas)');
   console.log('  US.Test.cargarFinal("D")  → Final D (slot 2, métricas malas)');
+  console.log('[cargar-slots] Para repetir caso 8 manteniendo métricas custom:');
+  console.log('  US.Test.resetCaso8(1)     → vacía caso-08 del progress del slot 1');
+  console.log('  US.Test.resetCaso8(2)     → idem para slot 2');
 
   US.Test = US.Test || {};
   US.Test.cargarFinal = cargarFinal;
+  US.Test.resetCaso8  = resetCaso8;
 })();

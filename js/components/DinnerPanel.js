@@ -30,10 +30,12 @@ US.DinnerPanel = class DinnerPanel {
     this.veredictoNota = this._veredictoLinea(caseResult);
 
     // Final de juego (caso 8). Si el caso define `endings`, se intercala una
-    // fase 'ending' tras la fase 'personal' que reproduce una cinemática de
-    // bloques narration/dialogue. El cierre del banco global se omite porque
-    // el final propio del caso reemplaza el "cierre genérico".
-    this.ending           = this._pickEnding(caseData, caseResult);
+    // fase 'ending' tras la fase 'gancho' (o 'personal' en casos sin gancho
+    // → ending directo). El ending NO se elige aquí: se elige en
+    // `_enterEndingPhase()`, al transitar a 'ending', para que las métricas
+    // y flags acumuladas durante la cena cuenten en la matriz 2x2.
+    this.ending           = null;
+    this._hasEndings      = !!(caseData && caseData.endings);
     this.endingBlockIdx   = 0;
 
     this.phase       = 'apertura';
@@ -342,9 +344,8 @@ US.DinnerPanel = class DinnerPanel {
         // En casos con cinemática propia (caso 8) saltamos la fase 'personal'
         // — sus preguntas del banco global rompen el clímax narrativo. El
         // gancho enlaza directo con la cinemática del final.
-        if (this.ending) {
-          this.phase = 'ending';
-          this.endingBlockIdx = 0;
+        if (this._hasEndings) {
+          this._enterEndingPhase();
         } else {
           this.phase = 'personal';
           this.exchangeIdx = 0;
@@ -357,9 +358,8 @@ US.DinnerPanel = class DinnerPanel {
         } else {
           // Si el caso tiene cinemática de final propia (caso 8), saltamos
           // el cierre genérico del banco global y enlazamos con la cinemática.
-          if (this.ending) {
-            this.phase = 'ending';
-            this.endingBlockIdx = 0;
+          if (this._hasEndings) {
+            this._enterEndingPhase();
           } else {
             this.phase = 'cierre';
           }
@@ -394,6 +394,23 @@ US.DinnerPanel = class DinnerPanel {
     if (this.phase === 'gancho'   && !this.gancho)             return true;
     if (this.phase === 'personal' && this.personal.length === 0) return true;
     return false;
+  }
+
+  /**
+   * Transición al ending. Aquí es donde se evalúa el cuadrante 2x2 (matriz
+   * acusación × métricas), con las métricas y flags YA actualizadas por
+   * todas las respuestas de la cena. Antes lo hacíamos en `start()` y daba
+   * el final equivocado para los efectos acumulados durante repaso/gancho/
+   * personal — los aportes de c08_tendria, c08_dos_copas, etc., se
+   * descartaban silenciosamente.
+   */
+  _enterEndingPhase() {
+    this.ending         = this._pickEnding(this.caseData, this.caseResult);
+    this.endingBlockIdx = 0;
+    // Recalcular el veredictoNota: en start() se evaluó sin ending, así que
+    // devolvía la rama genérica. Ahora con ending real, refleja el cuadrante.
+    this.veredictoNota  = this._veredictoLinea(this.caseResult);
+    this.phase          = 'ending';
   }
 
   // ── Selection ────────────────────────────────────
