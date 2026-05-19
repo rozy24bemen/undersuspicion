@@ -36,6 +36,14 @@
   box-shadow: none;
 }
 
+/* En la pantalla de Resolución, el FAB está fixed top-left pero hay un
+   .btn--back en position:absolute top:16px/left:16px que ocupa esa misma
+   esquina. Desplazamos el FAB a la derecha del back button para evitar
+   que lo tape. */
+body.screen-resolution .audio-fab {
+  left: 140px;
+}
+
 .audio-fab:hover {
   background: #2a200a;
   border-color: var(--gold, #C9A961);
