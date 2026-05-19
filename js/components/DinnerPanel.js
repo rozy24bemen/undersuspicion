@@ -400,8 +400,16 @@ US.DinnerPanel = class DinnerPanel {
 
   _pickRepaso(pool, caseResult) {
     if (!Array.isArray(pool) || pool.length === 0) return [];
-    const shuffled = pool.slice().sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, Math.min(2, shuffled.length));
+    // Intercambios marcados `required: true` siempre aparecen (caso 8 los usa
+    // para sembrar el hijo muerto en la cena final, p.ej. c08_tendria). El
+    // resto se baraja y rellena hasta llegar al target (2). Si los requeridos
+    // ya superan el target, se devuelven todos sin truncar.
+    const required = pool.filter(x => x && x.required);
+    const optional = pool.filter(x => !x || !x.required);
+    const shuffled = optional.slice().sort(() => Math.random() - 0.5);
+    const target = 2;
+    const fill = Math.max(0, target - required.length);
+    return required.concat(shuffled.slice(0, fill));
   }
 
   _pickPersonal(caseData) {

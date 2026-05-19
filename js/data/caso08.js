@@ -491,6 +491,28 @@ US.CASES['caso-08'] = {
 
     repasoPool: [
       {
+        // Siembra del hijo nacido muerto, siempre presente en la última
+        // cena. Elena en oblicuo: no lo nombra, solo dice "tendría". Ver
+        // memoria `feedback_elena_temas_dolorosos`.
+        id: 'c08_tendria',
+        required: true,
+        linea: {
+          default: '[Elena mira la copa que tienes delante, no a ti. Habla más bajo de lo habitual.] Hoy he echado las cuentas. Por curiosidad. [pausa larga] Tendría ya tres años.',
+          acusoIncorrecto: '[Elena no levanta la mirada de la mesa.] Hoy he echado las cuentas. Por curiosidad. Tendría ya tres años. [pausa] ¿Te has acordado tú alguna vez de esa cuenta esta semana?'
+        },
+        respuestas: [
+          { id: 'a', texto: 'Tres y un mes y medio. Llevo la cuenta sin querer.',
+            efecto: { sinceridad: +18, integridad: +14, lucidez: +10, flags: ['recuerda_hijo_muerto', 'nombra_la_fecha'] },
+            replica: '[asiente sin levantar la vista] Llevas tres años sin volver a decir esa cuenta en voz alta.' },
+          { id: 'b', texto: '¿De qué hablas, Elena? No te entiendo.',
+            efecto: { sinceridad: -16, lucidez: -10, integridad: -8, flags: ['rechaza_recordar'] },
+            replica: 'Lo sabes, Roberto. Lo sabes muy bien.' },
+          { id: 'c', texto: 'Hoy no. Por favor. Hoy no.',
+            efecto: { sinceridad: +6, integridad: +4, lucidez: -8 },
+            replica: 'Hoy es exactamente cuando toca, Roberto.' }
+        ]
+      },
+      {
         id: 'c08_cuerpo',
         linea: {
           default: 'Tu forense ha dicho que el cuerpo lleva meses. ¿Le has escuchado?',
