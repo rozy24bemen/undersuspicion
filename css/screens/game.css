@@ -393,15 +393,18 @@
 .room__scene.scene-caso8-recibidor {
   background-image: none;
   background: #0f0805;
-  align-items: center;
+  /* flex-start ancla el retrato arriba del slot, dejando la mitad de
+     abajo libre para que el room__hud-bottom (dialogue + question
+     panel) se vea sin solaparse con el espejo del retrato. */
+  align-items: flex-start;
 }
 
 .room__scene.scene-caso8-recibidor .portrait__img {
   --portrait-scale: 1;
-  height: 100%;
-  max-width: 100%;
+  height: 50%;
+  max-width: 75%;
   object-fit: contain;
-  object-position: center;
+  object-position: top center;
 }
 
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
