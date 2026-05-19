@@ -134,6 +134,18 @@
   .dinner-room__name        { font-size: 11px; letter-spacing: 2px; }
   .dinner-room__role        { font-size: 8px; }
 
+  /* Overlay full-screen de finales (caso 8): en móvil portrait la imagen
+     16:9 se encoge (max 42vh) para dejar sitio al texto sin scroll. */
+  .dinner-ending             { padding: 16px 18px 20px; gap: 14px; }
+  .dinner-ending__title      { font-size: 13px; letter-spacing: 5px; }
+  .dinner-ending__subtitle   { font-size: 9px;  letter-spacing: 2px; }
+  .dinner-ending__stage      { gap: 14px; }
+  .dinner-ending__image      { max-height: 42vh; }
+  .dinner-ending__text       { font-size: 13px; line-height: 1.65; padding: 0 4px; }
+  .dinner-ending__veredicto  { font-size: 13px; letter-spacing: 2px; padding: 10px 12px; }
+  .dinner-ending__continue,
+  .dinner-ending__exit       { padding: 11px 28px; font-size: 10px; letter-spacing: 3px; }
+
   /* Notebook toggle */
   .notebook-toggle  { width: 40px; height: 40px; top: 8px; left: 8px; }
   .notebook-toggle__icon { font-size: 18px; }
@@ -287,6 +299,16 @@
   .dinner-figure__silhouette { width: 110px; height: 170px; }
   .dinner-panel__line       { font-size: 11px; padding: 8px 10px; }
   .dinner-panel__response   { font-size: 9.5px; padding: 7px 9px; }
+
+  /* Overlay finales en móvil pequeño portrait. */
+  .dinner-ending             { padding: 12px 14px 16px; gap: 10px; }
+  .dinner-ending__title      { font-size: 11.5px; letter-spacing: 4px; }
+  .dinner-ending__subtitle   { font-size: 8.5px; }
+  .dinner-ending__image      { max-height: 36vh; }
+  .dinner-ending__text       { font-size: 12px; line-height: 1.55; }
+  .dinner-ending__veredicto  { font-size: 11.5px; letter-spacing: 2px; padding: 8px 10px; }
+  .dinner-ending__continue,
+  .dinner-ending__exit       { padding: 10px 22px; font-size: 9.5px; letter-spacing: 2.5px; }
 
   /* Notebook toggle smaller */
   .notebook-toggle  { width: 36px; height: 36px; top: 6px; left: 6px; }

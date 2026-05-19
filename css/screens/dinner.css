@@ -481,8 +481,10 @@
   min-height: 0;
 }
 
-/* Imagen de cinemática final (4 escenas por final). Se coloca encima del
-   texto, ocupa todo el ancho del panel manteniendo aspect ratio 16:9. */
+/* Imagen de cinemática final (legacy — uso en el panel pequeño). Las
+   cinemáticas del caso 8 ahora se muestran en pantalla completa via
+   `.dinner-ending` (más abajo). Esta clase queda solo para casos que
+   pudieran reusar bloques `scene` dentro del panel split. */
 .dinner-panel__ending-image {
   display: block;
   width: 100%;
@@ -495,5 +497,150 @@
 
 @keyframes dinner-ending-fade {
   from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FULL-SCREEN ENDING OVERLAY (caso 8) ──────────── */
+/* Cuando DinnerPanel entra en fase 'ending' (y mientras dura el wrap-up
+   en 'done' con this.ending), el split mesa/Elena se oculta y este
+   overlay toma toda la pantalla. La imagen 16:9 queda centrada arriba,
+   el texto debajo, y el botón de avanzar al pie. En móvil portrait la
+   imagen se encoge para que el texto siga visible sin scroll.
+   Position: fixed para cubrir también el nav superior — la cinemática
+   debe ser inmersiva. */
+
+.dinner-ending {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(40, 20, 10, 0.4) 0%, transparent 60%),
+    #050302;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 24px 32px 28px;
+  gap: 18px;
+  overflow: auto;
+  animation: dinner-ending-overlay-fade 0.55s ease;
+}
+
+.dinner-ending[hidden] { display: none; }
+
+.dinner-ending__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.dinner-ending__title {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.dinner-ending__subtitle {
+  color: var(--gold-dim);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.dinner-ending__stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.dinner-ending__image {
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  max-height: 60vh;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #050302;
+  border: 1px solid #1a0e04;
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.85);
+  animation: dinner-ending-image-fade 0.7s ease;
+}
+
+.dinner-ending__text {
+  font-style: italic;
+  color: #e8dfc8;
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+  white-space: pre-line;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: dinner-ending-text-fade 0.7s ease 0.12s both;
+}
+
+.dinner-ending__veredicto {
+  color: var(--gold);
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.65;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-top: 1px solid #2a1a08;
+  border-bottom: 1px solid #2a1a08;
+  background: rgba(10, 6, 2, 0.6);
+}
+
+.dinner-ending__actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.dinner-ending__continue,
+.dinner-ending__exit {
+  padding: 12px 36px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-family: var(--font);
+  font-weight: bold;
+  background: #1a1008;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.dinner-ending__continue:hover,
+.dinner-ending__exit:hover {
+  background: #2a1a0a;
+  border-color: var(--gold);
+  color: #fff7c8;
+}
+
+@keyframes dinner-ending-overlay-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes dinner-ending-image-fade {
+  from { opacity: 0; transform: scale(1.015); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dinner-ending-text-fade {
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }

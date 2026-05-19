@@ -51,6 +51,7 @@ US.DinnerScreen = class DinnerScreen {
           </div>
         </div>
       </main>
+      <section class="dinner-ending" id="dinner-ending" hidden></section>
     `;
 
     const audioFab = document.getElementById('audio-fab');
