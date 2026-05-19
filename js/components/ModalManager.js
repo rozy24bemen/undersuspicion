@@ -361,7 +361,13 @@ US.ModalManager = class ModalManager {
   showContradiction(c) {
     const suspectName = this.engine.getSuspects().find(s => s.id === c.suspectId).name;
 
-    if (US.audio) US.audio.playSFX('contradiction-hit');
+    if (US.audio) {
+      US.audio.playSFX('contradiction-hit');
+      // Sting musical largo encima del impacto seco — refuerzo del beat
+      // narrativo "lo has descubierto". Si suena demasiado, basta con
+      // bajar SFX en el modal de ajustes (afecta a los dos).
+      US.audio.playSFX('revelation-sting');
+    }
 
     // No diferenciamos visualmente las pistas falsas: el jugador debe deducir
     // por sí mismo si una contradicción es decisiva o un episodio personal.

@@ -25,13 +25,29 @@ US.AudioControls = class AudioControls {
     this._bindGlobalEvents();
   }
 
+  // Garantiza que el FAB sigue en el DOM. Las pantallas hacen
+  // `container.innerHTML = ...` lo cual destruye el FAB si fue reparentado
+  // dentro de su nav en el render anterior. UIController llama aquí antes
+  // de cada showScreen para recrearlo si fue arrastrado por la limpieza.
+  ensureMounted() {
+    if (!document.getElementById('audio-fab')) {
+      this._createFab();
+    }
+    if (!document.getElementById('audio-settings')) {
+      this._createModal();
+    }
+  }
+
   // ═══════════════════════════════════════════════════
   // MOUNT
   // ═══════════════════════════════════════════════════
 
   _mount() {
-    // Botón flotante (FAB). Se inserta directo en body para que viva por
-    // encima de cualquier pantalla.
+    this._createFab();
+    this._createModal();
+  }
+
+  _createFab() {
     const fab = document.createElement('button');
     fab.id = 'audio-fab';
     fab.className = 'btn btn--nav-back audio-fab';
@@ -40,21 +56,15 @@ US.AudioControls = class AudioControls {
     fab.innerHTML = this._iconHtml() + '<span class="audio-fab__label">Ajustes</span>';
     document.body.appendChild(fab);
 
-    fab.addEventListener('click', () => {
-      this.openSettings();
-    });
-    fab.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      this.openSettings();
-    });
-    fab.addEventListener('dblclick', () => {
-      this.openSettings();
-    });
+    fab.addEventListener('click', () => this.openSettings());
+    fab.addEventListener('contextmenu', (e) => { e.preventDefault(); this.openSettings(); });
+    fab.addEventListener('dblclick', () => this.openSettings());
 
     this._fabEl = fab;
     this._refreshFab();
+  }
 
-    // Modal de ajustes. Se queda en DOM, escondido por CSS hasta openSettings().
+  _createModal() {
     const modal = document.createElement('div');
     modal.id = 'audio-settings';
     modal.className = 'audio-settings';

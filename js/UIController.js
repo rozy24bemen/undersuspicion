@@ -74,12 +74,30 @@ US.UIController = class UIController {
   showScreen(name) {
     const prev = this._activeScreenName;
 
+    // Las pantallas hacen container.innerHTML = '...' en su render(), lo que
+    // destruye el FAB si lo movieron a su nav. Reconstruimos primero y
+    // luego rescatamos el FAB a body — de ahí GameScreen/DinnerScreen lo
+    // arrastrarán a su propio nav durante el render de esta pantalla.
+    if (US.audioControls) US.audioControls.ensureMounted();
+    const fabPre = document.getElementById('audio-fab');
+    if (fabPre && fabPre.parentElement !== document.body) {
+      document.body.appendChild(fabPre);
+    }
+
     Object.values(this.screens).forEach(s => s.classList.remove('active'));
     this.screens[name].classList.add('active');
+
+    // Body class para reglas CSS por pantalla (ej: ocultar FAB en menú).
+    document.body.className = document.body.className
+      .split(/\s+/).filter(c => !c.startsWith('screen-')).concat('screen-' + name).join(' ').trim();
 
     if (this._screens[name]) {
       this._screens[name].render(this.screens[name]);
     }
+
+    // FAB oculto en el menú (que ya tiene su propio botón "AJUSTES DE AUDIO").
+    const fab = document.getElementById('audio-fab');
+    if (fab) fab.style.display = (name === 'menu') ? 'none' : '';
 
     this._activeScreenName = name;
     this._updateAudioForScreen(name, prev);
@@ -305,6 +323,21 @@ US.UIController = class UIController {
     this.engine.on('toolDiscovery', (data) => {
       if (!US.audio) return;
       if (data && data.toolId === 'uv-light') US.audio.playSFX('uv-on');
+    });
+
+    // ── Audio hooks (UI clicks por delegación) ───────
+    // Cualquier .desk-card → card-click (chasquido de naipe sobre madera).
+    // Cualquier botón con clase .btn → button-click (tap seco).
+    // Excluimos botones dentro del modal de ajustes de audio para no
+    // hacer feedback loops al tocar los sliders/toggles.
+    document.addEventListener('click', (e) => {
+      if (!US.audio) return;
+      const card = e.target.closest('.desk-card');
+      if (card) { US.audio.playSFX('card-click'); return; }
+      const btn = e.target.closest('.btn, .dinner-panel__continue, .dinner-panel__response, .dinner-panel__exit');
+      if (btn && !btn.closest('.audio-settings') && !btn.closest('#audio-fab')) {
+        US.audio.playSFX('button-click');
+      }
     });
 
     document.addEventListener('keydown', e => {

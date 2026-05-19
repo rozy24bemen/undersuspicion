@@ -8,8 +8,10 @@
 .dinner-nav {
   background: #140b04;
   border-bottom: 1px solid #3a2814;
-  justify-content: space-between;
   padding: 0 16px;
+  /* Sin justify-content:space-between para que el FAB inyectado entre
+     título y "who" quede pegado al título (top-left) en lugar del centro.
+     `margin-left: auto` en .dinner-nav__who empuja el nombre a la derecha. */
 }
 
 .dinner-nav .game-nav__title {
@@ -21,6 +23,7 @@
   font-size: 10px;
   letter-spacing: 3px;
   color: var(--gold);
+  margin-left: auto;
 }
 
 /* ── SPLIT ────────────────────────────────────────── */
