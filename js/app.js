@@ -120,6 +120,11 @@
 
   // ── BOOTSTRAP ─────────────────────────────────────────────
 
+  // Audio: singleton creado antes que el UI para que showScreen pueda
+  // disparar el loop correspondiente desde la primera pantalla.
+  US.audio = new US.AudioManager();
+  new US.AudioControls();
+
   var engine = new US.GameEngine();
   var ui = new US.UIController(engine, document.getElementById('app'));
 

@@ -19,6 +19,8 @@ US.ModalManager = class ModalManager {
     const ev = this.engine.getAllEvidence().find(e => e.id === evidenceId);
     if (!ev) return;
 
+    if (US.audio) US.audio.playSFX('modal-open');
+
     // ── Estado UV de la prueba y del caso ─────────────────────────
     // - uvLightAvailable a nivel de caso → el botón aparece en TODAS las
     //   pruebas para que el jugador tenga que investigar cuáles revelan
@@ -358,6 +360,8 @@ US.ModalManager = class ModalManager {
 
   showContradiction(c) {
     const suspectName = this.engine.getSuspects().find(s => s.id === c.suspectId).name;
+
+    if (US.audio) US.audio.playSFX('contradiction-hit');
 
     // No diferenciamos visualmente las pistas falsas: el jugador debe deducir
     // por sí mismo si una contradicción es decisiva o un episodio personal.

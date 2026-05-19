@@ -58,7 +58,10 @@ US.QuestionPanel = class QuestionPanel {
     }).join('');
 
     body.querySelectorAll('.q-item:not(.asked)').forEach(item => {
-      item.addEventListener('click', () => this.ui._handleAskQuestion(item.dataset.questionId));
+      item.addEventListener('click', () => {
+        if (US.audio) US.audio.playSFX('question-typed');
+        this.ui._handleAskQuestion(item.dataset.questionId);
+      });
     });
   }
 

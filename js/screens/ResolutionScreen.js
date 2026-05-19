@@ -240,6 +240,7 @@ US.ResolutionScreen = class ResolutionScreen {
 
     const result = this.engine.resolveCase(who, how, why, who2);
     this.ui._lastResult = result;
+    if (US.audio) US.audio.playSFX('case-closed');
     this.ui.showScreen('dinner');
   }
 

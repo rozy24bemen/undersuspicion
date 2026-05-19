@@ -72,12 +72,40 @@ US.UIController = class UIController {
   // ═══════════════════════════════════════════════════
 
   showScreen(name) {
+    const prev = this._activeScreenName;
+
     Object.values(this.screens).forEach(s => s.classList.remove('active'));
     this.screens[name].classList.add('active');
 
     if (this._screens[name]) {
       this._screens[name].render(this.screens[name]);
     }
+
+    this._activeScreenName = name;
+    this._updateAudioForScreen(name, prev);
+  }
+
+  // Loop por pantalla + SFX de transición. Llamado en cada showScreen.
+  // - menu → menu loop
+  // - intro / game / resolution → investigation loop
+  // - dinner → dinner loop
+  // El SFX de transición no suena en el arranque (no hay pantalla previa).
+  _updateAudioForScreen(name, prev) {
+    if (!US.audio) return;
+
+    if (prev && prev !== name) {
+      US.audio.playSFX('screen-transition');
+    }
+
+    const loopByScreen = {
+      menu:       'menu',
+      intro:      'investigation',
+      game:       'investigation',
+      resolution: 'investigation',
+      dinner:     'dinner'
+    };
+    const target = loopByScreen[name];
+    if (target) US.audio.playLoop(target);
   }
 
   // ═══════════════════════════════════════════════════
@@ -266,6 +294,17 @@ US.UIController = class UIController {
     // que las respuestas del caso anterior no se muestren en el nuevo.
     this.engine.on('caseLoaded', () => {
       this._lastDialogueBySuspect = {};
+    });
+
+    // ── Audio hooks (engine events) ──────────────────
+    // Candado abierto (Caso 5+ via UV o teléfono).
+    this.engine.on('lockOpened', () => {
+      if (US.audio) US.audio.playSFX('lock-open');
+    });
+    // Tool discovery: si fue la linterna UV, sonar el encendido.
+    this.engine.on('toolDiscovery', (data) => {
+      if (!US.audio) return;
+      if (data && data.toolId === 'uv-light') US.audio.playSFX('uv-on');
     });
 
     document.addEventListener('keydown', e => {

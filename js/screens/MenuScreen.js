@@ -54,6 +54,8 @@ US.MenuScreen = class MenuScreen {
           <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
           <button class="btn btn--menu btn--exit" data-action="exit-game">SALIR</button>
 
+          <button class="menu__audio-btn" data-action="audio-settings">AJUSTES DE AUDIO</button>
+
           <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
         </div>
 
@@ -83,6 +85,21 @@ US.MenuScreen = class MenuScreen {
       exitBtn.addEventListener('click', () => {
         if (window.confirm('¿Seguro que quieres salir del juego?')) {
           window.close();
+        }
+      });
+    }
+
+    const audioBtn = container.querySelector('[data-action="audio-settings"]');
+    if (audioBtn) {
+      audioBtn.addEventListener('click', () => {
+        // Buscar el AudioControls montado en body por app.js. Si existe,
+        // abrir su modal; si no (test/headless), no-op.
+        const modal = document.getElementById('audio-settings');
+        if (modal && US.audio) {
+          modal.querySelector('[data-audio-music]').value = Math.round(US.audio.getMusicVolume() * 100);
+          modal.querySelector('[data-audio-sfx]').value   = Math.round(US.audio.getSfxVolume() * 100);
+          modal.querySelector('[data-audio-mute]').checked = US.audio.isMuted();
+          modal.classList.add('open');
         }
       });
     }

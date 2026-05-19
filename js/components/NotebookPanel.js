@@ -34,6 +34,7 @@ US.NotebookPanel = class NotebookPanel {
     } else {
       this.refreshContent();
       this.el.classList.add('open');
+      if (US.audio) US.audio.playSFX('notebook-open');
     }
   }
 
