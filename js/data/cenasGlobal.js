@@ -11,17 +11,27 @@ US.CENAS_GLOBAL = {
 
   // Identidad de la mujer. `portraits` mapea pose → ruta. El tono activo
   // de cada pregunta meta selecciona la pose en DinnerPanel; el resto de
-  // fases (apertura, repaso, gancho, cierre) usa `neutral`. Los finales
-  // del Caso 8 marcan poses específicas en sus bloques (`elenaPose`).
+  // fases (apertura, repaso, gancho, cierre) usa `neutral`. Las variantes
+  // `*-hablando` se usan cuando se muestra una línea de Elena (frase en
+  // pantalla); las idle (sin sufijo) se usan cuando aparecen los botones
+  // de respuesta del jugador. Los finales del Caso 8 marcan poses
+  // específicas en sus bloques (`elenaPose`).
   esposa: {
     nombre: 'Elena',
     portraits: {
-      neutral:         'assets/img/suspects/Elena-Neutral.png',
-      casual:          'assets/img/suspects/Elena-Calida.png',
-      preocupada:      'assets/img/suspects/Elena-Preocupada.png',
-      confrontacional: 'assets/img/suspects/Elena-Confrontacional.png',
-      despedida:       'assets/img/suspects/Elena-Despedida.png',
-      ausente:         'assets/img/suspects/Elena-Ausente.png'
+      // Idle (Elena escucha — botones de respuesta del jugador visibles)
+      neutral:                  'assets/img/suspects/Elena-Neutral.png',
+      casual:                   'assets/img/suspects/Elena-Calida.png',
+      preocupada:               'assets/img/suspects/Elena-Preocupada.png',
+      confrontacional:          'assets/img/suspects/Elena-Confrontacional.png',
+      // Hablando (Elena dice una línea — frase en pantalla)
+      'neutral-hablando':         'assets/img/suspects/Elena-Neutral-Hablando.png',
+      'casual-hablando':          'assets/img/suspects/Elena-Calida-Hablando.png',
+      'preocupada-hablando':      'assets/img/suspects/Elena-Preocupada-Hablando.png',
+      'confrontacional-hablando': 'assets/img/suspects/Elena-Confrontacional-Hablando.png',
+      // Finales del Caso 8 (poses únicas, no se compositan con bg)
+      despedida:               'assets/img/suspects/Elena-Despedida.png',
+      ausente:                 'assets/img/suspects/Elena-Ausente.png'
     }
   },
 
