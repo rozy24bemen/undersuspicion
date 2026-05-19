@@ -167,7 +167,7 @@ para web), 44.1 kHz, mono o estéreo según se indica. Duración total típica:
 
 ### 5. Clic en tarjeta de prueba
 
-**Archivo:** `sfx-card-click.ogg`
+**Archivo:** `click.mp3`
 **Duración:** 0.15 seg, mono
 **Cuándo:** el jugador hace clic en una desk-card para abrir el modal.
 
@@ -180,7 +180,7 @@ para web), 44.1 kHz, mono o estéreo según se indica. Duración total típica:
 
 ### 6. Arrastrar tarjeta sobre la mesa
 
-**Archivo:** `sfx-card-drag.ogg`
+**Archivo:** `arrastrar.mp3`
 **Duración:** 0.4 seg, mono, **loopable mientras se arrastra**
 **Cuándo:** mientras el jugador arrastra una desk-card con el ratón.
 
@@ -191,7 +191,7 @@ para web), 44.1 kHz, mono o estéreo según se indica. Duración total típica:
 
 ### 7. Apertura de modal de evidencia
 
-**Archivo:** `sfx-modal-open.ogg`
+**Archivo:** `apertura.mp3`
 **Duración:** 0.6 seg, estéreo
 **Cuándo:** el modal con la foto grande de la prueba aparece.
 
@@ -202,7 +202,7 @@ para web), 44.1 kHz, mono o estéreo según se indica. Duración total típica:
 
 ### 8. Contradicción descubierta (impact)
 
-**Archivo:** `sfx-contradiction-hit.ogg`
+**Archivo:** `contradiccion.mp3`
 **Duración:** 1.2 seg, estéreo
 **Cuándo:** el overlay rojo de contradicción aparece en pantalla. Es el momento
 "AHA" del juego, debe sonar a impacto controlado.
@@ -218,7 +218,7 @@ ser una versión más corta y desnuda del mismo. Decisión post-generación.
 
 ### 9. Cerradura desbloqueada (Caso 5)
 
-**Archivo:** `sfx-lock-open.ogg`
+**Archivo:** `cerradura.mp3`
 **Duración:** 1.5 seg, mono
 **Cuándo:** el jugador introduce la combinación `8614` correcta en el cajón.
 
@@ -231,20 +231,20 @@ ser una versión más corta y desnuda del mismo. Decisión post-generación.
 
 ### 10. Linterna UV encendida (Caso 5+)
 
-**Archivo:** `sfx-uv-on.ogg`
+**Archivo:** `Luz_ON.mp3`
 **Duración:** 0.8 seg + loop ambient 2 seg
 **Cuándo:** el jugador activa la herramienta de luz UV. El primer one-shot es
 el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa.
 
 **Prompt (ElevenLabs, dos archivos):**
-> 1) `sfx-uv-on.ogg`: A soft electrical fluorescent buzz starting up — a brief rising electrical hum lasting 800 milliseconds, ends on a steady tone.
-> 2) `sfx-uv-loop.ogg`: A very faint continuous fluorescent bulb hum, like a mid-1980s lamp in a dim room. 2 seconds, loopable seamlessly. Very low volume.
+> 1) `Luz_ON.mp3`: A soft electrical fluorescent buzz starting up — a brief rising electrical hum lasting 800 milliseconds, ends on a steady tone.
+> 2) `lamp.mp3`: A very faint continuous fluorescent bulb hum, like a mid-1980s lamp in a dim room. 2 seconds, loopable seamlessly. Very low volume.
 
 ---
 
 ### 11. Pregunta hecha al sospechoso
 
-**Archivo:** `sfx-question-typed.ogg`
+**Archivo:** `Pregunta_Sospechoso.mp3`
 **Duración:** 0.5 seg, mono
 **Cuándo:** el jugador hace clic en una pregunta del panel de interrogatorio.
 
@@ -257,7 +257,7 @@ el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa
 
 ### 12. Cambio de pantalla (transición)
 
-**Archivo:** `sfx-screen-transition.ogg`
+**Archivo:** `Transicion.mp3`
 **Duración:** 0.7 seg, estéreo
 **Cuándo:** transiciones entre pantallas (menú → intro → juego → resolución).
 
@@ -270,7 +270,7 @@ el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa
 
 ### 13. Hover de botón
 
-**Archivo:** `sfx-button-hover.ogg`
+**Archivo:** `Hover_boton.mp3`
 **Duración:** 0.08 seg, mono
 **Cuándo:** ratón sobre un botón importante (acusar, abrir expediente).
 
@@ -282,7 +282,7 @@ el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa
 
 ### 14. Clic de botón
 
-**Archivo:** `sfx-button-click.ogg`
+**Archivo:** `click_boton.mp3`
 **Duración:** 0.12 seg, mono
 **Cuándo:** clic en cualquier botón.
 
@@ -294,7 +294,7 @@ el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa
 
 ### 15. Apertura de libreta del detective
 
-**Archivo:** `sfx-notebook-open.ogg`
+**Archivo:** `apertura_libreta.mp3`
 **Duración:** 0.6 seg, mono
 **Cuándo:** el panel lateral de la libreta se abre.
 
@@ -306,7 +306,7 @@ el "encender"; opcionalmente puede haber un loop muy sutil mientras está activa
 
 ### 16. Cierre de caso (caso resuelto)
 
-**Archivo:** `sfx-case-closed.ogg`
+**Archivo:** `cierre_de_caso.mp3`
 **Duración:** 2 seg, estéreo
 **Cuándo:** una sola vez, cuando el caso se resuelve y se pasa a la cena con
 Elena. Es el "puente" sonoro entre investigación y cena.

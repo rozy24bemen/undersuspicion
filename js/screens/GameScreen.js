@@ -72,6 +72,20 @@ US.GameScreen = class GameScreen {
     this.ui._renderRoom();
     this.ui.notebook.render();
 
+    const audioFab = document.getElementById('audio-fab');
+    const gameNav = container.querySelector('.game-nav');
+    if (audioFab && gameNav) {
+      const titleEl = gameNav.querySelector('.game-nav__title');
+      const insertionPoint = titleEl && titleEl.nextElementSibling;
+      if (titleEl && insertionPoint) {
+        gameNav.insertBefore(audioFab, insertionPoint);
+      } else if (titleEl) {
+        gameNav.appendChild(audioFab);
+      } else {
+        gameNav.prepend(audioFab);
+      }
+    }
+
     container.querySelector('[data-action="go-resolve"]')
       .addEventListener('click', () => this.ui.showScreen('resolution'));
 
