@@ -367,6 +367,17 @@
   background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-S%C3%B3tano%20Aravaca.png');
 }
 
+/* ── ACTO III — Caso 8 ─────────────────────────────── */
+
+/* El caso 8 ocurre en el propio salón-comedor del detective (calle de
+   Hermosilla), exactamente el mismo lugar que las cenas con Elena.
+   Reutilizamos `Escenario_Comedor.png` para que el jugador reconozca
+   visualmente el espacio cuando llega al final: la mesa puesta para
+   dos, el calendario del 86, el sofá donde está el cuerpo. */
+.room__scene.scene-caso8 {
+  background-image: url('../../assets/img/scenes/Escenario_Comedor.png');
+}
+
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
 
 .tool-toolbar {
