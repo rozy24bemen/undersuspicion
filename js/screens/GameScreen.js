@@ -31,7 +31,7 @@ US.GameScreen = class GameScreen {
         <div class="game-nav__title">UNDER SUSPICION</div>
         <div class="game-nav__suspects" id="nav-suspects"></div>
         <div class="game-nav__actions">
-          <button class="btn btn--save" data-action="quick-save" title="Guardar partida en la ranura activa">💾 GUARDAR</button>
+          <button class="btn btn--save" data-action="quick-save" title="Guardar partida en la ranura activa">GUARDAR</button>
           <button class="btn btn--resolver" data-action="go-resolve">RESOLVER CASO</button>
         </div>
       </nav>
