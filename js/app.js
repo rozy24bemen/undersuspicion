@@ -4,7 +4,27 @@
 (function () {
   'use strict';
 
-  // ── PROTECCIÓN CONTRA COPIAS Y EXTRACCIONES ──────────────
+  // En builds nativos (Electron .exe / Capacitor APK) el usuario ya tiene
+  // el binario en su máquina, así que bloquear F12 / click derecho / Ctrl+C
+  // sólo molesta al depurar y no aporta protección real.
+  var ua = (navigator.userAgent || '').toLowerCase();
+  var isElectron  = ua.indexOf(' electron/') !== -1;
+  var isCapacitor = !!(window.Capacitor && window.Capacitor.isNativePlatform &&
+                       window.Capacitor.isNativePlatform());
+  var isNative    = isElectron || isCapacitor;
+  US.isNative = isNative;
+
+  if (isNative) {
+    // Salta todo el bloque anti-copia y arranca directo.
+    US.audio = new US.AudioManager();
+    US.audioControls = new US.AudioControls();
+    var engineN = new US.GameEngine();
+    var uiN = new US.UIController(engineN, document.getElementById('app'));
+    uiN.showScreen('menu');
+    return;
+  }
+
+  // ── PROTECCIÓN CONTRA COPIAS Y EXTRACCIONES (sólo web) ────
 
   // Prevenir arrastrado de imágenes
   document.addEventListener('dragstart', function(e) {

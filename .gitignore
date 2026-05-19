@@ -16,3 +16,15 @@ Thumbs.db
 # Backups locales de assets (no entran al repo)
 **/Pruebas_original/
 **/*_backup/
+
+# Node / Electron / Capacitor
+node_modules/
+dist-electron/
+www/
+android/app/build/
+android/.gradle/
+android/build/
+android/local.properties
+*.log
+npm-debug.log*
+.electron-builder-cache/

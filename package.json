@@ -1,0 +1,66 @@
+{
+  "name": "undersuspi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Under Suspicion — detective noir game (web + desktop + android wrappers)",
+  "author": "Roman",
+  "license": "UNLICENSED",
+  "main": "electron/main.js",
+  "scripts": {
+    "audit:assets": "node scripts/audit-assets.js",
+    "electron:dev": "node scripts/run-electron.js",
+    "electron:build": "node scripts/build-electron.js --win --x64",
+    "electron:build:portable": "node scripts/build-electron.js --win portable --x64",
+    "android:sync": "node scripts/build-android-www.js && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:assemble": "node scripts/build-android-www.js && npx cap sync android && npx cap run android --no-sync"
+  },
+  "build": {
+    "appId": "com.roman.undersuspi",
+    "productName": "Under Suspicion",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "index.html",
+      "css/**/*",
+      "js/**/*",
+      "fonts/**/*",
+      "assets/**/*",
+      "audio/**/*",
+      "electron/**/*",
+      "!assets/img/suspects/**/_originales_con_fondo/**",
+      "!assets/img/suspects/**/Pruebas_original/**",
+      "!**/*.py",
+      "!scripts/**/*",
+      "!tests/**/*",
+      "!docs/**/*",
+      "!wireframe.html",
+      "!CHANGELOG.md",
+      "!SOUL.md",
+      "!UML.md",
+      "!.git/**/*",
+      "!.claude/**/*"
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Under Suspicion"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}
