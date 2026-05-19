@@ -393,18 +393,27 @@
 .room__scene.scene-caso8-recibidor {
   background-image: none;
   background: #0f0805;
-  /* Sin override de align-items: hereda flex-end del .room__scene base,
-     igual que los otros casos. El retrato se ancla abajo y el
-     room__hud-bottom (dialogue + question panel) se solapa por encima
-     en su z-index:2, exactamente como pasa con Felipe/Octavio. */
+  /* Retrato anclado arriba: este retrato es una escena horneada (no
+     un body bottom-anchored como los otros sospechosos), así que la
+     parte interesante (espejo+cara) está en el centro vertical. Lo
+     subimos para que no se pelee con el hud-bottom solapado abajo. */
+  align-items: flex-start;
 }
 
 .room__scene.scene-caso8-recibidor .portrait__img {
   --portrait-scale: 1;
-  height: 95%;
-  max-width: 85%;
+  height: 60%;
+  max-width: 80%;
   object-fit: contain;
   object-position: top center;
+  margin-top: 6px;
+}
+
+/* Damos algo más de aire al hud-bottom para que las 3 preguntas + tabs
+   + dialogue caben sin que se recorten en pantallas cortas (el
+   default es max-height:55%). Sólo afecta a la cuarta tarjeta. */
+.room:has(.scene-caso8-recibidor) .room__hud-bottom {
+  max-height: 70%;
 }
 
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
