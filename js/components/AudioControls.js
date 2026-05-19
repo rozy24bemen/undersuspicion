@@ -25,38 +25,46 @@ US.AudioControls = class AudioControls {
     this._bindGlobalEvents();
   }
 
+  // Garantiza que el FAB sigue en el DOM. Las pantallas hacen
+  // `container.innerHTML = ...` lo cual destruye el FAB si fue reparentado
+  // dentro de su nav en el render anterior. UIController llama aquí antes
+  // de cada showScreen para recrearlo si fue arrastrado por la limpieza.
+  ensureMounted() {
+    if (!document.getElementById('audio-fab')) {
+      this._createFab();
+    }
+    if (!document.getElementById('audio-settings')) {
+      this._createModal();
+    }
+  }
+
   // ═══════════════════════════════════════════════════
   // MOUNT
   // ═══════════════════════════════════════════════════
 
   _mount() {
-    // Botón flotante (FAB). Se inserta directo en body para que viva por
-    // encima de cualquier pantalla.
+    this._createFab();
+    this._createModal();
+  }
+
+  _createFab() {
     const fab = document.createElement('button');
     fab.id = 'audio-fab';
-    fab.className = 'audio-fab';
-    fab.setAttribute('aria-label', 'Ajustes de audio');
-    fab.innerHTML = this._iconHtml();
+    fab.className = 'btn btn--nav-back audio-fab';
+    fab.setAttribute('aria-label', 'Abrir ajustes de audio');
+    fab.setAttribute('title', 'Abrir ajustes de audio');
+    fab.innerHTML = this._iconHtml() + '<span class="audio-fab__label">Ajustes</span>';
     document.body.appendChild(fab);
 
-    fab.addEventListener('click', (e) => {
-      // Clic corto → toggle mute
-      this._toggleMute();
-    });
-    fab.addEventListener('contextmenu', (e) => {
-      // Clic derecho → abrir modal
-      e.preventDefault();
-      this.openSettings();
-    });
-    fab.addEventListener('dblclick', () => {
-      // Doble clic → abrir modal (más accesible que clic derecho en táctil)
-      this.openSettings();
-    });
+    fab.addEventListener('click', () => this.openSettings());
+    fab.addEventListener('contextmenu', (e) => { e.preventDefault(); this.openSettings(); });
+    fab.addEventListener('dblclick', () => this.openSettings());
 
     this._fabEl = fab;
     this._refreshFab();
+  }
 
-    // Modal de ajustes. Se queda en DOM, escondido por CSS hasta openSettings().
+  _createModal() {
     const modal = document.createElement('div');
     modal.id = 'audio-settings';
     modal.className = 'audio-settings';
@@ -128,31 +136,17 @@ US.AudioControls = class AudioControls {
   // INTERNAL
   // ═══════════════════════════════════════════════════
 
-  _toggleMute() {
-    if (!US.audio) return;
-    US.audio.toggleMuted();
-    this._refreshFab();
-  }
-
   _refreshFab() {
-    if (!this._fabEl || !US.audio) return;
-    const muted = US.audio.isMuted();
-    this._fabEl.classList.toggle('muted', muted);
-    this._fabEl.innerHTML = this._iconHtml(muted);
-    this._fabEl.setAttribute('aria-label', muted ? 'Activar audio' : 'Ajustes de audio (clic: mute · doble clic: ajustes)');
+    if (!this._fabEl) return;
+    this._fabEl.classList.remove('muted');
+    this._fabEl.innerHTML = this._iconHtml() + '<span class="audio-fab__label">Ajustes</span>';
+    this._fabEl.setAttribute('aria-label', 'Abrir ajustes de audio');
   }
 
-  _iconHtml(muted) {
-    // SVG altavoz / altavoz tachado, estilo noir gold.
-    if (muted) {
-      return `
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path d="M3 9v6h4l5 5V4L7 9H3zm13.59 3l2.7-2.7-1.41-1.41L15.17 10.6l-2.7-2.7-1.42 1.41L13.76 12l-2.71 2.7 1.42 1.41 2.7-2.71 2.7 2.71 1.41-1.41-2.7-2.7z"/>
-        </svg>`;
-    }
+  _iconHtml() {
     return `
       <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-        <path d="M3 9v6h4l5 5V4L7 9H3zm10.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 13.5 12zm-2.5-8v2.06a7 7 0 0 1 0 11.88V19a8.5 8.5 0 0 0 0-15z"/>
+        <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm0-5a1 1 0 0 1 1 1v1.07a7.002 7.002 0 0 1 3.9 2.26l.76-.76a1 1 0 1 1 1.42 1.42l-.76.76A7.002 7.002 0 0 1 20.93 11H22a1 1 0 1 1 0 2h-1.07a7.002 7.002 0 0 1-2.26 3.9l.76.76a1 1 0 0 1-1.42 1.42l-.76-.76A7.002 7.002 0 0 1 13 20.93V22a1 1 0 1 1-2 0v-1.07a7.002 7.002 0 0 1-3.9-2.26l-.76.76a1 1 0 0 1-1.42-1.42l.76-.76A7.002 7.002 0 0 1 3.07 13H2a1 1 0 1 1 0-2h1.07a7.002 7.002 0 0 1 2.26-3.9l-.76-.76A1 1 0 0 1 5.99 4.92l.76.76A7.002 7.002 0 0 1 11 3.07V2a1 1 0 0 1 1-1z"/>
       </svg>`;
   }
 

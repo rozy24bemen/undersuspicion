@@ -27,6 +27,7 @@ SUSPECT_DIRS = [
     ROOT / "assets" / "img" / "suspects" / "Caso2" / "Sospechosos",
     ROOT / "assets" / "img" / "suspects" / "Caso3" / "Sospechosos",
     ROOT / "assets" / "img" / "suspects" / "Caso4" / "Sospechosos",
+    ROOT / "assets" / "img" / "suspects" / "Caso8" / "Sospechosos",
 ]
 ELENA_DIR = ROOT / "assets" / "img" / "suspects"
 ELENA_EXCLUDE = {"Elena-Despedida.png", "Elena-Ausente.png"}
@@ -39,6 +40,13 @@ def collect_elena_portraits():
 
 def main():
     elena_only = "--elena-only" in sys.argv
+    # --case=N procesa SOLO los sospechosos de un caso concreto (útil cuando
+    # se añade un caso nuevo y no se quiere reprocesar todos los anteriores,
+    # cuyos PNGs ya están transparentes y reprocesarlos solo rewrite-a bytes).
+    case_filter = None
+    for arg in sys.argv[1:]:
+        if arg.startswith("--case="):
+            case_filter = arg.split("=", 1)[1]
 
     session = new_session("u2net")  # modelo por defecto, equilibrio calidad/velocidad
 
@@ -48,8 +56,11 @@ def main():
             if not d.is_dir():
                 print(f"[skip] no es directorio: {d}", file=sys.stderr)
                 continue
+            if case_filter and f"Caso{case_filter}" not in str(d):
+                continue
             files.extend(sorted(d.glob("*.png")))
-    files.extend(collect_elena_portraits())
+    if not case_filter:
+        files.extend(collect_elena_portraits())
 
     print(f"Procesando {len(files)} imágenes...")
     failures = []

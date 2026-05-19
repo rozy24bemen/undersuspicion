@@ -53,6 +53,20 @@ US.DinnerScreen = class DinnerScreen {
       </main>
     `;
 
+    const audioFab = document.getElementById('audio-fab');
+    const dinnerNav = container.querySelector('.game-nav');
+    if (audioFab && dinnerNav) {
+      const titleEl = dinnerNav.querySelector('.game-nav__title');
+      const insertionPoint = titleEl && titleEl.nextElementSibling;
+      if (titleEl && insertionPoint) {
+        dinnerNav.insertBefore(audioFab, insertionPoint);
+      } else if (titleEl) {
+        dinnerNav.appendChild(audioFab);
+      } else {
+        dinnerNav.prepend(audioFab);
+      }
+    }
+
     if (!this.ui.dinner) this.ui.dinner = new US.DinnerPanel(this.ui);
     this.ui.dinner.start(result);
 

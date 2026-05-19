@@ -367,6 +367,54 @@
   background-image: url('../../assets/img/suspects/Caso7/Escenario/Escenario-S%C3%B3tano%20Aravaca.png');
 }
 
+/* ── ACTO III — Caso 8 ─────────────────────────────── */
+
+/* El caso 8 ocurre en el propio salón-comedor del detective (calle de
+   Hermosilla), exactamente el mismo lugar que las cenas con Elena.
+   Reutilizamos `Escenario_Comedor.png` para que el jugador reconozca
+   visualmente el espacio cuando llega al final: la mesa puesta para
+   dos, el calendario del 86, el sofá donde está el cuerpo. */
+.room__scene.scene-caso8 {
+  background-image: url('../../assets/img/scenes/Escenario_Comedor.png');
+}
+
+/* Override para la "cuarta tarjeta" — Roberto Mora interrogándose en
+   el espejo del recibidor de su piso. El escenario propio aporta el
+   contexto (papel granate, console table, puerta al salón, coat rack
+   con gabardina), pero el generador dibujó un marco de espejo dentro
+   del escenario aunque el prompt pedía un óvalo vacío. Si compositamos
+   el retrato (que ya trae su propio marco) tal cual, se ven DOS
+   marcos solapados. Lo resolvemos en dos pasos:
+   1) ::before añade una elipse oscura centrada que tapa el marco
+      dibujado por el generador (queda como hueco oscuro donde caerá
+      el espejo "real" del retrato).
+   2) El retrato se agranda y se ancla al centro vertical (no a flex-
+      end) para que su marco caiga justo encima del hueco oscuro, y
+      queda como un único marco coherente. */
+.room__scene.scene-caso8-recibidor {
+  background-image: url('../../assets/img/suspects/Caso8/Escenario/Escenario-Recibidor.png');
+  align-items: center; /* portrait centrado vertical para alinear con el hueco */
+}
+
+.room__scene.scene-caso8-recibidor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Mancha oscura cubriendo donde el escenario dibujó su marco. Si
+     visualmente queda algo desalineado, ajustar `at 50% 38%` o
+     reducir el tamaño de la elipse. */
+  background: radial-gradient(ellipse 28% 38% at 50% 38%, rgba(10,5,2,0.96) 0%, rgba(10,5,2,0.55) 65%, transparent 90%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.room__scene.scene-caso8-recibidor .portrait__img {
+  --portrait-scale: 1.55;
+  height: 88%;
+  max-width: 80%;
+  object-position: center;
+}
+
 /* ── HERRAMIENTA: Toolbar ─────────────────────────── */
 
 .tool-toolbar {

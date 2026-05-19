@@ -374,6 +374,52 @@ A continuación se listan los **28 iconos únicos** del juego. Donde el mismo ic
 
 ---
 
+## Iconos del Caso 8 — La última cena
+
+Los iconos `icon_informe`, `icon_calendario`, `icon_fotos`, `icon_copa` y `icon_carpeta` ya existen y se reutilizan. Los **4 siguientes son nuevos y específicos del caso 8**: cada uno representa una prueba que aparece exclusivamente en el cierre del juego, así que el icono debe leer al instante incluso a 14 px.
+
+---
+
+### 35. Grabadora analógica
+**Emoji original:** 🎙️  
+**Archivo:** `icon_grabadora.png`  
+**Usado en:** Caso 8 (Grabadora Antigua sobre la Mesa — P4)
+
+**Prompt:**
+> Icono cuadrado 128×128 px, ilustración 2D editorial estilo Cluedo moderno, trazo limpio y contornos definidos. Sujeto: grabadora portátil de cassette analógica años 80-90 (estilo Sanyo o Walkman grabador), vista en tres cuartos, con un pequeño LED rojo encendido en el frontal indicando grabación activa y una ventanita transparente que deja ver la cinta. Paleta noir cálida, carcasa gris-beige plástico, detalles metálicos en oro mostaza (#C9A961), LED en rojo sangre (#8B0000). Iluminación de claroscuro con luz lateral cálida, ligera sombra proyectada. Fondo transparente. Sin texto legible, sin watermark, sin 3D, sin anime, sin manga.
+
+---
+
+### 36. Sofá del salón
+**Emoji original:** 🛋️  
+**Archivo:** `icon_sofa.png`  
+**Usado en:** Caso 8 (Sofá del Salón — Manchas Bajo UV — P6)
+
+**Prompt:**
+> Icono cuadrado 128×128 px, ilustración 2D editorial estilo Cluedo moderno, trazo limpio. Sujeto: sofá de tres plazas de terciopelo color burdeos oscuro visto en tres cuartos, una de las almohadas hundida y desgastada en el lado izquierdo (señal de uso prolongado), cojín del lado derecho intacto, patas de madera oscura visibles. Paleta noir cálida, tapizado en burdeos profundo (cercano a #5a1818), reflejos cálidos oro mostaza sobre el terciopelo, sombras profundas. Iluminación de claroscuro con luz lateral cálida. Fondo transparente. Sin manchas visibles, sin sangre (el detalle UV NO se ve a este tamaño — el icono solo identifica el mueble). Sin texto, sin watermark, sin 3D, sin anime, sin manga.
+
+---
+
+### 37. Registro de alarma doméstica
+**Emoji original:** 🚨  
+**Archivo:** `icon_alarma.png`  
+**Usado en:** Caso 8 (Registro de Alarma Doméstica de Felipe Saiz — P7)
+
+**Prompt:**
+> Icono cuadrado 128×128 px, ilustración 2D editorial estilo Cluedo moderno, trazo limpio. Sujeto: panel de control de alarma doméstica antigua montado en pared, con un teclado numérico de tres por cuatro, un pequeño LED rojo en la esquina superior derecha encendido fijo (sistema armado) y una etiqueta superior estilizada. Paleta noir cálida, carcasa en plástico beige envejecido, teclas grises con números ilegibles, LED en rojo sangre (#8B0000), borde y detalles en oro mostaza. Iluminación de claroscuro con luz lateral cálida. Fondo transparente. Sin texto legible (los números de las teclas son borrones de tinta), sin marca comercial, sin watermark, sin 3D, sin anime, sin manga.
+
+---
+
+### 38. Análisis del aire / Calidad ambiental
+**Emoji original:** 🌫️  
+**Archivo:** `icon_aire.png`  
+**Usado en:** Caso 8 (Análisis del Aire del Salón — P8)
+
+**Prompt:**
+> Icono cuadrado 128×128 px, ilustración 2D editorial estilo Cluedo moderno, trazo limpio. Sujeto: matraz Erlenmeyer pequeño de laboratorio forense con una voluta de humo o gas tenue saliendo del cuello, ligeramente coloreada, sobre una base estilizada. Alternativa equivalente si encaja mejor: una sonda portátil de medición ambiental con una pantallita LCD analógica mostrando un gráfico de línea irregular. Paleta noir cálida, cristal con reflejos oro mostaza, humo en tono gris-verdoso traslúcido (sugiriendo descomposición orgánica), sombras profundas. Iluminación de claroscuro con luz lateral cálida. Fondo transparente. Sin texto legible, sin gore explícito, sin watermark, sin 3D, sin anime, sin manga.
+
+---
+
 ## Notas de implementación
 
 Una vez generados los iconos, para usarlos en el juego hay que:

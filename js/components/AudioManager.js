@@ -153,6 +153,33 @@ US.AudioManager = class AudioManager {
     a.play().catch(() => {});
   }
 
+  // Detiene un SFX en curso. Con `fadeMs > 0` aplica un fade-out corto
+  // antes de pausar, para evitar el "clic" de un corte abrupto. Útil
+  // para SFX largos (revelation-sting) que deben recortarse cuando el
+  // jugador cierra el overlay o ha pasado un tiempo máximo.
+  stopSFX(key, fadeMs) {
+    const a = this._sfx[key];
+    if (!a || a.paused) return;
+    fadeMs = fadeMs || 0;
+    if (fadeMs <= 0) {
+      a.pause();
+      a.currentTime = 0;
+      return;
+    }
+    const startVol = a.volume;
+    const start = performance.now();
+    const timer = setInterval(() => {
+      const t = Math.min(1, (performance.now() - start) / fadeMs);
+      a.volume = startVol * (1 - t);
+      if (t >= 1) {
+        clearInterval(timer);
+        a.pause();
+        a.currentTime = 0;
+        a.volume = startVol;
+      }
+    }, 20);
+  }
+
   // ═════════════════════════════════════════════════════
   // VOLUMES & MUTE
   // ═════════════════════════════════════════════════════

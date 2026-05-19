@@ -52,9 +52,8 @@ US.MenuScreen = class MenuScreen {
           <button class="btn btn--menu ${hasAnySlot ? '' : 'btn--disabled'}" data-action="load-game" ${hasAnySlot ? '' : 'disabled'}>CARGAR PARTIDA</button>
           ${devMode ? `<button class="btn btn--menu" data-action="dev-cases">⚙ DEV · ELEGIR CASO</button>` : ''}
           <button class="btn btn--menu btn--disabled">MODO SIN FIN</button>
+          <button class="btn btn--menu" data-action="audio-settings">AJUSTES DE AUDIO</button>
           <button class="btn btn--menu btn--exit" data-action="exit-game">SALIR</button>
-
-          <button class="menu__audio-btn" data-action="audio-settings">AJUSTES DE AUDIO</button>
 
           <div class="menu__credits">DEVELOPED BY AARON · DAVID · ROMAN</div>
         </div>
