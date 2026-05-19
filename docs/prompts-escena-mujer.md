@@ -6,6 +6,16 @@
 > drag-and-drop decorativos sin gameplay ([DinnerTable.js:5](../js/components/DinnerTable.js#L5)
 > lo deja claro: *"los objetos son decorativos por ahora, se pondrán
 > assets más tarde"*). Este documento es ese **"más tarde"**.
+>
+> El doc tiene **dos ideas** con filosofías opuestas:
+> - **Idea 1** (sección 1-8): 4 ilustraciones que EVOLUCIONAN por
+>   caso. La mesa se va degradando. Cambio explícito como termómetro.
+> - **Idea 2** (sección 9): UNA ilustración que se repite IGUAL en
+>   los 8 casos. La repetición misma es el spoiler — solo cuando se
+>   revela el lore del C8 el jugador entiende lo que llevaba 7 cenas
+>   mirando.
+>
+> Elegir UNA. No se mezclan — el doc lista las dos para decidir.
 
 ---
 
@@ -594,4 +604,317 @@ Total: **4 obligatorios + 2 opcionales = 4-6 assets**.
 
 ---
 
-> Doc temporal: eliminar (o archivar) tras producir y wirear los assets.
+# 9 · IDEA 2 — "La mesa que nunca cambia"
+
+> Alternativa a la Idea 1 (sección 1-8). Filosofía opuesta: en vez de
+> mostrar la decadencia con cambios visibles, **un único cuadro
+> idéntico repetido en las 8 cenas**. El golpe narrativo no está en
+> "mirar y notar el cambio", sino en "mirar 7 veces sin pensar, y a
+> la 8ª darte cuenta de lo que estabas viendo todo el tiempo".
+
+## 9.1 · Concepto
+
+Una sola ilustración de la mesa del comedor, **vista desde arriba con
+ligero picado** (similar a Idea 1, ~70°), idéntica en todos los casos.
+Sobre la mesa, los objetos canónicos de cualquier cena en casa
+española: plato con comida, copa de vino, candela, servilleta, cubiertos.
+
+**La diferencia que cierra el spoiler**: hay **DOS** copas de vino,
+ambas servidas, ambas iguales. Las dos están ahí desde el Caso 1. El
+jugador no las cuenta — son "dos copas en una mesa para dos". Solo
+cuando el Caso 8 revela que Elena lleva tres años muerta, esas dos
+copas repetidas desde la primera cena se vuelven retroactivamente
+escalofriantes.
+
+El detective no aparece en absoluto en la composición — ni siquiera la
+mano del POV (a diferencia de la Idea 1). Es una mesa **vista por nadie**,
+como una foto fija de algo que ocurre todas las noches igual. Esa
+quietud es deliberada — refuerza el "todas las noches lo mismo durante
+tres años".
+
+### Variación permitida (mínima)
+
+El cuadro es idéntico en composición y contenido. Sólo cambia, casi
+imperceptible, **el nivel del vino en las dos copas**:
+
+| Casos | Variante visual |
+|---|---|
+| 1-2 | Ambas copas servidas a 2/3 (recién puestas) |
+| 3-5 | Ambas copas a 1/2 — el detective se ha bebido una sin darse cuenta |
+| 6-7 | Una copa vacía y la otra a 2/3 — incongruencia visual que se mete bajo la piel sin explicar (ÉL se ha bebido las dos por turnos) |
+| 8 | Las dos llenas otra vez (la cena ceremonial final, igual que en la P2 del caso) |
+
+Son **4 variantes** del MISMO cuadro — cambia un único detalle (el
+nivel de las copas) y nada más. No cambia perspectiva, ni iluminación,
+ni objetos, ni candela. El jugador no debería ser capaz de articular
+"la mesa cambió" pero sí sentirlo subconscientemente.
+
+> Una alternativa aún más radical: **una sola imagen para los 8 casos
+> sin variación ninguna**. Más barato (1 asset), narrativamente
+> también funciona pero pierde el matiz del progreso. Mi
+> recomendación: las 4 variantes mínimas.
+
+## 9.2 · Naming canónico (Idea 2)
+
+```
+assets/img/scenes/Mesa_Hogar_LLena.png         (casos 1-2)
+assets/img/scenes/Mesa_Hogar_Media.png         (casos 3-5)
+assets/img/scenes/Mesa_Hogar_Asimetrica.png    (casos 6-7)
+assets/img/scenes/Mesa_Hogar_Ceremonial.png    (caso 8)
+```
+
+Si se va por la versión 1-asset:
+
+```
+assets/img/scenes/Mesa_Hogar.png               (todos los casos)
+```
+
+## 9.3 · Prompt único (Idea 2)
+
+> Solo escribo UN prompt completo (la versión "llena", para casos
+> 1-2). Las otras 3 variantes son **regeneraciones del mismo prompt**
+> cambiando solo la línea que describe el nivel de vino de cada
+> copa. Se adjuntan unas a otras como referencia para forzar
+> idéntica composición.
+
+### Mesa-Hogar-Llena (casos 1-2 · maestra)
+
+**Archivo**: `Mesa_Hogar_LLena.png`  
+**Aparece en**: cenas del Caso 1 y Caso 2.
+
+```
+Still life of a domestic dinner table, viewed from above with slight
+high-angle (about 70 degrees, not pure flat-lay), square 1:1 aspect
+ratio. The table is set for TWO PEOPLE.
+
+Art style: digital oil painting illustration, semi-realistic stylized
+prop / scene art for a noir detective adventure game (Disco Elysium
+tradition). Soft painterly brush strokes, smooth volumetric rendered
+shading, visible texture of digital oil paint. NOT cel-shading, NOT
+flat colors, NOT anime, NOT 3D render, NOT photorealistic.
+
+Background: dark wooden dining table surface filling the entire frame,
+warm chestnut grain, slightly worn. NO walls visible, NO chairs visible,
+NO human figures, NO hands, NO body — only the table top and what is
+on it. The composition is impersonal — nobody is in the frame, as if
+the camera is suspended above the table looking down at an unattended
+dinner.
+
+Lighting: single warm candle light from the upper-centre of the frame,
+creating soft warm highlights on crockery and a long shadow toward the
+bottom edge. Ambient amber fill from the right side (the dining room
+lamp from Escenario_Comedor.png). Mood is intimate, slightly stale,
+domestic. NO cold light, NO daylight.
+
+Items on the table (THIS IS CRITICAL — every element must be present,
+in the exact positions described, with identical proportions across
+all variants of this image):
+
+- CENTRE-LEFT: a ceramic dinner plate (about 1/3 of frame width),
+  with a warm meal painterly-rendered — suggestion of stewed meat,
+  vegetables, a piece of bread on the side. Faint steam rising as
+  warm wisps.
+- CENTRE-RIGHT: TWO IDENTICAL red wine glasses, side by side, both
+  filled TWO-THIRDS FULL with the same deep ruby wine. The two glasses
+  almost touch at the stems but do not. They are placed where one
+  would normally be for one person — but there are clearly TWO. This
+  is the visual heart of the entire image.
+- UPPER-CENTRE behind the plate: a short white taper candle in a small
+  brass holder, lit, flame painterly with warm bloom. The wax is at
+  full height — fresh candle.
+- LOWER-LEFT, adjacent to the plate: a folded cream cloth napkin,
+  neatly squared.
+- ABOVE the plate, parallel: a silver fork and a silver knife,
+  domestic stainless steel, placed properly as in a Spanish home
+  setting (fork left, knife right, blade facing the plate).
+- UPPER-RIGHT edge: a small porcelain salt cellar, dark ceramic.
+
+Composition rules: the table fills the entire frame edge-to-edge. The
+candle is at the upper third. The two wine glasses are at the right
+third. The plate dominates the centre-left. The napkin and cutlery
+balance the lower-left. Negative space at the lower-right corner
+where the napkin's edge meets the table grain.
+
+Mood: a dinner laid out perfectly, waiting. The candle is the only
+movement. There is no one eating. The scene is the SAME every night
+— stilled, ceremonious without ceremony, the routine of two people
+who eat together. The image must read as ABSOLUTELY STILL —
+photographic stillness, not action.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: cel-shading, flat colors, anime, manga, photorealistic, 3D
+render, children cartoon, deformed, text, watermark, logos, brand
+labels, modern technology, smartphones, laptops, party setting,
+restaurant setting, fancy china, gold cutlery, daylight, fluorescent
+lighting, blue cold light, multiple people, human hands, body, arms,
+ghost figure, second person silhouette, supernatural glow on either
+glass, ONE glass only, three glasses, broken glass, spilled wine,
+empty plate, raw food, fancy plating, restaurant garnish, gore, blood.
+CRITICAL NEGATIVES: ONE wine glass only (must be TWO), uneven glass
+sizes, only one filled glass (both must be equally filled), one
+glass smaller than the other.
+```
+
+### Mesa-Hogar-Media (casos 3-5)
+
+```
+[ATTACH approved Mesa_Hogar_LLena.png as reference image]
+
+Same scene, same camera, same lighting, same table, same plate, same
+candle, same napkin, same cutlery, same salt cellar — IDENTICAL
+composition. Same two wine glasses in the same positions.
+
+The ONLY change: both wine glasses are now HALF FULL instead of two-
+thirds. The wine level in each glass is identical to the other — they
+must look like they have been drunk from at the same rate.
+
+Everything else MUST be pixel-identical to the master. The candle
+wax level, the plate position, the napkin folds, the cutlery angle —
+all unchanged.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as master, plus: uneven wine levels between the two
+glasses, one glass with lipstick mark and the other without (must be
+identical), changed plate position, changed cutlery angle, melted
+candle, different camera angle.
+```
+
+### Mesa-Hogar-Asimetrica (casos 6-7)
+
+```
+[ATTACH approved Mesa_Hogar_LLena.png as reference image]
+
+Same scene, same camera, same lighting, same table, same plate, same
+candle, same napkin, same cutlery, same salt cellar — IDENTICAL
+composition. Same two wine glasses in the same positions.
+
+The ONLY change in this variant: ONE of the two wine glasses is now
+COMPLETELY EMPTY (just a thin red residue at the bottom), while the
+OTHER glass remains TWO-THIRDS FULL. The wine glass on the LEFT (the
+one closer to the plate) is the EMPTY one. The wine glass on the
+RIGHT remains served.
+
+This asymmetry is deliberate and unsettling — the player should NOT
+consciously articulate why, but should feel a faint wrongness. NO
+gore, NO supernatural staging. Just one empty and one full glass
+where there should be two equal.
+
+Everything else MUST be pixel-identical to the master.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as master, plus: spilled wine, broken glass, only
+one glass (both must be present), both glasses empty (must be ONE
+empty + ONE full), supernatural overlay on the empty glass, dramatic
+lighting, horror mood.
+```
+
+### Mesa-Hogar-Ceremonial (caso 8)
+
+```
+[ATTACH approved Mesa_Hogar_LLena.png as reference image]
+
+Same scene, same camera, same lighting, same table, same plate, same
+candle, same napkin, same cutlery, same salt cellar — IDENTICAL
+composition. Same two wine glasses in the same positions.
+
+This variant restores both glasses to TWO-THIRDS FULL — same as the
+master image. The visual reads identical to the LLena version,
+because at the Caso 8 dinner the detective has served BOTH glasses
+again in his ritual, just as he did the first night three years ago.
+
+The only minor tells that this is the C8 version (subtle, almost
+invisible, the player should not consciously notice):
+- The candle wax is now slightly lower than in LLena (it has burned
+  a bit more — the cumulative weight of repetition over 8 cases).
+- The napkin is folded the same way but with a single small crease
+  on top, as if it has been handled many times.
+
+Everything else MUST be pixel-identical to the master. The wine
+levels must be EXACTLY the same as the LLena master — this is the
+visual rhyme that closes the spoiler.
+
+Style ID: undersuspi-noir-v1.
+
+NEGATIVE: same as master, plus: visible decay, dramatic horror, gore,
+visible bloodstains, ghost figure, supernatural manifestation,
+changed object positions.
+```
+
+## 9.4 · Wiring de código (Idea 2)
+
+### Versión con 4 variantes
+
+```js
+// cenasGlobal.js
+mesaPorCaso: {
+  1: 'assets/img/scenes/Mesa_Hogar_LLena.png',
+  2: 'assets/img/scenes/Mesa_Hogar_LLena.png',
+  3: 'assets/img/scenes/Mesa_Hogar_Media.png',
+  4: 'assets/img/scenes/Mesa_Hogar_Media.png',
+  5: 'assets/img/scenes/Mesa_Hogar_Media.png',
+  6: 'assets/img/scenes/Mesa_Hogar_Asimetrica.png',
+  7: 'assets/img/scenes/Mesa_Hogar_Asimetrica.png',
+  8: 'assets/img/scenes/Mesa_Hogar_Ceremonial.png'
+}
+```
+
+### Versión 1-asset
+
+```js
+mesaPorCaso: {} // sin override por caso
+// y en DinnerScreen.js, hardcoded:
+const mesaSrc = 'assets/img/scenes/Mesa_Hogar.png';
+```
+
+CSS y limpieza de items: igual que en la **sección 6** del doc, no
+cambia. Solo cambia el contenido de `mesaPorCaso`.
+
+## 9.5 · Comparativa con Idea 1
+
+| Aspecto | Idea 1 (mesa evoluciona) | Idea 2 (mesa idéntica) |
+|---|---|---|
+| Assets a generar | 4 (+2 polish) | 4 (o 1 si se quiere mínimo) |
+| Trabajo de generación | Más alto: 4 estados muy distintos, cada uno con su prompt | Más bajo: 1 maestra + 3 regeneraciones con cambio mínimo |
+| Carga narrativa | Explícita: el jugador VE el deterioro | Sutil: el jugador no la nota hasta el C8 |
+| Riesgo de spoiler temprano | Medio: si el jugador conecta "cigarrillos en C3-C5" con un drama personal, podría intuir | Bajo: la repetición pasa desapercibida hasta C8 |
+| Anclaje del POV | Mano del detective entra por abajo del frame | Sin presencia humana — mesa "vista por nadie" |
+| Continuidad del cuadro | Variable | Idéntica — esa identicidad ES la idea |
+| Cómo cierra el spoiler en C8 | La cuarta mesa pone DOS copas y se entiende | La cuarta variante es IDÉNTICA a la primera — confirmando que llevaba viendo eso desde el principio |
+| Tono | Más cinematográfico / dramático | Más editorial / contemplativo |
+
+## 9.6 · Mi recomendación final
+
+Si tuviera que elegir una de las dos:
+
+**Idea 2 (la mesa idéntica)** por tres razones:
+
+1. **Encaja mejor con el spoiler estructural del C8**. El game design
+   ya pone el peso narrativo de la repetición en la prueba P2 ("Dos
+   Copas") y en el hecho de que Elena lleva 3 años muerta sirviendo
+   dos copas cada noche. La Idea 2 hace VISIBLE esa repetición durante
+   las 7 cenas previas. Cuando el C8 nombra el spoiler, el jugador
+   ya lo había estado mirando.
+
+2. **Es más barato y robusto de producir**. 1 maestra + 3 variantes
+   casi-idénticas = mucho menos riesgo de inconsistencia visual entre
+   estados que 4 ilustraciones distintas (Idea 1).
+
+3. **No compite con el peso emocional de Elena**. La Idea 1, con
+   sus papeles, ceniceros, botellas de Cadaqués y manos del
+   detective, lleva mucha carga visual a la izquierda. La derecha
+   ya tiene a Elena viva ahí, hablándole. Si la izquierda también
+   grita, la cena se vuelve ruidosa. La Idea 2 deja que Elena
+   domine la cena emocionalmente y reserva el golpe visual de la
+   izquierda para el final.
+
+La Idea 1 es más cinematográfica y entrega un payoff inmediato. La
+Idea 2 es más literaria y entrega un payoff retroactivo. Elige según
+qué tipo de juego quieres rematar.
+
+---
+
+> Doc temporal: eliminar (o archivar) tras producir y wirear los assets
+> de UNA de las dos ideas.
