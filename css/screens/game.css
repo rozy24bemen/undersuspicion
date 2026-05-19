@@ -379,39 +379,28 @@
 }
 
 /* Override para la "cuarta tarjeta" — Roberto Mora interrogándose en
-   el espejo del recibidor de su piso. El escenario propio aporta el
-   contexto (papel granate, console table, puerta al salón, coat rack
-   con gabardina), pero el generador dibujó un marco de espejo dentro
-   del escenario aunque el prompt pedía un óvalo vacío. Si compositamos
-   el retrato (que ya trae su propio marco) tal cual, se ven DOS
-   marcos solapados. Lo resolvemos en dos pasos:
-   1) ::before añade una elipse oscura centrada que tapa el marco
-      dibujado por el generador (queda como hueco oscuro donde caerá
-      el espejo "real" del retrato).
-   2) El retrato se agranda y se ancla al centro vertical (no a flex-
-      end) para que su marco caiga justo encima del hueco oscuro, y
-      queda como un único marco coherente. */
+   el espejo del recibidor de su piso. CLAVE: el retrato de Roberto
+   Mora YA incluye toda la escena (recibidor con papel granate, console
+   table con teléfono, lámpara de pared, doorway al salón visible en
+   el reflejo). No se composita sobre un escenario aparte — el retrato
+   ES la escena. Para preservar esto:
+   - No se aplica rembg a RobertoMora-*.png (excluidos en scripts/
+     rembg_suspects.py). El retrato viene con la escena horneada.
+   - El bg de la pantalla es un color oscuro sólido que solo se ve si
+     el retrato no llena el slot por completo (letterbox lateral).
+   - El retrato se muestra al 100% sin scale-up para que no se recorte
+     la cara del detective. */
 .room__scene.scene-caso8-recibidor {
-  background-image: url('../../assets/img/suspects/Caso8/Escenario/Escenario-Recibidor.png');
-  align-items: center; /* portrait centrado vertical para alinear con el hueco */
-}
-
-.room__scene.scene-caso8-recibidor::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  /* Mancha oscura cubriendo donde el escenario dibujó su marco. Si
-     visualmente queda algo desalineado, ajustar `at 50% 38%` o
-     reducir el tamaño de la elipse. */
-  background: radial-gradient(ellipse 28% 38% at 50% 38%, rgba(10,5,2,0.96) 0%, rgba(10,5,2,0.55) 65%, transparent 90%);
-  pointer-events: none;
-  z-index: 0;
+  background-image: none;
+  background: #0f0805;
+  align-items: center;
 }
 
 .room__scene.scene-caso8-recibidor .portrait__img {
-  --portrait-scale: 1.55;
-  height: 88%;
-  max-width: 80%;
+  --portrait-scale: 1;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
   object-position: center;
 }
 
