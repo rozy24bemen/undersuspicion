@@ -85,10 +85,14 @@ US.DinnerPanel = class DinnerPanel {
   }
 
   // ── Pose de Elena (sprite en el slot derecho) ───────
-  // Escoge la pose según fase + tono activo y actualiza #dinner-elena.
-  // Fases neutras (apertura/repaso/gancho/cierre) → 'neutral'.
-  // Fase 'personal' → tono de la pregunta actual.
-  // Fase 'ending' → `elenaPose` del bloque actual, o fallback por id de ending.
+  // Escoge la pose según fase + tono + si Elena habla ahora mismo, y
+  // actualiza #dinner-elena. Mapa de poses base:
+  //   - Fase 'personal' → tono de la pregunta actual (casual/preocupada/confrontacional)
+  //   - Resto de fases → 'neutral'
+  //   - Fase 'ending' → elenaPose del bloque o fallback por id (despedida/ausente)
+  // Sufijo '-hablando' aplicado cuando Elena tiene la palabra (réplica
+  // visible o fase de sólo-CONTINUAR como apertura/cierre). Cuando el
+  // jugador está eligiendo respuesta, se usa la pose idle (sin sufijo).
   _updateElenaPose() {
     const G = US.CENAS_GLOBAL || {};
     const esposa = G.esposa || {};
@@ -96,7 +100,15 @@ US.DinnerPanel = class DinnerPanel {
     if (!portraits.neutral) return;
 
     const pose = this._pickElenaPose();
-    const src = portraits[pose] || portraits.neutral;
+
+    // Fallback: si el hablando no existe (asset no producido), caer al
+    // idle del mismo tono antes que saltar a neutral — la transición es
+    // menos disruptiva.
+    let src = portraits[pose];
+    if (!src && pose.endsWith('-hablando')) {
+      src = portraits[pose.replace('-hablando', '')];
+    }
+    src = src || portraits.neutral;
 
     const figure = this.root.querySelector('#dinner-figure');
     const img    = this.root.querySelector('#dinner-elena');
@@ -122,12 +134,29 @@ US.DinnerPanel = class DinnerPanel {
       return 'neutral';
     }
 
+    const base = this._baseTonoPose();
+    return this._elenaIsSpeaking() ? base + '-hablando' : base;
+  }
+
+  _baseTonoPose() {
     if (this.phase === 'personal') {
       const q = this.personal && this.personal[this.exchangeIdx];
       if (q && q.tono) return q.tono;
     }
-
     return 'neutral';
+  }
+
+  // Elena está hablando ahora mismo si:
+  //   - su réplica está visible (acaba de contestar al jugador), o
+  //   - estamos en una fase donde sólo hay CONTINUAR (apertura/cierre/done)
+  // En las fases con respuestas del jugador (repaso/gancho/personal), si NO
+  // hay réplica, los botones del jugador están visibles → Elena espera (idle).
+  _elenaIsSpeaking() {
+    if (this.replica) return true;
+    if (this.phase === 'repaso' || this.phase === 'gancho' || this.phase === 'personal') {
+      return false;
+    }
+    return true;
   }
 
   // ── Phase logic ──────────────────────────────────

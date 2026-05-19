@@ -217,6 +217,12 @@
   align-items: flex-end;
   justify-content: center;
   pointer-events: none;
+  /* Fondo del comedor (sin personajes). Los retratos de Elena son ahora
+     PNG con fondo transparente (procesados por scripts/rembg_suspects.py),
+     compositados encima de esta imagen. */
+  background-image: url('../../assets/img/scenes/Escenario_Comedor.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .dinner-room__scene::after {
@@ -243,10 +249,19 @@
   filter: drop-shadow(0 0 24px rgba(212, 168, 69, .25));
 }
 
-/* La pose `ausente` (final malo C8) NO es un retrato de Elena: es el
-   comedor 16:9 vacío con la sombra colgada. Quitamos el halo dorado
-   (pensado para silueta humana) y dejamos que se expanda a ancho
-   completo del slot, manteniendo el límite de altura. */
+/* Las poses especiales `despedida` (final bueno C8) y `ausente` (final
+   malo C8) NO se compositan sobre el comedor genérico: cada una trae su
+   propio fondo en el asset (despedida con luz dorada del pasillo, ausente
+   con la sombra colgada). En esas poses ocultamos el bg de la escena para
+   evitar la doble composición. */
+.dinner-room__scene:has(> .dinner-figure[data-pose="despedida"]),
+.dinner-room__scene:has(> .dinner-figure[data-pose="ausente"]) {
+  background-image: none;
+}
+
+/* La pose `ausente` además es un paisaje 16:9 (no retrato): quitamos el
+   halo dorado pensado para silueta humana y dejamos que se expanda a
+   ancho completo del slot, manteniendo el límite de altura. */
 .dinner-figure[data-pose="ausente"] img {
   max-width: 100%;
   filter: none;
